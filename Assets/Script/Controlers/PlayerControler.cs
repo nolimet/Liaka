@@ -41,31 +41,11 @@ public class PlayerControler : MonoBehaviour
         GameManager.inputManager.onSwipeUp += InputManager_onSwipeUp;
         GameManager.inputManager.onTap += InputManager_onTap;
         GameManager.instance.onPauseGame += Instance_onPauseGame;
+        BaseObject.onHitPlayer += BaseObject_onHitPlayer;
 
         if (onPlayerCreated!=null)
             onPlayerCreated(this);
         
-    }
-
-    private void Instance_onPauseGame(bool b)
-    {
-        gamePaused = b;
-        if (b)
-        {
-            speed = rigi2d.velocity;
-            rigi2d.velocity = Vector2.zero;
-            rigi2d.isKinematic = true;
-        }
-        else
-        {
-            rigi2d.isKinematic = false;
-            rigi2d.velocity = speed;
-        }
-    }
-
-    private void InputManager_onTap(Vector2 pos)
-    {
-        shoot(pos);
     }
 
     public void OnDestroy()
@@ -73,6 +53,7 @@ public class PlayerControler : MonoBehaviour
         GameManager.inputManager.onSwipeUp -= InputManager_onSwipeUp;
         GameManager.inputManager.onTap -= InputManager_onTap;
         GameManager.instance.onPauseGame -= Instance_onPauseGame;
+        BaseObject.onHitPlayer -= BaseObject_onHitPlayer;
 
         if (onPlayerDestoryed != null)
             onPlayerDestoryed(this);
@@ -96,10 +77,13 @@ public class PlayerControler : MonoBehaviour
     {
         if (gamePaused)
             return;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l);
+        int mask = 1 << LayerMask.NameToLayer("Ground");
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
        // Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l),Color.red);
         if (hit && hit.transform.tag == TagManager.Ground)
         {
+           
+           
             if (!g && onHitGround != null)
                 onHitGround();
 
@@ -123,7 +107,7 @@ public class PlayerControler : MonoBehaviour
 
         if(Energy<=0)
         {
-            Debug.Log("YOU DIED");
+           // Debug.Log("YOU DIED");
         }
 
         
@@ -154,4 +138,57 @@ public class PlayerControler : MonoBehaviour
 
         //Debug.Log("Shooting - Heat Level " + (weaponHeat / 100f).ToString("p"));
     }
+
+    private void BaseObject_onHitPlayer(BaseObject.objectType o)
+    {
+        switch(o)
+        {
+            case BaseObject.objectType.Enemy:
+                Energy -= 10;
+                break;
+        }
+    }
+
+    private void Instance_onPauseGame(bool b)
+    {
+        gamePaused = b;
+        if (b)
+        {
+            speed = rigi2d.velocity;
+            rigi2d.velocity = Vector2.zero;
+            rigi2d.isKinematic = true;
+        }
+        else
+        {
+            rigi2d.isKinematic = false;
+            rigi2d.velocity = speed;
+        }
+    }
+
+    private void InputManager_onTap(Vector2 pos)
+    {
+        shoot(pos);
+    }
+
+    public void hitPickup(GameObject g)
+    {
+        if(g.GetComponent<BaseObject>().type == BaseObject.objectType.Pickup)
+        {
+            PickObject p = g.GetComponent<PickObject>();
+
+            switch(p.TypePickup)
+            {
+                case PickObject.pickupType.Dynamic_Coin | PickObject.pickupType.Static_Coin:
+
+                    break;
+
+                case PickObject.pickupType.Dynamic_Energy | PickObject.pickupType.Static_Energy:
+                        Energy += 10;
+                    if (Energy > MaxEnergy)
+                        Energy = MaxEnergy;
+                    break;
+            }
+        }
+    }
+
 }

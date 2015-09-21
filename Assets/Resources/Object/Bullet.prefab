@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21258630}
   - 114: {fileID: 11462096}
   - 50: {fileID: 5013836}
-  - 60: {fileID: 6013868}
+  - 58: {fileID: 5812444}
   m_Layer: 12
   m_Name: Bullet
   m_TagString: Bullet
@@ -47,8 +47,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &6013868
-PolygonCollider2D:
+--- !u!58 &5812444
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -58,14 +58,8 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
-  m_Points:
-    m_Paths:
-    - - {x: -.75, y: .305000007}
-      - {x: -.75, y: -.305000007}
-      - {x: .569999993, y: -.305000007}
-      - {x: .75, y: -.144999996}
-      - {x: .75, y: .174999997}
-      - {x: .560000002, y: .305000007}
+  serializedVersion: 2
+  m_Radius: .75
 --- !u!114 &11462096
 MonoBehaviour:
   m_ObjectHideFlags: 1

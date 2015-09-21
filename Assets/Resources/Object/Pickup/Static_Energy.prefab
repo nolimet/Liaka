@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21296532}
   - 50: {fileID: 5064462}
   - 114: {fileID: 11431316}
-  - 60: {fileID: 6034078}
+  - 58: {fileID: 5845276}
   m_Layer: 14
   m_Name: Static_Energy
   m_TagString: Pickup
@@ -47,8 +47,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!60 &6034078
-PolygonCollider2D:
+--- !u!58 &5845276
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -58,15 +58,8 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
-  m_Points:
-    m_Paths:
-    - - {x: -.466666669, y: .683333337}
-      - {x: -.666666687, y: .483333319}
-      - {x: -.666666687, y: -.416666657}
-      - {x: -.533333361, y: -.683333337}
-      - {x: .666666687, y: -.683333337}
-      - {x: .666666687, y: .616666675}
-      - {x: .5, y: .683333337}
+  serializedVersion: 2
+  m_Radius: .639999986
 --- !u!114 &11431316
 MonoBehaviour:
   m_ObjectHideFlags: 1

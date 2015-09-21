@@ -61,9 +61,10 @@ public class BaseObject : MonoBehaviour
         if (r)
             r.color = new Color(r.color.r, r.color.g, r.color.b, 1);
 
-        PolygonCollider2D cp = GetComponent<PolygonCollider2D>();
+        CircleCollider2D cp = GetComponent<CircleCollider2D>();
         if (cp)
             cp.enabled = true;
+        
 
         Rigidbody2D ri = GetComponent<Rigidbody2D>();
         if (ri)
@@ -84,7 +85,7 @@ public class BaseObject : MonoBehaviour
     public virtual void hit(string s = "")
     {
         StartCoroutine(fadeOut(0.3f, 0, s));
-        GetComponent<PolygonCollider2D>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
     }
 
     public virtual void Destory()
@@ -148,7 +149,7 @@ public class BaseObject : MonoBehaviour
             
             float z = f;
             SpriteRenderer r = GetComponent<SpriteRenderer>();
-            GetComponent<PolygonCollider2D>().enabled = false;
+            GetComponent<CircleCollider2D>().enabled = false;
 
             Color c = r.color;
 
@@ -191,16 +192,34 @@ public class BaseObject : MonoBehaviour
     {
         PickObject p;
         int l = Random.Range(1, 10);
-
+        float r;
         for (int i = 0; i < l; i++)
         {
-            if (Random.Range(0f, 30f) > 20)
+            r = Random.Range(0f, 50f);
+            if (r < 10f)
+            {
                 p = BasePool.GetPickup(PickObject.pickupType.Dynamic_Energy);
+                p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
+                p.transform.position = transform.position;
+            }
+            else if (r < 20f)
+            {
+                p = BasePool.GetPickup(PickObject.pickupType.Static_Energy);
+                p.transform.position = transform.position + new Vector3(Random.Range(-2,2), Random.Range(-2, 2));
+                p.setVelocity(new Vector3(-5, 0));
+            }
+            else if (r < 30f)
+            {
+                p = BasePool.GetPickup(PickObject.pickupType.Static_Coin);
+                p.transform.position = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2));
+                p.setVelocity(new Vector3(-5, 0));
+            }
             else
+            {
                 p = BasePool.GetPickup(PickObject.pickupType.Dynamic_Coin);
-
-            p.setVelocity(new Vector2(Random.Range(-5f, 5f),3f));
-            p.transform.position = transform.position;
+                p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
+                p.transform.position = transform.position;
+            }
         }
     }
 
