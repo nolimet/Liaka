@@ -38,7 +38,7 @@ public class BaseObject : MonoBehaviour
     }
 
     [SerializeField]
-    bounds useBounds;
+    protected bounds useBounds;
 
     public objectType type;
     Vector2 Speed = Vector2.zero;
@@ -133,9 +133,12 @@ public class BaseObject : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
+        //Debug.Log(collision.transform.name);
         if (collision.transform.tag != TagManager.Enemy)
-            if (collision.name.ToUpper().Contains("BOX") && useBounds.touchingBound(collision.name) || !collision.name.ToUpper().Contains("BOX")) { 
-                StartCoroutine(fadeOut(0.1f, 0.6f));}
+            if (collision.name.ToUpper().Contains("BOX") && useBounds.touchingBound(collision.name) || !collision.name.ToUpper().Contains("BOX") && collision.name.ToUpper().Contains("PLAYER"))
+            {
+                StartCoroutine(fadeOut(0.1f, 0.6f));
+            }
     }
 
     bool fading = false;
@@ -196,19 +199,20 @@ public class BaseObject : MonoBehaviour
         for (int i = 0; i < l; i++)
         {
             r = Random.Range(0f, 50f);
-            if (r < 10f)
+            if (r < 5f)
             {
                 p = BasePool.GetPickup(PickObject.pickupType.Dynamic_Energy);
                 p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
                 p.transform.position = transform.position;
             }
-            else if (r < 20f)
+            else if (r < 10f)
             {
-                p = BasePool.GetPickup(PickObject.pickupType.Static_Energy);
-                p.transform.position = transform.position + new Vector3(Random.Range(-2,2), Random.Range(-2, 2));
-                p.setVelocity(new Vector3(-5, 0));
+                p = BasePool.GetPickup(PickObject.pickupType.Dynamic_Coin);
+                p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
+                p.transform.position = transform.position;
+                
             }
-            else if (r < 30f)
+            else if (r < 20f)
             {
                 p = BasePool.GetPickup(PickObject.pickupType.Static_Coin);
                 p.transform.position = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2));
@@ -216,9 +220,9 @@ public class BaseObject : MonoBehaviour
             }
             else
             {
-                p = BasePool.GetPickup(PickObject.pickupType.Dynamic_Coin);
-                p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
-                p.transform.position = transform.position;
+                p = BasePool.GetPickup(PickObject.pickupType.Static_Energy);
+                p.transform.position = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2));
+                p.setVelocity(new Vector3(-5, 0));
             }
         }
     }

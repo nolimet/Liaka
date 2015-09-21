@@ -11,6 +11,7 @@ GameObject:
   - 20: {fileID: 2063796}
   - 92: {fileID: 9282902}
   - 124: {fileID: 12425448}
+  - 81: {fileID: 8170696}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -324,6 +325,7 @@ GameObject:
   - 4: {fileID: 405260}
   - 114: {fileID: 11446020}
   - 114: {fileID: 11408040}
+  - 114: {fileID: 11401976}
   m_Layer: 0
   m_Name: GameControler
   m_TagString: GameController
@@ -647,6 +649,13 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!81 &8170696
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101808}
+  m_Enabled: 1
 --- !u!92 &9282902
 Behaviour:
   m_ObjectHideFlags: 1
@@ -654,6 +663,25 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101808}
   m_Enabled: 1
+--- !u!114 &11401976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d750c18e5d2cf424d9723b66c21eabec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerJump: {fileID: 8300000, guid: ff34309d87df17347a804046e7ed5e57, type: 3}
+  PlayerHitGround: {fileID: 8300000, guid: 5c042761e4e5e9f47b2e42ee570d8322, type: 3}
+  PlayerShoots: {fileID: 8300000, guid: 476fd62a036c7754ea50c16fc5593cb9, type: 3}
+  enemyGetsHit: {fileID: 8300000, guid: dd8aec3dc9c4f8945a770109d766839f, type: 3}
+  CoinGetsPicked: {fileID: 8300000, guid: 66bd709f36697b341b7f57c2749b4440, type: 3}
+  EnergyGetsPicked: {fileID: 8300000, guid: 66bd709f36697b341b7f57c2749b4440, type: 3}
+  bossGetsHitByBullet: {fileID: 0}
+  bossGetsHitByEnemy: {fileID: 0}
 --- !u!114 &11404016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -871,6 +899,7 @@ MonoBehaviour:
   _inputManager: {fileID: 11408040}
   _playerControler: {fileID: 0}
   _UIControler: {fileID: 11482284}
+  _AudioControler: {fileID: 0}
   PauseMenu: {fileID: 115436}
   saveDat:
     soundVolume: 0

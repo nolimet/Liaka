@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-
+    #region Events
     public delegate void VoidDelegate();
     public delegate void BoolDelegate(bool b);
 
@@ -14,25 +14,34 @@ public class GameManager : MonoBehaviour
 
     //Bool Events
     public event BoolDelegate onPauseGame;
+    #endregion
 
+    #region varibles
     //Statics
     public static GameManager instance;
+
     //InputManager
     public static InputManager inputManager;
     public InputManager _inputManager;
+
     //Player Controler
     public static PlayerControler playerControler;
     public PlayerControler _playerControler;
+
     //UI contrler
     public static UIControler uiControler;
     public UIControler _UIControler;
+
+    public static AudioControler audioControler;
+    public AudioControler _AudioControler;
+
     //publics
     public GameObject PauseMenu;
 
     public SaveData saveDat = null;
 
     bool GamePaused;
-
+    #endregion
     void Awake()
     {
         if (instance)
@@ -64,7 +73,8 @@ public class GameManager : MonoBehaviour
         if (_UIControler && !uiControler)
             uiControler = _UIControler;
 
-        
+        if (_AudioControler && !audioControler)
+            audioControler = _AudioControler;
     }
 
     void onPlayerDestoryed(PlayerControler p)
@@ -111,6 +121,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(inputManager);
         DontDestroyOnLoad(uiControler);
+        DontDestroyOnLoad(audioControler);
         DontDestroyOnLoad(instance);
     }
 

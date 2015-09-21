@@ -172,18 +172,21 @@ public class PlayerControler : MonoBehaviour
 
     public void hitPickup(GameObject g)
     {
-        if(g.GetComponent<BaseObject>().type == BaseObject.objectType.Pickup)
+        if (g.GetComponent<BaseObject>().type == BaseObject.objectType.Pickup)
         {
             PickObject p = g.GetComponent<PickObject>();
 
-            switch(p.TypePickup)
+            switch (p.TypePickup)
             {
-                case PickObject.pickupType.Dynamic_Coin | PickObject.pickupType.Static_Coin:
-
+                case PickObject.pickupType.Static_Coin:
+                case PickObject.pickupType.Dynamic_Coin:
+                    Debug.Log("coin");
                     break;
 
-                case PickObject.pickupType.Dynamic_Energy | PickObject.pickupType.Static_Energy:
-                        Energy += 10;
+                case PickObject.pickupType.Static_Energy:
+                case PickObject.pickupType.Dynamic_Energy:
+                    Debug.Log("energy");
+                    Energy += 10;
                     if (Energy > MaxEnergy)
                         Energy = MaxEnergy;
                     break;

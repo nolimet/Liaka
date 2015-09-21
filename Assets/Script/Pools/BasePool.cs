@@ -49,7 +49,6 @@ public class BasePool : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        Debug.Log(ActivePool.Count);
         for (int i = ActivePool.Count-1; i >= 0; i--)
         {
             RemoveObject(ActivePool[i]);
@@ -66,7 +65,7 @@ public class BasePool : MonoBehaviour
                 instance.InActivePool.Add(e);
             if (e)
             {
-                e.transform.position = new Vector3(0, 0, -50);
+                e.transform.position = new Vector3(0, 500, -50);
                 e.Instance_onPauseGame(true);
             }
 

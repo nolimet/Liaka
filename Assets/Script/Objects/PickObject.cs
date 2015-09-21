@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PickObject : BaseObject
 {
+    public delegate void PickupObjectEvent(pickupType p);
+    public static event PickupObjectEvent onPickup;
 
     public pickupType TypePickup;
     Rigidbody2D rigi;
@@ -41,13 +43,19 @@ public class PickObject : BaseObject
     }
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnTriggerEnter2D(collision);
-
+        //base.OnTriggerEnter2D(collision);
+        if (collision.transform.tag != TagManager.Enemy)
+            if (collision.name.ToUpper().Contains("BOX") && useBounds.touchingBound(collision.name))
+            {
+                StartCoroutine(fadeOut(0.1f, 0.6f));
+            }
         switch (collision.transform.tag)
         {
             case TagManager.Player:
                 StartCoroutine(fadeOut(0.1f, 0));
                 collision.transform.gameObject.SendMessage("hitPickup", gameObject, SendMessageOptions.DontRequireReceiver);
+                if (onPickup != null)
+                    onPickup(TypePickup);
                 break;
         }
 
