@@ -180,12 +180,10 @@ public class PlayerControler : MonoBehaviour
             {
                 case PickObject.pickupType.Static_Coin:
                 case PickObject.pickupType.Dynamic_Coin:
-                    Debug.Log("coin");
                     break;
 
                 case PickObject.pickupType.Static_Energy:
                 case PickObject.pickupType.Dynamic_Energy:
-                    Debug.Log("energy");
                     Energy += 10;
                     if (Energy > MaxEnergy)
                         Energy = MaxEnergy;

@@ -4,8 +4,8 @@ using System.Collections;
 [System.Serializable]
 public class SaveData
 {
-    public float soundVolume;
-    public float musicVolume;
+    public float soundVolume = 1f;
+    public float musicVolume = 1f;
 
-    public int Coins;
+    public int Coins = 0;
 }

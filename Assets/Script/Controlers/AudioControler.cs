@@ -12,6 +12,8 @@ public class AudioControler : MonoBehaviour {
 
     Vector3 soundPos = new Vector3(0, 0, -10);
 
+    float MusicVol, SFXVol;
+
     void Start()
     {
         PlayerControler.onPlayerCreated += PlayerCreated;
@@ -24,7 +26,11 @@ public class AudioControler : MonoBehaviour {
         s = gameObject.AddComponent<AudioSource>();
     }
 
-   
+   void Update()
+    {
+        MusicVol = GameManager.instance.saveDat.musicVolume;
+        SFXVol = GameManager.instance.saveDat.soundVolume;
+    }
 
     void GamePaused()
     {
@@ -56,17 +62,17 @@ public class AudioControler : MonoBehaviour {
 
     private void PlayerControler_onHitGround()
     {
-        AudioSource.PlayClipAtPoint(PlayerHitGround, soundPos);
+        AudioSource.PlayClipAtPoint(PlayerHitGround, soundPos, SFXVol);
     }
 
     private void PlayerControler_onJump()
     {
-        AudioSource.PlayClipAtPoint(playerJump, soundPos);
+        AudioSource.PlayClipAtPoint(playerJump, soundPos, SFXVol);
     }
 
     private void PlayerControler_onShoot()
     {
-        AudioSource.PlayClipAtPoint(PlayerShoots, soundPos);
+        AudioSource.PlayClipAtPoint(PlayerShoots, soundPos, SFXVol);
     }
 
     private void BaseObject_onImpact(BaseObject.objectType o)
@@ -83,12 +89,12 @@ public class AudioControler : MonoBehaviour {
         {
             case PickObject.pickupType.Static_Coin:
             case PickObject.pickupType.Dynamic_Coin:
-                AudioSource.PlayClipAtPoint(CoinGetsPicked, soundPos);
+                AudioSource.PlayClipAtPoint(CoinGetsPicked, soundPos, SFXVol);
                 break;
 
             case PickObject.pickupType.Dynamic_Energy:
             case PickObject.pickupType.Static_Energy:
-                AudioSource.PlayClipAtPoint(EnergyGetsPicked, soundPos);
+                AudioSource.PlayClipAtPoint(EnergyGetsPicked, soundPos, SFXVol);
                 break;
         }
     }
