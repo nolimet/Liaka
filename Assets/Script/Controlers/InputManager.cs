@@ -33,13 +33,19 @@ public class InputManager : MonoBehaviour
 
     private void Instance_onPauseGame(bool b)
     {
-        setReconizers(b);
+        setReconizers(!b);
     }
+
+    public void OnLevelWasLoaded(int level)
+    {
+        if (level == 1)
+            setReconizers(false);
+    }   
 
     void setReconizers(bool b)
     {
         Debug.Log(b ? "Removing Reconziers" : "Adding Reconziers");
-        if (b)
+        if (!b && !eventActive)
         {
             eventActive = false;
             TouchKit.removeAllGestureRecognizers();

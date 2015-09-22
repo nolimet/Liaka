@@ -79,7 +79,7 @@ public class PlayerControler : MonoBehaviour
             return;
         int mask = 1 << LayerMask.NameToLayer("Ground");
         RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
-       // Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l),Color.red);
+        Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l),Color.red);
         if (hit && hit.transform.tag == TagManager.Ground)
         {
            
