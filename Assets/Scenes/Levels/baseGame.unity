@@ -1063,7 +1063,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1455725819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0700000003, y: -1.96000004, z: 0}
+  m_LocalPosition: {x: -.0700000003, y: -2.18000007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1978643272}
@@ -1118,7 +1118,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1520723049}
   m_LocalRotation: {x: 0, y: 0, z: .00282612932, w: .999996006}
-  m_LocalPosition: {x: .230000004, y: -1.96000004, z: 0}
+  m_LocalPosition: {x: .230000004, y: -2.18000007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1978643272}
@@ -1624,7 +1624,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .0500000007, y: -.319999993}
+  m_Offset: {x: .0500000007, y: -.50999999}
   serializedVersion: 2
   m_Size: {x: 2.13000011, y: 4.28000021}
 --- !u!212 &1978643271
@@ -1684,7 +1684,7 @@ MonoBehaviour:
   g: 0
   doubleJump: 0
   l: 2.0999999
-  distOff: {x: 0, y: 0, z: 0}
+  distOff: {x: 0, y: -1.38, z: 0}
   weaponHeat: 0
   MaxHeat: 100
   Energy: 0
