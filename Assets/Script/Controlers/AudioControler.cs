@@ -48,6 +48,7 @@ public class AudioControler : MonoBehaviour
             PlaySong();
         else
             AudioSources.Music.Stop();
+        SetClicks();
     }
 
     AudioSource CreateSource()
@@ -128,7 +129,7 @@ public class AudioControler : MonoBehaviour
         }
     }
 
-    void OnEnable()
+    void SetClicks()
     {
         Button[] buttons = FindObjectsOfType<Button>();
         foreach (Button button in buttons)
