@@ -7,7 +7,7 @@ public class MainMenuControler : MonoBehaviour {
     [System.Serializable]
     public struct opMenu
     {
-        public Slider sounds, music;
+        public Slider sounds, music,interfaceVol;
         public GameObject menu;
     }
     public opMenu OptionMenu;
@@ -15,8 +15,9 @@ public class MainMenuControler : MonoBehaviour {
     void Start()
     {
         OpenOptions(false);
-        OptionMenu.sounds.value = GameManager.instance.saveDat.soundVolume;
-        OptionMenu.music.value = GameManager.instance.saveDat.musicVolume;
+        OptionMenu.sounds.value = GameManager.instance.saveDat.options.soundVolume;
+        OptionMenu.music.value = GameManager.instance.saveDat.options.musicVolume;
+        OptionMenu.interfaceVol.value = GameManager.instance.saveDat.options.interfaceVolume;
     }
 
     public void OpenOptions(bool b)
@@ -27,11 +28,16 @@ public class MainMenuControler : MonoBehaviour {
 
     public void onFXVolumeChange(float f)
     {
-        GameManager.instance.saveDat.soundVolume = f;
+        GameManager.instance.saveDat.options.soundVolume = f;
     }
 
     public void onMusicVolumeChange(float f)
     {
-        GameManager.instance.saveDat.musicVolume = f;
+        GameManager.instance.saveDat.options.musicVolume = f;
+    }
+
+    public void onInterfaceVolumeChange(float f)
+    {
+        GameManager.instance.saveDat.options.interfaceVolume = f;
     }
 }

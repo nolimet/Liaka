@@ -20,17 +20,23 @@ public class AudioControler : MonoBehaviour
     [System.Serializable]
     public struct sources
     {
+        //player
         public AudioSource playerJump, PlayerHitGround, PlayerShoots;
+        //BaseObject
         public AudioSource enemyGetsHit, CoinGetsPicked, EnergyGetsPicked;
+        //Boss
         public AudioSource bossGetsHitByBullet, bossGetsHitByEnemy;
+        //Music
         public AudioSource Music;
+        //UI
+        public AudioSource MouseOver, MouseClick;
     }
 
     public sources AudioSources;
 
     Vector3 soundPos = new Vector3(0, 0, -10);
 
-    float MusicVol, SFXVol;
+    float MusicVol, SFXVol, UIVol;
 
     void Start()
     {
@@ -61,8 +67,9 @@ public class AudioControler : MonoBehaviour
 
     void Update()
     {
-        MusicVol = GameManager.instance.saveDat.musicVolume;
-        SFXVol = GameManager.instance.saveDat.soundVolume;
+        MusicVol = GameManager.instance.saveDat.options.musicVolume;
+        SFXVol = GameManager.instance.saveDat.options.soundVolume;
+        UIVol = GameManager.instance.saveDat.options.interfaceVolume;
     }
 
     void GamePaused()
@@ -73,6 +80,7 @@ public class AudioControler : MonoBehaviour
     void PlaySong()
     {
         AudioSources.Music.clip = Music[Random.Range(0, Music.Length)];
+        AudioSources.Music.volume = MusicVol;
         AudioSources.Music.Play();
     }
 
@@ -156,12 +164,12 @@ public class AudioControler : MonoBehaviour
 
     public void PlayMouseOver()
     {
-        AudioSource.PlayClipAtPoint(MouseOver, Camera.main.transform.position);
+        AudioSources.MouseOver.PlayOneShot(MouseOver, UIVol);
     }
 
     public void PlayMouseClick()
     {
-        AudioSource.PlayClipAtPoint(MouseClick, Camera.main.transform.position);
+        AudioSources.MouseOver.PlayOneShot(MouseClick, UIVol);
     }
 
     private void PickObject_onPickup(PickObject.pickupType p)

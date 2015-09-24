@@ -1,0 +1,105 @@
+﻿using UnityEngine;
+
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+public class EnemyPool : MonoBehaviour {
+
+    public static EnemyPool instance;
+    public delegate void ObjectRemoved(EnemyBase objectRemoved);
+    public event ObjectRemoved onRemove;
+
+    List<EnemyBase> ActivePool, InActivePool;
+
+    bool autoCollectEnemiesOnStart = true;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+
+        ActivePool = new List<EnemyBase>();
+        InActivePool = new List<EnemyBase>();
+    }
+
+    void Start()
+    {
+        if (autoCollectEnemiesOnStart)
+        {
+            EnemyBase[] pl = FindObjectsOfType<EnemyBase>();
+            foreach (EnemyBase p in pl)
+            {
+                if (p.gameObject.activeSelf)
+                    ActivePool.Add(p);
+                else
+                    InActivePool.Add(p);
+
+                p.transform.SetParent(transform);
+            }
+        }
+    }
+
+    void Update()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
+    public void OnLevelWasLoaded(int level)
+    {
+        for (int i = ActivePool.Count - 1; i >= 0; i--)
+        {
+            RemoveObject(ActivePool[i]);
+        }
+    }
+
+    public static void RemoveObject(EnemyBase e)
+    {
+        if (instance)
+        {
+            if (instance.ActivePool.Contains(e))
+                instance.ActivePool.Remove(e);
+            if (!instance.InActivePool.Contains(e))
+                instance.InActivePool.Add(e);
+            if (e)
+            {
+                e.transform.position = new Vector3(0, 500, -50);
+                e.Instance_onPauseGame(true);
+            }
+
+            if (instance.onRemove != null)
+                instance.onRemove(e);
+        }
+    }
+
+    public static EnemyBase GetObject(EnemyBase.Enemytype Type)
+    {
+        if (instance)
+        {
+            EnemyBase e;
+            if (instance.InActivePool.Any(i => i.type == Type))
+            {
+                e = instance.InActivePool.First(i => i.type == Type);
+                instance.InActivePool.Remove(e);
+                instance.ActivePool.Add(e);
+                e.gameObject.SetActive(true);
+            }
+            else
+            {
+                GameObject g = Instantiate(Resources.Load("Object/" + Type.ToString()), Vector3.zero, Quaternion.identity) as GameObject;
+                g.name = Type.ToString() + " - " + (instance.ActivePool.Count + instance.InActivePool.Count);
+                e = g.GetComponent<EnemyBase>();
+
+                instance.ActivePool.Add(e);
+                e.transform.SetParent(instance.transform, false);
+            }
+
+            e.gameObject.SendMessage("startBehaviours", SendMessageOptions.DontRequireReceiver);
+            return e;
+        }
+        return null;
+    }
+}

@@ -20,6 +20,11 @@ public class BaseObject : MonoBehaviour
         [Tooltip("true means it will use that bound. False means it will be ignored")]
         public bool up, down, left, right;
 
+        /// <summary>
+        /// check if object is touching one of the bounds
+        /// </summary>
+        /// <param name="b">name of the bound in anyformat</param>
+        /// <returns>value based on the fact of the object is touching one of the bounds</returns>
         public bool touchingBound(string b)
         {
             b = b.ToLower();
@@ -44,7 +49,8 @@ public class BaseObject : MonoBehaviour
     Vector2 Speed = Vector2.zero;
 
     bool delegateSet = false;
-    
+    bool fading = false;
+
 
     /// <summary>
     /// Set movement speed for the object
@@ -55,6 +61,9 @@ public class BaseObject : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = v;
     }
 
+    /// <summary>
+    /// Used when placing the object into the world
+    /// </summary>
     public virtual void startBehaviours()
     {
         SpriteRenderer r = GetComponent<SpriteRenderer>();
@@ -82,14 +91,26 @@ public class BaseObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// called by sending a message signaling that the object has been hit
+    /// </summary>
+    /// <param name="s">Tag of the object that collided with this one</param>
     public virtual void hit(string s = "")
     {
         StartCoroutine(fadeOut(0.3f, 0, s));
         GetComponent<CircleCollider2D>().enabled = false;
     }
 
-    public virtual void Destory()
+    /// <summary>
+    /// Throw object out of the active object pool
+    /// </summary>
+    public virtual void RemoveFromView()
     {
+        if (delegateSet)
+        {
+            delegateSet = false;
+            GameManager.instance.onPauseGame -= Instance_onPauseGame;
+        }
         BasePool.RemoveObject(this);
     }
 
@@ -141,13 +162,19 @@ public class BaseObject : MonoBehaviour
             }
     }
 
-    bool fading = false;
+    /// <summary>
+    /// fades the object out
+    /// </summary>
+    /// <param name="f">Time the fading takes</param>
+    /// <param name="d">Starting Delay before the fading</param>
+    /// <param name="g">Tag of the object that started it</param>
+    /// <returns></returns>
     protected virtual IEnumerator fadeOut(float f, float d, string g = "")
     {
         if (!fading)
         {
             if (type == objectType.Enemy && g == TagManager.Bullet)
-                dropCoins();  
+                dropLoot();  
             fading = true;
             
             float z = f;
@@ -166,12 +193,7 @@ public class BaseObject : MonoBehaviour
             }
 
             fading = false;
-            if (delegateSet)
-            {
-                delegateSet = false;
-                GameManager.instance.onPauseGame -= Instance_onPauseGame;
-            }
-            BasePool.RemoveObject(this);
+            RemoveFromView();
         }
     }
 
@@ -191,7 +213,7 @@ public class BaseObject : MonoBehaviour
         }
     }
 
-    void dropCoins()
+    protected virtual void dropLoot()
     {
         PickObject p;
         int l = Random.Range(1, 10);
@@ -227,9 +249,9 @@ public class BaseObject : MonoBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (transform.position.x > 100)
-            Destory();
+            RemoveFromView();
     }
 }

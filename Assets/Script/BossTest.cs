@@ -8,7 +8,7 @@ public class BossTest : MonoBehaviour {
     {
         BaseObject.onHitBose += hit;
         FinalSize = transform.localScale;
-        transform.localScale /= 30f;
+        transform.localScale = new Vector3(transform.localScale.x / 30f, transform.localScale.y, transform.localScale.z);
         startSize = transform.localScale;
 
     }

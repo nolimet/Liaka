@@ -2,39 +2,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using util;
 
 public class VariationLayerControler : LayerControler
 {
     protected override void Start()
     {
-        Transform[] tx = GetComponentsInChildren<Transform>();
+        
         WorldScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2f, 0));
+        subObjectWorldSize = transform.GetChild(0).getChildBounds().size;
         SubObjects = new List<Transform>();
-
-        for (int i = 0; i < tx.Length; i++)
+        float l = 0f;
+        Debug.Log(l);
+        Transform tx;
+        for (int i = 0; i < transform.childCount; i++)
         {
-            if (tx[i] != transform)
-            {
-                SubObjects.Add(tx[i]);
-                tx[i].position = new Vector3(subObjectWorldSize.x * (i - 1), tx[i].position.y);
-                if (i > 3)
-                    tx[i].gameObject.SetActive(false);
-            }
+            tx = transform.GetChild(i);
+                SubObjects.Add(tx);
+                tx.position = new Vector3(l, tx.position.y);
+                l += tx.getChildBounds().size.x;
+                if (i >= 3)
+                    tx.gameObject.SetActive(false);
         }
     }
 
     public override bool OutOfView(Transform t)
     {
+        
         //bool b = base.OutOfView(t);
-        if ((t.position + (subObjectWorldSize / 2f)).x < WorldScreenSize.x)
+        if (t.position.x +(t.getChildBounds().size.x) < WorldScreenSize.x)
         {
-            t.position += new Vector3(subObjectWorldSize.x * 3, 0);
-
             List<Transform> randomSelection = SubObjects.Where(i => i.gameObject.activeSelf == false).ToList();
-            Transform freeObject = randomSelection.ElementAtOrDefault(new System.Random().Next() % randomSelection.Count());
-            t.gameObject.SetActive(false);
-            freeObject.gameObject.SetActive(true);
-            freeObject.position = t.position;
+            List<Transform> negativeSelectoin = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
+
+            Transform f = transform;
+            foreach (Transform x in negativeSelectoin)
+                if (x.transform.position.x > f.position.x)
+                    f = x;
+            
+            if (randomSelection.Count > 0)
+            {
+                Transform freeObject = randomSelection.ElementAtOrDefault(new System.Random().Next() % randomSelection.Count());
+                t.gameObject.SetActive(false);
+                freeObject.gameObject.SetActive(true);
+
+                freeObject.position = f.position + new Vector3(f.getChildBounds().size.x, 0, 0);
+            }
             return true;
 
         }

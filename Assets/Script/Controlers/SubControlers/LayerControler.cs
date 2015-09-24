@@ -13,6 +13,7 @@ public class LayerControler : MonoBehaviour {
     {
         Transform[] tx = GetComponentsInChildren<Transform>();
         SubObjects = new List<Transform>();
+        subObjectWorldSize = transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size;
         WorldScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2f, 0));
 
         for (int i = 0; i < tx.Length; i++)
@@ -23,7 +24,6 @@ public class LayerControler : MonoBehaviour {
                 tx[i].position = new Vector3(subObjectWorldSize.x * (i - 1), tx[i].position.y);
             }
         }
-
     }
 
 	public virtual void moveLayer(Vector3 v)
@@ -47,4 +47,6 @@ public class LayerControler : MonoBehaviour {
         }
         return false;
     }
+
+    
 }
