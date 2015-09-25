@@ -58,7 +58,6 @@ public class PickObject : BaseObject
                     onPickup(TypePickup);
                 break;
         }
-
     }
 
     void FixedUpdate()

@@ -2,8 +2,16 @@
 using System.Collections;
 
 public class EnemyControler : MonoBehaviour
-{  
-    public Transform[] spawnPositions;
+{
+    
+    [System.Serializable]
+    public struct twoT
+    {
+        public Transform Low, High;
+    }
+    public Transform GroundSpawnPoints;
+    public twoT FlyingSpawnPoints;
+
     [Range(1,10), Tooltip("increases spawning speed")]
     public int diff = 1;
     bool gamePaused;
@@ -30,9 +38,17 @@ public class EnemyControler : MonoBehaviour
 
     void Spawn()
     {
-        BaseObject b = BasePool.GetObject(BaseObject.objectType.Enemy);
-        if (spawnPositions.Length > 0)
-            b.transform.position = spawnPositions[Random.Range(0, spawnPositions.Length)].position;
+        EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.flying);
+        switch (b.etype)
+        {
+            case EnemyBase.Enemytype.flying:
+                b.transform.position = new Vector3(FlyingSpawnPoints.Low.position.x, Random.Range(FlyingSpawnPoints.Low.position.y, FlyingSpawnPoints.High.position.y), FlyingSpawnPoints.Low.position.z);
+                break;
+
+            case EnemyBase.Enemytype.walking:
+                b.transform.position = GroundSpawnPoints.position;
+                break;
+        }   
     }
 
     IEnumerator gameLoop()

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyBase : MonoBehaviour {
+[RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
+public class EnemyBase : BaseObject{
 
     public int Health, maxHealth;
 
@@ -19,25 +20,42 @@ public class EnemyBase : MonoBehaviour {
         flying
     }
 
-    public Enemytype type;
+    public Enemytype etype;
 
     public virtual void Start()
     {
 
     }
 
-    public virtual void StartBehaviour()
-    {
-
-    }
-
+    /// <summary>
+    /// goes through all the movement sets for a enemy
+    /// </summary>
+    /// <returns></returns>
     protected virtual IEnumerator MoveBehaviourLoop()
     {
         yield return new WaitForEndOfFrame();
     }
 
-    public virtual void Instance_onPauseGame(bool state)
+    protected override void dropLoot()
     {
+        //base.dropLoot();
 
+        PickupBase p = GameManager.dropTable.getRandomItem();
+        for (int i = 0; i < 5; i++)
+        {
+            if (p != null)
+            {
+                if (p.moveType == PickupBase.Movement.Dynamic)
+                {
+                    p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
+                    p.transform.position = transform.position;
+                }
+                else if (p.moveType == PickupBase.Movement.Static)
+                {
+                    p.transform.position = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2));
+                    p.setVelocity(new Vector3(-5, 0));
+                }
+            }
+        }
     }
 }

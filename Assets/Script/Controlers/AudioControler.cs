@@ -57,6 +57,10 @@ public class AudioControler : MonoBehaviour
         SetClicks();
     }
 
+    /// <summary>
+    /// create a new audio soruce
+    /// </summary>
+    /// <returns></returns>
     AudioSource CreateSource()
     {
         GameObject g = new GameObject();
@@ -77,6 +81,33 @@ public class AudioControler : MonoBehaviour
 
     }
 
+    void SetClicks()
+    {
+        Button[] buttons = FindObjectsOfType<Button>();
+        foreach (Button button in buttons)
+        {
+            EventTrigger eventTrigger = null;
+            if (button.gameObject.GetComponent<EventTrigger>() == null)
+            {
+                button.gameObject.AddComponent<EventTrigger>();
+            }
+            eventTrigger = button.gameObject.GetComponent<EventTrigger>();
+
+            EventTrigger.Entry over = new EventTrigger.Entry();
+            over.eventID = EventTriggerType.PointerEnter;
+            over.callback.AddListener(delegate { PlayMouseOver(); });
+            if (eventTrigger.triggers == null)
+            {
+                eventTrigger.triggers = new System.Collections.Generic.List<EventTrigger.Entry>();
+            }
+            eventTrigger.triggers.Add(over);
+
+            button.onClick.AddListener(delegate { PlayMouseClick(); });
+        }
+    }
+
+    //Collection of Event listerns and such
+    #region soundPlayers
     void PlaySong()
     {
         AudioSources.Music.clip = Music[Random.Range(0, Music.Length)];
@@ -114,6 +145,7 @@ public class AudioControler : MonoBehaviour
     private void PlayerControler_onHitGround()
     {
         AudioSources.PlayerHitGround.PlayOneShot(PlayerHitGround, SFXVol);
+        
         //AudioSource.PlayClipAtPoint(PlayerHitGround, soundPos, SFXVol);
     }
 
@@ -131,35 +163,10 @@ public class AudioControler : MonoBehaviour
 
     private void BaseObject_onImpact(BaseObject.objectType o)
     {
-        switch (o)
+        /*switch (o)
         {
 
-        }
-    }
-
-    void SetClicks()
-    {
-        Button[] buttons = FindObjectsOfType<Button>();
-        foreach (Button button in buttons)
-        {
-            EventTrigger eventTrigger = null;
-            if (button.gameObject.GetComponent<EventTrigger>() == null)
-            {
-                button.gameObject.AddComponent<EventTrigger>();
-            }
-            eventTrigger = button.gameObject.GetComponent<EventTrigger>();
-
-            EventTrigger.Entry over = new EventTrigger.Entry();
-            over.eventID = EventTriggerType.PointerEnter;
-            over.callback.AddListener(delegate { PlayMouseOver(); });
-            if (eventTrigger.triggers == null)
-           {
-                eventTrigger.triggers = new System.Collections.Generic.List<EventTrigger.Entry>();
-            }
-            eventTrigger.triggers.Add(over);
-
-            button.onClick.AddListener(delegate { PlayMouseClick(); });
-        }
+        }*/
     }
 
     public void PlayMouseOver()
@@ -205,4 +212,6 @@ public class AudioControler : MonoBehaviour
                 break;
         }
     }
+
+    #endregion
 }

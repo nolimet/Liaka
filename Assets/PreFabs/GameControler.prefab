@@ -147,6 +147,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 403298}
   - 114: {fileID: 11469606}
+  - 114: {fileID: 11434458}
+  - 114: {fileID: 11436620}
   m_Layer: 0
   m_Name: Pools
   m_TagString: Untagged
@@ -501,6 +503,7 @@ GameObject:
   - 4: {fileID: 405260}
   - 114: {fileID: 11446020}
   - 114: {fileID: 11408040}
+  - 114: {fileID: 11473038}
   m_Layer: 0
   m_Name: GameControler
   m_TagString: GameController
@@ -919,7 +922,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1366,7 +1369,7 @@ AudioSource:
   m_GameObject: {fileID: 156626}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24324488, guid: 32de67f6bee440541831bdc9b8b1e608,
+  OutputAudioMixerGroup: {fileID: 24307222, guid: 32de67f6bee440541831bdc9b8b1e608,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
@@ -1437,7 +1440,7 @@ AudioSource:
   m_GameObject: {fileID: 173228}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24324488, guid: 32de67f6bee440541831bdc9b8b1e608,
+  OutputAudioMixerGroup: {fileID: 24307222, guid: 32de67f6bee440541831bdc9b8b1e608,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
@@ -2029,6 +2032,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &11434458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01bb39a2bfd9824a807a1f1f2415280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11436620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf5f089f3563ab4891894186f639f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11446020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2044,10 +2069,13 @@ MonoBehaviour:
   _playerControler: {fileID: 0}
   _UIControler: {fileID: 11482284}
   _AudioControler: {fileID: 11407024}
+  _DropTable: {fileID: 11473038}
   PauseMenu: {fileID: 115436}
   saveDat:
-    soundVolume: 0
-    musicVolume: 0
+    options:
+      soundVolume: 1
+      musicVolume: 1
+      interfaceVolume: .400000006
     Coins: 0
 --- !u!114 &11451870
 MonoBehaviour:
@@ -2238,6 +2266,31 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11473038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107778bef201a494aa6f47d2d850ff37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropChance:
+  - type: 0
+    movement: 1
+    chance: 4
+  - type: 0
+    movement: 0
+    chance: 500
+  - type: 1
+    movement: 1
+    chance: 1
+  - type: 1
+    movement: 0
+    chance: 2
+  Table: 
 --- !u!114 &11473052
 MonoBehaviour:
   m_ObjectHideFlags: 1

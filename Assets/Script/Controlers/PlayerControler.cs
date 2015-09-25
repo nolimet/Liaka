@@ -23,7 +23,8 @@ public class PlayerControler : MonoBehaviour
     float l = 1f;
 
     [SerializeField,Tooltip("STarting point of ground checkRay")]
-    Vector3 distOff = Vector2.zero;
+    Vector3 distOff = Vector3.zero;
+
     Rigidbody2D rigi2d;
     Vector2 speed = Vector2.zero;
 
@@ -31,6 +32,7 @@ public class PlayerControler : MonoBehaviour
     public float weaponHeat, MaxHeat = 100f;
     public float Energy, MaxEnergy = 100f;
     public bool weaponForcedCooldown;
+    public float playerScreenX = 0f;
     bool gamePaused = false;
 
     void Start()
@@ -45,7 +47,8 @@ public class PlayerControler : MonoBehaviour
 
         if (onPlayerCreated!=null)
             onPlayerCreated(this);
-        
+
+        playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
     }
 
     public void OnDestroy()
@@ -125,6 +128,8 @@ public class PlayerControler : MonoBehaviour
         if (weaponForcedCooldown)
             return;
 
+        if (p.x <= playerScreenX)
+            return;
        
         weaponHeat += Random.Range(10, 15);
 
@@ -174,16 +179,14 @@ public class PlayerControler : MonoBehaviour
     {
         if (g.GetComponent<BaseObject>().type == BaseObject.objectType.Pickup)
         {
-            PickObject p = g.GetComponent<PickObject>();
+            PickupBase p = g.GetComponent<PickupBase>();
 
-            switch (p.TypePickup)
+            switch (p.pType)
             {
-                case PickObject.pickupType.Static_Coin:
-                case PickObject.pickupType.Dynamic_Coin:
+                case PickupBase.PickupType.Coin:
                     break;
 
-                case PickObject.pickupType.Static_Energy:
-                case PickObject.pickupType.Dynamic_Energy:
+                case PickupBase.PickupType.Energy:
                     Energy += 10;
                     if (Energy > MaxEnergy)
                         Energy = MaxEnergy;

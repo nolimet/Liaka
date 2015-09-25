@@ -31,9 +31,14 @@ public class GameManager : MonoBehaviour
     //UI contrler
     public static UIControler uiControler;
     public UIControler _UIControler;
-
+    
+    //AudioControler
     public static AudioControler audioControler;
     public AudioControler _AudioControler;
+
+    //DropTable
+    public static DropTableControler dropTable;
+    public DropTableControler _DropTable;
 
     //publics
     public GameObject PauseMenu;
@@ -75,6 +80,9 @@ public class GameManager : MonoBehaviour
 
         if (_AudioControler && !audioControler)
             audioControler = _AudioControler;
+
+        if (_DropTable && !dropTable)
+            dropTable = _DropTable;
     }
 
     void onPlayerDestoryed(PlayerControler p)

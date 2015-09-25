@@ -11,6 +11,7 @@ public class BackgroundControler : MonoBehaviour
         [Tooltip("Distance it will travel each second")]
         public Vector3 speed;
     }
+
     [SerializeField]
     layer[] Layers = new layer[0];
     bool GamePaused = false;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody2D),typeof(CircleCollider2D))]
 public class BaseObject : MonoBehaviour
 {
     public delegate void objectTypeDelegate(objectType o);
@@ -74,7 +75,6 @@ public class BaseObject : MonoBehaviour
         if (cp)
             cp.enabled = true;
         
-
         Rigidbody2D ri = GetComponent<Rigidbody2D>();
         if (ri)
             ri.isKinematic = false;

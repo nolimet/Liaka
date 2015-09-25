@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class EnemyPool : MonoBehaviour {
+public class EnemyPool : MonoBehaviour
+{
 
     public static EnemyPool instance;
     public delegate void ObjectRemoved(EnemyBase objectRemoved);
@@ -80,16 +80,16 @@ public class EnemyPool : MonoBehaviour {
         if (instance)
         {
             EnemyBase e;
-            if (instance.InActivePool.Any(i => i.type == Type))
+            if (instance.InActivePool.Any(i => i.etype == Type))
             {
-                e = instance.InActivePool.First(i => i.type == Type);
+                e = instance.InActivePool.First(i => i.etype == Type);
                 instance.InActivePool.Remove(e);
                 instance.ActivePool.Add(e);
                 e.gameObject.SetActive(true);
             }
             else
             {
-                GameObject g = Instantiate(Resources.Load("Object/" + Type.ToString()), Vector3.zero, Quaternion.identity) as GameObject;
+                GameObject g = Instantiate(Resources.Load("Object/Enemies/" + Type.ToString()), Vector3.zero, Quaternion.identity) as GameObject;
                 g.name = Type.ToString() + " - " + (instance.ActivePool.Count + instance.InActivePool.Count);
                 e = g.GetComponent<EnemyBase>();
 

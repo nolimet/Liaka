@@ -55,7 +55,7 @@ public class InputManager : MonoBehaviour
             return;
 
         eventActive = true;
-        TKSwipeRecognizer r1 = new TKSwipeRecognizer(TKSwipeDirection.Up);
+        /*TKSwipeRecognizer r1 = new TKSwipeRecognizer(TKSwipeDirection.Up);
         r1.gestureRecognizedEvent += (r) =>
         {
             if (DebugTouches)
@@ -64,7 +64,19 @@ public class InputManager : MonoBehaviour
             if (onSwipeUp != null)
                 onSwipeUp();
         };
-        TouchKit.addGestureRecognizer(r1);
+        TouchKit.addGestureRecognizer(r1);*/
+
+        TKButtonRecognizer r3 = new TKButtonRecognizer(new TKRect(50, 50, new Vector2(25,25)),0);
+        
+        r3.onTouchUpInsideEvent += (r) =>
+        {
+            if (DebugTouches)
+                Debug.Log("swipe recognizer fired: " + r);
+
+            if (onSwipeUp != null)
+                onSwipeUp();
+        };
+        TouchKit.addGestureRecognizer(r3);
 
         TKTapRecognizer r2 = new TKTapRecognizer();
 
