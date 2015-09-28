@@ -6,6 +6,8 @@ public class UIControler : MonoBehaviour
 
     [SerializeField]
     MaskBar heatLevel,EnergyLevel;
+    [SerializeField]
+    UnityEngine.UI.Slider TimerBar;
     bool GamePaused;
     bool PlayerExists;
     public void Start()
@@ -48,6 +50,7 @@ public class UIControler : MonoBehaviour
 
         Update_HeatLevel();
         Update_EnergyLevel();
+        Update_TimerBar();
     }
 
     void Update_HeatLevel()
@@ -65,5 +68,13 @@ public class UIControler : MonoBehaviour
             return;
 
         EnergyLevel.setValue(GameManager.playerControler.Energy / GameManager.playerControler.MaxEnergy);
+    }
+
+    void Update_TimerBar()
+    {
+        if (!PlayerExists || !GameManager.stageControler)
+            return;
+
+        TimerBar.value = GameManager.stageControler.NormalizedTimeLeft();
     }
 }

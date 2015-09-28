@@ -53,5 +53,13 @@ namespace util
 
             return bounds;
         }
+
+        public static float CalculateJumpVerticalSpeed(float targetJumpHeight)
+        {
+            // From the jump height and gravity we deduce the upwards speed 
+            // for the character to reach at the apex.
+            Debug.Log(2f * targetJumpHeight * Physics2D.gravity.y);
+            return Mathf.Sqrt(2f * targetJumpHeight * Physics2D.gravity.y);
+        }
     }
 }

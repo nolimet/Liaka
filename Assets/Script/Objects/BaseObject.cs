@@ -89,6 +89,8 @@ public class BaseObject : MonoBehaviour
             delegateSet = true;
             GameManager.instance.onPauseGame += Instance_onPauseGame;
         }
+
+        StopAllCoroutines();
     }
 
     /// <summary>

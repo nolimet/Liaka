@@ -40,22 +40,31 @@ public class EnemyBase : BaseObject{
     {
         //base.dropLoot();
 
-        PickupBase p = GameManager.dropTable.getRandomItem();
+        PickupBase p = PickupPool.GetObject(PickupBase.PickupType.Coin);
+        placeObject(p);
+
         for (int i = 0; i < 5; i++)
         {
+            p = GameManager.dropTable.getRandomItem();
             if (p != null)
             {
-                if (p.moveType == PickupBase.Movement.Dynamic)
-                {
-                    p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
-                    p.transform.position = transform.position;
-                }
-                else if (p.moveType == PickupBase.Movement.Static)
-                {
-                    p.transform.position = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2));
-                    p.setVelocity(new Vector3(-5, 0));
-                }
+                placeObject(p);
             }
+            p = null;
+        }
+    }
+
+    protected void placeObject(PickupBase p)
+    {
+        if (p.moveType == PickupBase.Movement.Dynamic)
+        {
+            p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
+            p.transform.position = transform.position;
+        }
+        else if (p.moveType == PickupBase.Movement.Static)
+        {
+            p.transform.position = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2));
+            p.setVelocity(new Vector3(-5, 0));
         }
     }
 }

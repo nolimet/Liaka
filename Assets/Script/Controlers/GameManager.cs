@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
     public static DropTableControler dropTable;
     public DropTableControler _DropTable;
 
+    public static StageControler stageControler;
+    public StageControler _stageControler;
+
+
     //publics
     public GameObject PauseMenu;
 
@@ -47,6 +51,8 @@ public class GameManager : MonoBehaviour
 
     bool GamePaused;
     #endregion
+
+    #region UnityFunctions
     void Awake()
     {
         if (instance)
@@ -62,7 +68,32 @@ public class GameManager : MonoBehaviour
     public void OnDestroy()
     {
         SaveLoad(true);
+        dropTable = null;
+        audioControler = null;
+        uiControler = null;
+        playerControler = null;
+        inputManager = null;
+        instance = null;
+        stageControler = null;
     }
+
+    public void OnLevelWasLoaded(int level)
+    {
+        if (level != 1)
+        {
+            ContinueGame();
+
+        }
+
+        if (level == 1)
+        {
+            PauseMenu.SetActive(false);
+
+            uiControler.gameObject.SetActive(false);
+        }
+    }
+
+    #endregion
 
     void SetStatics()
     {
@@ -83,21 +114,9 @@ public class GameManager : MonoBehaviour
 
         if (_DropTable && !dropTable)
             dropTable = _DropTable;
-    }
 
-    void onPlayerDestoryed(PlayerControler p)
-    {
-        if (_playerControler != p)
-            return;
-
-        _playerControler = null;
-        playerControler = null;
-    }
-
-    void onPlayerCreated(PlayerControler p)
-    {
-        if (_playerControler == null)
-            _playerControler = p;
+        if (_stageControler && !stageControler)
+            stageControler = _stageControler;
     }
 
     void SaveLoad(bool save)
@@ -119,18 +138,6 @@ public class GameManager : MonoBehaviour
                 saveDat = new SaveData();
             Serialization.Save(dataName, Serialization.fileTypes.binary, saveDat);
         }
-    }
-
-    void EventInit()
-    {
-        _inputManager.onEscapePressed += EscapePressed;
-        PlayerControler.onPlayerDestoryed += onPlayerDestoryed;
-        PlayerControler.onPlayerCreated += onPlayerCreated;
-
-        DontDestroyOnLoad(inputManager);
-        DontDestroyOnLoad(uiControler);
-        DontDestroyOnLoad(audioControler);
-        DontDestroyOnLoad(instance);
     }
 
     void EscapePressed()
@@ -155,21 +162,51 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SetStatics();
-    }
+    } 
 
-    public void OnLevelWasLoaded(int level)
+    #region EventListeners
+    void EventInit()
     {
-        if (level != 1)
-        {
-            ContinueGame();
-            
-        }
+        _inputManager.onEscapePressed += EscapePressed;
+        PlayerControler.onPlayerDestoryed += onPlayerDestoryed;
+        PlayerControler.onPlayerCreated += onPlayerCreated;
+        StageControler.onStageCreated += onStageControlerLoaded;
+        StageControler.onStageDestroyed += onStageControlerDestroyed;
 
-        if(level == 1)
-        {
-            PauseMenu.SetActive(false);
-            
-            uiControler.gameObject.SetActive(false);
-        }
+        DontDestroyOnLoad(inputManager);
+        DontDestroyOnLoad(uiControler);
+        DontDestroyOnLoad(audioControler);
+        DontDestroyOnLoad(instance);
     }
+
+    void onPlayerDestoryed(PlayerControler p)
+    {
+        if (_playerControler != p)
+            return;
+
+        _playerControler = null;
+        playerControler = null;
+    }
+
+    void onPlayerCreated(PlayerControler p)
+    {
+        if (_playerControler == null)
+            _playerControler = p;
+    }
+
+    void onStageControlerLoaded(StageControler s)
+    {
+        if (_stageControler == null)
+            _stageControler = s;
+    }
+
+    void onStageControlerDestroyed(StageControler s)
+    {
+        if (_stageControler != s)
+            return;
+
+        stageControler = null;
+        _stageControler = null;
+    }
+    #endregion
 }

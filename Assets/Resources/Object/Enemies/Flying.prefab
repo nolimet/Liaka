@@ -97,7 +97,7 @@ MonoBehaviour:
   type: 2
   Health: 0
   maxHealth: 0
-  etype: 0
+  etype: 1
 --- !u!212 &21293900
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -147,6 +147,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a815a90af6c60481aa8eb46058a04a64, type: 2}
+    - target: {fileID: 0}
+      propertyPath: etype
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 103708}

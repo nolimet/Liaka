@@ -330,7 +330,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 155836809}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.5699997, y: .270000011, z: 0}
+  m_LocalPosition: {x: 18.5699997, y: -1.83000004, z: 0}
   m_LocalScale: {x: 1, y: 1.09923053, z: 1}
   m_Children: []
   m_Father: {fileID: 1771950470}
@@ -440,7 +440,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 598618649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.5699997, y: 9.67000008, z: 0}
+  m_LocalPosition: {x: 18.5699997, y: 10.0900002, z: 0}
   m_LocalScale: {x: 1, y: 1.09923053, z: 1}
   m_Children: []
   m_Father: {fileID: 1771950470}
@@ -494,7 +494,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 786230848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -6.96000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1214327007}
@@ -1406,7 +1406,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1588056644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.5699997, y: 2.70000005, z: 0}
+  m_LocalPosition: {x: 18.5699997, y: 1.15999997, z: 0}
   m_LocalScale: {x: 1, y: 1.09923053, z: 1}
   m_Children: []
   m_Father: {fileID: 1771950470}
@@ -1940,6 +1940,7 @@ GameObject:
   - 61: {fileID: 1978643270}
   - 95: {fileID: 1978643276}
   - 114: {fileID: 1978643273}
+  - 114: {fileID: 1978643274}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -2039,6 +2040,19 @@ MonoBehaviour:
   Energy: 0
   MaxEnergy: 100
   weaponForcedCooldown: 0
+  playerScreenX: 0
+--- !u!114 &1978643274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1978643268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c7baecb0b0004469c66ff6e823e1ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageLength: 15
 --- !u!58 &1978643275
 CircleCollider2D:
   m_ObjectHideFlags: 0

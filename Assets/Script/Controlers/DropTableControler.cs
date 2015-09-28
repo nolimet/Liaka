@@ -13,7 +13,8 @@ public class DropTableControler : MonoBehaviour
         [Tooltip("chance in a thousand it will drop")]
         public int chance;
     }
-
+    [SerializeField]
+    int chanceTableSize;
     [SerializeField]
     dropChanceStruc[] dropChance;
     [SerializeField]
@@ -23,7 +24,7 @@ public class DropTableControler : MonoBehaviour
     void Awake()
     {
         Table = new List<int>();
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < chanceTableSize; i++)
         {
             Table.Add(0);
         }

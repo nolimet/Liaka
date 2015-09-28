@@ -18,13 +18,20 @@ public class PickupBase :BaseObject {
         Dynamic
     }
 
+    public Movement moveType
+    {
+        get { return _moveType; }
+        set { _moveType = value; SetMovementType(value); }
+    }
+
     public PickupType pType;
-    public Movement moveType;
+    public Movement _moveType;
     Rigidbody2D rigi;
     bool stopedMoving;
     public override void startBehaviours()
     {
         base.startBehaviours();
+        type = objectType.Pickup;
         stopedMoving = false;
     }
 
@@ -40,7 +47,11 @@ public class PickupBase :BaseObject {
 
     public virtual void SetMovementType(Movement t)
     {
-        moveType = t;
+        // moveType = t;
+        if (!rigi)
+            rigi = GetComponent<Rigidbody2D>();
+
+        rigi.constraints = RigidbodyConstraints2D.None;
         if (t == Movement.Dynamic)
             rigi.constraints = RigidbodyConstraints2D.FreezeRotation;
         else
@@ -49,7 +60,7 @@ public class PickupBase :BaseObject {
 
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag != TagManager.Enemy)
+        if (collision.transform.tag != TagManager.Enemy && collision.tag != TagManager.Pickup)
             if (collision.name.ToUpper().Contains("BOX") && useBounds.touchingBound(collision.name))
             {
                 StartCoroutine(fadeOut(0.1f, 0.6f));
@@ -59,6 +70,7 @@ public class PickupBase :BaseObject {
         {
             case TagManager.Player:
                 StartCoroutine(fadeOut(0.1f, 0));
+
                 collision.transform.gameObject.SendMessage("hitPickup", gameObject, SendMessageOptions.DontRequireReceiver);
                 if (onPickup != null)
                     onPickup(pType);
