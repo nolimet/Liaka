@@ -2738,7 +2738,7 @@ MonoBehaviour:
     movement: 0
     chance: 1
   - type: 2
-    movement: 0
+    movement: 1
     chance: 800
   Table: 
 --- !u!114 &11473052

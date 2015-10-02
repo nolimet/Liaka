@@ -14,6 +14,7 @@ public class AttackSlider : MonoBehaviour
     slidePart Good, Bad1, Bad2, Perfect;
     [SerializeField]
     float MoveMin, MoveMax, moveRange;
+    bool paused;
 
     public enum state
     {
@@ -36,16 +37,26 @@ public class AttackSlider : MonoBehaviour
     public void OnEnable()
     {
         //GameManager.inputManager.onTap += InputManager_onTap;
+        GameManager.instance.onPauseGame += Instance_onPauseGame;
+    }
+
+    private void Instance_onPauseGame(bool b)
+    {
+        paused = b;
     }
 
     public void OnDisable()
     {
         //GameManager.inputManager.onTap -= InputManager_onTap;
+        GameManager.instance.onPauseGame += Instance_onPauseGame;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (paused)
+            return;
+
         if (Input.GetKeyDown(KeyCode.C))
             InputManager_onTap(Vector2.zero);
 

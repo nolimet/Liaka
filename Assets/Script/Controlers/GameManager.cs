@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public event VoidDelegate onBonusLevel;
 
     //Bool Events
+    /// <summary>
+    /// called when game is paused.
+    /// </summary>
     public event BoolDelegate onPauseGame;
     #endregion
 
