@@ -9,6 +9,7 @@ public class BasePool : MonoBehaviour
     public delegate void ObjectRemoved(BaseObject objectRemoved);
     public event ObjectRemoved onRemove;
 
+    [SerializeField]
     List<BaseObject> ActivePool, InActivePool;
 
     bool autoCollectEnemiesOnStart = true;

@@ -9,7 +9,8 @@ public class PickupBase :BaseObject {
     public enum PickupType
     {
         Coin,
-        Energy
+        Energy,
+        SpeedUp
     }
 
     public enum Movement
@@ -33,6 +34,12 @@ public class PickupBase :BaseObject {
         base.startBehaviours();
         type = objectType.Pickup;
         stopedMoving = false;
+    }
+
+    public override void RemoveFromView()
+    {
+        unregisterDelegates();
+        PickupPool.RemoveObject(this);
     }
 
     public override void OnCollisionEnter2D(Collision2D collision)

@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour
         PlayerControler.onPlayerCreated += onPlayerCreated;
         StageControler.onStageCreated += onStageControlerLoaded;
         StageControler.onStageDestroyed += onStageControlerDestroyed;
+        StageControler.onStageTimerEnded += onStageEnded;
 
         DontDestroyOnLoad(inputManager);
         DontDestroyOnLoad(uiControler);
@@ -207,6 +208,11 @@ public class GameManager : MonoBehaviour
 
         stageControler = null;
         _stageControler = null;
+    }
+
+    void onStageEnded()
+    {
+        
     }
     #endregion
 }

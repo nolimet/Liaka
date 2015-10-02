@@ -13,7 +13,6 @@ public class VariationLayerControler : LayerControler
         subObjectWorldSize = transform.GetChild(0).getChildBounds().size;
         SubObjects = new List<Transform>();
         float l = 0f;
-        Debug.Log(l);
         Transform tx;
         for (int i = 0; i < transform.childCount; i++)
         {

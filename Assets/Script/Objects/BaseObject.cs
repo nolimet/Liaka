@@ -108,12 +108,17 @@ public class BaseObject : MonoBehaviour
     /// </summary>
     public virtual void RemoveFromView()
     {
+        unregisterDelegates();
+        BasePool.RemoveObject(this);
+    }
+
+    public virtual void unregisterDelegates()
+    {
         if (delegateSet)
         {
             delegateSet = false;
             GameManager.instance.onPauseGame -= Instance_onPauseGame;
         }
-        BasePool.RemoveObject(this);
     }
 
     public virtual void OnCollisionEnter2D(Collision2D collision)

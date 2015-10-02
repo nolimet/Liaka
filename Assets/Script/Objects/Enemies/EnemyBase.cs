@@ -36,13 +36,19 @@ public class EnemyBase : BaseObject{
         yield return new WaitForEndOfFrame();
     }
 
+    public override void RemoveFromView()
+    {
+        unregisterDelegates();
+        EnemyPool.RemoveObject(this);
+    }
+
     protected override void dropLoot()
     {
         //base.dropLoot();
 
         PickupBase p = PickupPool.GetObject(PickupBase.PickupType.Coin);
         placeObject(p);
-
+        p = null;
         for (int i = 0; i < 5; i++)
         {
             p = GameManager.dropTable.getRandomItem();

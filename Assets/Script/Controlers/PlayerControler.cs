@@ -89,7 +89,7 @@ public class PlayerControler : MonoBehaviour
         int mask = 1 << LayerMask.NameToLayer("Ground");
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
-        //Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l),Color.red);
+        Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l),Color.red);
         if (hit && hit.transform.tag == TagManager.Ground)
         {
             if (!g && onHitGround != null)
@@ -122,12 +122,13 @@ public class PlayerControler : MonoBehaviour
     void Jump()
     {
 
-        float g = Physics.gravity.magnitude; // get the gravity value
-        float vertSpeed = Mathf.Sqrt(2 * g * 5); // calculate the vertical speed
-        float totalTime = 2 * vertSpeed / g; // calculate the total time
-        //var hSpeed = maxDistance / totalTime; // calculate the horizontal speed
-        rigi2d.velocity = new Vector2(rigi2d.velocity.x, vertSpeed); // launch the projectile!
-        //rigi2d.AddForce(new Vector2(0, 500));
+        /* float g = Physics.gravity.magnitude; // get the gravity value
+         float vertSpeed = Mathf.Sqrt(2 * g * 5); // calculate the vertical speed
+         float totalTime = 2 * vertSpeed / g; // calculate the total time
+         //var hSpeed = maxDistance / totalTime; // calculate the horizontal speed
+         rigi2d.velocity = new Vector2(rigi2d.velocity.x, vertSpeed); // launch the projectile!
+         //rigi2d.AddForce(new Vector2(0, 500));*/
+        rigi2d.AddForce(new Vector3(0, 9 * rigi2d.mass, 0), ForceMode2D.Impulse);
         if (onJump != null)
             onJump();
     }
@@ -202,8 +203,20 @@ public class PlayerControler : MonoBehaviour
                     if (Energy > MaxEnergy)
                         Energy = MaxEnergy;
                     break;
+
+                case PickupBase.PickupType.SpeedUp:
+                    transform.Translate(0.5f, 0, 0);
+                    break;
             }
         }
     }
 
+    public void ChangePlayerPos(float newXpos)
+    {
+        Debug.DrawRay(new Vector3(newXpos, -10, 0), Vector3.up, Color.cyan, 100f);
+        playerScreenX = newXpos;
+        transform.position = new Vector3(newXpos, transform.position.y);
+
+        playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
+    }
 }

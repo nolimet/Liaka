@@ -6,7 +6,7 @@ public class StageControler : MonoBehaviour
     public delegate void StageControlerEvent(StageControler stage);
     public static event StageControlerEvent onStageCreated, onStageDestroyed;
     public delegate void DelegateVoid();
-    public static event DelegateVoid onStageEnded;
+    public static event DelegateVoid onStageTimerEnded;
     [Tooltip("time in seconds")]
     public float StageLength;
     float TimeLeft;
@@ -32,8 +32,8 @@ public class StageControler : MonoBehaviour
         if(TimeLeft<0 && TimeLeft>-1)
         {
             TimeLeft = -20;
-            if (onStageEnded != null)
-                onStageEnded();
+            if (onStageTimerEnded != null)
+                onStageTimerEnded();
         }
     }
 

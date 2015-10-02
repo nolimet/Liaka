@@ -11,9 +11,9 @@ GameObject:
   - 212: {fileID: 21296532}
   - 50: {fileID: 5064462}
   - 114: {fileID: 11431316}
-  - 58: {fileID: 5870564}
+  - 58: {fileID: 5845276}
   m_Layer: 14
-  m_Name: Dynamic_Energy
+  m_Name: SpeedUp
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,8 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!58 &5870564
+  m_Constraints: 6
+--- !u!58 &5845276
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 188060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb4eaef84967aa8419037ac41a367074, type: 3}
+  m_Script: {fileID: 11500000, guid: cbf02262a1618114e9c1660183ea6f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   useBounds:
@@ -77,7 +77,8 @@ MonoBehaviour:
     left: 1
     right: 1
   type: 0
-  TypePickup: 3
+  pType: 2
+  _moveType: 0
 --- !u!212 &21296532
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -102,7 +103,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a774410254bcef4409f309f775f1c9fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e18a39aa8a05ef449efca41676f84ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -113,7 +114,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: TypePickup
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Mass
@@ -141,7 +142,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_GravityScale
@@ -154,11 +155,15 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a774410254bcef4409f309f775f1c9fb,
+      objectReference: {fileID: 21300000, guid: 9e18a39aa8a05ef449efca41676f84ef,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: pType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -10,6 +10,7 @@ public class PickupPool : MonoBehaviour
     public delegate void ObjectRemoved(PickupBase objectRemoved);
     public event ObjectRemoved onRemove;
 
+    [SerializeField]
     List<PickupBase> ActivePool, InActivePool;
 
     bool autoCollectEnemiesOnStart = true;

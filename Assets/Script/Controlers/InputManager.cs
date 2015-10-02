@@ -21,7 +21,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField]
     private bool DebugTouches = false;
-    bool eventActive;
+    [SerializeField]
+    bool eventActive, enableEventsOnStart = false;
     // Use this for initialization
 
 
@@ -29,23 +30,26 @@ public class InputManager : MonoBehaviour
     {
         GameManager.instance.onPauseGame += Instance_onPauseGame;
         Instance_onPauseGame(false);
+
+        if (enableEventsOnStart)
+            setReconizers(true);
     }
 
     private void Instance_onPauseGame(bool b)
     {
-        setReconizers(!b);
+        if (Application.loadedLevel != 1 && Application.loadedLevel != 0)
+            setReconizers(!b);
     }
 
     public void OnLevelWasLoaded(int level)
     {
-        if (level == 1)
+        if (level == 1 || level == 0)
             setReconizers(false);
     }   
 
     void setReconizers(bool b)
     {
         Debug.Log(b ? "Adding Reconziers" : "Removing Reconziers");
-        Debug.Log(b);
         if (!b && !eventActive)
         {
             eventActive = false;
