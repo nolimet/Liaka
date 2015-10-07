@@ -102,7 +102,7 @@ public class PickupPool : MonoBehaviour
                 e.transform.SetParent(instance.transform, false);
             }
 
-            e.gameObject.SendMessage("startBehaviours", SendMessageOptions.DontRequireReceiver);
+            e.gameObject.SendMessage("startBehaviours");
             return e;
         }
         return null;

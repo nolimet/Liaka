@@ -46,7 +46,7 @@ public class DropTableControler : MonoBehaviour
     {
         int i = Table.ElementAtOrDefault(new System.Random().Next() % Table.Count());
         i--;
-        Debug.Log(i);
+
         if (i < 0)
             return null;
 

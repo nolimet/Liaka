@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControler : MonoBehaviour
 {
+    #region Delegates
     public delegate void PlayerControlerEvent(PlayerControler p);
     public static event PlayerControlerEvent onPlayerCreated;
     public static event PlayerControlerEvent onPlayerDestoryed;
@@ -13,7 +14,9 @@ public class PlayerControler : MonoBehaviour
     public event VoidDelegate onJump;
     public event VoidDelegate onHitGround;
     public event VoidDelegate onEnergyZero;
+    #endregion
 
+    #region Varibles
     public PlayerGun gun;
 
     [SerializeField]
@@ -24,17 +27,27 @@ public class PlayerControler : MonoBehaviour
 
     [SerializeField,Tooltip("STarting point of ground checkRay")]
     Vector3 distOff = Vector3.zero;
+    [SerializeField]
+    Transform SpeedUpEndPosition;
 
     Rigidbody2D rigi2d;
-    Vector2 speed = Vector2.zero;
+    Vector2 speed = Vector2.zero, startPos;
 
     float coolDownDelay;
-    public float weaponHeat, MaxHeat = 100f;
-    public float Energy, MaxEnergy = 100f;
-    public bool weaponForcedCooldown;
-    public float playerScreenX = 0f;
-    bool gamePaused = false;
+    public float boostMoveSpeed = 10f, maxBoost = 10f, boostDegrationSpeed = 2.5f, boostTimeLeft = 0f;
 
+    [HideInInspector]
+    public float weaponHeat, MaxHeat = 100f;
+    [HideInInspector]
+    public float Energy, MaxEnergy = 100f;
+    [HideInInspector]
+    public bool weaponForcedCooldown;
+    [HideInInspector]
+    public float playerScreenX = 0f;
+    bool gamePaused = false; 
+    #endregion
+
+    #region Unity functions
     void Start()
     {
         Energy = MaxEnergy;
@@ -49,6 +62,8 @@ public class PlayerControler : MonoBehaviour
             onPlayerCreated(this);
 
         playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
+        SpeedUpEndPosition.position = new Vector3(SpeedUpEndPosition.position.x, transform.position.x, transform.position.z);
+        startPos = transform.position;
     }
 
     public void OnDestroy()
@@ -67,6 +82,53 @@ public class PlayerControler : MonoBehaviour
             onPlayerDestoryed(this);
     }
 
+    void Update()
+    {
+        if (gamePaused)
+            return;
+
+        Update_Energy();
+        Update_HeatLevel();
+        Update_GroundCheck();
+        Update_Boost();
+    }
+    #endregion
+
+    #region eventListeners
+
+    private void BaseObject_onHitPlayer(BaseObject.objectType o)
+    {
+        switch (o)
+        {
+            case BaseObject.objectType.Enemy:
+                Energy -= 10;
+                if (Energy < 0)
+                    Energy = 0;
+                break;
+        }
+    }
+
+    private void Instance_onPauseGame(bool b)
+    {
+        gamePaused = b;
+        if (b)
+        {
+            speed = rigi2d.velocity;
+            rigi2d.velocity = Vector2.zero;
+            rigi2d.isKinematic = true;
+        }
+        else
+        {
+            rigi2d.isKinematic = false;
+            rigi2d.velocity = speed;
+        }
+    }
+
+    private void InputManager_onTap(Vector2 pos)
+    {
+        shoot(pos);
+    }
+
     private void InputManager_onSwipeUp()
     {
         if (g)
@@ -81,43 +143,32 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    void Update()
+    //called by string method. Not exactly save...
+    public void hitPickup(GameObject g)
     {
-        if (gamePaused)
-            return;
-
-        int mask = 1 << LayerMask.NameToLayer("Ground");
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
-        Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l),Color.red);
-        if (hit && hit.transform.tag == TagManager.Ground)
+        if (g.GetComponent<BaseObject>().type == BaseObject.objectType.Pickup)
         {
-            if (!g && onHitGround != null)
-                onHitGround();
+            PickupBase p = g.GetComponent<PickupBase>();
 
-            g = true;
-            doubleJump = true;
-        }
-        else
-            g = false;
+            switch (p.pType)
+            {
+                case PickupBase.PickupType.Coin:
+                    break;
 
-        if (weaponHeat > 0)
-            weaponHeat -= 20f * Time.deltaTime; // remove 20 heat per second;
+                case PickupBase.PickupType.Energy:
+                    Energy += 15;
+                    if (Energy > MaxEnergy)
+                        Energy = MaxEnergy;
+                    break;
 
-        if (weaponHeat <= 0)
-        {
-            weaponHeat = 0;
-            weaponForcedCooldown = false;
-        }
+                case PickupBase.PickupType.SpeedUp:
+                    boostTimeLeft+=0.5f;
 
-        if (Energy > 0)
-            Energy -= 2f * Time.deltaTime;
-
-        if(Energy<=0)
-        {
-           // Debug.Log("YOU DIED");
+                    break;
+            }
         }
     }
+    #endregion
 
     void Jump()
     {
@@ -154,63 +205,6 @@ public class PlayerControler : MonoBehaviour
         //Debug.Log("Shooting - Heat Level " + (weaponHeat / 100f).ToString("p"));
     }
 
-    private void BaseObject_onHitPlayer(BaseObject.objectType o)
-    {
-        switch(o)
-        {
-            case BaseObject.objectType.Enemy:
-                Energy -= 10;
-                if (Energy < 0)
-                    Energy = 0;
-                break;
-        }
-    }
-
-    private void Instance_onPauseGame(bool b)
-    {
-        gamePaused = b;
-        if (b)
-        {
-            speed = rigi2d.velocity;
-            rigi2d.velocity = Vector2.zero;
-            rigi2d.isKinematic = true;
-        }
-        else
-        {
-            rigi2d.isKinematic = false;
-            rigi2d.velocity = speed;
-        }
-    }
-
-    private void InputManager_onTap(Vector2 pos)
-    {
-        shoot(pos);
-    }
-
-    public void hitPickup(GameObject g)
-    {
-        if (g.GetComponent<BaseObject>().type == BaseObject.objectType.Pickup)
-        {
-            PickupBase p = g.GetComponent<PickupBase>();
-
-            switch (p.pType)
-            {
-                case PickupBase.PickupType.Coin:
-                    break;
-
-                case PickupBase.PickupType.Energy:
-                    Energy += 15;
-                    if (Energy > MaxEnergy)
-                        Energy = MaxEnergy;
-                    break;
-
-                case PickupBase.PickupType.SpeedUp:
-                    transform.Translate(0.5f, 0, 0);
-                    break;
-            }
-        }
-    }
-
     public void ChangePlayerPos(float newXpos)
     {
         Debug.DrawRay(new Vector3(newXpos, -10, 0), Vector3.up, Color.cyan, 100f);
@@ -219,4 +213,124 @@ public class PlayerControler : MonoBehaviour
 
         playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
     }
+
+    void Update_Energy()
+    {
+        if (Energy > 0)
+            Energy -= 2f * Time.deltaTime;
+
+        if (Energy <= 0)
+        {
+            // Debug.Log("YOU DIED");
+        }
+    }
+    void Update_Boost()
+    {
+        if (boostTimeLeft <= 0 || gamePaused)
+            return;
+
+        if (boostTimeLeft > maxBoost)
+            Debug.Log("overBoost");
+
+        float t = boostTimeLeft / maxBoost;
+
+        ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
+
+        boostTimeLeft -= Time.deltaTime / boostDegrationSpeed;
+    }
+    void Update_GroundCheck()
+    {
+        int mask = 1 << LayerMask.NameToLayer("Ground");
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
+        Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l), Color.red);
+        if (hit && hit.transform.tag == TagManager.Ground)
+        {
+            if (!g && onHitGround != null)
+                onHitGround();
+
+            g = true;
+            doubleJump = true;
+        }
+        else
+            g = false;
+    }
+    void Update_HeatLevel()
+    {
+        if (weaponHeat > 0)
+            weaponHeat -= 20f * Time.deltaTime; // remove 20 heat per second;
+
+        if (weaponHeat <= 0)
+        {
+            weaponHeat = 0;
+            weaponForcedCooldown = false;
+        }
+    }
+
+   /* IEnumerator playerBoost(float duration)
+    {
+        boostTimeLeft += duration;
+        if(boostActive)
+        yield break;
+
+        Vector3 startPos = transform.position;
+        float startX;
+        float t;
+        float m;
+        float maxBoost = 0;
+
+        boostTimeLeft = duration;
+        boostActive = true;
+        
+
+        while(boostTimeLeft>0)
+        {
+            if (boostTimeLeft > maxBoost)
+            {
+                maxBoost = boostTimeLeft;
+                if (maxBoost > 10)
+                    boostTimeLeft = maxBoost = 10f;
+                startX = transform.position.x;
+                 t = 1f * (Vector3.Distance(startPos, transform.position) / Vector3.Distance(startPos, SpeedUpEndPosition.position));
+                 m = 1f * (maxBoost / 10f);
+
+
+
+                if (m > 1)
+                    m = 1;
+                while (t < m)
+                {
+                    if (!gamePaused)
+                    {
+                        ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
+                        t += Time.deltaTime / boostMoveSpeed;
+                    }
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            if (!gamePaused)
+                boostTimeLeft -= Time.deltaTime/5f;
+            
+            yield return new WaitForEndOfFrame();
+        }
+
+        boostActive = false;
+
+        startX = transform.position.x;
+        t = 1f * (Vector3.Distance(startPos, transform.position) / Vector3.Distance(startPos, SpeedUpEndPosition.position));
+        m = 1f * (maxBoost / 10f);
+        
+        if (m > 1)
+            m = 1;
+        while (t > 0)
+        {
+            if (!gamePaused)
+            {
+                ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
+                t -= Time.deltaTime / boostMoveSpeed;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+    */
 }

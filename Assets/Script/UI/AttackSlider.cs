@@ -6,7 +6,7 @@ public class AttackSlider : MonoBehaviour
 {
 
     public delegate void FloatDelegate(float f, state preformance);
-    public static event FloatDelegate onAttack;
+    public event FloatDelegate onAttack;
 
     [SerializeField]
     RectTransform cicleMov;
@@ -38,6 +38,8 @@ public class AttackSlider : MonoBehaviour
     {
         //GameManager.inputManager.onTap += InputManager_onTap;
         GameManager.instance.onPauseGame += Instance_onPauseGame;
+        t = 0;
+        Update_TriggerStatus();
     }
 
     private void Instance_onPauseGame(bool b)
@@ -48,7 +50,7 @@ public class AttackSlider : MonoBehaviour
     public void OnDisable()
     {
         //GameManager.inputManager.onTap -= InputManager_onTap;
-        GameManager.instance.onPauseGame += Instance_onPauseGame;
+        GameManager.instance.onPauseGame -= Instance_onPauseGame;
     }
 
     // Update is called once per frame
@@ -71,7 +73,10 @@ public class AttackSlider : MonoBehaviour
         }
         else
             t = 0;
+
+#if UNITY_EDITOR
         Update_TriggerStatus();
+#endif
     }
 
     private void Update_TriggerStatus()

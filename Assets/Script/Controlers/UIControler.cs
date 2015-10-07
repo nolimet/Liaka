@@ -3,6 +3,8 @@ using System.Collections;
 
 public class UIControler : MonoBehaviour
 {
+    public AttackSlider attackSlider;
+
 
     [SerializeField]
     MaskBar heatLevel,EnergyLevel;
@@ -16,7 +18,21 @@ public class UIControler : MonoBehaviour
         PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
         PlayerControler.onPlayerDestoryed += PlayerControler_onPlayerDestoryed;
 
+        StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
+        StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
+
+        attackSlider.gameObject.SetActive(false);
         Debug.Log("start");
+    }
+
+    private void StageControler_onBossBattleEnds()
+    {
+        attackSlider.gameObject.SetActive(false);
+    }
+
+    private void StageControler_onBossBattleBegins()
+    {
+        attackSlider.gameObject.SetActive(true);
     }
 
     private void PlayerControler_onPlayerDestoryed(PlayerControler p)
@@ -34,7 +50,10 @@ public class UIControler : MonoBehaviour
         GameManager.instance.onPauseGame -= onGamePause;
         PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
         PlayerControler.onPlayerDestoryed -= PlayerControler_onPlayerDestoryed;
-        
+
+
+        StageControler.onBossBattleBegins -= StageControler_onBossBattleBegins;
+        StageControler.onBossBattleEnds -= StageControler_onBossBattleEnds;
     }
 
     void onGamePause(bool b)
@@ -42,7 +61,7 @@ public class UIControler : MonoBehaviour
         GamePaused = b;
     }
 
-
+    #region Update
     void Update()
     {
         if (GamePaused)
@@ -77,4 +96,5 @@ public class UIControler : MonoBehaviour
 
         TimerBar.value = GameManager.stageControler.NormalizedTimeLeft();
     }
+    #endregion
 }

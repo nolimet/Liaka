@@ -10,7 +10,7 @@ public class BossTest : MonoBehaviour
     void Start()
     {
         BaseObject.onHitBose += hit;
-        AttackSlider.onAttack += AttackSlider_onAttack;
+        GameManager.uiControler.attackSlider.onAttack += AttackSlider_onAttack;
         PlayerControler.onPlayerCreated += PlayerControler_Created;
         
         SelfStart = transform.position;
@@ -18,7 +18,7 @@ public class BossTest : MonoBehaviour
 
     public void OnDestroy()
     {
-        AttackSlider.onAttack -= AttackSlider_onAttack;
+        GameManager.uiControler.attackSlider.onAttack -= AttackSlider_onAttack;
         BaseObject.onHitBose -= hit;
         PlayerControler.onPlayerCreated -= PlayerControler_Created;
     }
@@ -49,7 +49,7 @@ public class BossTest : MonoBehaviour
         if (tx > 1)
             tx = 1;
 
-        GameManager.playerControler.ChangePlayerPos(PlayerStart.x + Mathf.Lerp(0, 10, tx));
+        //GameManager.playerControler.ChangePlayerPos(PlayerStart.x + Mathf.Lerp(0, 10, tx));
         transform.position = SelfStart + new Vector3(Mathf.Lerp(0, 10, tx), 0);
     }
 
@@ -57,7 +57,7 @@ public class BossTest : MonoBehaviour
     {
         if (tx > 1)
             tx = 0;
-        tx += 1f / 40;
+        tx += 1f / 2;
         moveBoss();
     }
 }

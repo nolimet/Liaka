@@ -5,6 +5,7 @@ using System.Collections;
 public class EnemyBase : BaseObject{
 
     public int Health, maxHealth;
+    
 
     struct moveSet
     {
@@ -21,11 +22,6 @@ public class EnemyBase : BaseObject{
     }
 
     public Enemytype etype;
-
-    public virtual void Start()
-    {
-
-    }
 
     /// <summary>
     /// goes through all the movement sets for a enemy

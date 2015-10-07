@@ -653,7 +653,7 @@ GameObject:
   - 224: {fileID: 22415216}
   - 114: {fileID: 11414702}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: AttackBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,10 +717,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22450312}
+  - 114: {fileID: 11482284}
   - 223: {fileID: 22387620}
   - 114: {fileID: 11499544}
   - 114: {fileID: 11470870}
-  - 114: {fileID: 11482284}
   m_Layer: 5
   m_Name: InGame
   m_TagString: Untagged
@@ -2886,6 +2886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbce50e07c824984c8bc734954e5ce07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSlider: {fileID: 11414702}
   heatLevel: {fileID: 11486494}
   EnergyLevel: {fileID: 11466062}
   TimerBar: {fileID: 11411362}

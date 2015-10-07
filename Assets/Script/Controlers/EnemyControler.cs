@@ -9,16 +9,34 @@ public class EnemyControler : MonoBehaviour
     {
         public Transform Low, High;
     }
+
+
     public Transform GroundSpawnPoints;
     public twoT FlyingSpawnPoints;
 
     [Range(1,10), Tooltip("increases spawning speed")]
     public int diff = 1;
-    bool gamePaused;
+    bool gamePaused, bossBattle,GameLoopStarted;
+
+
     void Start()
     {
         GameManager.instance.onPauseGame += GamePaused;
+        StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
+        StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
         StartCoroutine(gameLoop());
+    }
+
+    private void StageControler_onBossBattleEnds()
+    {
+        bossBattle = false;
+        StartCoroutine(gameLoop());
+    }
+
+    private void StageControler_onBossBattleBegins()
+    {
+        bossBattle = true;
+        
     }
 
     void Destory()
@@ -53,8 +71,12 @@ public class EnemyControler : MonoBehaviour
 
     IEnumerator gameLoop()
     {
+        if (GameLoopStarted)
+            yield break;
+
+        GameLoopStarted = true;
         float d = 2f;
-        while (!gamePaused)
+        while (!gamePaused && !bossBattle)
         {
             if (d <= 0)
             {
@@ -65,5 +87,6 @@ public class EnemyControler : MonoBehaviour
             d -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        GameLoopStarted = false;
     }
 }

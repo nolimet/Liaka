@@ -74,10 +74,16 @@ public class BaseObject : MonoBehaviour
         CircleCollider2D cp = GetComponent<CircleCollider2D>();
         if (cp)
             cp.enabled = true;
-        
+
+        Animator a = GetComponent<Animator>();
+        if (a)
+            a.enabled = true;
+
         Rigidbody2D ri = GetComponent<Rigidbody2D>();
         if (ri)
             ri.isKinematic = false;
+
+        
 
         if (type == objectType.Enemy)
         {
@@ -188,6 +194,9 @@ public class BaseObject : MonoBehaviour
             SpriteRenderer r = GetComponent<SpriteRenderer>();
             GetComponent<CircleCollider2D>().enabled = false;
 
+            if (GetComponent<Animator>())
+                GetComponent<Animator>().enabled = true;
+
             Color c = r.color;
 
             yield return new WaitForSeconds(d);
@@ -207,16 +216,23 @@ public class BaseObject : MonoBehaviour
     public virtual void Instance_onPauseGame(bool b)
     {
         Rigidbody2D r = GetComponent<Rigidbody2D>();
+        Animator a = GetComponent<Animator>();
         if(b)
         {
             Speed = r.velocity;
             r.velocity = Vector2.zero;
             r.isKinematic = true;
+
+            if (a)
+                a.enabled = false;
         }
         else
         {
             r.isKinematic = false;
             r.velocity = Speed;
+
+            if (a)
+                a.enabled = true;
         }
     }
 
