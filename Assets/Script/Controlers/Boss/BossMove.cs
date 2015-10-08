@@ -3,7 +3,10 @@ using System.Collections;
 
 public class BossMove : MonoBehaviour
 {
-    enum moveDir
+    public delegate void moveDirDelegate(moveDir d);
+    public moveDirDelegate onMoveChange;
+
+    public enum moveDir
     {
         left = -1,
         none = 0,
@@ -62,12 +65,20 @@ public class BossMove : MonoBehaviour
 
             if (forceMove || util.RandomChange.getChance(100, 5))
             {
-                Vector3 z = transform.position - endPos.position;
+
                 int dir;
                 if (Vector3.Distance(transform.position, endPos.position) > 0.3f)
+                {
                     dir = 1;
+                    if (onMoveChange != null)
+                        onMoveChange(moveDir.right);
+                }
                 else if (Vector3.Distance(transform.position, startPos) > 0.3f)
+                {
                     dir = -1;
+                    if (onMoveChange != null)
+                        onMoveChange(moveDir.left);
+                }
                 else
                     dir = 0;
                 //Debug.Log("dir " + dir + " z " + z);
@@ -84,6 +95,10 @@ public class BossMove : MonoBehaviour
                     yield return new WaitForEndOfFrame();
 
                 }
+
+                if (onMoveChange != null)
+                    onMoveChange(moveDir.none);
+
                 forceMove = false;
             }
             

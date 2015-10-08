@@ -29,6 +29,9 @@ public class BossControler : MonoBehaviour
 
         StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
+
+        if (bossMove)
+            bossMove.onMoveChange += bossMove_onMoveChange;
     }
 
     public void OnDestroy()
@@ -39,6 +42,11 @@ public class BossControler : MonoBehaviour
         StageControler.onBossBattleEnds -= StageControler_onBossBattleEnds;
     }
 
+    private void bossMove_onMoveChange(BossMove.moveDir moveDir)
+    {
+        bossAnimator.MoveChange((int)moveDir);
+    }
+    
     private void BaseObject_onHitBose(BaseObject.objectType o)
     {
         if (o == BaseObject.objectType.Enemy)
