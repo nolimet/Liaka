@@ -50,10 +50,42 @@ public class BasePool : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        for (int i = ActivePool.Count-1; i >= 0; i--)
+        RemoveAll();
+    }
+
+    /// <summary>
+    /// Removes all objects from view
+    /// </summary>
+    public static void RemoveAll()
+    {
+        if (!instance)
+            return;
+
+        for (int i = instance.ActivePool.Count - 1; i >= 0; i--)
         {
-            RemoveObject(ActivePool[i]);
+            RemoveObject(instance.ActivePool[i]);
         }
+    }
+
+    /// <summary>
+    /// Deletes all objects in hierachy from scene
+    /// </summary>
+    public static void DeleteAll()
+    {
+        if (!instance)
+            return;
+
+        for (int i = instance.ActivePool.Count - 1; i >= 0; i--)
+        {
+            RemoveObject(instance.ActivePool[i]);
+        }
+
+        for (int i = instance.InActivePool.Count - 1; i >= 0; i--)
+        {
+            Destroy(instance.InActivePool[i], 0.1f);
+        }
+
+        instance.InActivePool = new List<BaseObject>();
     }
 
     public static void RemoveObject(BaseObject e)

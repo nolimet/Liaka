@@ -29,12 +29,17 @@ public class PlayerControler : MonoBehaviour
     Vector3 distOff = Vector3.zero;
     [SerializeField]
     Transform SpeedUpEndPosition;
+    [SerializeField]
+    PlayerAnimationControler AnimationControler;
 
     Rigidbody2D rigi2d;
     Vector2 speed = Vector2.zero, startPos;
 
     float coolDownDelay;
-    public float boostMoveSpeed = 10f, maxBoost = 10f, boostDegrationSpeed = 2.5f, boostTimeLeft = 0f;
+    public float boostMoveSpeed = 10f, maxBoost = 10f, boostDegrationSpeed = 2.5f, boostTimeLeft = 0f, BoostTimeStay = 2f,BoostForwardTimePerUnit =1f;
+    [Header("boostStuff"),SerializeField]
+    float boostTimeStayLeft, BoostForwardCalculatedTimeTarget, BoostForwardTime,LastCalcBoostTime, lastPickedupBoostTime = 0;
+    float maxForwardBoostTime = 0f;
 
     [HideInInspector]
     public float weaponHeat, MaxHeat = 100f;
@@ -104,6 +109,7 @@ public class PlayerControler : MonoBehaviour
                 Energy -= 10;
                 if (Energy < 0)
                     Energy = 0;
+                
                 break;
         }
     }
@@ -162,10 +168,96 @@ public class PlayerControler : MonoBehaviour
                     break;
 
                 case PickupBase.PickupType.SpeedUp:
-                    boostTimeLeft+=0.5f;
-
+                    lastPickedupBoostTime = boostTimeLeft;
+                    boostTimeLeft +=0.5f;  
                     break;
             }
+        }
+    }
+    #endregion
+
+    #region UpdateFunctions
+    void Update_Energy()
+    {
+        if (Energy > 0)
+            Energy -= 2f * Time.deltaTime;
+
+        if (Energy <= 0)
+        {
+            // Debug.Log("YOU DIED");
+        }
+    }
+    void Update_Boost()
+    {
+        if (boostTimeLeft <= 0 || gamePaused)
+            return;
+        
+        if (boostTimeLeft > maxBoost)
+            Debug.Log("overBoost");
+
+        if (BoostForwardTime < BoostForwardCalculatedTimeTarget || LastCalcBoostTime != lastPickedupBoostTime)
+        {
+            if(LastCalcBoostTime!=lastPickedupBoostTime)
+            {
+                boostTimeStayLeft = BoostTimeStay;
+
+                maxForwardBoostTime = Vector3.Distance(startPos, SpeedUpEndPosition.position) * BoostForwardTimePerUnit;
+                float normalBoost = boostTimeLeft / maxBoost;
+
+                BoostForwardCalculatedTimeTarget = normalBoost * maxForwardBoostTime;
+
+                LastCalcBoostTime = lastPickedupBoostTime;
+                
+            }
+            ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, BoostForwardTime / maxForwardBoostTime));
+            BoostForwardTime += Time.deltaTime;
+        }
+        else if (boostTimeStayLeft > 0)
+            boostTimeStayLeft -= Time.deltaTime;
+        else if (boostTimeLeft > 0)
+        {
+            float t = boostTimeLeft / maxBoost;
+            ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
+            boostTimeLeft -= Time.deltaTime / boostDegrationSpeed;
+
+            BoostForwardCalculatedTimeTarget = BoostForwardTime = (boostTimeLeft / maxBoost) * maxForwardBoostTime;
+
+            if (boostTimeLeft <= 0)
+            {
+                LastCalcBoostTime = 0;
+                
+                BoostForwardCalculatedTimeTarget = 0f;
+                boostTimeStayLeft = BoostTimeStay;
+            }
+                
+        }
+    }
+    void Update_GroundCheck()
+    {
+        int mask = 1 << LayerMask.NameToLayer("Ground");
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
+        Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l), Color.red);
+        if (hit && hit.transform.tag == TagManager.Ground)
+        {
+            if (!g && onHitGround != null)
+                onHitGround();
+
+            g = true;
+            doubleJump = true;
+        }
+        else
+            g = false;
+    }
+    void Update_HeatLevel()
+    {
+        if (weaponHeat > 0)
+            weaponHeat -= 20f * Time.deltaTime; // remove 20 heat per second;
+
+        if (weaponHeat <= 0)
+        {
+            weaponHeat = 0;
+            weaponForcedCooldown = false;
         }
     }
     #endregion
@@ -214,123 +306,70 @@ public class PlayerControler : MonoBehaviour
         playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
     }
 
-    void Update_Energy()
-    {
-        if (Energy > 0)
-            Energy -= 2f * Time.deltaTime;
+    /* IEnumerator playerBoost(float duration)
+     {
+         boostTimeLeft += duration;
+         if(boostActive)
+         yield break;
 
-        if (Energy <= 0)
-        {
-            // Debug.Log("YOU DIED");
-        }
-    }
-    void Update_Boost()
-    {
-        if (boostTimeLeft <= 0 || gamePaused)
-            return;
+         Vector3 startPos = transform.position;
+         float startX;
+         float t;
+         float m;
+         float maxBoost = 0;
 
-        if (boostTimeLeft > maxBoost)
-            Debug.Log("overBoost");
+         boostTimeLeft = duration;
+         boostActive = true;
 
-        float t = boostTimeLeft / maxBoost;
 
-        ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
-
-        boostTimeLeft -= Time.deltaTime / boostDegrationSpeed;
-    }
-    void Update_GroundCheck()
-    {
-        int mask = 1 << LayerMask.NameToLayer("Ground");
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
-        Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l), Color.red);
-        if (hit && hit.transform.tag == TagManager.Ground)
-        {
-            if (!g && onHitGround != null)
-                onHitGround();
-
-            g = true;
-            doubleJump = true;
-        }
-        else
-            g = false;
-    }
-    void Update_HeatLevel()
-    {
-        if (weaponHeat > 0)
-            weaponHeat -= 20f * Time.deltaTime; // remove 20 heat per second;
-
-        if (weaponHeat <= 0)
-        {
-            weaponHeat = 0;
-            weaponForcedCooldown = false;
-        }
-    }
-
-   /* IEnumerator playerBoost(float duration)
-    {
-        boostTimeLeft += duration;
-        if(boostActive)
-        yield break;
-
-        Vector3 startPos = transform.position;
-        float startX;
-        float t;
-        float m;
-        float maxBoost = 0;
-
-        boostTimeLeft = duration;
-        boostActive = true;
-        
-
-        while(boostTimeLeft>0)
-        {
-            if (boostTimeLeft > maxBoost)
-            {
-                maxBoost = boostTimeLeft;
-                if (maxBoost > 10)
-                    boostTimeLeft = maxBoost = 10f;
-                startX = transform.position.x;
-                 t = 1f * (Vector3.Distance(startPos, transform.position) / Vector3.Distance(startPos, SpeedUpEndPosition.position));
-                 m = 1f * (maxBoost / 10f);
+         while(boostTimeLeft>0)
+         {
+             if (boostTimeLeft > maxBoost)
+             {
+                 maxBoost = boostTimeLeft;
+                 if (maxBoost > 10)
+                     boostTimeLeft = maxBoost = 10f;
+                 startX = transform.position.x;
+                  t = 1f * (Vector3.Distance(startPos, transform.position) / Vector3.Distance(startPos, SpeedUpEndPosition.position));
+                  m = 1f * (maxBoost / 10f);
 
 
 
-                if (m > 1)
-                    m = 1;
-                while (t < m)
-                {
-                    if (!gamePaused)
-                    {
-                        ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
-                        t += Time.deltaTime / boostMoveSpeed;
-                    }
-                    yield return new WaitForEndOfFrame();
-                }
-            }
-            if (!gamePaused)
-                boostTimeLeft -= Time.deltaTime/5f;
-            
-            yield return new WaitForEndOfFrame();
-        }
+                 if (m > 1)
+                     m = 1;
+                 while (t < m)
+                 {
+                     if (!gamePaused)
+                     {
+                         ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
+                         t += Time.deltaTime / boostMoveSpeed;
+                     }
+                     yield return new WaitForEndOfFrame();
+                 }
+             }
+             if (!gamePaused)
+                 boostTimeLeft -= Time.deltaTime/5f;
 
-        boostActive = false;
+             yield return new WaitForEndOfFrame();
+         }
 
-        startX = transform.position.x;
-        t = 1f * (Vector3.Distance(startPos, transform.position) / Vector3.Distance(startPos, SpeedUpEndPosition.position));
-        m = 1f * (maxBoost / 10f);
-        
-        if (m > 1)
-            m = 1;
-        while (t > 0)
-        {
-            if (!gamePaused)
-            {
-                ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
-                t -= Time.deltaTime / boostMoveSpeed;
-            }
-            yield return new WaitForEndOfFrame();
-        }
-    }
-    */
+         boostActive = false;
+
+         startX = transform.position.x;
+         t = 1f * (Vector3.Distance(startPos, transform.position) / Vector3.Distance(startPos, SpeedUpEndPosition.position));
+         m = 1f * (maxBoost / 10f);
+
+         if (m > 1)
+             m = 1;
+         while (t > 0)
+         {
+             if (!gamePaused)
+             {
+                 ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
+                 t -= Time.deltaTime / boostMoveSpeed;
+             }
+             yield return new WaitForEndOfFrame();
+         }
+     }
+     */
 }

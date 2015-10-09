@@ -6,13 +6,12 @@ public class BossControler : MonoBehaviour
     public delegate void VoidDelegate();
     public static event VoidDelegate onPlayerHit;
 
-    [SerializeField]
-    BossMove bossMove;
+
+    public BossFight bossFight;
+    public BossMove bossMove;
     [SerializeField]
     BossAnimation bossAnimator;
-    [SerializeField]
-    BossFight bossFight;
-
+    
     //number of enemies that hit the boss;
     int noEnemiesThatHitBoss;
 

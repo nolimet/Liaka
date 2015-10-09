@@ -4,8 +4,7 @@ using System.Collections;
 public class BossMove : MonoBehaviour
 {
     public delegate void moveDirDelegate(moveDir d);
-    public moveDirDelegate onMoveChange;
-
+    public moveDirDelegate onMoveChange, onMoveChangeEarly;
     public enum moveDir
     {
         left = -1,
@@ -25,6 +24,7 @@ public class BossMove : MonoBehaviour
         startPos = transform.position;
         endPos.position = new Vector3(endPos.position.x, transform.position.y, transform.position.z);
         StartCoroutine(bossMove());
+
         GameManager.instance.onPauseGame += Instance_onPauseGame;
     }
 
@@ -67,22 +67,30 @@ public class BossMove : MonoBehaviour
             {
 
                 int dir;
+
                 if (Vector3.Distance(transform.position, endPos.position) > 0.3f)
-                {
                     dir = 1;
-                    if (onMoveChange != null)
-                        onMoveChange(moveDir.right);
-                }
                 else if (Vector3.Distance(transform.position, startPos) > 0.3f)
-                {
                     dir = -1;
-                    if (onMoveChange != null)
-                        onMoveChange(moveDir.left);
-                }
                 else
                     dir = 0;
+
                 //Debug.Log("dir " + dir + " z " + z);
-                
+                if (onMoveChangeEarly != null)
+                    onMoveChangeEarly((moveDir)dir);
+
+                while (t > 0)
+                {
+                    if (!paused)
+                        t -= Time.deltaTime;
+                    yield return new WaitForEndOfFrame();
+                }
+                t = 0.5f;
+
+
+                if (onMoveChange != null)
+                    onMoveChange((moveDir)dir);
+
                 while (dir==1 && Vector3.Distance(transform.position, endPos.position) > 0.3f || dir == -1 && Vector3.Distance(transform.position,startPos)>0.3f)
                 {
                     if (!paused)

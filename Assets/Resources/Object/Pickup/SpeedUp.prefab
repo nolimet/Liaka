@@ -75,7 +75,7 @@ MonoBehaviour:
     up: 1
     down: 1
     left: 1
-    right: 1
+    right: 0
   type: 0
   pType: 2
   _moveType: 0
@@ -138,7 +138,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: useBounds.right
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints

@@ -36,6 +36,7 @@ public class EnemyControler : MonoBehaviour
     private void StageControler_onBossBattleBegins()
     {
         bossBattle = true;
+        EnemyPool.RemoveAll();
         
     }
 
