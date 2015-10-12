@@ -6,13 +6,17 @@ using util;
 
 public class VariationLayerControler : LayerControler
 {
+
+    public float offSetX = 0;
     protected override void Start()
     {
         
         WorldScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2f, 0));
+        Debug.Log(WorldScreenSize);
+        Debug.DrawLine(Vector3.zero, WorldScreenSize, Color.cyan, 40f);
         subObjectWorldSize = transform.GetChild(0).getChildBounds().size;
         SubObjects = new List<Transform>();
-        float l = 0f;
+        float l = offSetX;
         Transform tx;
         for (int i = 0; i < transform.childCount; i++)
         {

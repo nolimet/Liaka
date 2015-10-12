@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - Bullet
   - Pickup
+  - Ground-Trap
   layers:
   - Default
   - TransparentFX

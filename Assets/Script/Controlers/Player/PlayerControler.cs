@@ -25,7 +25,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField, Tooltip("Distance the ground check ray travels")]
     float l = 1f;
 
-    [SerializeField,Tooltip("STarting point of ground checkRay")]
+    [SerializeField, Tooltip("STarting point of ground checkRay")]
     Vector3 distOff = Vector3.zero;
     [SerializeField]
     Transform SpeedUpEndPosition;
@@ -36,9 +36,23 @@ public class PlayerControler : MonoBehaviour
     Vector2 speed = Vector2.zero, startPos;
 
     float coolDownDelay;
-    public float boostMoveSpeed = 10f, maxBoost = 10f, boostDegrationSpeed = 2.5f, boostTimeLeft = 0f, BoostTimeStay = 2f,BoostForwardTimePerUnit =1f;
-    [Header("boostStuff"),SerializeField]
-    float boostTimeStayLeft, BoostForwardCalculatedTimeTarget, BoostForwardTime,LastCalcBoostTime, lastPickedupBoostTime = 0;
+
+    //boost publics
+    [Header("Boost Settings"), SerializeField]
+    public float boostMoveSpeed = 10f;
+    public float maxBoost = 10f;
+    public float boostDegrationSpeed = 2.5f;
+    public float boostTimeLeft = 0f;
+    public float BoostTimeStay = 2f;
+    public float BoostForwardTimePerUnit = 1f;
+    public float BoostGainPerPickup = 1f;
+
+    //boost Privates
+    float boostTimeStayLeft;
+    float BoostForwardCalculatedTimeTarget;
+    float BoostForwardTime;
+    float LastCalcBoostTime;
+    float lastPickedupBoostTime = 0;
     float maxForwardBoostTime = 0f;
 
     [HideInInspector]
@@ -49,7 +63,7 @@ public class PlayerControler : MonoBehaviour
     public bool weaponForcedCooldown;
     [HideInInspector]
     public float playerScreenX = 0f;
-    bool gamePaused = false; 
+    bool gamePaused = false;
     #endregion
 
     #region Unity functions
@@ -57,13 +71,13 @@ public class PlayerControler : MonoBehaviour
     {
         Energy = MaxEnergy;
         rigi2d = GetComponent<Rigidbody2D>();
-        
+
         GameManager.inputManager.onSwipeUp += InputManager_onSwipeUp;
         GameManager.inputManager.onTap += InputManager_onTap;
         GameManager.instance.onPauseGame += Instance_onPauseGame;
         BaseObject.onHitPlayer += BaseObject_onHitPlayer;
 
-        if (onPlayerCreated!=null)
+        if (onPlayerCreated != null)
             onPlayerCreated(this);
 
         playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
@@ -79,7 +93,7 @@ public class PlayerControler : MonoBehaviour
             GameManager.inputManager.onTap -= InputManager_onTap;
         }
 
-        if(GameManager.instance)
+        if (GameManager.instance)
             GameManager.instance.onPauseGame -= Instance_onPauseGame;
         BaseObject.onHitPlayer -= BaseObject_onHitPlayer;
 
@@ -109,7 +123,7 @@ public class PlayerControler : MonoBehaviour
                 Energy -= 10;
                 if (Energy < 0)
                     Energy = 0;
-                
+
                 break;
         }
     }
@@ -169,7 +183,7 @@ public class PlayerControler : MonoBehaviour
 
                 case PickupBase.PickupType.SpeedUp:
                     lastPickedupBoostTime = boostTimeLeft;
-                    boostTimeLeft +=0.5f;  
+                    boostTimeLeft += BoostGainPerPickup;
                     break;
             }
         }
@@ -191,13 +205,13 @@ public class PlayerControler : MonoBehaviour
     {
         if (boostTimeLeft <= 0 || gamePaused)
             return;
-        
+
         if (boostTimeLeft > maxBoost)
             Debug.Log("overBoost");
 
         if (BoostForwardTime < BoostForwardCalculatedTimeTarget || LastCalcBoostTime != lastPickedupBoostTime)
         {
-            if(LastCalcBoostTime!=lastPickedupBoostTime)
+            if (LastCalcBoostTime != lastPickedupBoostTime)
             {
                 boostTimeStayLeft = BoostTimeStay;
 
@@ -207,7 +221,7 @@ public class PlayerControler : MonoBehaviour
                 BoostForwardCalculatedTimeTarget = normalBoost * maxForwardBoostTime;
 
                 LastCalcBoostTime = lastPickedupBoostTime;
-                
+
             }
             ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, BoostForwardTime / maxForwardBoostTime));
             BoostForwardTime += Time.deltaTime;
@@ -225,11 +239,11 @@ public class PlayerControler : MonoBehaviour
             if (boostTimeLeft <= 0)
             {
                 LastCalcBoostTime = 0;
-                
+
                 BoostForwardCalculatedTimeTarget = 0f;
                 boostTimeStayLeft = BoostTimeStay;
             }
-                
+
         }
     }
     void Update_GroundCheck()
@@ -283,7 +297,7 @@ public class PlayerControler : MonoBehaviour
 
         if (p.x <= playerScreenX)
             return;
-       
+
         weaponHeat += Random.Range(10, 15);
 
         if (weaponHeat >= MaxHeat)
@@ -300,76 +314,8 @@ public class PlayerControler : MonoBehaviour
     public void ChangePlayerPos(float newXpos)
     {
         Debug.DrawRay(new Vector3(newXpos, -10, 0), Vector3.up, Color.cyan, 100f);
-        playerScreenX = newXpos;
         transform.position = new Vector3(newXpos, transform.position.y);
 
         playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
     }
-
-    /* IEnumerator playerBoost(float duration)
-     {
-         boostTimeLeft += duration;
-         if(boostActive)
-         yield break;
-
-         Vector3 startPos = transform.position;
-         float startX;
-         float t;
-         float m;
-         float maxBoost = 0;
-
-         boostTimeLeft = duration;
-         boostActive = true;
-
-
-         while(boostTimeLeft>0)
-         {
-             if (boostTimeLeft > maxBoost)
-             {
-                 maxBoost = boostTimeLeft;
-                 if (maxBoost > 10)
-                     boostTimeLeft = maxBoost = 10f;
-                 startX = transform.position.x;
-                  t = 1f * (Vector3.Distance(startPos, transform.position) / Vector3.Distance(startPos, SpeedUpEndPosition.position));
-                  m = 1f * (maxBoost / 10f);
-
-
-
-                 if (m > 1)
-                     m = 1;
-                 while (t < m)
-                 {
-                     if (!gamePaused)
-                     {
-                         ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
-                         t += Time.deltaTime / boostMoveSpeed;
-                     }
-                     yield return new WaitForEndOfFrame();
-                 }
-             }
-             if (!gamePaused)
-                 boostTimeLeft -= Time.deltaTime/5f;
-
-             yield return new WaitForEndOfFrame();
-         }
-
-         boostActive = false;
-
-         startX = transform.position.x;
-         t = 1f * (Vector3.Distance(startPos, transform.position) / Vector3.Distance(startPos, SpeedUpEndPosition.position));
-         m = 1f * (maxBoost / 10f);
-
-         if (m > 1)
-             m = 1;
-         while (t > 0)
-         {
-             if (!gamePaused)
-             {
-                 ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
-                 t -= Time.deltaTime / boostMoveSpeed;
-             }
-             yield return new WaitForEndOfFrame();
-         }
-     }
-     */
 }

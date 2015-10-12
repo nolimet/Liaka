@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LayerControler : MonoBehaviour {
-
+    [SerializeField]
     protected List<Transform> SubObjects;
     [SerializeField]
     protected Vector3 subObjectWorldSize;
@@ -15,6 +15,7 @@ public class LayerControler : MonoBehaviour {
         SubObjects = new List<Transform>();
         subObjectWorldSize = transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size;
         WorldScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2f, 0));
+        
 
         for (int i = 0; i < tx.Length; i++)
         {

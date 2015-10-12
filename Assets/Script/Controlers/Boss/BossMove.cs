@@ -35,7 +35,7 @@ public class BossMove : MonoBehaviour
 
     public void OnDestroy()
     {
-        if(enabled)
+        if(enabled && GameManager.instance)
             GameManager.instance.onPauseGame -= Instance_onPauseGame;
         alive = false;
     }
@@ -53,6 +53,7 @@ public class BossMove : MonoBehaviour
 
         alive = true;
         float t = 2f;
+        int dir = 0;
         while (alive)
         {
             while (t > 0)
@@ -66,7 +67,7 @@ public class BossMove : MonoBehaviour
             if (forceMove || util.RandomChange.getChance(100, 5))
             {
 
-                int dir;
+                
 
                 if (Vector3.Distance(transform.position, endPos.position) > 0.3f)
                     dir = 1;
@@ -75,35 +76,66 @@ public class BossMove : MonoBehaviour
                 else
                     dir = 0;
 
-                //Debug.Log("dir " + dir + " z " + z);
+                //send message that warns other systems that boss wil sprint forward
                 if (onMoveChangeEarly != null)
-                    onMoveChangeEarly((moveDir)dir);
+                    onMoveChangeEarly(moveDir.right);
 
+                t = 3f;
+
+                //waiting while player picks up the powerup
                 while (t > 0)
                 {
                     if (!paused)
                         t -= Time.deltaTime;
                     yield return new WaitForEndOfFrame();
                 }
-                t = 0.5f;
 
-
+                //warn other systems that boss is moving, this includes bossControler
                 if (onMoveChange != null)
-                    onMoveChange((moveDir)dir);
-
-                while (dir==1 && Vector3.Distance(transform.position, endPos.position) > 0.3f || dir == -1 && Vector3.Distance(transform.position,startPos)>0.3f)
+                    onMoveChange(moveDir.right);
+                Debug.Log(dir);
+                //Move forward
+                while (dir==1 && Vector3.Distance(transform.position, endPos.position) > 0.3f)
                 {
                     if (!paused)
                     {
-                        if (dir == 1)
-                            transform.Translate(Vector3.right * Random.Range(0.6f, 2f) * SpeedForward * Time.deltaTime * dir);
-                        else if (dir == -1)
-                            transform.Translate(Vector3.right * Random.Range(0.6f, 2f) * SpeedBackward * Time.deltaTime * dir);
+                            transform.Translate(Vector3.right * Random.Range(0.6f, 2f) * SpeedForward * Time.deltaTime);                         
                     }
                     yield return new WaitForEndOfFrame();
+                }
+                Debug.Log(dir);
+                //wait a lil bit
+                t = Random.Range(4f, 6f);
+                while (t > 0)
+                {
+                    if (!paused)
+                        t -= Time.deltaTime;
+                    yield return new WaitForEndOfFrame();
+                }
+                Debug.Log(dir);
+                //send message that warns other systems that boss wil sprint forward
+                if (onMoveChangeEarly != null)
+                    onMoveChangeEarly(moveDir.left);
 
+                if (onMoveChange != null)
+                    onMoveChange(moveDir.left);
+
+                dir = -1;
+
+                Debug.Log(dir);
+
+                //move backwards
+                while (dir == -1 && Vector3.Distance(transform.position, startPos) > 0.3f)
+                {
+                    if (!paused)
+                    {
+                        transform.Translate(Vector3.left * Random.Range(0.6f, 2f) * SpeedBackward * Time.deltaTime);
+                    }
+                    yield return new WaitForEndOfFrame();
                 }
 
+                t = 2f;
+                //Say that obss stoped moving
                 if (onMoveChange != null)
                     onMoveChange(moveDir.none);
 

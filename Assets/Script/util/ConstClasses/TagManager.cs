@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TagManager {
+public class TagManager
+{
 
-    public const string Ground = "Ground";
-    public const string Player = "Player";
-    public const string Bullet = "Bullet";
-    public const string Enemy = "Enemy";
-    public const string Boss = "Boss";
-    public const string Pickup = "Pickup";
-
+    public const string 
+          Ground = "Ground"
+        , Player = "Player"
+        , Bullet = "Bullet"
+        , Enemy = "Enemy"
+        , Boss = "Boss"
+        , Pickup = "Pickup"
+        , Trap = "Ground-Trap"
+    ;
 }

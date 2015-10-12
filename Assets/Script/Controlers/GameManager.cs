@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
     public void ContinueGame()
     {
         GamePaused = false;
+        if(onPauseGame!=null)
         onPauseGame(false);
         PauseMenu.SetActive(false);
         uiControler.gameObject.SetActive(true);

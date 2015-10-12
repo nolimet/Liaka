@@ -15,7 +15,8 @@ public class BossControler : MonoBehaviour
     //number of enemies that hit the boss;
     int noEnemiesThatHitBoss;
 
-    void Start()
+
+    void Awake()
     {
         if (!bossMove)
             bossMove = GetComponent<BossMove>();
@@ -24,13 +25,15 @@ public class BossControler : MonoBehaviour
         if (!bossFight)
             bossFight = GetComponent<BossFight>();
 
+        if (bossMove)
+            bossMove.onMoveChange += bossMove_onMoveChange;
+    }
+    void Start()
+    {
         BaseObject.onHitBose += BaseObject_onHitBose;
 
         StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
-
-        if (bossMove)
-            bossMove.onMoveChange += bossMove_onMoveChange;
     }
 
     public void OnDestroy()
