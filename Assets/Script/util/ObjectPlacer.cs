@@ -17,6 +17,7 @@ public class ObjectPlacer : MonoBehaviour {
 	
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ObjectPlacer))]
 public class ObjectPlacer_EDITOR : Editor
 {
@@ -39,7 +40,7 @@ public class ObjectPlacer_EDITOR : Editor
             }
         }
 
-        #region Clear
+#region Clear
         if (GUILayout.Button("Destroy Children"))
         {
             for (int i = tar.transform.childCount - 1; i >= 0; i--)
@@ -47,7 +48,7 @@ public class ObjectPlacer_EDITOR : Editor
                 DestroyImmediate(tar.transform.GetChild(i).gameObject);
             }
         }
-        #endregion
+#endregion
     }
 
     Transform MakeObject(Transform parent, Vector3 localPos)
@@ -70,3 +71,4 @@ public class ObjectPlacer_EDITOR : Editor
         return g.transform;
     }
 }
+#endif

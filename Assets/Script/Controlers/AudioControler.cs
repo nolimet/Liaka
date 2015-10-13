@@ -48,6 +48,15 @@ public class AudioControler : MonoBehaviour
         PickObject.onPickup += PickObject_onPickup;
     }
 
+    void onDestory()
+    {
+        PlayerControler.onPlayerCreated -= PlayerCreated;
+        PlayerControler.onPlayerDestoryed -= PlayerDestoryed;
+        BaseObject.onHitBose -= BaseObject_onHitBose;
+        BaseObject.onImpact -= BaseObject_onImpact;
+        PickObject.onPickup -= PickObject_onPickup;
+    }
+
     public void OnLevelWasLoaded(int level)
     {
         if (level != 1 && level != 0)

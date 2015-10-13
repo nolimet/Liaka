@@ -22,7 +22,7 @@ public class LayerControler : MonoBehaviour {
             if (tx[i] != transform)
             {
                 SubObjects.Add(tx[i]);
-                tx[i].position = new Vector3(subObjectWorldSize.x * (i - 1), tx[i].position.y);
+                tx[i].position = new Vector3(subObjectWorldSize.x * (i - 1), tx[i].position.y, tx[i].position.z);
             }
         }
     }

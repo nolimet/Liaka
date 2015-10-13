@@ -866,7 +866,7 @@ Transform:
   m_GameObject: {fileID: 108450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .5, y: 0, z: 10}
-  m_LocalScale: {x: .00999999978, y: 1, z: 1}
+  m_LocalScale: {x: .00999999978, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 447388}
   m_RootOrder: 3
@@ -921,7 +921,7 @@ Transform:
   m_GameObject: {fileID: 195966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.5, y: 0, z: 10}
-  m_LocalScale: {x: .00999999978, y: 1, z: 1}
+  m_LocalScale: {x: .00999999978, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 447388}
   m_RootOrder: 2
@@ -933,7 +933,7 @@ Transform:
   m_GameObject: {fileID: 139448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -.5, z: 10}
-  m_LocalScale: {x: 1, y: .00999999978, z: 1}
+  m_LocalScale: {x: 2, y: .00999999978, z: 1}
   m_Children: []
   m_Father: {fileID: 447388}
   m_RootOrder: 1
@@ -1082,7 +1082,7 @@ Transform:
   m_GameObject: {fileID: 116262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .5, z: 10}
-  m_LocalScale: {x: 1, y: .00999999978, z: 1}
+  m_LocalScale: {x: 2, y: .00999999978, z: 1}
   m_Children: []
   m_Father: {fileID: 447388}
   m_RootOrder: 0
@@ -2727,19 +2727,19 @@ MonoBehaviour:
   dropChance:
   - type: 0
     movement: 1
-    chance: 4
+    chance: 200
   - type: 0
     movement: 0
-    chance: 4
+    chance: 200
   - type: 1
     movement: 1
-    chance: 8
+    chance: 200
   - type: 1
     movement: 0
-    chance: 1
+    chance: 200
   - type: 2
     movement: 1
-    chance: 800
+    chance: 200
   Table: 
 --- !u!114 &11473052
 MonoBehaviour:

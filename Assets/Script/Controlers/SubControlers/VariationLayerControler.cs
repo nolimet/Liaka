@@ -12,8 +12,7 @@ public class VariationLayerControler : LayerControler
     {
         
         WorldScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2f, 0));
-        Debug.Log(WorldScreenSize);
-        Debug.DrawLine(Vector3.zero, WorldScreenSize, Color.cyan, 40f);
+
         subObjectWorldSize = transform.GetChild(0).getChildBounds().size;
         SubObjects = new List<Transform>();
         float l = offSetX;
@@ -22,7 +21,7 @@ public class VariationLayerControler : LayerControler
         {
             tx = transform.GetChild(i);
                 SubObjects.Add(tx);
-                tx.position = new Vector3(l, tx.position.y);
+            tx.position = new Vector3(l, tx.position.y, tx.position.z);
                 l += tx.getChildBounds().size.x;
                 if (i >= 3)
                     tx.gameObject.SetActive(false);

@@ -23,9 +23,10 @@ public class AsyncLoader : MonoBehaviour {
         {
             yield return async.isDone;
             LoadingBar.setValue(async.progress);
+            Debug.Log("Loading at " + async.progress);
         }
 
-        Debug.Log("Loading complete");
+        Debug.Log("Completed Loading of :: " + levelName);
 
         gameObject.SetActive(false);
     }
