@@ -9,10 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 475400}
   - 212: {fileID: 21296532}
-  - 95: {fileID: 9577812}
   - 50: {fileID: 5064462}
   - 114: {fileID: 11431316}
   - 58: {fileID: 5882538}
+  - 114: {fileID: 11446178}
   m_Layer: 14
   m_Name: Coin
   m_TagString: Pickup
@@ -47,7 +47,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 2
 --- !u!58 &5882538
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -61,23 +61,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .683333337
---- !u!95 &9577812
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188060}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 12069fff6375fe842af7e8155440ee5f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11431316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,6 +80,23 @@ MonoBehaviour:
   type: 0
   pType: 0
   _moveType: 0
+--- !u!114 &11446178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6452fe976818647914480a82ec39d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sprites:
+  - {fileID: 21300000, guid: 4e74d7308537b5d4a9a97abf4657b98d, type: 3}
+  - {fileID: 21300000, guid: 3c4da06146f51fa4a83a467532629f90, type: 3}
+  - {fileID: 21300000, guid: 407743722580c6048ae0b573f31a9574, type: 3}
+  - {fileID: 21300000, guid: 6636e09ae5aacb14896fea219719e311, type: 3}
+  - {fileID: 21300000, guid: 8cf8f54ff1234654a91eb4d082f25bc5, type: 3}
 --- !u!212 &21296532
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -121,7 +121,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f19752fb321ffe34db27e3ef8e92b8bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 407743722580c6048ae0b573f31a9574, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -130,6 +130,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Sprites.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TypePickup
       value: 0
@@ -160,7 +164,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_GravityScale
@@ -174,6 +178,11 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 407743722580c6048ae0b573f31a9574,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 188060}

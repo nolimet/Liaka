@@ -43,6 +43,8 @@ public class EnemyControler : MonoBehaviour
     void Destory()
     {
         GameManager.instance.onPauseGame -= GamePaused;
+        StageControler.onBossBattleBegins -= StageControler_onBossBattleBegins;
+        StageControler.onBossBattleEnds -= StageControler_onBossBattleEnds;
     }
 
     void GamePaused(bool b)

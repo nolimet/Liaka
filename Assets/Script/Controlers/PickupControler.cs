@@ -42,8 +42,8 @@ public class PickupControler : MonoBehaviour
 
     public void OnDestroy()
     {
-        GameManager.instance.onPauseGame -= Instance_onPauseGame;
-        FindObjectOfType<BossControler>().bossMove.onMoveChangeEarly -= setlocalMoveDirBoss;
+        //GameManager.instance.onPauseGame -= Instance_onPauseGame;
+        //FindObjectOfType<BossControler>().bossMove.onMoveChangeEarly -= setlocalMoveDirBoss;
 
         StageControler.onBossBattleBegins -= StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds -= StageControler_onBossBattleEnds;

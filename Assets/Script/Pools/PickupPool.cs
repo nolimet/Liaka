@@ -13,7 +13,8 @@ public class PickupPool : MonoBehaviour
     [SerializeField]
     List<PickupBase> ActivePool, InActivePool;
 
-    bool autoCollectEnemiesOnStart = true;
+    [Tooltip("will it auto collect all objects of it's own type")]
+    bool AutoCollectObjects = true;
 
     void Awake()
     {
@@ -28,7 +29,7 @@ public class PickupPool : MonoBehaviour
 
     void Start()
     {
-        if (autoCollectEnemiesOnStart)
+        if (AutoCollectObjects)
         {
             PickupBase[] pl = FindObjectsOfType<PickupBase>();
             foreach (PickupBase p in pl)
@@ -124,6 +125,9 @@ public class PickupPool : MonoBehaviour
             }
             else
             {
+                //stage Specific location
+               // GameObject g = Instantiate(Resources.Load("Object/Pickup/" + Application.loadedLevelName + "/"  + Type.ToString()), Vector3.zero, Quaternion.identity) as GameObject;
+                //None Stage Specific
                 GameObject g = Instantiate(Resources.Load("Object/Pickup/" + Type.ToString()), Vector3.zero, Quaternion.identity) as GameObject;
                 if (g == null)
                     return null;

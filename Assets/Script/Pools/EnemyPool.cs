@@ -122,7 +122,9 @@ public class EnemyPool : MonoBehaviour
             }
             else
             {
-                GameObject g = Instantiate(Resources.Load("Object/Enemies/" + Type.ToString()), Vector3.zero, Quaternion.identity) as GameObject;
+                GameObject g = Instantiate(Resources.Load("Object/Enemies/" + Application.loadedLevelName + "/" + Type.ToString()), Vector3.zero, Quaternion.identity) as GameObject;
+                if(!g)
+                    g = Instantiate(Resources.Load("Object/Enemies/" + Type.ToString()), Vector3.zero, Quaternion.identity) as GameObject;
                 g.name = Type.ToString() + " - " + (instance.ActivePool.Count + instance.InActivePool.Count);
                 e = g.GetComponent<EnemyBase>();
 

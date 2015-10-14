@@ -14,6 +14,7 @@ public class PlayerControler : MonoBehaviour
     public event VoidDelegate onJump;
     public event VoidDelegate onHitGround;
     public event VoidDelegate onEnergyZero;
+    public event VoidDelegate onHitTrap;
     #endregion
 
     #region Varibles
@@ -99,6 +100,13 @@ public class PlayerControler : MonoBehaviour
 
         if (onPlayerDestoryed != null)
             onPlayerDestoryed(this);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == TagManager.Trap)
+            if (onHitTrap != null)
+                onHitTrap();
     }
 
     void Update()
@@ -274,6 +282,7 @@ public class PlayerControler : MonoBehaviour
             weaponForcedCooldown = false;
         }
     }
+
     #endregion
 
     void Jump()

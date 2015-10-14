@@ -9,32 +9,32 @@ public class BossAnimation : MonoBehaviour
         
     }
 
-    public void Fight_onPerfectHit()
+    public virtual void Fight_onPerfectHit()
     {
         Debug.Log("NOT BAD! A PERFECT HIT");
     }
 
-    public void Fight_onGoodHit()
+    public virtual void Fight_onGoodHit()
     {
         Debug.Log("PLAYER DID A NOT SO BAD HIT");
     }
 
-    public void Fight_onBadHit()
+    public virtual void Fight_onBadHit()
     {
         Debug.Log("PLAYER CAN'T AIM!");
     }
 
-    public void OnPlayerHit()
+    public virtual void OnPlayerHit()
     {
         Debug.Log("PLAYER HIT ME");
     }
 
-    public void OnEnemyHit()
+    public virtual void OnEnemyHit()
     {
         Debug.Log("Enemie HIT ANIMATION PLAY Event");
     }
 
-    public void MoveChange(int interger)
+    public virtual void MoveChange(int interger)
     {
         switch (interger)
         {

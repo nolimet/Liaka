@@ -15,6 +15,7 @@ public class BackgroundControler : MonoBehaviour
     [SerializeField]
     layer[] Layers = new layer[0];
     bool GamePaused = false;
+    bool playerHitTrap = false;
     void Start()
     {
         if(GameManager.instance)
@@ -30,6 +31,11 @@ public class BackgroundControler : MonoBehaviour
     void onGamePaused(bool b)
     {
         GamePaused = b;
+    }
+
+    void onPlayerHitTrap()
+    {
+        playerHitTrap = true;
     }
 
     void Update()

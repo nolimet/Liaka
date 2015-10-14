@@ -4,7 +4,7 @@ using System.Collections;
 public class BossFight : MonoBehaviour
 {
     public delegate void VoidDelegate();
-    public VoidDelegate onGoodHit, onBadHit, onPerfectHit;
+    public VoidDelegate onGoodHit, onBadHit, onPerfectHit, onOutOfHP;
 
     public float HP;
     public float MaxHP;
@@ -28,13 +28,13 @@ public class BossFight : MonoBehaviour
             case AttackSlider.state.perfect:
                 if (onPerfectHit != null)
                     onPerfectHit();
-
+                HP -= 3;
                 break;
 
             case AttackSlider.state.good:
                 if (onGoodHit != null)
                     onGoodHit();
-
+                HP--;
                 break;
 
             case AttackSlider.state.bad:
@@ -43,5 +43,9 @@ public class BossFight : MonoBehaviour
 
                 break;
         }
+
+        if (HP <= 0)
+            if (onOutOfHP != null)
+                onOutOfHP();
     }
 }

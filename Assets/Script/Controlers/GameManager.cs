@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public event VoidDelegate onStageDone;
     public event VoidDelegate onPlayerDeath;
     public event VoidDelegate onBonusLevel;
+    public event VoidDelegate onGameOver;
 
     //Bool Events
     /// <summary>
@@ -174,6 +175,7 @@ public class GameManager : MonoBehaviour
         _inputManager.onEscapePressed += EscapePressed;
         PlayerControler.onPlayerDestoryed += onPlayerDestoryed;
         PlayerControler.onPlayerCreated += onPlayerCreated;
+        
         StageControler.onStageCreated += onStageControlerLoaded;
         StageControler.onStageDestroyed += onStageControlerDestroyed;
         StageControler.onStageTimerEnded += onStageEnded;
@@ -217,6 +219,11 @@ public class GameManager : MonoBehaviour
     void onStageEnded()
     {
         
+    }
+
+    void onPlayerHitTrap()
+    {
+        Application.LoadLevel("GAME-OVER");
     }
     #endregion
 }
