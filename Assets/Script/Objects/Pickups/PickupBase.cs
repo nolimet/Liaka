@@ -93,7 +93,10 @@ public class PickupBase :BaseObject {
         Vector2 v;
         Vector2 d = GameManager.playerControler.transform.position - transform.position;
         v = util.MathHelper.AngleToVector(util.MathHelper.VectorToAngle(d));
-
+        if (!rigi)
+            rigi = GetComponent<Rigidbody2D>();
+        if (!rigi)
+            Debug.LogError(name + " : MISSES RIGIDBODY!");
         rigi.AddForce(v * 50f);
     }
 }

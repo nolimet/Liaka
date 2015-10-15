@@ -10,11 +10,26 @@ public class PlayerControler : MonoBehaviour
     public static event PlayerControlerEvent onPlayerDestoryed;
 
     public delegate void VoidDelegate();
+    /// <summary>
+    /// called when player shoots
+    /// </summary>
     public event VoidDelegate onShoot;
+    /// <summary>
+    /// called when player jumps
+    /// </summary>
     public event VoidDelegate onJump;
+    /// <summary>
+    /// Called when player hits the ground
+    /// </summary>
     public event VoidDelegate onHitGround;
+    /// <summary>
+    /// Called when your energy ran out
+    /// </summary>
     public event VoidDelegate onEnergyZero;
-    public event VoidDelegate onHitTrap;
+    /// <summary>
+    /// Called when a playerkilling event occured
+    /// </summary>
+    public event VoidDelegate onDeath;
     #endregion
 
     #region Varibles
@@ -64,7 +79,7 @@ public class PlayerControler : MonoBehaviour
     public bool weaponForcedCooldown;
     [HideInInspector]
     public float playerScreenX = 0f;
-    bool gamePaused = false;
+    bool gamePaused = false, hitTrap = false;
     #endregion
 
     #region Unity functions
@@ -104,14 +119,26 @@ public class PlayerControler : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == TagManager.Trap)
-            if (onHitTrap != null)
-                onHitTrap();
+        if (collision.transform.tag == TagManager.Boss && !GameManager.instance.GodMode)
+        {
+            if (onDeath != null)
+                onDeath();
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag == TagManager.Trap && !GameManager.instance.GodMode)
+        { 
+            hitTrap = true;
+
+            rigi2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     void Update()
     {
-        if (gamePaused)
+        if (gamePaused || hitTrap)
             return;
 
         Update_Energy();
@@ -294,6 +321,10 @@ public class PlayerControler : MonoBehaviour
          //var hSpeed = maxDistance / totalTime; // calculate the horizontal speed
          rigi2d.velocity = new Vector2(rigi2d.velocity.x, vertSpeed); // launch the projectile!
          //rigi2d.AddForce(new Vector2(0, 500));*/
+
+        if (hitTrap)
+            return;
+
         rigi2d.AddForce(new Vector3(0, 9 * rigi2d.mass, 0), ForceMode2D.Impulse);
         if (onJump != null)
             onJump();
@@ -301,7 +332,7 @@ public class PlayerControler : MonoBehaviour
 
     void shoot(Vector2 p)
     {
-        if (weaponForcedCooldown)
+        if (weaponForcedCooldown || hitTrap)
             return;
 
         if (p.x <= playerScreenX)

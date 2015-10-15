@@ -17,8 +17,9 @@ public class EnemyBase : BaseObject{
 
 	public enum Enemytype
     {
-        walking,
-        flying
+        walking =0,
+        flying =1,
+        flying_high=2
     }
 
     public Enemytype etype;

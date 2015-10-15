@@ -66,9 +66,6 @@ public class BossMove : MonoBehaviour
 
             if (forceMove || util.RandomChange.getChance(100, 5))
             {
-
-                
-
                 if (Vector3.Distance(transform.position, endPos.position) > 0.3f)
                     dir = 1;
                 else if (Vector3.Distance(transform.position, startPos) > 0.3f)
@@ -79,6 +76,7 @@ public class BossMove : MonoBehaviour
                 //send message that warns other systems that boss wil sprint forward
                 if (onMoveChangeEarly != null)
                     onMoveChangeEarly(moveDir.right);
+                ScreenShaker.ShakeScreen(3f, 0.2f, 0.05f);
 
                 t = 3f;
 
@@ -93,7 +91,7 @@ public class BossMove : MonoBehaviour
                 //warn other systems that boss is moving, this includes bossControler
                 if (onMoveChange != null)
                     onMoveChange(moveDir.right);
-                Debug.Log(dir);
+               
                 //Move forward
                 while (dir==1 && Vector3.Distance(transform.position, endPos.position) > 0.3f)
                 {
@@ -103,7 +101,7 @@ public class BossMove : MonoBehaviour
                     }
                     yield return new WaitForEndOfFrame();
                 }
-                Debug.Log(dir);
+                
                 //wait a lil bit
                 t = Random.Range(4f, 6f);
                 while (t > 0)
@@ -112,7 +110,7 @@ public class BossMove : MonoBehaviour
                         t -= Time.deltaTime;
                     yield return new WaitForEndOfFrame();
                 }
-                Debug.Log(dir);
+                
                 //send message that warns other systems that boss wil sprint forward
                 if (onMoveChangeEarly != null)
                     onMoveChangeEarly(moveDir.left);

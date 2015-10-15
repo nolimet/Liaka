@@ -22,46 +22,30 @@ public class StageControler : MonoBehaviour
             onBossBattleEnds();
 
         PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
-        PlayerControler.onPlayerDestoryed += PlayerControler_onPlayerDestoryed;
-
     }
-
-    private void PlayerControler_onPlayerDestoryed(PlayerControler p)
-    {
-        p.onHitTrap += P_onHitTrap;
-        p.onEnergyZero += P_onEnergyZero;
-    }
-
-    private void PlayerControler_onPlayerCreated(PlayerControler p)
-    {
-        p.onHitTrap -= P_onHitTrap;
-        p.onEnergyZero -= P_onEnergyZero;
-    }
-
-    private void P_onEnergyZero()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void P_onHitTrap()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    
 
     public void OnDestroy()
     {
         if (onStageDestroyed != null)
             onStageDestroyed(this);
 
-        PlayerControler.onPlayerDestoryed -= PlayerControler_onPlayerDestoryed;
         PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
     }
 
-    public void onPlayerHitTrap()
+    private void PlayerControler_onPlayerCreated(PlayerControler p)
     {
+        p.onDeath += Player_onDeath;
+        p.onEnergyZero += Player_onEnergyZero;
+    }
 
+    private void Player_onEnergyZero()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void Player_onDeath()
+    {
+        Application.LoadLevel("GAME-OVER");
     }
 
     // Update is called once per frame

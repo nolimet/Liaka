@@ -18,6 +18,8 @@ public class EnemyControler : MonoBehaviour
     public int diff = 1;
     bool gamePaused, bossBattle,GameLoopStarted;
 
+    float speedGround, speedMidFlying, speedHighFlying;
+
 
     void Start()
     {
@@ -30,7 +32,13 @@ public class EnemyControler : MonoBehaviour
     private void StageControler_onBossBattleEnds()
     {
         bossBattle = false;
-        StartCoroutine(gameLoop());
+        if (this)
+            StartCoroutine(gameLoop());
+        else
+        {
+            StageControler.onBossBattleBegins -= StageControler_onBossBattleBegins;
+            StageControler.onBossBattleEnds -= StageControler_onBossBattleEnds;
+        }
     }
 
     private void StageControler_onBossBattleBegins()
@@ -59,7 +67,7 @@ public class EnemyControler : MonoBehaviour
 
     void Spawn()
     {
-        EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.flying);
+        EnemyBase b = EnemyPool.GetObject((EnemyBase.Enemytype)Random.Range(0,3));
         switch (b.etype)
         {
             case EnemyBase.Enemytype.flying:
@@ -68,6 +76,10 @@ public class EnemyControler : MonoBehaviour
 
             case EnemyBase.Enemytype.walking:
                 b.transform.position = GroundSpawnPoints.position;
+                break;
+
+            case EnemyBase.Enemytype.flying_high:
+                b.transform.position = FlyingSpawnPoints.High.position;
                 break;
         }   
     }

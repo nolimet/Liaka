@@ -71,7 +71,7 @@ public class InputManager : MonoBehaviour
         };
         TouchKit.addGestureRecognizer(r1);*/
 
-        TKButtonRecognizer r3 = new TKButtonRecognizer(new TKRect(50, 50, new Vector2(25,25)),0);
+        TKButtonRecognizer r3 = new TKButtonRecognizer(new TKRect(100, 130, new Vector2(50,65)),0);
         
         r3.onTouchUpInsideEvent += (r) =>
         {

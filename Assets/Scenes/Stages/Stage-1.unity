@@ -95,6 +95,7 @@ GameObject:
   - 4: {fileID: 23051813}
   - 212: {fileID: 23051815}
   - 61: {fileID: 23051814}
+  - 61: {fileID: 23051816}
   m_Layer: 11
   m_Name: trap_sand_0
   m_TagString: Ground-Trap
@@ -124,9 +125,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 4.88888884, y: 1.44444442}
+  m_Offset: {x: 4.88888884, y: 1.17999995}
   serializedVersion: 2
-  m_Size: {x: 9.77777767, y: 2.88888884}
+  m_Size: {x: 9.77777767, y: 2.61999989}
 --- !u!212 &23051815
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -153,6 +154,19 @@ SpriteRenderer:
   m_SortingOrder: -40
   m_Sprite: {fileID: 21300000, guid: df41a6029b8648b4d99ee29f02df3bc4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!61 &23051816
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 23051812}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 4.88888884, y: 2.3599999}
+  serializedVersion: 2
+  m_Size: {x: 9.77777767, y: 2.88888884}
 --- !u!1 &25930332
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,6 +2973,96 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1ddfb15cbebaf5044a293c9db8b29ae7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &716270424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 716270428}
+  - 212: {fileID: 716270427}
+  - 114: {fileID: 716270426}
+  - 114: {fileID: 716270425}
+  m_Layer: 0
+  m_Name: laag_voor_zand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &716270425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716270424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7b7cb3445501d45b0eba514d25bce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  screenSize: {x: 0, y: 0, z: 0}
+  StartSize: {x: 3555.55566, y: 659.259277}
+  ExstraSizeMult: {x: 1, y: 1}
+  Vertical: 0
+  Horizontal: 1
+--- !u!114 &716270426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716270424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63982766ebea8ac4f837d18db34aee62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  screenPosition: {x: 0, y: -100, z: 0}
+  StartSize: {x: 1, y: 1}
+  Vertical: 1
+  Horizontal: 0
+  UsePivot: 1
+--- !u!212 &716270427
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716270424}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: -45
+  m_Sprite: {fileID: 21300000, guid: a457e2e1efca581488ec0ec7b2238b55, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &716270428
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 716270424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -5.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 978499771}
+  m_RootOrder: 12
 --- !u!1 &756676889
 GameObject:
   m_ObjectHideFlags: 0
@@ -3602,6 +3706,7 @@ Transform:
   - {fileID: 1109644213}
   - {fileID: 417059910}
   - {fileID: 204544240}
+  - {fileID: 716270428}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!114 &978499772
@@ -6141,6 +6246,7 @@ GameObject:
   - 4: {fileID: 1849164641}
   - 212: {fileID: 1849164643}
   - 61: {fileID: 1849164642}
+  - 61: {fileID: 1849164644}
   m_Layer: 11
   m_Name: trap_sand_0
   m_TagString: Ground-Trap
@@ -6170,9 +6276,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 4.88888884, y: 1.44444442}
+  m_Offset: {x: 4.88888884, y: 1.17999995}
   serializedVersion: 2
-  m_Size: {x: 9.77777767, y: 2.88888884}
+  m_Size: {x: 9.77777767, y: 2.61999989}
 --- !u!212 &1849164643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6199,6 +6305,19 @@ SpriteRenderer:
   m_SortingOrder: -40
   m_Sprite: {fileID: 21300000, guid: df41a6029b8648b4d99ee29f02df3bc4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!61 &1849164644
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1849164640}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 4.88888884, y: 2.3599999}
+  serializedVersion: 2
+  m_Size: {x: 9.77777767, y: 2.88888884}
 --- !u!1 &1859591390
 GameObject:
   m_ObjectHideFlags: 0

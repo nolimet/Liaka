@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     public SaveData saveDat = null;
 
+    public bool GodMode = false;
+
     bool GamePaused;
     #endregion
 
@@ -83,16 +85,16 @@ public class GameManager : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        if (level != 1)
+        if (level != 1 && level != 2)
         {
             ContinueGame();
 
         }
 
-        if (level == 1)
+        if (level == 1 || level ==2)
         {
             PauseMenu.SetActive(false);
-
+            onPauseGame(true);
             uiControler.gameObject.SetActive(false);
         }
     }
@@ -223,7 +225,7 @@ public class GameManager : MonoBehaviour
 
     void onPlayerHitTrap()
     {
-        Application.LoadLevel("GAME-OVER");
+        
     }
     #endregion
 }

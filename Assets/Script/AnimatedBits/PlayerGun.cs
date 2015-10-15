@@ -17,6 +17,6 @@ public class PlayerGun : MonoBehaviour {
         b.transform.rotation = q;
         b.transform.position = fireLocation.position;
 
-        b.setVelocity(d.normalized * 20f);
+        b.setVelocity(util.MathHelper.AngleToVector(util.MathHelper.VectorToAngle(d)) * 20f);
     }
 }
