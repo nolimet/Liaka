@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5064462}
   - 114: {fileID: 11431316}
   - 58: {fileID: 5845276}
+  - 114: {fileID: 11402146}
   m_Layer: 14
   m_Name: SpeedUp
   m_TagString: Pickup
@@ -60,6 +61,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .639999986
+--- !u!114 &11402146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6452fe976818647914480a82ec39d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sprites:
+  - {fileID: 21300000, guid: 38e01c085b192e046859726907c903bc, type: 3}
+  - {fileID: 21300000, guid: 34d71dbdc39507f4c923dfecc381680b, type: 3}
+  - {fileID: 21300000, guid: 6daa9bdd017492c4091fe8039e2112f9, type: 3}
 --- !u!114 &11431316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,6 +128,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Sprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TypePickup
       value: 2

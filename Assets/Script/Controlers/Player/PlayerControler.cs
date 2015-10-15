@@ -322,7 +322,7 @@ public class PlayerControler : MonoBehaviour
          rigi2d.velocity = new Vector2(rigi2d.velocity.x, vertSpeed); // launch the projectile!
          //rigi2d.AddForce(new Vector2(0, 500));*/
 
-        if (hitTrap)
+        if (hitTrap || gamePaused)
             return;
 
         rigi2d.AddForce(new Vector3(0, 9 * rigi2d.mass, 0), ForceMode2D.Impulse);
@@ -332,7 +332,7 @@ public class PlayerControler : MonoBehaviour
 
     void shoot(Vector2 p)
     {
-        if (weaponForcedCooldown || hitTrap)
+        if (weaponForcedCooldown || hitTrap || gamePaused)
             return;
 
         if (p.x <= playerScreenX)

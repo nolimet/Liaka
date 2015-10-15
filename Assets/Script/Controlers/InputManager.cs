@@ -71,7 +71,7 @@ public class InputManager : MonoBehaviour
         };
         TouchKit.addGestureRecognizer(r1);*/
 
-        TKButtonRecognizer r3 = new TKButtonRecognizer(new TKRect(100, 130, new Vector2(50,65)),0);
+        TKButtonRecognizer r3 = new TKButtonRecognizer(new TKRect(100, 180, new Vector2(50,65)),0);
         
         r3.onTouchUpInsideEvent += (r) =>
         {
@@ -103,5 +103,12 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             if (onEscapePressed != null)
                 onEscapePressed();
+
+        
+        if (eventActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (onSwipeUp != null)
+                onSwipeUp();
+        }
     }
 }

@@ -48,7 +48,7 @@ public class AudioControler : MonoBehaviour
         PickObject.onPickup += PickObject_onPickup;
     }
 
-    void onDestory()
+    void OnDestroy()
     {
         PlayerControler.onPlayerCreated -= PlayerCreated;
         PlayerControler.onPlayerDestoryed -= PlayerDestoryed;
@@ -59,10 +59,11 @@ public class AudioControler : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        if (level != 1 && level != 0)
+        if (level != 1 && level != 0 && level != 2)
             PlaySong();
         else
             AudioSources.Music.Stop();
+
         SetClicks();
     }
 
@@ -154,7 +155,7 @@ public class AudioControler : MonoBehaviour
     private void PlayerControler_onHitGround()
     {
         AudioSources.PlayerHitGround.PlayOneShot(PlayerHitGround, SFXVol);
-        
+
         //AudioSource.PlayClipAtPoint(PlayerHitGround, soundPos, SFXVol);
     }
 
