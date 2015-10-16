@@ -126,27 +126,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22467376, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22467376, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22467376, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22429434, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22429434, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22429434, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408040, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: DebugTouches
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11446020, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: GodMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
@@ -186,7 +194,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 790139191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.1299992, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -215,7 +223,7 @@ Camera:
   m_Depth: 15
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

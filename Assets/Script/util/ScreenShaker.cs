@@ -1,28 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScreenShaker : MonoBehaviour {
+public class ScreenShaker : MonoBehaviour
+{
 
     /// <summary>
     /// Object instance
     /// </summary>
     public static ScreenShaker instance;
     bool shaking = false;
+    bool paused = false;
+
+    void Start()
+    {
+        GameManager.instance.onPauseGame += Instance_onPauseGame;
+    }
+
+    private void Instance_onPauseGame(bool b)
+    {
+        paused = b;
+    }
 
     void Update()
     {
         if (!instance)
             instance = this;
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.S))
         {
             ShakeScreen(2f, 0.2f, 0.05f);
         }
-    #endif
+#endif
     }
 
-    
+
 
     /// <summary>
     /// Shakes the screen for a period of time
@@ -33,7 +45,7 @@ public class ScreenShaker : MonoBehaviour {
     /// <returns></returns>
     public static void ShakeScreen(float duration, float intensity, float timePerShake)
     {
-        if(instance)
+        if (instance)
         {
             instance.StartCoroutine(instance.shake(duration, intensity, timePerShake));
         }
@@ -59,29 +71,31 @@ public class ScreenShaker : MonoBehaviour {
         //shakeDelayTimer
         float shakeLerp = 0;
         //shaking posistion keeping
-        Vector2 screenShakeTarget = new Vector2(intensity * Random.Range(-1f,1f), intensity * Random.Range(-1f, 1f)), LastScreenShakeTarget = Vector2.zero;
+        Vector2 screenShakeTarget = new Vector2(intensity * Random.Range(-1f, 1f), intensity * Random.Range(-1f, 1f)), LastScreenShakeTarget = Vector2.zero;
         //camera main transform;
         Transform camTrans = Camera.main.transform;
 
         while (t > 0)
         {
-
-            camTrans.localPosition = Vector2.Lerp(LastScreenShakeTarget, screenShakeTarget, shakeLerp / timePerShake);
-
-            t -= Time.deltaTime;
-            shakeLerp += Time.deltaTime;
-            if (shakeLerp >= timePerShake)
+            if (!paused)
             {
-                shakeLerp = 0;
+                camTrans.localPosition = Vector2.Lerp(LastScreenShakeTarget, screenShakeTarget, shakeLerp / timePerShake);
 
-                LastScreenShakeTarget = screenShakeTarget;
-                screenShakeTarget = new Vector2(intensity * Random.Range(-1f, 1f), intensity * Random.Range(-1f, 1f));
+                t -= Time.deltaTime;
+                shakeLerp += Time.deltaTime;
+                if (shakeLerp >= timePerShake)
+                {
+                    shakeLerp = 0;
+
+                    LastScreenShakeTarget = screenShakeTarget;
+                    screenShakeTarget = new Vector2(intensity * Random.Range(-1f, 1f), intensity * Random.Range(-1f, 1f));
+                }
             }
             yield return new WaitForEndOfFrame();
         }
 
         t = 0;
-        while(t<timePerShake)
+        while (t < timePerShake)
         {
             camTrans.localPosition = Vector2.Lerp(screenShakeTarget, Vector2.zero, t / timePerShake);
             t += Time.deltaTime;
