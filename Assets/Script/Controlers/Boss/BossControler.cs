@@ -4,7 +4,7 @@ using System.Collections;
 public class BossControler : MonoBehaviour
 {
     public delegate void VoidDelegate();
-    public static event VoidDelegate onPlayerHit, onEnemyHit;
+    public static event VoidDelegate onPlayerHit, onEnemyHit, onDefeated;
 
 
     public BossFight bossFight;

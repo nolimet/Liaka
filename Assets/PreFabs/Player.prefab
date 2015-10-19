@@ -293,11 +293,11 @@ MonoBehaviour:
   AnimationControler: {fileID: 0}
   boostMoveSpeed: 10
   maxBoost: 10
-  boostDegrationSpeed: 2.5
+  boostDegrationSpeed: 1
   boostTimeLeft: 0
   BoostTimeStay: 2
   BoostForwardTimePerUnit: .100000001
-  BoostGainPerPickup: 1
+  BoostGainPerPickup: 1.5
   weaponHeat: 0
   MaxHeat: 100
   Energy: 0

@@ -10,6 +10,8 @@ public class StageControler : MonoBehaviour
     [Tooltip("The time in second the stage takes")]
     public float StageLength;
     float TimeLeft;
+    bool bossFighting,bossDefeated;
+    BossControler bossControler;
 
     // Use this for initialization
     void Start()
@@ -22,6 +24,7 @@ public class StageControler : MonoBehaviour
             onBossBattleEnds();
 
         PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
+        BossControler.onDefeated += BossControler_Defeated;
     }
 
     public void OnDestroy()
@@ -30,6 +33,7 @@ public class StageControler : MonoBehaviour
             onStageDestroyed(this);
 
         PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
+        BossControler.onDefeated -= BossControler_Defeated;
     }
 
     private void PlayerControler_onPlayerCreated(PlayerControler p)
@@ -40,7 +44,7 @@ public class StageControler : MonoBehaviour
 
     private void Player_onEnergyZero()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     private void Player_onDeath()
@@ -48,15 +52,26 @@ public class StageControler : MonoBehaviour
         Application.LoadLevel("GAME-OVER");
     }
 
+    private void BossControler_Defeated()
+    {
+        bossDefeated = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        TimeLeft -= Time.deltaTime;
-        if(TimeLeft<0 && TimeLeft>-1)
+        if(TimeLeft>0)
+            TimeLeft -= Time.deltaTime;
+
+        if (TimeLeft<0 && TimeLeft>-1)
         {
             TimeLeft = -20;
             if (onStageTimerEnded != null)
                 onStageTimerEnded();
+
+            if (bossFighting)
+                if (onBossBattleEnds != null)
+                    onBossBattleEnds();
         }
 
         if (Input.GetKeyDown(KeyCode.G))

@@ -2506,7 +2506,7 @@ MonoBehaviour:
       musicVolume: 1
       interfaceVolume: .400000006
     Coins: 0
-  GodMode: 0
+  GodMode: 1
 --- !u!114 &11446662
 MonoBehaviour:
   m_ObjectHideFlags: 1

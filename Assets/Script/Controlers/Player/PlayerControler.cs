@@ -64,13 +64,11 @@ public class PlayerControler : MonoBehaviour
     public float BoostGainPerPickup = 0.75f;
 
     //boost Privates
-    [SerializeField]
-    float boostTimeStayLeft , NegativeBoostTime;
-    float BoostForwardCalculatedTimeTarget, BoostBackwardCalculatedTimeTarget;
-    float BoostForwardTime, BoostBackwardTime;
-    float LastCalcBoostTime, LastCalcNegativeBoostTime;
-    float lastPickedupBoostTime = 0, lastPickedupNegativeBoostTime = 0f;
-    float maxForwardBoostTime = 0f, maxBackwardBoostTime;
+    float LastBoostTimeStep;
+    float BoostNormalPos = 0, BoostNormalTarget = 0;
+    int boostDirection;
+    bool atNewBoostPos;
+    float BoostStayTimeLeft;
 
     [HideInInspector]
     public float weaponHeat, MaxHeat = 100f;
@@ -218,13 +216,15 @@ public class PlayerControler : MonoBehaviour
                     break;
 
                 case PickupBase.PickupType.SpeedUp:
-                    lastPickedupBoostTime = boostTimeLeft;
                     boostTimeLeft += BoostGainPerPickup;
+                    BoostStayTimeLeft = BoostTimeStay;
+                    atNewBoostPos = false;
                     break;
 
                 case PickupBase.PickupType.SpeedDown:
-                    lastPickedupNegativeBoostTime = NegativeBoostTime;
-                    NegativeBoostTime += BoostGainPerPickup;
+                    boostTimeLeft -= BoostGainPerPickup;
+                    BoostStayTimeLeft = BoostTimeStay;
+                    atNewBoostPos = false;
                     break;
             }
         }
@@ -245,80 +245,77 @@ public class PlayerControler : MonoBehaviour
     void Update_Boost()
     {
         //normal boost
-        if (boostTimeLeft <= 0 && NegativeBoostTime <= 0 || gamePaused)
+        if (gamePaused)
             return;
 
         if (boostTimeLeft > maxBoost)
             Debug.Log("overBoost");
 
-        if (boostTimeLeft > 0)
-        {
-            #region normalBoostTime
-            if (BoostForwardTime < BoostForwardCalculatedTimeTarget || LastCalcBoostTime != lastPickedupBoostTime)
-            {
-                if (LastCalcBoostTime != lastPickedupBoostTime)
-                {
-                    boostTimeStayLeft = BoostTimeStay;
-
-                    maxForwardBoostTime = Vector3.Distance(startPos, SpeedUpEndPosition.position) * BoostForwardTimePerUnit;
-                    float normalBoost = boostTimeLeft / maxBoost;
-
-                    BoostForwardCalculatedTimeTarget = normalBoost * maxForwardBoostTime;
-
-                    LastCalcBoostTime = lastPickedupBoostTime;
-
-                }
-                ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, BoostForwardTime / maxForwardBoostTime));
-                BoostForwardTime += Time.deltaTime;
-            }
-            else if (boostTimeStayLeft > 0)
-                boostTimeStayLeft -= Time.deltaTime;
-            else if (boostTimeLeft > 0)
-            {
-                float t = boostTimeLeft / maxBoost;
-                ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, t));
-                boostTimeLeft -= Time.deltaTime / boostDegrationSpeed;
-
-                BoostForwardCalculatedTimeTarget = BoostForwardTime = (boostTimeLeft / maxBoost) * maxForwardBoostTime;
-
-                if (boostTimeLeft <= 0)
-                {
-                    LastCalcBoostTime = 0;
-
-                    BoostForwardCalculatedTimeTarget = 0f;
-                    boostTimeStayLeft = BoostTimeStay;
-                }
-
-            }
-            #endregion
-        }
-        /*
-        else if (NegativeBoostTime > 0)
-        {
-            if (NegativeBoostTime < BoostBackwardCalculatedTimeTarget)
-            {
-                if (LastCalcNegativeBoostTime != BoostBackwardCalculatedTimeTarget)
-                {
-                    maxBackwardBoostTime = Vector3.Distance(startPos, SpeedUpEndPosition.position) * BoostForwardTimePerUnit;
-                    float normalBoost = NegativeBoostTime / 2f;
-
-                    BoostForwardCalculatedTimeTarget = normalBoost * maxBackwardBoostTime;
-
-                    LastCalcNegativeBoostTime = lastPickedupNegativeBoostTime;
-                }
-                ChangePlayerPos(Mathf.Lerp(startPos.x, startPos.x - 10f, BoostBackwardTime / NegativeBoostTime));
-
-                BoostBackwardTime += Time.deltaTime;
-            }
-            if (boostTimeLeft <= 0)
-            {
-                float t = NegativeBoostTime / 2f;
-                ChangePlayerPos(Mathf.Lerp(startPos.x, startPos.x - 10f, t));
-            }
-            NegativeBoostTime -= Time.deltaTime;
-        }
-        */
+        moveBoostCalc();
+        moveBoostStep();
+        moveBoostDecay();
     }
+
+    void moveBoostCalc()
+    {
+        if(LastBoostTimeStep!=boostTimeLeft)
+        {
+            
+            if (LastBoostTimeStep > boostTimeLeft)
+                boostDirection = -1;
+            else if (LastBoostTimeStep < boostTimeLeft)
+                boostDirection = 1;
+
+            LastBoostTimeStep = boostTimeLeft;
+            BoostNormalTarget = (boostTimeLeft / maxBoost) ;
+            Debug.Log(Vector3.Distance(startPos, SpeedUpEndPosition.position));
+        }
+        
+    }
+
+    void moveBoostStep()
+    {
+        if (boostDirection > 0)
+        {
+            if (BoostNormalPos < BoostNormalTarget)
+            {
+                BoostNormalPos += Time.deltaTime * BoostForwardTimePerUnit;
+            }
+            else
+                atNewBoostPos = true;
+
+        }
+        else if (boostDirection < 0)
+        {
+            if (BoostNormalPos > BoostNormalTarget)
+            {
+                BoostNormalPos -= Time.deltaTime * BoostForwardTimePerUnit;
+            }
+            else
+                atNewBoostPos = true;
+        }
+
+        if (BoostNormalPos >= 0)
+            ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, BoostNormalPos));
+        else if (BoostNormalPos <= 0)
+            ChangePlayerPos(Mathf.Lerp(startPos.x, startPos.x - 7, -BoostNormalPos));
+    }
+
+    void moveBoostDecay()
+    {
+        if (atNewBoostPos)
+        {
+            if(BoostStayTimeLeft > 0)
+            {
+                BoostStayTimeLeft -= Time.deltaTime;
+                return;
+            }
+
+            if (boostTimeLeft > 0)
+                boostTimeLeft -= Time.deltaTime * boostDegrationSpeed;
+        }
+    }
+
     void Update_GroundCheck()
     {
         int mask = 1 << LayerMask.NameToLayer("Ground");
