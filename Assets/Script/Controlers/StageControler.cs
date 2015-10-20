@@ -8,8 +8,16 @@ public class StageControler : MonoBehaviour
     public delegate void DelegateVoid();
     public delegate void DelegateBool(bool b);
     public static event DelegateVoid onStageTimerEnded, onBossBattleBegins, onBossBattleEnds;
+
     [Tooltip("The time in seconds the stage takes")]
     public float StageLength, BossBattleLength;
+    public bool BossFighting
+    {
+        get
+        {
+            return bossFighting;
+        }
+    }
     float TimeLeft;
     bool bossFighting,bossDefeated;
     BossControler bossControler;
@@ -83,18 +91,33 @@ public class StageControler : MonoBehaviour
                 if (onBossBattleBegins != null)
                     onBossBattleBegins();
 
-                bossFighting = true;
-                TimeLeft = BossBattleLength;
+                if (bossDefeated)
+                    Application.LoadLevel("STAGE_COMPLETE");
+                else
+                {
+                    bossFighting = true;
+                    TimeLeft = BossBattleLength;
+                }
             }
         }
 
         if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (onBossBattleEnds != null)
+                onBossBattleEnds();
+
+            TimeLeft = StageLength;
+            bossFighting = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
             if (onBossBattleBegins != null)
                 onBossBattleBegins();
 
-        if (Input.GetKeyDown(KeyCode.H))
-            if (onBossBattleEnds != null)
-                onBossBattleEnds();
+            bossFighting = true;
+            TimeLeft = BossBattleLength;
+        }
     }
 
     public float NormalizedTimeLeft()

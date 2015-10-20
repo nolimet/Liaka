@@ -36,7 +36,7 @@ public class AttackSlider : MonoBehaviour
     float t, curve;
     public void OnEnable()
     {
-        //GameManager.inputManager.onTap += InputManager_onTap;
+        GameManager.inputManager.onTap += InputManager_onTap;
         GameManager.instance.onPauseGame += Instance_onPauseGame;
         t = 0;
         Update_TriggerStatus();
@@ -49,7 +49,7 @@ public class AttackSlider : MonoBehaviour
 
     public void OnDisable()
     {
-        //GameManager.inputManager.onTap -= InputManager_onTap;
+        GameManager.inputManager.onTap -= InputManager_onTap;
         GameManager.instance.onPauseGame -= Instance_onPauseGame;
     }
 

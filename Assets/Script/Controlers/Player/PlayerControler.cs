@@ -144,9 +144,12 @@ public class PlayerControler : MonoBehaviour
             return;
 
         Update_Energy();
-        Update_HeatLevel();
-        Update_GroundCheck();
-        Update_Boost();
+        if (!GameManager.stageControler.BossFighting)
+        {
+            Update_HeatLevel();
+            Update_GroundCheck();
+            Update_Boost();
+        }
     }
     #endregion
 
@@ -352,15 +355,7 @@ public class PlayerControler : MonoBehaviour
 
     void Jump()
     {
-
-        /* float g = Physics.gravity.magnitude; // get the gravity value
-         float vertSpeed = Mathf.Sqrt(2 * g * 5); // calculate the vertical speed
-         float totalTime = 2 * vertSpeed / g; // calculate the total time
-         //var hSpeed = maxDistance / totalTime; // calculate the horizontal speed
-         rigi2d.velocity = new Vector2(rigi2d.velocity.x, vertSpeed); // launch the projectile!
-         //rigi2d.AddForce(new Vector2(0, 500));*/
-
-        if (hitTrap || gamePaused)
+        if (hitTrap || gamePaused || GameManager.stageControler.BossFighting)
             return;
 
         rigi2d.AddForce(new Vector3(0, 9 * rigi2d.mass, 0), ForceMode2D.Impulse);
@@ -370,7 +365,7 @@ public class PlayerControler : MonoBehaviour
 
     void shoot(Vector2 p)
     {
-        if (weaponForcedCooldown || hitTrap || gamePaused)
+        if (weaponForcedCooldown || hitTrap || gamePaused || GameManager.stageControler.BossFighting)
             return;
 
         if (p.x <= playerScreenX)
