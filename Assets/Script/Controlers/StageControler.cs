@@ -6,9 +6,10 @@ public class StageControler : MonoBehaviour
     public delegate void StageControlerEvent(StageControler stage);
     public static event StageControlerEvent onStageCreated, onStageDestroyed;
     public delegate void DelegateVoid();
+    public delegate void DelegateBool(bool b);
     public static event DelegateVoid onStageTimerEnded, onBossBattleBegins, onBossBattleEnds;
-    [Tooltip("The time in second the stage takes")]
-    public float StageLength;
+    [Tooltip("The time in seconds the stage takes")]
+    public float StageLength, BossBattleLength;
     float TimeLeft;
     bool bossFighting,bossDefeated;
     BossControler bossControler;
@@ -70,8 +71,21 @@ public class StageControler : MonoBehaviour
                 onStageTimerEnded();
 
             if (bossFighting)
+            {
                 if (onBossBattleEnds != null)
                     onBossBattleEnds();
+
+                TimeLeft = StageLength;
+                bossFighting = false;
+            }
+            else
+            {
+                if (onBossBattleBegins != null)
+                    onBossBattleBegins();
+
+                bossFighting = true;
+                TimeLeft = BossBattleLength;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.G))
@@ -85,6 +99,9 @@ public class StageControler : MonoBehaviour
 
     public float NormalizedTimeLeft()
     {
-        return TimeLeft / StageLength;
+        if (!bossFighting)
+            return TimeLeft / StageLength;
+        else
+            return TimeLeft / BossBattleLength;
     }
 }

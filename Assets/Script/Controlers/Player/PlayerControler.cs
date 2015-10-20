@@ -137,6 +137,9 @@ public class PlayerControler : MonoBehaviour
 
     void Update()
     {
+        if (transform.position.y < -9)
+            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+
         if (gamePaused || hitTrap)
             return;
 

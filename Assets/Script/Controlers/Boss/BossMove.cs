@@ -9,12 +9,12 @@ public class BossMove : MonoBehaviour
     {
         left = -1,
         none = 0,
-        right= 1
+        right = 1
     }
 
     Vector3 startPos;
     public Transform endPos;
-    public float SpeedForward = 0.5f,SpeedBackward = 4f;
+    public float SpeedForward = 0.5f, SpeedBackward = 4f;
     bool alive;
     public bool forceMove;
     bool paused;
@@ -33,9 +33,19 @@ public class BossMove : MonoBehaviour
         paused = b;
     }
 
+    public void OnDisable()
+    {
+        alive = false;
+    }
+
+    public void OnEnable()
+    {
+        StartCoroutine(bossMove());
+    }
+
     public void OnDestroy()
     {
-        if(enabled && GameManager.instance)
+        if (enabled && GameManager.instance)
             GameManager.instance.onPauseGame -= Instance_onPauseGame;
         alive = false;
     }
@@ -91,26 +101,26 @@ public class BossMove : MonoBehaviour
                 //warn other systems that boss is moving, this includes bossControler
                 if (onMoveChange != null)
                     onMoveChange(moveDir.right);
-               
+
                 //Move forward
-                while (dir==1 && Vector3.Distance(transform.position, endPos.position) > 0.3f)
+                while (dir == 1 && Vector3.Distance(transform.position, endPos.position) > 0.3f && alive)
                 {
                     if (!paused)
                     {
-                            transform.Translate(Vector3.right * Random.Range(0.6f, 2f) * SpeedForward * Time.deltaTime);                         
+                        transform.Translate(Vector3.right * Random.Range(0.6f, 2f) * SpeedForward * Time.deltaTime);
                     }
                     yield return new WaitForEndOfFrame();
                 }
-                
+
                 //wait a lil bit
                 t = Random.Range(4f, 6f);
-                while (t > 0)
+                while (t > 0 && alive)
                 {
                     if (!paused)
                         t -= Time.deltaTime;
                     yield return new WaitForEndOfFrame();
                 }
-                
+
                 //send message that warns other systems that boss wil sprint forward
                 if (onMoveChangeEarly != null)
                     onMoveChangeEarly(moveDir.left);
@@ -139,7 +149,7 @@ public class BossMove : MonoBehaviour
 
                 forceMove = false;
             }
-            
+
         }
     }
 }

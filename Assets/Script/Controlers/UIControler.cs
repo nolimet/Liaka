@@ -95,6 +95,8 @@ public class UIControler : MonoBehaviour
             return;
 
         TimerBar.value = GameManager.stageControler.NormalizedTimeLeft();
+
+        Debug.Log(TimerBar.value = GameManager.stageControler.NormalizedTimeLeft());
     }
     #endregion
 }

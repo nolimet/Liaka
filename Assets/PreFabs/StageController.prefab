@@ -135,7 +135,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.9285374, y: 2.03376985, z: -11.38904}
+  m_LocalPosition: {x: 16.9285374, y: 3.50999999, z: -11.38904}
   m_LocalScale: {x: 1, y: 1.09923053, z: 1}
   m_Children: []
   m_Father: {fileID: 467258}
@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.5699997, y: -1.83000004, z: 0}
+  m_LocalPosition: {x: 18.5699997, y: -1.32000005, z: 0}
   m_LocalScale: {x: 1, y: 1.09923053, z: 1}
   m_Children: []
   m_Father: {fileID: 427676}
@@ -174,7 +174,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.5699997, y: 1.15999997, z: 0}
+  m_LocalPosition: {x: 18.5699997, y: 2.63000011, z: 0}
   m_LocalScale: {x: 1, y: 1.09923053, z: 1}
   m_Children: []
   m_Father: {fileID: 427676}
@@ -214,7 +214,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.9285374, y: -6.8962307, z: -11.38904}
+  m_LocalPosition: {x: 16.9285374, y: -5.42000008, z: -11.38904}
   m_LocalScale: {x: 1, y: 1.09923053, z: 1}
   m_Children: []
   m_Father: {fileID: 467258}
@@ -226,7 +226,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.5699997, y: 10.0900002, z: 0}
+  m_LocalPosition: {x: 18.5699997, y: 11.5600004, z: 0}
   m_LocalScale: {x: 1, y: 1.09923053, z: 1}
   m_Children: []
   m_Father: {fileID: 427676}
@@ -258,7 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c7baecb0b0004469c66ff6e823e1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageLength: 15
+  StageLength: 10
+  BossBattleLength: 150
 --- !u!114 &11460744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HighSpawn: {fileID: 422094}
   LowSpawn: {fileID: 472882}
-  spawnable: 0100000000000000
+  spawnable: 010000000000000003000000
   MinVelocity: 5
   MaxVelocity: 7
   bossCharging: 0

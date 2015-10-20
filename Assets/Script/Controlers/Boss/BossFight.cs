@@ -6,19 +6,30 @@ public class BossFight : MonoBehaviour
     public delegate void VoidDelegate();
     public VoidDelegate onGoodHit, onBadHit, onPerfectHit, onOutOfHP;
 
-    public float HP;
-    public float MaxHP;
+    public delegate void FloatDelegate(float f);
+    public FloatDelegate onHPChange;
+
+    public float HP = 5;
+    public float MaxHP = 5;
+    public TextMesh textm;
 
    void Start()
     {
         if (GameManager.uiControler)
             GameManager.uiControler.attackSlider.onAttack += AttackSlider_onAttack;
+
+        textm.text = "BossHP: " + HP.ToString() + " / " + MaxHP.ToString();
     }
 
     void Destroy()
     {
         if (GameManager.uiControler)
             GameManager.uiControler.attackSlider.onAttack -= AttackSlider_onAttack;
+    }
+
+    void onEnable()
+    {
+
     }
 
     private void AttackSlider_onAttack(float f, AttackSlider.state preformance)
@@ -45,7 +56,13 @@ public class BossFight : MonoBehaviour
         }
 
         if (HP <= 0)
+        {
             if (onOutOfHP != null)
                 onOutOfHP();
+
+            HP = 0;
+        }
+
+        textm.text = "BossHP: " + HP.ToString() + " / " + MaxHP.ToString();
     }
 }

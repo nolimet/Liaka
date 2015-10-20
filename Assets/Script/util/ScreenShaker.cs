@@ -27,10 +27,14 @@ public class ScreenShaker : MonoBehaviour
             instance = this;
 
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.S))
-        {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
             ShakeScreen(2f, 0.2f, 0.05f);
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            ShakeScreen(2f, 0.2f, 0.1f);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            ShakeScreen(2f, 0.4f, 0.05f);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            ShakeScreen(2f, 0.7f, 0.05f);
 #endif
     }
 
@@ -68,20 +72,23 @@ public class ScreenShaker : MonoBehaviour
 
         //timer
         float t = duration;
-        //shakeDelayTimer
+        //counter that is used for moving the cam withing the lerp
         float shakeLerp = 0;
         //shaking posistion keeping
         Vector2 screenShakeTarget = new Vector2(intensity * Random.Range(-1f, 1f), intensity * Random.Range(-1f, 1f)), LastScreenShakeTarget = Vector2.zero;
         //camera main transform;
         Transform camTrans = Camera.main.transform;
-
+        //shakes the screen
         while (t > 0)
         {
+            //when the game is pause it does not shake the screen 
             if (!paused)
             {
+                //moves the camera around with a liniar interpolation
                 camTrans.localPosition = Vector2.Lerp(LastScreenShakeTarget, screenShakeTarget, shakeLerp / timePerShake);
-
+                //does a count down
                 t -= Time.deltaTime;
+                
                 shakeLerp += Time.deltaTime;
                 if (shakeLerp >= timePerShake)
                 {
@@ -95,6 +102,7 @@ public class ScreenShaker : MonoBehaviour
         }
 
         t = 0;
+        //make sure the screen is back to where it started
         while (t < timePerShake)
         {
             camTrans.localPosition = Vector2.Lerp(screenShakeTarget, Vector2.zero, t / timePerShake);

@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StageLength: 15
+  BossBattleLength: 0
 --- !u!114 &11415966
 MonoBehaviour:
   m_ObjectHideFlags: 1
