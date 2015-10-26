@@ -85,7 +85,7 @@ public class StageControler : MonoBehaviour
     private void BossControler_Defeated()
     {
         bossDefeated = true;
-        Debug.Log("jellow");
+        
     }
     #endregion
 
@@ -113,8 +113,8 @@ public class StageControler : MonoBehaviour
             {
                 if (onBossBattleBegins != null)
                     onBossBattleBegins();
-                
-                    TimeLeft = BossBattleLength;
+
+                TimeLeft = BossBattleLength;
             }
         }
 

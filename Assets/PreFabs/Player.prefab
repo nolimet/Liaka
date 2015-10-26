@@ -91,7 +91,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 497154}
   - 114: {fileID: 11495150}
-  - 114: {fileID: 11402850}
   - 212: {fileID: 21256866}
   - 50: {fileID: 5077958}
   - 58: {fileID: 5807936}
@@ -235,19 +234,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.99999988, y: 2}
---- !u!114 &11402850
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c7baecb0b0004469c66ff6e823e1ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StageLength: 15
-  BossBattleLength: 0
 --- !u!114 &11415966
 MonoBehaviour:
   m_ObjectHideFlags: 1
