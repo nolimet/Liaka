@@ -25,16 +25,22 @@ public class StageControler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
+        BossControler.onDefeated += BossControler_Defeated;
+
+        onBossBattleBegins += StageControler_onBossBattleBegins;
+        onBossBattleEnds += StageControler_onBossBattleEnds;
+
         TimeLeft = StageLength;
+
         if (onStageCreated != null)
             onStageCreated(this);
 
         if (onBossBattleEnds != null)
             onBossBattleEnds();
-
-        PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
-        BossControler.onDefeated += BossControler_Defeated;
     }
+
+   
 
     public void OnDestroy()
     {
@@ -44,6 +50,8 @@ public class StageControler : MonoBehaviour
         PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
         BossControler.onDefeated -= BossControler_Defeated;
     }
+
+    #region Events
 
     private void PlayerControler_onPlayerCreated(PlayerControler p)
     {
@@ -61,10 +69,26 @@ public class StageControler : MonoBehaviour
         Application.LoadLevel("GAME-OVER");
     }
 
+    private void StageControler_onBossBattleEnds()
+    {
+        bossFighting = false;
+
+        if (bossDefeated)
+            Application.LoadLevel("STAGE_COMPLETE");
+    }
+
+    private void StageControler_onBossBattleBegins()
+    {
+        bossFighting = true;
+    }
+
     private void BossControler_Defeated()
     {
         bossDefeated = true;
+        Debug.Log("jellow");
     }
+    #endregion
+
 
     // Update is called once per frame
     void Update()
@@ -84,20 +108,13 @@ public class StageControler : MonoBehaviour
                     onBossBattleEnds();
 
                 TimeLeft = StageLength;
-                bossFighting = false;
             }
             else
             {
                 if (onBossBattleBegins != null)
                     onBossBattleBegins();
-
-                if (bossDefeated)
-                    Application.LoadLevel("STAGE_COMPLETE");
-                else
-                {
-                    bossFighting = true;
+                
                     TimeLeft = BossBattleLength;
-                }
             }
         }
 

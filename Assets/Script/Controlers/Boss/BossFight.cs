@@ -63,6 +63,9 @@ public class BossFight : MonoBehaviour
             HP = 0;
         }
 
+        if (onHPChange != null)
+            onHPChange(HP / MaxHP);
+
         textm.text = "BossHP: " + HP.ToString() + " / " + MaxHP.ToString();
     }
 }

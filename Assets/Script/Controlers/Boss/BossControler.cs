@@ -23,10 +23,7 @@ public class BossControler : MonoBehaviour
         if (!bossAnimator)
             bossAnimator = GetComponent<BossAnimation>();
         if (!bossFight)
-            bossFight = GetComponent<BossFight>();
-
-        if (bossMove)
-            bossMove.onMoveChange += bossMove_onMoveChange;
+            bossFight = GetComponent<BossFight>();            
     }
     void Start()
     {
@@ -34,6 +31,10 @@ public class BossControler : MonoBehaviour
 
         StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
+
+        bossFight.onOutOfHP += bossFight_onOutOfHP;
+
+        bossMove.onMoveChange += bossMove_onMoveChange;
     }
 
     public void OnDestroy()
@@ -70,6 +71,12 @@ public class BossControler : MonoBehaviour
     {
         bossFight.enabled = true;
         bossMove.enabled = false;
+    }
+
+    private void bossFight_onOutOfHP()
+    {
+        if (onDefeated != null)
+            onDefeated();
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c7baecb0b0004469c66ff6e823e1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageLength: 45
-  BossBattleLength: 20
+  StageLength: 75
+  BossBattleLength: 15
 --- !u!114 &11460744
 MonoBehaviour:
   m_ObjectHideFlags: 1

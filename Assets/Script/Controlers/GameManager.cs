@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
 
         PauseMenu.SetActive(false);
         GamePaused = false;
+
+        if (!Application.isEditor)
+            GodMode = false;
     }
 
     public void OnDestroy()
@@ -97,6 +100,8 @@ public class GameManager : MonoBehaviour
             onPauseGame(true);
             uiControler.gameObject.SetActive(false);
         }
+
+        
     }
 
     #endregion

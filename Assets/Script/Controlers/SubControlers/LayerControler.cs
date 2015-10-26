@@ -49,5 +49,6 @@ public class LayerControler : MonoBehaviour {
         return false;
     }
 
+    public virtual void FixedLayerMove(Vector3 v) { }
     
 }

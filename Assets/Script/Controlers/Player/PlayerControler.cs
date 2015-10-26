@@ -30,6 +30,10 @@ public class PlayerControler : MonoBehaviour
     /// Called when a playerkilling event occured
     /// </summary>
     public event VoidDelegate onDeath;
+    /// <summary>
+    /// Callen when the player does a attack on the boss
+    /// </summary>
+    public event VoidDelegate onBossBattleAttack;
     #endregion
 
     #region Varibles
@@ -144,12 +148,9 @@ public class PlayerControler : MonoBehaviour
             return;
 
         Update_Energy();
-        if (!GameManager.stageControler.BossFighting)
-        {
-            Update_HeatLevel();
-            Update_GroundCheck();
-            Update_Boost();
-        }
+        Update_GroundCheck();
+        Update_HeatLevel();
+        Update_Boost();
     }
     #endregion
 
@@ -248,80 +249,6 @@ public class PlayerControler : MonoBehaviour
             // Debug.Log("YOU DIED");
         }
     }
-    void Update_Boost()
-    {
-        //normal boost
-        if (gamePaused)
-            return;
-
-        if (boostTimeLeft > maxBoost)
-            Debug.Log("overBoost");
-
-        moveBoostCalc();
-        moveBoostStep();
-        moveBoostDecay();
-    }
-
-    void moveBoostCalc()
-    {
-        if(LastBoostTimeStep!=boostTimeLeft)
-        {
-            
-            if (LastBoostTimeStep > boostTimeLeft)
-                boostDirection = -1;
-            else if (LastBoostTimeStep < boostTimeLeft)
-                boostDirection = 1;
-
-            LastBoostTimeStep = boostTimeLeft;
-            BoostNormalTarget = (boostTimeLeft / maxBoost) ;
-            Debug.Log(Vector3.Distance(startPos, SpeedUpEndPosition.position));
-        }
-        
-    }
-
-    void moveBoostStep()
-    {
-        if (boostDirection > 0)
-        {
-            if (BoostNormalPos < BoostNormalTarget)
-            {
-                BoostNormalPos += Time.deltaTime * BoostForwardTimePerUnit;
-            }
-            else
-                atNewBoostPos = true;
-
-        }
-        else if (boostDirection < 0)
-        {
-            if (BoostNormalPos > BoostNormalTarget)
-            {
-                BoostNormalPos -= Time.deltaTime * BoostForwardTimePerUnit;
-            }
-            else
-                atNewBoostPos = true;
-        }
-
-        if (BoostNormalPos >= 0)
-            ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, BoostNormalPos));
-        else if (BoostNormalPos <= 0)
-            ChangePlayerPos(Mathf.Lerp(startPos.x, startPos.x - 7, -BoostNormalPos));
-    }
-
-    void moveBoostDecay()
-    {
-        if (atNewBoostPos)
-        {
-            if(BoostStayTimeLeft > 0)
-            {
-                BoostStayTimeLeft -= Time.deltaTime;
-                return;
-            }
-
-            if (boostTimeLeft > 0)
-                boostTimeLeft -= Time.deltaTime * boostDegrationSpeed;
-        }
-    }
-
     void Update_GroundCheck()
     {
         int mask = 1 << LayerMask.NameToLayer("Ground");
@@ -350,12 +277,96 @@ public class PlayerControler : MonoBehaviour
             weaponForcedCooldown = false;
         }
     }
+    /// <summary>
+    /// calls the Functions for the MoveBoost
+    /// They need to be executed in a certain order to work well
+    /// </summary>
+    void Update_Boost()
+    {
+        //normal boost
+        if (boostTimeLeft > maxBoost)
+            Debug.Log("overBoost");
+
+        moveBoostCalc();
+        moveBoostStep();
+        moveBoostDecay();
+    }
+    /// <summary>
+    /// Does the calculation for the moveBoost
+    /// </summary>
+    void moveBoostCalc()
+    {
+        if(LastBoostTimeStep!=boostTimeLeft)
+        {
+            
+            if (LastBoostTimeStep > boostTimeLeft)
+                boostDirection = -1;
+            else if (LastBoostTimeStep < boostTimeLeft)
+                boostDirection = 1;
+
+            LastBoostTimeStep = boostTimeLeft;
+            BoostNormalTarget = (boostTimeLeft / maxBoost) ;
+        }
+        
+    }
+    /// <summary>
+    /// Does the steps the player makes on screen
+    /// So when he needs to move this function handels that
+    /// </summary>
+    void moveBoostStep()
+    {
+        if (boostDirection > 0)
+        {
+            if (BoostNormalPos < BoostNormalTarget)
+            {
+                BoostNormalPos += Time.deltaTime * BoostForwardTimePerUnit;
+            }
+            else
+                atNewBoostPos = true;
+
+        }
+        else if (boostDirection < 0)
+        {
+            if (BoostNormalPos > BoostNormalTarget)
+            {
+                BoostNormalPos -= Time.deltaTime * BoostForwardTimePerUnit;
+            }
+            else
+                atNewBoostPos = true;
+        }
+
+        if (BoostNormalPos >= 0)
+            ChangePlayerPos(Mathf.Lerp(startPos.x, SpeedUpEndPosition.position.x, BoostNormalPos));
+        else if (BoostNormalPos <= 0)
+            ChangePlayerPos(Mathf.Lerp(startPos.x, startPos.x - 7, -BoostNormalPos));
+    }
+    /// <summary>
+    /// When the boost idle timer runs out the boost starts to decay.
+    /// The Boost time slowly starts to run to zero. When it has hit zero it stops decaying. 
+    /// When the boost is below zero nothing will happen. 
+    /// </summary>
+    void moveBoostDecay()
+    {
+        if (atNewBoostPos)
+        {
+            if(BoostStayTimeLeft > 0)
+            {
+                BoostStayTimeLeft -= Time.deltaTime;
+                return;
+            }
+
+            if (boostTimeLeft > 0)
+                boostTimeLeft -= Time.deltaTime * boostDegrationSpeed;
+        }
+    }
+
+
 
     #endregion
 
     void Jump()
     {
-        if (hitTrap || gamePaused || GameManager.stageControler.BossFighting)
+        if (hitTrap || gamePaused)
             return;
 
         rigi2d.AddForce(new Vector3(0, 9 * rigi2d.mass, 0), ForceMode2D.Impulse);
@@ -365,23 +376,29 @@ public class PlayerControler : MonoBehaviour
 
     void shoot(Vector2 p)
     {
-        if (weaponForcedCooldown || hitTrap || gamePaused || GameManager.stageControler.BossFighting)
+        if (weaponForcedCooldown || hitTrap || gamePaused)
             return;
 
         if (p.x <= playerScreenX)
             return;
 
-        weaponHeat += Random.Range(10, 15);
+        if (!GameManager.stageControler.BossFighting)
+        {
+            weaponHeat += Random.Range(10, 15);
 
-        if (weaponHeat >= MaxHeat)
-            weaponForcedCooldown = true;
+            if (weaponHeat >= MaxHeat)
+                weaponForcedCooldown = true;
 
-        if (onShoot != null)
-            onShoot();
+            if (onShoot != null)
+                onShoot();
 
-        gun.Shoot(p);
+            gun.Shoot(p);
 
-        //Debug.Log("Shooting - Heat Level " + (weaponHeat / 100f).ToString("p"));
+            return;
+        }
+
+        if (onBossBattleAttack != null)
+            onBossBattleAttack();
     }
 
     public void ChangePlayerPos(float newXpos)

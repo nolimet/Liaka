@@ -12,13 +12,15 @@ public class AttackSlider : MonoBehaviour
     RectTransform cicleMov;
     [SerializeField]
     slidePart Good, Bad1, Bad2, Perfect;
-    [SerializeField]
-    float MoveMin, MoveMax, moveRange;
+    [Header("MovementRange")]
+    public float MoveMin;
+    public float MoveMax;
+    public float moveRange;
     bool paused;
 
     public enum state
     {
-        good,bad,perfect
+        good, bad, perfect
     }
 
     [System.Serializable]
@@ -32,24 +34,30 @@ public class AttackSlider : MonoBehaviour
     }
 
     bool run = true;
-    
+
     float t, curve;
+
+    void Awake()
+    {
+        PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
+    }
+
+    public void OnDestroy()
+    {
+        PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
+    }
+
     public void OnEnable()
     {
-        GameManager.inputManager.onTap += InputManager_onTap;
+
         GameManager.instance.onPauseGame += Instance_onPauseGame;
+
         t = 0;
         Update_TriggerStatus();
     }
 
-    private void Instance_onPauseGame(bool b)
-    {
-        paused = b;
-    }
-
     public void OnDisable()
     {
-        GameManager.inputManager.onTap -= InputManager_onTap;
         GameManager.instance.onPauseGame -= Instance_onPauseGame;
     }
 
@@ -60,16 +68,13 @@ public class AttackSlider : MonoBehaviour
             return;
 
         if (Input.GetKeyDown(KeyCode.C))
-            InputManager_onTap(Vector2.zero);
+            P_onBossBattleAttack();
 
         if (run)
         {
             curve = Mathf.Lerp(MoveMin, MoveMax, (1 + Mathf.Cos(t * 3f)) / 2);
             cicleMov.rotation = Quaternion.Euler(0, 0, curve);
             t += Time.deltaTime;
-
-            // Debug.Log(-(curve - (moveRange / 2f)) / moveRange);
-            // Debug.Log(curve);
         }
         else
             t = 0;
@@ -109,7 +114,7 @@ public class AttackSlider : MonoBehaviour
 
         for (int i = 0; i < a.Length; i++)
         {
-            if (called > counter  )
+            if (called > counter)
                 heighest = i;
 
             counter += a[i].triggerPoint / total;
@@ -117,7 +122,7 @@ public class AttackSlider : MonoBehaviour
         return a[heighest].State;
     }
 
-    private void InputManager_onTap(Vector2 pos)
+    private void P_onBossBattleAttack()
     {
         run = !run;
         if (run)
@@ -130,4 +135,16 @@ public class AttackSlider : MonoBehaviour
             onAttack(f, statusCheck());
         }
     }
+
+    private void PlayerControler_onPlayerCreated(PlayerControler p)
+    {
+        p.onBossBattleAttack += P_onBossBattleAttack;
+    }
+
+    private void Instance_onPauseGame(bool b)
+    {
+        paused = b;
+    }
+
+
 }

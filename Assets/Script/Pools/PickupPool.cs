@@ -56,6 +56,20 @@ public class PickupPool : MonoBehaviour
     }
 
     /// <summary>
+    /// Removes all objects from view Immediately
+    /// </summary>
+    public static void RemoveAllImmediate()
+    {
+        if (!instance)
+            return;
+
+        for (int i = instance.ActivePool.Count - 1; i >= 0; i--)
+        {
+            RemoveObject(instance.ActivePool[i]);
+        }
+    }
+
+    /// <summary>
     /// Removes all objects from view
     /// </summary>
     public static void RemoveAll()
@@ -65,7 +79,7 @@ public class PickupPool : MonoBehaviour
 
         for (int i = instance.ActivePool.Count - 1; i >= 0; i--)
         {
-            RemoveObject(instance.ActivePool[i]);
+            instance.ActivePool[i].hit();
         }
     }
 

@@ -18,8 +18,8 @@ public class BackgroundControler : MonoBehaviour
     bool playerHitTrap = false;
     void Start()
     {
-        if(GameManager.instance)
-        GameManager.instance.onPauseGame += onGamePaused;
+        if (GameManager.instance)
+            GameManager.instance.onPauseGame += onGamePaused;
     }
 
     void OnDestory()
@@ -47,4 +47,14 @@ public class BackgroundControler : MonoBehaviour
             l.Layer.moveLayer(l.speed);
         }
     }
+
+    //public void FixedUpdate()
+    //{
+    //    if (GamePaused)
+    //        return;
+    //    foreach (layer l in Layers)
+    //    {
+    //        l.Layer.FixedLayerMove(l.speed);
+    //    }
+    //}
 }
