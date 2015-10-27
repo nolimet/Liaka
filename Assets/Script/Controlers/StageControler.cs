@@ -49,6 +49,9 @@ public class StageControler : MonoBehaviour
 
         PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
         BossControler.onDefeated -= BossControler_Defeated;
+
+        onBossBattleBegins -= StageControler_onBossBattleBegins;
+        onBossBattleEnds -= StageControler_onBossBattleEnds;
     }
 
     #region Events

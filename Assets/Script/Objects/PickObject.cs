@@ -41,6 +41,9 @@ public class PickObject : BaseObject
         }
 
     }
+
+    
+
     public override void OnTriggerEnter2D(Collider2D collision)
     {
         //base.OnTriggerEnter2D(collision);
@@ -66,9 +69,9 @@ public class PickObject : BaseObject
             return;
 
         Vector2 v;
-        Vector2 d = GameManager.playerControler.transform.position-transform.position;
+        Vector2 d = GameManager.playerControler.transform.position - transform.position;
         v = util.MathHelper.AngleToVector(util.MathHelper.VectorToAngle(d));
 
-        rigi.AddForce( v * 50f);
+        rigi.AddForce(v * 50f);
     }
 }

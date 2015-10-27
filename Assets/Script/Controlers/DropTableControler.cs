@@ -39,8 +39,32 @@ public class DropTableControler : MonoBehaviour
                 index++;
             }
         }
+
+        System.Random rnd = new System.Random();
+
+        Table = Table.OrderBy(x => rnd.Next()).ToList();
+#if UNITY_EDITOR
+        TestTable();
+#endif 
     }
     
+    void TestTable()
+    {
+        int l = 100000;
+        int[] numbs = new int[dropChance.Length+1];
+        int j;
+        for (int i = 0; i < l; i++)
+        {
+            j = Table.ElementAtOrDefault(new System.Random().Next() % Table.Count());
+            numbs[j]++;
+        }
+
+        string output = "";
+        foreach (int i in numbs)
+            output += i.ToString() + " ";
+
+        print(output);
+    }
 
     public PickupBase getRandomItem()
     {

@@ -69,5 +69,6 @@ public class EnemyBase : BaseObject{
             p.transform.position = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2));
             p.setVelocity(new Vector3(-5, 0));
         }
+        p.Unstuck();
     }
 }

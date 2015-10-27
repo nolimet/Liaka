@@ -2755,7 +2755,7 @@ MonoBehaviour:
     chance: 50
   - type: 0
     movement: 0
-    chance: 100
+    chance: 45
   - type: 1
     movement: 1
     chance: 15

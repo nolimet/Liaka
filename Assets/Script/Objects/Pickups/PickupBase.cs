@@ -66,6 +66,34 @@ public class PickupBase :BaseObject {
             rigi.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
     }
 
+    
+    public virtual void Unstuck()
+    {
+        int mask = 1 << LayerMask.NameToLayer("Ground");
+
+        Vector3 pos = transform.position;
+        Vector3 distOff = Vector3.zero;
+        float l = GetComponent<CircleCollider2D>().bounds.size.y/2f;
+
+
+        RaycastHit2D hit = Physics2D.Raycast(pos + distOff, new Vector2(0, -1), l, mask);
+        Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l), Color.red,20f);
+
+       // Debug.Log(l);
+        if (hit && hit.transform.tag == TagManager.Ground)
+        {
+            Transform oStuckin = hit.transform;
+            while (hit.transform == oStuckin)
+            {
+                hit = Physics2D.Raycast(pos + distOff, new Vector2(0, -1), l, mask);
+                distOff += new Vector3(0, 0.05f);
+               // Debug.Log(hit.transform);
+            }
+
+            transform.position = pos + distOff;
+        }
+    }
+
     public override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag != TagManager.Enemy && collision.tag != TagManager.Pickup)
