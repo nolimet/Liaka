@@ -21,8 +21,8 @@ public class UIControler : MonoBehaviour
         StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
 
+
         attackSlider.gameObject.SetActive(false);
-        Debug.Log("start");
     }
 
     private void StageControler_onBossBattleEnds()
