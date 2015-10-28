@@ -382,7 +382,7 @@ public class PlayerControler : MonoBehaviour
         if (p.x <= playerScreenX)
             return;
 
-        if (!GameManager.stageControler.BossFighting)
+        if (!GameManager.stageControler.bossFighting)
         {
             weaponHeat += Random.Range(10, 15);
 

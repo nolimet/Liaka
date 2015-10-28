@@ -12,6 +12,9 @@ public class UIControler : MonoBehaviour
     UnityEngine.UI.Slider TimerBar;
     bool GamePaused;
     bool PlayerExists;
+
+    bool StageControlerAlive = false;
+
     public void Start()
     {
         GameManager.instance.onPauseGame += onGamePause;
@@ -23,6 +26,17 @@ public class UIControler : MonoBehaviour
 
 
         attackSlider.gameObject.SetActive(false);
+    }
+
+    public void Destory()
+    {
+        GameManager.instance.onPauseGame -= onGamePause;
+        PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
+        PlayerControler.onPlayerDestoryed -= PlayerControler_onPlayerDestoryed;
+
+
+        StageControler.onBossBattleBegins -= StageControler_onBossBattleBegins;
+        StageControler.onBossBattleEnds -= StageControler_onBossBattleEnds;
     }
 
     private void StageControler_onBossBattleEnds()
@@ -45,16 +59,7 @@ public class UIControler : MonoBehaviour
         PlayerExists = true;
     }
 
-    public void Destory()
-    {
-        GameManager.instance.onPauseGame -= onGamePause;
-        PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
-        PlayerControler.onPlayerDestoryed -= PlayerControler_onPlayerDestoryed;
-
-
-        StageControler.onBossBattleBegins -= StageControler_onBossBattleBegins;
-        StageControler.onBossBattleEnds -= StageControler_onBossBattleEnds;
-    }
+    
 
     void onGamePause(bool b)
     {
@@ -95,6 +100,14 @@ public class UIControler : MonoBehaviour
             return;
 
         TimerBar.value = GameManager.stageControler.NormalizedTimeLeft();
+    }
+
+    void Update_AttackBarVisable()
+    {
+        if (GameManager.stageControler)
+            if (GameManager.stageControler.bossDefeated)
+                if (attackSlider.isActiveAndEnabled)
+                    attackSlider.gameObject.SetActive(false);
     }
     #endregion
 }

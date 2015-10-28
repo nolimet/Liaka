@@ -59,7 +59,7 @@ public class AudioControler : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        if (level != 1 && level != 0 && level != 2)
+        if (level != 1 && level != 0 && level != 2 && level!=3)
             PlaySong();
         else
             AudioSources.Music.Stop();
@@ -84,11 +84,6 @@ public class AudioControler : MonoBehaviour
         MusicVol = GameManager.instance.saveDat.options.musicVolume;
         SFXVol = GameManager.instance.saveDat.options.soundVolume;
         UIVol = GameManager.instance.saveDat.options.interfaceVolume;
-    }
-
-    void GamePaused()
-    {
-
     }
 
     void SetClicks()

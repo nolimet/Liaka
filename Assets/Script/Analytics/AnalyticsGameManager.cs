@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Analytics;
+using GameAnalyticsSDK;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,5 +12,11 @@ public class AnalyticsGameManager : MonoBehaviour
                 {
                     {"level_id", "Lvl " + level }
                 });
+    }
+
+    void Awake()
+    {
+        GameAnalytics.NewDesignEvent("Game-Started");
+        //UnityEngine.
     }
 }

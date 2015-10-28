@@ -7,7 +7,7 @@ public class PlayerGun : MonoBehaviour {
 
     public void Shoot(Vector2 v2)
     {
-        if (!GameManager.stageControler.BossFighting)
+        if (!GameManager.stageControler.bossFighting)
         {
             Vector3 wp = Camera.main.ScreenToWorldPoint(new Vector3(v2.x, v2.y, 0));
             Vector3 d = wp - transform.position;

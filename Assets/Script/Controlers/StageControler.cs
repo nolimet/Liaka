@@ -11,16 +11,24 @@ public class StageControler : MonoBehaviour
 
     [Tooltip("The time in seconds the stage takes")]
     public float StageLength, BossBattleLength;
-    public bool BossFighting
+    public bool bossFighting
     {
         get
         {
-            return bossFighting;
+            return _bossFighting;
         }
     }
+    public bool bossDefeated
+    {
+        get
+        {
+            return _bossDefeated;
+        }
+    }
+
     float TimeLeft;
-    bool bossFighting,bossDefeated;
-    BossControler bossControler;
+    bool _bossFighting,_bossDefeated;
+    BossControler bossControler; 
 
     // Use this for initialization
     void Start()
@@ -74,20 +82,20 @@ public class StageControler : MonoBehaviour
 
     private void StageControler_onBossBattleEnds()
     {
-        bossFighting = false;
+        _bossFighting = false;
 
-        if (bossDefeated)
+        if (_bossDefeated)
             Application.LoadLevel("STAGE_COMPLETE");
     }
 
     private void StageControler_onBossBattleBegins()
     {
-        bossFighting = true;
+        _bossFighting = true;
     }
 
     private void BossControler_Defeated()
     {
-        bossDefeated = true;
+        _bossDefeated = true;
         
     }
     #endregion
@@ -105,7 +113,7 @@ public class StageControler : MonoBehaviour
             if (onStageTimerEnded != null)
                 onStageTimerEnded();
 
-            if (bossFighting)
+            if (_bossFighting)
             {
                 if (onBossBattleEnds != null)
                     onBossBattleEnds();
@@ -127,7 +135,7 @@ public class StageControler : MonoBehaviour
                 onBossBattleEnds();
 
             TimeLeft = StageLength;
-            bossFighting = false;
+            _bossFighting = false;
         }
 
         if (Input.GetKeyDown(KeyCode.H))
@@ -135,14 +143,14 @@ public class StageControler : MonoBehaviour
             if (onBossBattleBegins != null)
                 onBossBattleBegins();
 
-            bossFighting = true;
+            _bossFighting = true;
             TimeLeft = BossBattleLength;
         }
     }
 
     public float NormalizedTimeLeft()
     {
-        if (!bossFighting)
+        if (!_bossFighting)
             return TimeLeft / StageLength;
         else
             return TimeLeft / BossBattleLength;

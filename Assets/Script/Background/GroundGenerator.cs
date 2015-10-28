@@ -5,6 +5,7 @@ using System.Collections.Generic;
 #endif
 using System.Collections;
 
+[ExecuteInEditMode]
 public class GroundGenerator : MonoBehaviour {
 
     public Sprite FloorLeft, FloorRight, FloorMiddle, Trap;
@@ -12,7 +13,8 @@ public class GroundGenerator : MonoBehaviour {
 
 	void Awake()
     {
-        Destroy(this);
+        if (Application.isPlaying)
+            Destroy(this);
     }
 }
 
@@ -113,7 +115,7 @@ public class groundGenerator_EDITOR : Editor
             {
                 b.transform.localPosition = posLast;
                 posLast = b.spriteRenderer.bounds.max;
-
+                //Debug.Log(b.spriteRenderer.bounds.max);
                 posLast.y = 0;
                 posLast.z = 0;
 
