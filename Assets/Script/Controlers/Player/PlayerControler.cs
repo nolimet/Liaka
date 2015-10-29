@@ -10,6 +10,7 @@ public class PlayerControler : MonoBehaviour
     public static event PlayerControlerEvent onPlayerDestoryed;
 
     public delegate void VoidDelegate();
+    public delegate void IntDelegate(int i);
     /// <summary>
     /// called when player shoots
     /// </summary>
@@ -34,6 +35,14 @@ public class PlayerControler : MonoBehaviour
     /// Callen when the player does a attack on the boss
     /// </summary>
     public event VoidDelegate onBossBattleAttack;
+    /// <summary>
+    /// Called when the player picks up a coin
+    /// </summary>
+    public event VoidDelegate onCoinPickup;
+    /// <summary>
+    /// Called when the player losses coins
+    /// </summary>
+    public event IntDelegate onCoinsLost;
     #endregion
 
     #region Varibles
@@ -94,7 +103,7 @@ public class PlayerControler : MonoBehaviour
         GameManager.inputManager.onSwipeUp += InputManager_onSwipeUp;
         GameManager.inputManager.onTap += InputManager_onTap;
         GameManager.instance.onPauseGame += Instance_onPauseGame;
-        BaseObject.onHitPlayer += BaseObject_onHitPlayer;
+        EnemyBase.onHitPlayer += BaseObject_onHitPlayer;
 
         if (onPlayerCreated != null)
             onPlayerCreated(this);
@@ -103,6 +112,8 @@ public class PlayerControler : MonoBehaviour
         SpeedUpEndPosition.position = new Vector3(SpeedUpEndPosition.position.x, transform.position.x, transform.position.z);
         startPos = transform.position;
     }
+
+    
 
     public void OnDestroy()
     {
@@ -114,10 +125,11 @@ public class PlayerControler : MonoBehaviour
 
         if (GameManager.instance)
             GameManager.instance.onPauseGame -= Instance_onPauseGame;
-        BaseObject.onHitPlayer -= BaseObject_onHitPlayer;
 
         if (onPlayerDestoryed != null)
             onPlayerDestoryed(this);
+
+        EnemyBase.onHitPlayer -= BaseObject_onHitPlayer;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -131,7 +143,7 @@ public class PlayerControler : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == TagManager.Trap && !GameManager.instance.GodMode)
+        if (collision.transform.tag == TagManager.Trap && (GameManager.instance && !GameManager.instance.GodMode)) 
         { 
             hitTrap = true;
 
@@ -161,9 +173,8 @@ public class PlayerControler : MonoBehaviour
         switch (o)
         {
             case BaseObject.objectType.Enemy:
-                Energy -= 10;
-                if (Energy < 0)
-                    Energy = 0;
+                if (onCoinsLost != null)
+                    onCoinsLost(Random.Range(5, 8));
 
                 break;
         }
@@ -214,6 +225,7 @@ public class PlayerControler : MonoBehaviour
             switch (p.pType)
             {
                 case PickupBase.PickupType.Coin:
+                    onCoinPickup();
                     break;
 
                 case PickupBase.PickupType.Energy:

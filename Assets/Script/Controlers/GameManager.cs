@@ -135,13 +135,23 @@ public class GameManager : MonoBehaviour
         string dataName = "GameSave";
         if (!save)
         {
-            Serialization.Load(dataName, Serialization.fileTypes.binary, ref saveDat);
-
-            if (saveDat == null)
+            try
             {
-                saveDat = new SaveData();
-                Serialization.Save(dataName, Serialization.fileTypes.binary, saveDat);
+                Serialization.Load(dataName, Serialization.fileTypes.binary, ref saveDat);
+
+                if (saveDat == null)
+                {
+                    saveDat = new SaveData();
+                    Serialization.Save(dataName, Serialization.fileTypes.binary, saveDat);
+                }
             }
+            catch (System.Exception e)
+            {
+                AnalyticsGameManager.ThrowSystemError(e);
+
+                Debug.Log(saveDat);
+            }
+            
         }
         else
         {

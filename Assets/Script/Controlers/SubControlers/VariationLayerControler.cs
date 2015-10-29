@@ -28,7 +28,7 @@ public class VariationLayerControler : LayerControler
         }
     }
 
-    public override bool OutOfView(Transform t)
+    public override bool InView(Transform t)
     {
         
         //bool b = base.OutOfView(t);
@@ -50,9 +50,9 @@ public class VariationLayerControler : LayerControler
 
                 freeObject.position = f.position + new Vector3(f.getChildBounds().size.x, 0, 0);
             }
-            return true;
+            return false;
 
         }
-        return false;
+        return true;
     }
 }

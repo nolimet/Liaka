@@ -28,6 +28,9 @@ public class StageControler : MonoBehaviour
 
     float TimeLeft;
     bool _bossFighting,_bossDefeated;
+
+    int coinsCollected;
+
     BossControler bossControler; 
 
     // Use this for initialization
@@ -48,8 +51,6 @@ public class StageControler : MonoBehaviour
             onBossBattleEnds();
     }
 
-   
-
     public void OnDestroy()
     {
         if (onStageDestroyed != null)
@@ -68,11 +69,32 @@ public class StageControler : MonoBehaviour
     {
         p.onDeath += Player_onDeath;
         p.onEnergyZero += Player_onEnergyZero;
+        p.onCoinPickup += P_onCoinPickup;
+        p.onCoinsLost += P_onCoinsLost;
+    }
+
+    private void P_onCoinsLost(int i)
+    {
+        int o = i;
+        coinsCollected -= i;
+        if (coinsCollected < 0)
+        {
+            o += coinsCollected;
+            coinsCollected = 0;
+        }
+
+        if (o > 0)
+            dropCoins(o); 
+    }
+
+    private void P_onCoinPickup()
+    {
+        coinsCollected++;
     }
 
     private void Player_onEnergyZero()
     {
-       
+        Application.LoadLevel("GAME-OVER");
     }
 
     private void Player_onDeath()
@@ -146,6 +168,9 @@ public class StageControler : MonoBehaviour
             _bossFighting = true;
             TimeLeft = BossBattleLength;
         }
+
+        if (Input.GetKeyDown(KeyCode.X))
+            dropCoins(10);
     }
 
     public float NormalizedTimeLeft()
@@ -154,5 +179,21 @@ public class StageControler : MonoBehaviour
             return TimeLeft / StageLength;
         else
             return TimeLeft / BossBattleLength;
+    }
+
+    void dropCoins(int l)
+    {
+        PickupBase p;
+        for (int i = 0; i < l; i++)
+        {
+             p = PickupPool.GetObject(PickupBase.PickupType.Coin);
+
+            p.ignorPlayer();
+            p.transform.position = GameManager.playerControler.transform.position;
+            p.SetMovementType(PickupBase.Movement.Dynamic);
+            p.setVelocity(Random.Range(6f, 9f) * util.MathHelper.AngleToVector(Random.Range(45f, 45 + 90f)));
+
+            p.FadeOutStart(0.4f, 2f);
+        }
     }
 }

@@ -14,7 +14,7 @@ public enum TKGestureRecognizerState
 	Recognized // successfully recognized and we are not a continuous recognizer
 }
 
-
+[System.Serializable]
 public abstract class TKAbstractGestureRecognizer : IComparable<TKAbstractGestureRecognizer>
 {
 	public bool enabled = true;

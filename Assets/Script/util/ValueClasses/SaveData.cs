@@ -12,7 +12,17 @@ public class SaveData
         public float interfaceVolume = 0.4f;
     }
 
-    public optionsData options = new optionsData();
+    [System.Serializable]
+    public class gameData
+    {
+        public bool firstStartup = true;
+        public int CoinsCurrent = 0;
+        public int CoinsTotal = 0;
+    }
 
-    public int Coins = 0;
+    public optionsData options = new optionsData();
+    public gameData game = new gameData();
+
+    string GameVersionLastStartup = "";
+    const string CurrentGameVersion = "0.1f";
 }

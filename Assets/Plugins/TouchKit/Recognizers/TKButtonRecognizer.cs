@@ -30,8 +30,11 @@ public class TKButtonRecognizer : TKAbstractGestureRecognizer
 	{}
 
 
-	public TKButtonRecognizer( TKRect defaultFrame, float highlightedExpansion ) : this( defaultFrame, defaultFrame.copyWithExpansion( highlightedExpansion ) )
-	{}
+	public TKButtonRecognizer( TKRect defaultFrame, float highlightedExpansion ) //: this( defaultFrame, defaultFrame.copyWithExpansion( highlightedExpansion ) )
+	{
+        _defaultFrame = defaultFrame;
+        _highlightedFrame = defaultFrame.copyWithExpansion(highlightedExpansion);
+    }
 
 
 	public TKButtonRecognizer( TKRect defaultFrame, TKRect highlightedFrame )

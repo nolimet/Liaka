@@ -33,20 +33,21 @@ public class LayerControler : MonoBehaviour {
         {
             if (t.gameObject.activeSelf)
             {
+                if(InView(t))
                 t.Translate(v * Time.deltaTime);
-                OutOfView(t);
+                
             }
         }
     }
 
-    public virtual bool OutOfView(Transform t)
+    public virtual bool InView(Transform t)
     {
         if ((t.position + (subObjectWorldSize / 2f)).x < WorldScreenSize.x)
         {
             t.position += new Vector3(subObjectWorldSize.x * (SubObjects.Count), 0);
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public virtual void FixedLayerMove(Vector3 v) { }

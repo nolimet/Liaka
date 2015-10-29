@@ -181,8 +181,9 @@ public class BaseObject : MonoBehaviour
     /// <param name="f">Time the fading takes</param>
     /// <param name="d">Starting Delay before the fading</param>
     /// <param name="g">Tag of the object that started it</param>
+    /// <param name="DisableCollsionAtStart">Disable colision checking at the start of the fading Opperation</param>
     /// <returns></returns>
-    protected virtual IEnumerator fadeOut(float f, float d, string g = "")
+    protected virtual IEnumerator fadeOut(float f, float d, string g = "", bool DisableCollsionAtStart = true)
     {
         if (!fading)
         {
@@ -191,15 +192,24 @@ public class BaseObject : MonoBehaviour
             fading = true;
             
             float z = f;
+            
             SpriteRenderer r = GetComponent<SpriteRenderer>();
-            GetComponent<CircleCollider2D>().enabled = false;
+
+            
 
             if (GetComponent<Animator>())
                 GetComponent<Animator>().enabled = true;
 
             Color c = r.color;
 
+            if (DisableCollsionAtStart)
+                GetComponent<CircleCollider2D>().enabled = false;
+
             yield return new WaitForSeconds(d);
+
+            if (!DisableCollsionAtStart)
+                GetComponent<CircleCollider2D>().enabled = false;
+
             while (z > 0)
             {
                 c.a = z / f;

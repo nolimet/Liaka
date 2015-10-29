@@ -33,6 +33,7 @@ public class PickupBase :BaseObject {
     public override void startBehaviours()
     {
         base.startBehaviours();
+        gameObject.layer = LayerMask.NameToLayer("Pickup");
         type = objectType.Pickup;
         stopedMoving = false;
     }
@@ -51,6 +52,11 @@ public class PickupBase :BaseObject {
                 stopedMoving = true;
                 break;
         }
+    }
+
+    public void ignorPlayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("IgnorPlayer");
     }
 
     public virtual void SetMovementType(Movement t)
@@ -112,6 +118,16 @@ public class PickupBase :BaseObject {
                     onPickup(pType);
                 break;
         }
+    }
+
+    /// <summary>
+    /// fades the object out
+    /// </summary>
+    /// <param name="f">Time the fading takes</param>
+    /// <param name="d">Starting Delay before the fading</param>
+    public void FadeOutStart(float f, float d)
+    {
+        StartCoroutine(fadeOut(f, d, "", false));
     }
 
     void FixedUpdate()

@@ -36,7 +36,7 @@ public class PhysicsLayerControler : VariationLayerControler
             {
                 rigiBodies[i].MovePosition(t.position + (v * Time.fixedDeltaTime));
                 //t.Translate(v * Time.deltaTime);
-                OutOfView(t);
+                InView(t);
             }
         }
     }

@@ -71,7 +71,7 @@ public class InputManager : MonoBehaviour
         };
         TouchKit.addGestureRecognizer(r1);
 
-       /* TKButtonRecognizer r3 = new TKButtonRecognizer(new TKRect(100, 180, new Vector2(50,65)),0);
+        TKButtonRecognizer r3 = new TKButtonRecognizer(new TKRect(100, 180, new Vector2(50,65)),0);
         
         r3.onTouchUpInsideEvent += (r) =>
         {
@@ -83,7 +83,9 @@ public class InputManager : MonoBehaviour
         };
         Debug.Log(r3);
         
-        TouchKit.addGestureRecognizer(r3);*/
+        TouchKit.addGestureRecognizer(r3);
+
+        
 
         TKTapRecognizer r2 = new TKTapRecognizer();
 

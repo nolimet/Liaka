@@ -19,4 +19,9 @@ public class AnalyticsGameManager : MonoBehaviour
         GameAnalytics.NewDesignEvent("Game-Started");
         //UnityEngine.
     }
+
+    public static void ThrowSystemError(System.Exception e)
+    {
+        GameAnalytics.NewErrorEvent(GA_Error.GAErrorSeverity.GAErrorSeverityError, e.Message);
+    }
 }

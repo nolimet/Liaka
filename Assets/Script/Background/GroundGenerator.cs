@@ -5,7 +5,7 @@ using System.Collections.Generic;
 #endif
 using System.Collections;
 
-[ExecuteInEditMode]
+
 public class GroundGenerator : MonoBehaviour {
 
     public Sprite FloorLeft, FloorRight, FloorMiddle, Trap;
@@ -13,7 +13,6 @@ public class GroundGenerator : MonoBehaviour {
 
 	void Awake()
     {
-        if (Application.isPlaying)
             Destroy(this);
     }
 }
@@ -33,7 +32,7 @@ public class groundGenerator_EDITOR : Editor
         if (GUILayout.Button("GenerateGround"))
         {
             List<FloorBitHolder> bits = new List<FloorBitHolder>();
-            List<int> floorLayout = new List<int>(); ;
+            List<int> floorLayout = new List<int>();
 
             //adding some normal floor at the beginning
             for (int i = 0; i < 3; i++)
@@ -115,7 +114,8 @@ public class groundGenerator_EDITOR : Editor
             {
                 b.transform.localPosition = posLast;
                 posLast = b.spriteRenderer.bounds.max;
-                //Debug.Log(b.spriteRenderer.bounds.max);
+                Debug.Log(b.spriteRenderer.bounds.max.x);
+
                 posLast.y = 0;
                 posLast.z = 0;
 

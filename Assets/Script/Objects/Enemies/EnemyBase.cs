@@ -4,6 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class EnemyBase : BaseObject{
 
+    new public static event objectTypeDelegate onHitPlayer;
+
     public int Health, maxHealth;
     
 
@@ -41,8 +43,6 @@ public class EnemyBase : BaseObject{
 
     protected override void dropLoot()
     {
-        //base.dropLoot();
-
         PickupBase p = PickupPool.GetObject(PickupBase.PickupType.Coin);
         placeObject(p);
         p = null;
@@ -70,5 +70,12 @@ public class EnemyBase : BaseObject{
             p.setVelocity(new Vector3(-5, 0));
         }
         p.Unstuck();
+    }
+
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        if (collision.gameObject.tag == TagManager.Player)
+            onHitPlayer(type);
     }
 }
