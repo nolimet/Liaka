@@ -26,19 +26,23 @@ public class TKButtonRecognizer : TKAbstractGestureRecognizer
 	/// <summary>
 	/// the constructors ensure we have a frame to work with for button recognizers
 	/// </summary>
-	public TKButtonRecognizer( TKRect defaultFrame ) : this( defaultFrame, 40f )
-	{}
-
-
-	public TKButtonRecognizer( TKRect defaultFrame, float highlightedExpansion ) //: this( defaultFrame, defaultFrame.copyWithExpansion( highlightedExpansion ) )
+	public TKButtonRecognizer( TKRect defaultFrame ): this( defaultFrame, 40f )
 	{
-        _defaultFrame = defaultFrame;
-        _highlightedFrame = defaultFrame.copyWithExpansion(highlightedExpansion);
+        Debug.Log(1);
+    }
+
+
+	public TKButtonRecognizer( TKRect defaultFrame, float highlightedExpansion ) : this( defaultFrame, defaultFrame.copyWithExpansion( highlightedExpansion ) )
+	{
+        Debug.Log(2);
+
+        Debug.Log(defaultFrame);
     }
 
 
 	public TKButtonRecognizer( TKRect defaultFrame, TKRect highlightedFrame )
 	{
+        Debug.Log(3);
 		_defaultFrame = defaultFrame;
 		_highlightedFrame = highlightedFrame;
 		boundaryFrame = _defaultFrame;

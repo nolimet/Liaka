@@ -208,8 +208,6 @@ public partial class TouchKit : MonoBehaviour
 	{
 		if( shouldAutoUpdateTouches )
 			internalUpdateTouches();
-        if (_instance == null)
-            _instance = this;
 	}
 
 
