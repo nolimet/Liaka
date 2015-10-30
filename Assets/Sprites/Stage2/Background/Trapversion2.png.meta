@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: df41a6029b8648b4d99ee29f02df3bc4
-timeCreated: 1446199519
+guid: 9cbd3b325c5bd814d8a7a8cf3046f574
+timeCreated: 1446199663
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: trap_sand_0
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -43,25 +42,15 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 6
-  spritePivot: {x: 0, y: 0}
+  spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 54
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: trap_sand_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 528
-        height: 101
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-  spritePackingTag: Background_Stage-1
+    sprites: []
+  spritePackingTag: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 

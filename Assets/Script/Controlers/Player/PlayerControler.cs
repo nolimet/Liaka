@@ -225,7 +225,8 @@ public class PlayerControler : MonoBehaviour
             switch (p.pType)
             {
                 case PickupBase.PickupType.Coin:
-                    onCoinPickup();
+                    if (onCoinPickup != null)
+                        onCoinPickup();
                     break;
 
                 case PickupBase.PickupType.Energy:

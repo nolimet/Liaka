@@ -75,6 +75,7 @@ public class UIControler : MonoBehaviour
         Update_HeatLevel();
         Update_EnergyLevel();
         Update_TimerBar();
+        Update_AttackBarVisable();
     }
 
     void Update_HeatLevel()

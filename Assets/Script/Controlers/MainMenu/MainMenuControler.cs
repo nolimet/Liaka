@@ -12,12 +12,29 @@ public class MainMenuControler : MonoBehaviour {
     }
     public opMenu OptionMenu;
 
+    public Text CoinsDisplay;
+
+    int updateDelay;
+
     void Start()
     {
         OpenOptions(false);
         OptionMenu.sounds.value = GameManager.instance.saveDat.options.soundVolume;
         OptionMenu.music.value = GameManager.instance.saveDat.options.musicVolume;
         OptionMenu.interfaceVol.value = GameManager.instance.saveDat.options.interfaceVolume;
+
+        CoinsDisplay.text = "Current Gold: " + GameManager.instance.saveDat.game.CoinsCurrent.ToString();
+    }
+
+    public void Update()
+    {
+        updateDelay++;
+        if (updateDelay > 20)
+        {
+            updateDelay = 0;
+
+            CoinsDisplay.text = "Current Gold: " + GameManager.instance.saveDat.game.CoinsCurrent.ToString();
+        }
     }
 
     public void OpenOptions(bool b)

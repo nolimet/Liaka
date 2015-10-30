@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
         if (level != 1 && level != 2)
         {
             ContinueGame();
-
         }
 
         if (level == 1 || level ==2)
@@ -170,6 +169,14 @@ public class GameManager : MonoBehaviour
         onPauseGame(GamePaused);
         PauseMenu.SetActive(GamePaused);
         Debug.Log(GamePaused ? "OPENED PAUSE MENU" : "CLOSED PAUSE MENU");
+    }
+
+    void GameEnd()
+    {
+        if (_stageControler)
+        {
+            saveDat.game.addCoins(_stageControler.coinsCollected);
+        }
     }
 
     public void ContinueGame()

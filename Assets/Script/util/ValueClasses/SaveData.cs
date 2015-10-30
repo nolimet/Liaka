@@ -16,8 +16,30 @@ public class SaveData
     public class gameData
     {
         public bool firstStartup = true;
+        /// <summary>
+        /// coins you can currently spend
+        /// </summary>
         public int CoinsCurrent = 0;
+        /// <summary>
+        /// number of coins collected intotal
+        /// </summary>
         public int CoinsTotal = 0;
+        /// <summary>
+        /// The high ammount of coins the player ever had at one point
+        /// </summary>
+        public int HighestAmountOfCoinsHeld = 0;
+
+        /// <summary>
+        /// add x number of coins to the collected coins pool
+        /// </summary>
+        /// <param name="numb">Now many will be added</param>
+        public void addCoins(int numb)
+        {
+            CoinsCurrent += numb;
+            CoinsTotal += numb;
+            if (CoinsCurrent > HighestAmountOfCoinsHeld)
+                HighestAmountOfCoinsHeld = CoinsCurrent;
+        }
     }
 
     public optionsData options = new optionsData();

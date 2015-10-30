@@ -2547,7 +2547,10 @@ MonoBehaviour:
       soundVolume: 1
       musicVolume: 1
       interfaceVolume: .400000006
-    Coins: 0
+    game:
+      firstStartup: 1
+      CoinsCurrent: 0
+      CoinsTotal: 0
   GodMode: 1
 --- !u!114 &11446662
 MonoBehaviour:
@@ -3671,7 +3674,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -.799999237}
+  m_AnchoredPosition: {x: 0, y: -.500011444}
   m_SizeDelta: {x: 703, y: 38.6999969}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22420638
@@ -3775,9 +3778,9 @@ RectTransform:
   - {fileID: 22420036}
   m_Father: {fileID: 22450312}
   m_RootOrder: 2
-  m_AnchorMin: {x: .5, y: 1}
-  m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -28.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -369, y: -50.5}
   m_SizeDelta: {x: 703, y: 57}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22435440

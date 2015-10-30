@@ -26,10 +26,20 @@ public class StageControler : MonoBehaviour
         }
     }
 
+    public int coinsCollected
+    {
+        get
+        {
+            return _coinsCollected;
+        }
+    }
+
+    public string NextStageName = "";
+
     float TimeLeft;
     bool _bossFighting,_bossDefeated;
 
-    int coinsCollected;
+    int _coinsCollected;
 
     BossControler bossControler; 
 
@@ -56,6 +66,8 @@ public class StageControler : MonoBehaviour
         if (onStageDestroyed != null)
             onStageDestroyed(this);
 
+        
+
         PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
         BossControler.onDefeated -= BossControler_Defeated;
 
@@ -76,11 +88,11 @@ public class StageControler : MonoBehaviour
     private void P_onCoinsLost(int i)
     {
         int o = i;
-        coinsCollected -= i;
-        if (coinsCollected < 0)
+        _coinsCollected -= i;
+        if (_coinsCollected < 0)
         {
-            o += coinsCollected;
-            coinsCollected = 0;
+            o += _coinsCollected;
+            _coinsCollected = 0;
         }
 
         if (o > 0)
@@ -89,7 +101,7 @@ public class StageControler : MonoBehaviour
 
     private void P_onCoinPickup()
     {
-        coinsCollected++;
+        _coinsCollected++;
     }
 
     private void Player_onEnergyZero()
@@ -107,7 +119,13 @@ public class StageControler : MonoBehaviour
         _bossFighting = false;
 
         if (_bossDefeated)
-            Application.LoadLevel("STAGE_COMPLETE");
+        {
+            if (NextStageName == "")
+                Application.LoadLevel("STAGE_COMPLETE");
+            else
+                Application.LoadLevel(NextStageName);
+        }
+
     }
 
     private void StageControler_onBossBattleBegins()
