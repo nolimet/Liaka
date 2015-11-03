@@ -35,6 +35,10 @@ public class BossControler : MonoBehaviour
         bossFight.onOutOfHP += bossFight_onOutOfHP;
 
         bossMove.onMoveChange += bossMove_onMoveChange;
+
+        bossFight.onBadHit += () => bossAnimator.Fight_onBadHit();
+        bossFight.onGoodHit += () => bossAnimator.Fight_onGoodHit();
+        bossFight.onPerfectHit += () => bossAnimator.Fight_onPerfectHit();
     }
 
     public void OnDestroy()
@@ -50,6 +54,8 @@ public class BossControler : MonoBehaviour
         bossAnimator.MoveChange((int)moveDir);
     }
     
+    
+
     private void BaseObject_onHitBose(BaseObject.objectType o)
     {
         if (o == BaseObject.objectType.Enemy)

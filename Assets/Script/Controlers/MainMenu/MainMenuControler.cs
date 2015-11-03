@@ -23,7 +23,7 @@ public class MainMenuControler : MonoBehaviour {
         OptionMenu.music.value = GameManager.instance.saveDat.options.musicVolume;
         OptionMenu.interfaceVol.value = GameManager.instance.saveDat.options.interfaceVolume;
 
-        CoinsDisplay.text = "Current Gold: " + GameManager.instance.saveDat.game.CoinsCurrent.ToString();
+        CoinsDisplay.text = "Current Gold:" + "\n " + GameManager.instance.saveDat.game.CoinsCurrent.ToString();
     }
 
     public void Update()

@@ -690,7 +690,7 @@ GameObject:
   - 114: {fileID: 11427896}
   - 114: {fileID: 11467910}
   m_Layer: 0
-  m_Name: GameControler
+  m_Name: GameManager
   m_TagString: GameController
   m_Icon: {fileID: 2800000, guid: 2b3834f16108bfa4593701f5b316c515, type: 3}
   m_NavMeshLayer: 0
@@ -2551,6 +2551,7 @@ MonoBehaviour:
       firstStartup: 1
       CoinsCurrent: 0
       CoinsTotal: 0
+      HighestAmountOfCoinsHeld: 0
   GodMode: 1
 --- !u!114 &11446662
 MonoBehaviour:

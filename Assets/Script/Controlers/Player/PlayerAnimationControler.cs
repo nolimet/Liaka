@@ -1,23 +1,81 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerAnimationControler : MonoBehaviour {
+public class PlayerAnimationControler : MonoBehaviour
+{
 
     int CurrentMoveDir = 0;
-    SpineAnimation anim;
-	public void Player_OnHit()
-    {
 
+    [SerializeField]
+    SkeletonAnimation anim;
+
+    [SpineAnimation]
+    public string hit;
+
+    [SpineAnimation]
+    public string idle;
+
+    [SpineAnimation]
+    public string MoveLeft;
+
+    [SpineAnimation]
+    public string MoveRight;
+
+    [SpineAnimation]
+    public string jump;
+
+    [SpineAnimation]
+    public string Idle_Air;
+
+    [SpineAnimation]
+    public string shoot;
+
+    [SpineAnimation]
+    public string death;
+
+    [SpineAnimation]
+    public string groundHit;
+
+    void Start()
+    {
+        anim = GetComponent<SkeletonAnimation>();
+
+        if (!anim)
+        {
+            Destroy(this);
+            return;
+        }
+        GameManager.playerControler.onJump += Player_OnJump;
+        GameManager.playerControler.onCoinsLost += Player_OnHit;
+        GameManager.playerControler.onHitGround += Player_Land;
+    }
+
+    public void OnDestroy()
+    {
+        if (!GameManager.playerControler)
+            return;
+
+        GameManager.playerControler.onJump -= Player_OnJump;
+        GameManager.playerControler.onCoinsLost -= Player_OnHit;
+        GameManager.playerControler.onHitGround -= Player_Land;
+    }
+
+    public void Player_OnHit(int i)
+    {
+        anim.state.SetAnimation(0, hit, false);
+        anim.state.AddAnimation(0, idle, true, 0);
     }
 
     public void Player_OnJump()
     {
-
+        anim.state.SetAnimation(0, jump, false);
+        anim.state.AddAnimation(0, Idle_Air, true, 0);
     }
 
     public void Player_Land()
     {
-
+        anim.state.SetAnimation(0, groundHit, false);
+        anim.state.AddAnimation(0, idle, true, 0);
     }
 
     public void Player_MoveChange(int Dir)
@@ -25,15 +83,15 @@ public class PlayerAnimationControler : MonoBehaviour {
         switch (Dir)
         {
             case -1:
-                //left
+                anim.AnimationName = MoveLeft;
                 break;
 
             case 0:
-                //idle
+                anim.AnimationName = idle;
                 break;
 
             case 1:
-                //right
+                anim.AnimationName = MoveRight;
                 break;
         }
 
@@ -43,6 +101,9 @@ public class PlayerAnimationControler : MonoBehaviour {
 
     public void Player_OnPause(bool b)
     {
-        //pause all animations
+        if (b)
+            anim.timeScale = 0;
+        else
+            anim.timeScale = 1;
     }
 }

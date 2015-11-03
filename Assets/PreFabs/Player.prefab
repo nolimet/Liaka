@@ -95,6 +95,7 @@ GameObject:
   - 50: {fileID: 5077958}
   - 58: {fileID: 5807936}
   - 61: {fileID: 6119504}
+  - 114: {fileID: 11419796}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -260,6 +261,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireLocation: {fileID: 408540}
+--- !u!114 &11419796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 192252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd934a6ae08369468d8f0c15bc3e62a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  hit: 
+  idle: 
+  MoveLeft: 
+  MoveRight: 
+  jump: 
+  Idle_Air: 
+  shoot: 
+  death: 
+  groundHit: 
 --- !u!114 &11495150
 MonoBehaviour:
   m_ObjectHideFlags: 1

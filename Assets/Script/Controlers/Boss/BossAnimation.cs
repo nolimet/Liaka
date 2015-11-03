@@ -3,10 +3,19 @@ using System.Collections;
 
 public class BossAnimation : MonoBehaviour
 {
-    
+    SkeletonAnimation ani;
     void Start()
     {
-        
+        if (!ani)
+            ani = GetComponent<SkeletonAnimation>();
+
+        if(!ani)
+        {
+            enabled = false;
+            return;
+        }
+
+
     }
 
     public virtual void Fight_onPerfectHit()

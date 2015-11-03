@@ -59,8 +59,6 @@ public class UIControler : MonoBehaviour
         PlayerExists = true;
     }
 
-    
-
     void onGamePause(bool b)
     {
         GamePaused = b;

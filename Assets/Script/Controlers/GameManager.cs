@@ -21,8 +21,30 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region varibles
+    //Keept spawing new Instances when quiting the game. This fixed that.
+    private static bool _Destroyed = false;
+
     //Statics
-    public static GameManager instance;
+    private static GameManager _instance;
+    public static GameManager instance
+    {
+        get
+        {
+            if (!_instance)
+            {
+                _instance = FindObjectOfType<GameManager>();
+
+                if (!_instance && !_Destroyed)
+                {   
+                    GameObject g = Instantiate(Resources.Load("GameManager")) as GameObject;
+                    g.name = "Game Manager";
+                    Debug.Log("created new object");
+                    return g.GetComponent<GameManager>();
+                }
+            }
+            return _instance;
+        }
+    }
 
     //InputManager
     public static InputManager inputManager;
@@ -61,7 +83,8 @@ public class GameManager : MonoBehaviour
     #region UnityFunctions
     void Awake()
     {
-        if (instance)
+        
+        if (_instance)
             Destroy(gameObject);
         SetStatics();
         EventInit();
@@ -82,8 +105,9 @@ public class GameManager : MonoBehaviour
         uiControler = null;
         playerControler = null;
         inputManager = null;
-        instance = null;
+        _instance = null;
         stageControler = null;
+        _Destroyed = true;
     }
 
     public void OnLevelWasLoaded(int level)
@@ -110,8 +134,8 @@ public class GameManager : MonoBehaviour
         if (_inputManager && !inputManager)
             inputManager = _inputManager;
 
-        if (!instance)
-            instance = this;
+        if (!_instance)
+            _instance = this;
 
         if (_playerControler && !playerControler)
             playerControler = _playerControler;
@@ -207,7 +231,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(inputManager);
         DontDestroyOnLoad(uiControler);
         DontDestroyOnLoad(audioControler);
-        DontDestroyOnLoad(instance);
+        DontDestroyOnLoad(_instance);
     }
 
     void onPlayerDestoryed(PlayerControler p)
