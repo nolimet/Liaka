@@ -46,6 +46,8 @@ public class AudioControler : MonoBehaviour
         BaseObject.onHitBose += BaseObject_onHitBose;
         BaseObject.onImpact += BaseObject_onImpact;
         PickObject.onPickup += PickObject_onPickup;
+
+        SetClicks();
     }
 
     void OnDestroy()
