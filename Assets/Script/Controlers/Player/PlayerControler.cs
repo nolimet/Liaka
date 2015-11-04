@@ -259,7 +259,9 @@ public class PlayerControler : MonoBehaviour
 
         if (Energy <= 0)
         {
-            // Debug.Log("YOU DIED");
+            if (!GameManager.instance.GodMode)
+                if (onEnergyZero != null)
+                    onEnergyZero();
         }
     }
     void Update_GroundCheck()
