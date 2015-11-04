@@ -127,14 +127,14 @@ public class DropTableControler : MonoBehaviour
     {
         
         int i = 0;
-        int j;
-        bool check = true;
-        bool anyMatch = false;
-        while (check)
-        {
+ //       int j;
+ //       bool check = true;
+//        bool anyMatch = false;
+//        while (check)
+ //       {
             i = Table.ElementAtOrDefault(new System.Random().Next() % Table.Count());
             
-
+/*
             for (j = 0; j < lastItem.Length-1; j++)
             {
                 if (lastItem[j] == i)
@@ -153,18 +153,7 @@ public class DropTableControler : MonoBehaviour
         }
 
         lastItem[lastItem.Length - 1] = i;
-
-        //debuging stuff
-        string output = "";
-        for (int l = 0; l < lastItem.Length-1; l++)
-        {
-            output += lastItem[l].ToString() + ", ";
-        }
-
-        output += lastItem[lastItem.Length - 1].ToString();
-        print(output);
-        //end debugging stuff
-        
+        */
         i--;
         if (i < 0)
             return null;
