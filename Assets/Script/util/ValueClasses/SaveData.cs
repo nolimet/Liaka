@@ -23,11 +23,13 @@ public class SaveData
         /// <summary>
         /// number of coins collected intotal
         /// </summary>
-        public int CoinsTotal = 0;
+        public int CoinsTotal { get { return _CoinsTotal; } }
+        int _CoinsTotal = 0;
         /// <summary>
         /// The high ammount of coins the player ever had at one point
         /// </summary>
-        public int HighestAmountOfCoinsHeld = 0;
+        public int HighestAmountOfCoinsHeld { get { return _HighestAmountOfCoinsHeld; } }
+        int _HighestAmountOfCoinsHeld = 0;
 
         /// <summary>
         /// add x number of coins to the collected coins pool
@@ -36,10 +38,11 @@ public class SaveData
         public void addCoins(int numb)
         {
             CoinsCurrent += numb;
-            CoinsTotal += numb;
-            if (CoinsCurrent > HighestAmountOfCoinsHeld)
-                HighestAmountOfCoinsHeld = CoinsCurrent;
+            _CoinsTotal += numb;
+            if (CoinsCurrent > _HighestAmountOfCoinsHeld)
+                _HighestAmountOfCoinsHeld = CoinsCurrent;
         }
+        private int Test = 0;
     }
 
     public optionsData options = new optionsData();
@@ -47,4 +50,14 @@ public class SaveData
 
     string GameVersionLastStartup = "";
     const string CurrentGameVersion = "0.1f";
+
+    bool versionTest()
+    {
+        if (CurrentGameVersion != GameVersionLastStartup)
+        {
+            GameVersionLastStartup = CurrentGameVersion;
+            return true;
+        }
+        return false;
+    }
 }

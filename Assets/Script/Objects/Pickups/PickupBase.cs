@@ -30,11 +30,16 @@ public class PickupBase :BaseObject {
     public Movement _moveType;
     Rigidbody2D rigi;
     bool stopedMoving;
+    protected override void Awake()
+    {
+        base.Awake();
+        gameObject.layer = LayerMask.NameToLayer("Pickup");
+        type = objectType.Pickup;
+    }
+
     public override void startBehaviours()
     {
         base.startBehaviours();
-        gameObject.layer = LayerMask.NameToLayer("Pickup");
-        type = objectType.Pickup;
         stopedMoving = false;
     }
 

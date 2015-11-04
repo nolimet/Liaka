@@ -184,15 +184,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void EscapePressed()
+    public void ResetSave()
     {
-        if (Application.loadedLevel == 1)
-            return;
-
-        GamePaused = !GamePaused;
-        onPauseGame(GamePaused);
-        PauseMenu.SetActive(GamePaused);
-        Debug.Log(GamePaused ? "OPENED PAUSE MENU" : "CLOSED PAUSE MENU");
+        saveDat = new SaveData();
+        SaveLoad(true);
     }
 
     void GameEnd()
@@ -272,6 +267,17 @@ public class GameManager : MonoBehaviour
     void onPlayerHitTrap()
     {
         
+    }
+
+    void EscapePressed()
+    {
+        if (Application.loadedLevel == 1)
+            return;
+
+        GamePaused = !GamePaused;
+        onPauseGame(GamePaused);
+        PauseMenu.SetActive(GamePaused);
+        Debug.Log(GamePaused ? "OPENED PAUSE MENU" : "CLOSED PAUSE MENU");
     }
     #endregion
 }

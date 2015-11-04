@@ -12,7 +12,7 @@ public class MaskBar : MonoBehaviour {
 
     Vector2 startSize;
     RectTransform rect;
-    void Start()
+    void Awake()
     {
         rect = (RectTransform)transform;
 

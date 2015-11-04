@@ -28,21 +28,16 @@ public class TKButtonRecognizer : TKAbstractGestureRecognizer
 	/// </summary>
 	public TKButtonRecognizer( TKRect defaultFrame ): this( defaultFrame, 40f )
 	{
-        Debug.Log(1);
     }
 
 
 	public TKButtonRecognizer( TKRect defaultFrame, float highlightedExpansion ) : this( defaultFrame, defaultFrame.copyWithExpansion( highlightedExpansion ) )
 	{
-        Debug.Log(2);
-
-        Debug.Log(defaultFrame);
     }
 
 
 	public TKButtonRecognizer( TKRect defaultFrame, TKRect highlightedFrame )
 	{
-        Debug.Log(3);
 		_defaultFrame = defaultFrame;
 		_highlightedFrame = highlightedFrame;
 		boundaryFrame = _defaultFrame;

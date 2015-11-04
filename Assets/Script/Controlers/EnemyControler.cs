@@ -16,10 +16,7 @@ public class EnemyControler : MonoBehaviour
 
     [Range(1,10), Tooltip("increases spawning speed")]
     public int diff = 1;
-    bool gamePaused, bossBattle,GameLoopStarted;
-
-    float speedGround, speedMidFlying, speedHighFlying;
-
+    bool gamePaused, bossBattle, GameLoopStarted;
 
     void Start()
     {
@@ -27,6 +24,16 @@ public class EnemyControler : MonoBehaviour
         StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
         StartCoroutine(gameLoop());
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                EnemyPool.GetObject((EnemyBase.Enemytype)i);
+            }
+        }
+
+        EnemyPool.RemoveAllImmediate();
     }
 
     private void StageControler_onBossBattleEnds()
@@ -45,7 +52,6 @@ public class EnemyControler : MonoBehaviour
     {
         bossBattle = true;
         EnemyPool.RemoveAll();
-        
     }
 
     void Destory()

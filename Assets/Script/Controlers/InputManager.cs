@@ -81,7 +81,6 @@ public class InputManager : MonoBehaviour
             if (onSwipeUp != null)
                 onSwipeUp();
         };
-        Debug.Log(r3);
         
         TouchKit.addGestureRecognizer(r3);
 

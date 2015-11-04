@@ -57,4 +57,9 @@ public class MainMenuControler : MonoBehaviour {
     {
         GameManager.instance.saveDat.options.interfaceVolume = f;
     }
+
+    public void ClearSaveData()
+    {
+        GameManager.instance.ResetSave();
+    }
 }

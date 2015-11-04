@@ -26,7 +26,15 @@ public class PickupControler : MonoBehaviour
 
         StartCoroutine(gameLoop());
 
+        foreach(PickupBase.PickupType p in spawnable)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                PickupPool.GetObject(p);
+            }    
+        }
 
+        PickupPool.RemoveAllImmediate();
     }
 
     private void StageControler_onBossBattleEnds()

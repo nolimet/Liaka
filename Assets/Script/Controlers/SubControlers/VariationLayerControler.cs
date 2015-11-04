@@ -27,15 +27,16 @@ public class VariationLayerControler : LayerControler
                     tx.gameObject.SetActive(false);
         }
     }
-
+    List<Transform> randomSelection = null;
+    List<Transform> negativeSelectoin = null;
     public override bool InView(Transform t)
     {
         
         //bool b = base.OutOfView(t);
         if (t.position.x +(t.getChildBounds().size.x) < WorldScreenSize.x)
         {
-            List<Transform> randomSelection = SubObjects.Where(i => i.gameObject.activeSelf == false).ToList();
-            List<Transform> negativeSelectoin = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
+            randomSelection = SubObjects.Where(i => i.gameObject.activeSelf == false).ToList();
+            negativeSelectoin = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
 
             Transform f = transform;
             foreach (Transform x in negativeSelectoin)
@@ -50,6 +51,10 @@ public class VariationLayerControler : LayerControler
 
                 freeObject.position = f.position + new Vector3(f.getChildBounds().size.x, 0, 0);
             }
+
+
+            randomSelection = null;
+            negativeSelectoin = null;
             return false;
 
         }

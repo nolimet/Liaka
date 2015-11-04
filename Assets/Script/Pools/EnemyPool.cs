@@ -51,7 +51,7 @@ public class EnemyPool : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        RemoveAll();
+        DestroyAll();
     }
 
     /// <summary>
@@ -69,10 +69,10 @@ public class EnemyPool : MonoBehaviour
     }
 
     /// <summary>
-    /// Deletes all objects in hierachy from scene
+    /// Destory's all objects in pool from scene
     /// </summary>
-    public static void DeleteAll()
-    {
+    public static void DestroyAll()
+    { 
         if (!instance)
             return;
 
@@ -83,10 +83,25 @@ public class EnemyPool : MonoBehaviour
 
         for(int i = instance.InActivePool.Count-1;i>=0; i--)
         {
-            Destroy(instance.InActivePool[i],0.1f);
+            Destroy(instance.InActivePool[i].gameObject,0.1f);
         }
 
         instance.InActivePool = new List<EnemyBase>();
+        System.GC.Collect();
+    }
+
+    /// <summary>
+    /// Removes all objects from view Immediately
+    /// </summary>
+    public static void RemoveAllImmediate()
+    {
+        if (!instance)
+            return;
+
+        for (int i = instance.ActivePool.Count - 1; i >= 0; i--)
+        {
+            RemoveObject(instance.ActivePool[i]);
+        }
     }
 
     public static void RemoveObject(EnemyBase e)

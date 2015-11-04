@@ -52,6 +52,22 @@ public class BaseObject : MonoBehaviour
     bool delegateSet = false;
     bool fading = false;
 
+    protected Rigidbody2D ri;
+    protected Animator a;
+    protected CircleCollider2D cp;
+    protected SpriteRenderer r;
+
+    protected virtual void Awake()
+    {
+        if (!r)
+            r = GetComponent<SpriteRenderer>();
+        if (!cp)
+            cp = GetComponent<CircleCollider2D>();
+        if (!a)
+            a = GetComponent<Animator>();
+        if (!ri)
+            ri = GetComponent<Rigidbody2D>();
+    }
 
     /// <summary>
     /// Set movement speed for the object
@@ -67,23 +83,14 @@ public class BaseObject : MonoBehaviour
     /// </summary>
     public virtual void startBehaviours()
     {
-        SpriteRenderer r = GetComponent<SpriteRenderer>();
         if (r)
             r.color = new Color(r.color.r, r.color.g, r.color.b, 1);
-
-        CircleCollider2D cp = GetComponent<CircleCollider2D>();
         if (cp)
             cp.enabled = true;
-
-        Animator a = GetComponent<Animator>();
         if (a)
             a.enabled = true;
-
-        Rigidbody2D ri = GetComponent<Rigidbody2D>();
         if (ri)
             ri.isKinematic = false;
-
-        
 
         if (type == objectType.Enemy)
         {
@@ -225,25 +232,40 @@ public class BaseObject : MonoBehaviour
 
     public virtual void Instance_onPauseGame(bool b)
     {
-        Rigidbody2D r = GetComponent<Rigidbody2D>();
-        Animator a = GetComponent<Animator>();
-        if(b)
+        // Rigidbody2D r = GetComponent<Rigidbody2D>();
+        //Animator a = GetComponent<Animator>();
+        try
         {
-            Speed = r.velocity;
-            r.velocity = Vector2.zero;
-            r.isKinematic = true;
+            if(this==null)
+            {
+                Debug.Log("null pointer in Pause_Game");
+                GameManager.instance.onPauseGame -= Instance_onPauseGame;
+                return;
+            }
+            if (b)
+            {
+                Speed = ri.velocity;
+                ri.velocity = Vector2.zero;
+                ri.isKinematic = true;
 
-            if (a)
-                a.enabled = false;
+                if (a)
+                    a.enabled = false;
+            }
+            else
+            {
+                ri.isKinematic = false;
+                ri.velocity = Speed;
+
+                if (a)
+                    a.enabled = true;
+            }
         }
-        else
+        catch (System.Exception)
         {
-            r.isKinematic = false;
-            r.velocity = Speed;
-
-            if (a)
-                a.enabled = true;
+            GameManager.instance.onPauseGame -= Instance_onPauseGame;
+            throw;
         }
+        
     }
 
     protected virtual void dropLoot()

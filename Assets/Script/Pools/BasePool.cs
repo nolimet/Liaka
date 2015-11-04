@@ -68,9 +68,9 @@ public class BasePool : MonoBehaviour
     }
 
     /// <summary>
-    /// Deletes all objects in hierachy from scene
+    /// Destory's all objects in pool from scene
     /// </summary>
-    public static void DeleteAll()
+    public static void DestroyAll()
     {
         if (!instance)
             return;
@@ -82,10 +82,11 @@ public class BasePool : MonoBehaviour
 
         for (int i = instance.InActivePool.Count - 1; i >= 0; i--)
         {
-            Destroy(instance.InActivePool[i], 0.1f);
+            Destroy(instance.InActivePool[i].gameObject, 0.1f);
         }
 
         instance.InActivePool = new List<BaseObject>();
+        System.GC.Collect();
     }
 
     public static void RemoveObject(BaseObject e)

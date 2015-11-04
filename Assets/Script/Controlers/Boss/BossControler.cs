@@ -54,8 +54,6 @@ public class BossControler : MonoBehaviour
         bossAnimator.MoveChange((int)moveDir);
     }
     
-    
-
     private void BaseObject_onHitBose(BaseObject.objectType o)
     {
         if (o == BaseObject.objectType.Enemy)
@@ -91,6 +89,7 @@ public class BossControler : MonoBehaviour
         {
             if (onPlayerHit != null)
                 onPlayerHit();
+            bossAnimator.OnPlayerHit();
         }
     }
 }

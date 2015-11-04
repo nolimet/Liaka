@@ -52,7 +52,7 @@ public class PickupPool : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        RemoveAll();
+        DestroyAll();
     }
 
     /// <summary>
@@ -84,27 +84,28 @@ public class PickupPool : MonoBehaviour
     }
 
     /// <summary>
-    /// Deletes all objects in hierachy from scene
+    /// Destory's all objects in pool from scene
     /// </summary>
-    public static void DeleteAll()
+    public static void DestroyAll()
     {
         if (!instance)
             return;
 
         for (int i = instance.ActivePool.Count - 1; i >= 0; i--)
         {
-            RemoveObject(instance.ActivePool[i]);
+            RemoveObject(instance.ActivePool[i],true);
         }
 
         for (int i = instance.InActivePool.Count - 1; i >= 0; i--)
         {
-            Destroy(instance.InActivePool[i], 0.1f);
+            Destroy(instance.InActivePool[i].gameObject, 0.1f);
         }
 
         instance.InActivePool = new List<PickupBase>();
+        System.GC.Collect();
     }
 
-    public static void RemoveObject(PickupBase e)
+    public static void RemoveObject(PickupBase e, bool disableEvents = false)
     {
         if (instance)
         {
@@ -118,6 +119,8 @@ public class PickupPool : MonoBehaviour
             {
                 e.transform.position = new Vector3(0, 500, -50);
                 e.Instance_onPauseGame(true);
+                if (disableEvents)
+                    e.unregisterDelegates();
             }
 
             if (instance.onRemove != null)
