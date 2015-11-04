@@ -40,6 +40,8 @@ public class PickupBase :BaseObject {
     public override void startBehaviours()
     {
         base.startBehaviours();
+        if(gameObject.layer != LayerMask.NameToLayer("Pickup"))
+            gameObject.layer = LayerMask.NameToLayer("Pickup");
         stopedMoving = false;
     }
 
@@ -55,6 +57,11 @@ public class PickupBase :BaseObject {
         {
             case TagManager.Ground:
                 stopedMoving = true;
+                break;
+
+            case TagManager.Trap:
+                stopedMoving = true;
+                FadeOutStart(0.3f, 0);
                 break;
         }
     }
