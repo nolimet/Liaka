@@ -73,7 +73,8 @@ public class EnemyControler : MonoBehaviour
 
     void Spawn()
     {
-        EnemyBase b = EnemyPool.GetObject((EnemyBase.Enemytype)Random.Range(0,3));
+        //EnemyBase b = EnemyPool.GetObject((EnemyBase.Enemytype)Random.Range(0,3));
+        EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.walking);
         switch (b.etype)
         {
             case EnemyBase.Enemytype.flying:

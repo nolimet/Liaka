@@ -44,7 +44,7 @@ public class DropTableControler : MonoBehaviour
 
         Table = Table.OrderBy(x => rnd.Next()).ToList();
 #if UNITY_EDITOR
-        TestTable();
+        //TestTable();
 #endif 
     }
     
@@ -70,7 +70,7 @@ public class DropTableControler : MonoBehaviour
         }
 
         print(output);
-        print(raw);
+        //print(raw);
     }
     int[] lastItem = new int[10];
 
@@ -108,15 +108,15 @@ public class DropTableControler : MonoBehaviour
         lastItem[lastItem.Length - 1] = i;
 
         //debuging stuff
-        string output = "";
-        for (int l = 0; l < lastItem.Length - 1; l++)
-        {
-            output += lastItem[l].ToString() + ", ";
-        }
+        //string output = "";
+        //for (int l = 0; l < lastItem.Length - 1; l++)
+        //{
+        //    output += lastItem[l].ToString() + ", ";
+        //}
 
-        output += lastItem[lastItem.Length - 1].ToString();
-        output += " Total Itterations needed : " + itter.ToString();
-        print(output);
+        //output += lastItem[lastItem.Length - 1].ToString();
+        //output += " Total Itterations needed : " + itter.ToString();
+        //print(output);
         //end debugging stuff
 
         return i;

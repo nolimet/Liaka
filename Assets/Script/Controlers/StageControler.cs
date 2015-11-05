@@ -74,7 +74,8 @@ public class StageControler : MonoBehaviour
         onBossBattleBegins -= StageControler_onBossBattleBegins;
         onBossBattleEnds -= StageControler_onBossBattleEnds;
 
-        GameManager.instance.saveDat.game.addCoins(_coinsCollected);
+        if (GameManager.instance)
+            GameManager.instance.saveDat.game.addCoins(_coinsCollected);
     }
 
     #region Events

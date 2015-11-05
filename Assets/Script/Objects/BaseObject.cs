@@ -49,8 +49,10 @@ public class BaseObject : MonoBehaviour
     public objectType type;
     Vector2 Speed = Vector2.zero;
 
-    bool delegateSet = false;
-    bool fading = false;
+    protected bool delegateSet = false;
+    protected bool fading = false;
+    protected bool alive = false;
+    public bool fadeWhenGroundhit = true;
 
     protected Rigidbody2D ri;
     protected Animator a;
@@ -92,17 +94,12 @@ public class BaseObject : MonoBehaviour
         if (ri)
             ri.isKinematic = false;
 
-        if (type == objectType.Enemy)
-        {
-            setVelocity(new Vector3(-5, 0));
-        }
-
         if (!delegateSet)
         {
             delegateSet = true;
             GameManager.instance.onPauseGame += Instance_onPauseGame;
         }
-
+        alive = true;
         StopAllCoroutines();
     }
 
@@ -122,6 +119,7 @@ public class BaseObject : MonoBehaviour
     public virtual void RemoveFromView()
     {
         unregisterDelegates();
+        alive = false;
         BasePool.RemoveObject(this);
     }
 
@@ -164,7 +162,8 @@ public class BaseObject : MonoBehaviour
                 break;
 
             case TagManager.Ground:
-                StartCoroutine(fadeOut(0.2f, 0));
+                if (fadeWhenGroundhit)
+                    StartCoroutine(fadeOut(0.2f, 0));
 
                 if (onImpact != null)
                     onImpact(type);
@@ -194,6 +193,7 @@ public class BaseObject : MonoBehaviour
     {
         if (!fading)
         {
+            alive = false;
             if (type == objectType.Enemy && g == TagManager.Bullet)
                 dropLoot();  
             fading = true;
@@ -270,6 +270,8 @@ public class BaseObject : MonoBehaviour
 
     protected virtual void dropLoot()
     {
+        Debug.LogWarning("Calling old dropFunc");
+        /*
         PickObject p;
         int l = Random.Range(1, 10);
         float r;
@@ -301,7 +303,7 @@ public class BaseObject : MonoBehaviour
                 p.transform.position = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2));
                 p.setVelocity(new Vector3(-5, 0));
             }
-        }
+        }*/
     }
 
     protected virtual void Update()

@@ -35,6 +35,12 @@ public class EnemyBase : BaseObject{
         yield return new WaitForEndOfFrame();
     }
 
+    public override void startBehaviours()
+    {
+        base.startBehaviours();
+        setVelocity(new Vector3(-5, 0));
+    }
+
     public override void RemoveFromView()
     {
         unregisterDelegates();
