@@ -23,6 +23,7 @@ public class GroundEnemy : EnemyBase
         rayCastOffSet.y *= -1;
         Debug.Log(b.extents);
     }
+
     #region overrides
     public override void startBehaviours()
     {
@@ -74,6 +75,7 @@ public class GroundEnemy : EnemyBase
 
     }
     #endregion
+
     void Jump()
     {
         if (g)
