@@ -21,7 +21,6 @@ public class GroundEnemy : EnemyBase
         Bounds b = cp.bounds;
         rayCastOffSet = b.extents;
         rayCastOffSet.y *= -1;
-        Debug.Log(b.extents);
     }
 
     #region overrides
@@ -46,24 +45,25 @@ public class GroundEnemy : EnemyBase
             if (!GameManager.playerControler)
                 yield break;
 
-            d = transform.position.x - GameManager.playerControler.transform.position.x;
-            if (d < 0)
-                d *= -1;
-
-            if (d < 1f && jumpCooldown <= 0)
+            if (!paused)
             {
-                Jump();
-                jumpCooldown = 1f;
-            }
+                d = transform.position.x - GameManager.playerControler.transform.position.x;
+                if (d < 0)
+                    d *= -1;
 
+                if (d < 1f && jumpCooldown <= 0)
+                {
+                    Jump();
+                    jumpCooldown = 1f;
+                }
+            }
 
             t1 = System.DateTime.Now;
 
-            print(d);
-
             yield return new WaitForSeconds(0.1f);
-            if (jumpCooldown > 0)
-                jumpCooldown -= (float)(System.DateTime.Now - t1).TotalMilliseconds / 1000;
+            if (!paused)
+                if (jumpCooldown > 0)
+                    jumpCooldown -= (float)(System.DateTime.Now - t1).TotalMilliseconds / 1000;
         }
     }
 
@@ -71,25 +71,29 @@ public class GroundEnemy : EnemyBase
     {
         ri.isKinematic = true;
         return base.fadeOut(f, d, g, DisableCollsionAtStart);
-
-
     }
     #endregion
 
     void Jump()
     {
-        if (g)
+        if (g && jumpCooldown <= 0)
+        {
+            jumpCooldown = 1f;
             ri.AddForce(new Vector3(0, 9 * ri.mass, 0), ForceMode2D.Impulse);
+        }
 
         g = false;
     }
 
-    RaycastHit2D hit;
+    RaycastHit2D hitcast;
     void FixedUpdate()
     {
-        hit = Physics2D.Raycast(transform.position + rayCastOffSet, Vector2.down, 0.01f, RayMask);
+        if (paused)
+            return;
 
-        if (!hit.transform)
+        hitcast = Physics2D.Raycast(transform.position + rayCastOffSet, Vector2.down, 0.01f, RayMask);
+
+        if (!hitcast.transform)
         {
             if (g)
                 Jump();
@@ -100,7 +104,7 @@ public class GroundEnemy : EnemyBase
             g = true;
         }
 
-        hit = new RaycastHit2D();
+        hitcast = new RaycastHit2D();
     }
 
 }

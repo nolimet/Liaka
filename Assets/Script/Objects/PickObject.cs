@@ -17,8 +17,10 @@ public class PickObject : BaseObject
         Dynamic_Energy
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         type = objectType.Pickup;
         rigi = GetComponent<Rigidbody2D>();
     }

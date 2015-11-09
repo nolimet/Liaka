@@ -39,6 +39,7 @@ public class EnemyBase : BaseObject{
     {
         base.startBehaviours();
         setVelocity(new Vector3(-5, 0));
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     public override void RemoveFromView()

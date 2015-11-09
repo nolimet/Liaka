@@ -16,6 +16,14 @@ public class PickupPool : MonoBehaviour
     [Tooltip("will it auto collect all objects of it's own type")]
     bool AutoCollectObjects = true;
 
+    public int activeObjects
+    {
+        get
+        {
+            return ActivePool.Count();
+        }
+    }
+
     void Awake()
     {
         if (instance == null)

@@ -52,6 +52,7 @@ public class BaseObject : MonoBehaviour
     protected bool delegateSet = false;
     protected bool fading = false;
     protected bool alive = false;
+    protected bool paused = false;
     public bool fadeWhenGroundhit = true;
 
     protected Rigidbody2D ri;
@@ -100,7 +101,7 @@ public class BaseObject : MonoBehaviour
             GameManager.instance.onPauseGame += Instance_onPauseGame;
         }
         alive = true;
-        StopAllCoroutines();
+        //StopAllCoroutines();
     }
 
     /// <summary>
@@ -111,6 +112,11 @@ public class BaseObject : MonoBehaviour
     {
         StartCoroutine(fadeOut(0.3f, 0, s));
         GetComponent<CircleCollider2D>().enabled = false;
+    }
+
+    public virtual void RemoveObject(float f, float d, string g = "", bool DisableCollsionAtStart = true)
+    {
+        StartCoroutine(fadeOut(f, d, g, DisableCollsionAtStart));
     }
 
     /// <summary>
@@ -234,6 +240,8 @@ public class BaseObject : MonoBehaviour
     {
         // Rigidbody2D r = GetComponent<Rigidbody2D>();
         //Animator a = GetComponent<Animator>();
+        paused = b;
+
         try
         {
             if(this==null)

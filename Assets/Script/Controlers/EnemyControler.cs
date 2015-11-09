@@ -25,11 +25,14 @@ public class EnemyControler : MonoBehaviour
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
         StartCoroutine(gameLoop());
 
+        EnemyBase e;
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 6; j++)
             {
-                EnemyPool.GetObject((EnemyBase.Enemytype)i);
+                e = EnemyPool.GetObject((EnemyBase.Enemytype)i);
+                e.transform.position = new Vector3(e.transform.position.x, e.transform.position.y, 0);
+                e.RemoveObject(0, 0);
             }
         }
 
@@ -74,7 +77,7 @@ public class EnemyControler : MonoBehaviour
     void Spawn()
     {
         //EnemyBase b = EnemyPool.GetObject((EnemyBase.Enemytype)Random.Range(0,3));
-        EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.walking);
+        EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.flying);
         switch (b.etype)
         {
             case EnemyBase.Enemytype.flying:
@@ -102,6 +105,7 @@ public class EnemyControler : MonoBehaviour
         {
             if (d <= 0)
             {
+                if(EnemyPool.instance.activeObjects==0)
                 Spawn();
                 d = Random.Range(0.3f, 5 / Mathf.Pow(1.2f,diff));
             }

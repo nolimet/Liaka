@@ -68,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 103708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821b2602ced37b14e8c5c1292778beed, type: 3}
+  m_Script: {fileID: 11500000, guid: 6183b6b1ee97aa040bd18752b7806783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   useBounds:
@@ -77,9 +77,17 @@ MonoBehaviour:
     left: 1
     right: 0
   type: 2
+  fadeWhenGroundhit: 1
   Health: 0
   maxHealth: 0
   etype: 1
+  movingPaterns:
+  - Dir: {x: -4, y: -10}
+    duration: 2
+  - Dir: {x: 5, y: 10}
+    duration: 1
+  - Dir: {x: 0, y: 20}
+    duration: 1
 --- !u!212 &21293900
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -114,6 +122,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -138,6 +150,38 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 8eeff0dc7ed3a5940a0a3a3cb22a2ca5,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.data[0].Dir.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.data[0].duration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.data[1].Dir.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.data[2].Dir.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.data[1].duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.data[2].duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.data[0].Dir.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movingPaterns.Array.data[1].Dir.x
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 103708}

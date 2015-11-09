@@ -45,9 +45,25 @@ public class AudioControler : MonoBehaviour
         GameManager.instance.onPauseGame += Instance_onPauseGame;
         BaseObject.onHitBose += BaseObject_onHitBose;
         BaseObject.onImpact += BaseObject_onImpact;
-        PickObject.onPickup += PickObject_onPickup;
+        PickupBase.onPickup += PickupBase_onPickup;
 
         SetClicks();
+    }
+
+    private void PickupBase_onPickup(PickupBase.PickupType p)
+    {
+        switch (p)
+        {
+            case PickupBase.PickupType.Coin:
+                AudioSources.CoinGetsPicked.PlayOneShot(CoinGetsPicked, SFXVol);
+                //AudioSource.PlayClipAtPoint(CoinGetsPicked, soundPos, SFXVol);
+                break;
+
+            case PickupBase.PickupType.Energy:
+                AudioSources.EnergyGetsPicked.PlayOneShot(EnergyGetsPicked, SFXVol);
+                //AudioSource.PlayClipAtPoint(EnergyGetsPicked, soundPos, SFXVol);
+                break;
+        }
     }
 
     void OnDestroy()
@@ -56,7 +72,6 @@ public class AudioControler : MonoBehaviour
         PlayerControler.onPlayerDestoryed -= PlayerDestoryed;
         BaseObject.onHitBose -= BaseObject_onHitBose;
         BaseObject.onImpact -= BaseObject_onImpact;
-        PickObject.onPickup -= PickObject_onPickup;
     }
 
     public void OnLevelWasLoaded(int level)
@@ -186,23 +201,6 @@ public class AudioControler : MonoBehaviour
         AudioSources.MouseOver.PlayOneShot(MouseClick, UIVol);
     }
 
-    private void PickObject_onPickup(PickObject.pickupType p)
-    {
-        switch (p)
-        {
-            case PickObject.pickupType.Static_Coin:
-            case PickObject.pickupType.Dynamic_Coin:
-                AudioSources.CoinGetsPicked.PlayOneShot(CoinGetsPicked, SFXVol);
-                //AudioSource.PlayClipAtPoint(CoinGetsPicked, soundPos, SFXVol);
-                break;
-
-            case PickObject.pickupType.Dynamic_Energy:
-            case PickObject.pickupType.Static_Energy:
-                AudioSources.EnergyGetsPicked.PlayOneShot(EnergyGetsPicked, SFXVol);
-                //AudioSource.PlayClipAtPoint(EnergyGetsPicked, soundPos, SFXVol);
-                break;
-        }
-    }
 
     private void BaseObject_onHitBose(BaseObject.objectType o)
     {

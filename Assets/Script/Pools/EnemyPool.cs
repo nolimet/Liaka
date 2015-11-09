@@ -15,6 +15,14 @@ public class EnemyPool : MonoBehaviour
 
     bool autoCollectEnemiesOnStart = true;
 
+    public int activeObjects
+    {
+        get
+        {
+            return ActivePool.Count();
+        }
+    }
+
     void Awake()
     {
         if (instance == null)
