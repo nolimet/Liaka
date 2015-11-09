@@ -314,6 +314,11 @@ public class BaseObject : MonoBehaviour
         }*/
     }
 
+    public virtual void setPosition(Vector3 newPos)
+    {
+        transform.position = newPos;
+    }
+
     protected virtual void Update()
     {
         if (transform.position.x > 100)

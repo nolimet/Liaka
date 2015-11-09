@@ -29,6 +29,12 @@ public class FlyingEnemy: EnemyBase
         
     }
 
+    public override void setPosition(Vector3 newPos)
+    {
+        base.setPosition(newPos);
+        startingPoint = transform.position;
+    }
+
     protected override IEnumerator MoveBehaviourLoop()
     {
         if (running)
@@ -45,7 +51,7 @@ public class FlyingEnemy: EnemyBase
 
         while (alive)
         {
-            if (!paused)
+            if (!GameManager.gamePaused)
             {
                 p = transform.position;
                 Debug.Log(System.DateTime.Now);

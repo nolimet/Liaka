@@ -76,22 +76,29 @@ public class EnemyControler : MonoBehaviour
 
     void Spawn()
     {
-        //EnemyBase b = EnemyPool.GetObject((EnemyBase.Enemytype)Random.Range(0,3));
-        EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.flying);
+        EnemyBase b = EnemyPool.GetObject((EnemyBase.Enemytype)Random.Range(0,3));
+        //EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.flying);
+        Vector3 p = Vector3.zero;
         switch (b.etype)
         {
             case EnemyBase.Enemytype.flying:
-                b.transform.position = new Vector3(FlyingSpawnPoints.Low.position.x, Random.Range(FlyingSpawnPoints.Low.position.y, FlyingSpawnPoints.High.position.y), FlyingSpawnPoints.Low.position.z);
+                p = new Vector3(FlyingSpawnPoints.Low.position.x, Random.Range(FlyingSpawnPoints.Low.position.y, FlyingSpawnPoints.High.position.y), FlyingSpawnPoints.Low.position.z);
                 break;
 
             case EnemyBase.Enemytype.walking:
-                b.transform.position = GroundSpawnPoints.position;
+                p = GroundSpawnPoints.position;
                 break;
 
             case EnemyBase.Enemytype.flying_high:
-                b.transform.position = FlyingSpawnPoints.High.position;
+                p = FlyingSpawnPoints.High.position;
                 break;
-        }   
+
+            default:
+                Debug.LogError("unknown enemy: " + b.etype);
+                break;
+        }
+
+        b.setPosition(p);
     }
 
     IEnumerator gameLoop()

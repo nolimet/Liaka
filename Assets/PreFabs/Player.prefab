@@ -1734,9 +1734,9 @@ MonoBehaviour:
   maxBoost: 10
   boostDegrationSpeed: 1
   boostTimeLeft: 0
-  BoostTimeStay: 2
+  BoostTimeStay: 2.5
   BoostForwardTimePerUnit: .100000001
-  BoostGainPerPickup: 1.5
+  BoostGainPerPickup: 2
   weaponHeat: 0
   MaxHeat: 100
   Energy: 0

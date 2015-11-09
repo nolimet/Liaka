@@ -81,12 +81,13 @@ MonoBehaviour:
   Health: 0
   maxHealth: 0
   etype: 1
+  deb: {x: 0, y: 0, z: 0}
   movingPaterns:
-  - Dir: {x: -4, y: -10}
+  - Dir: {x: -4, y: -2}
     duration: 2
-  - Dir: {x: 5, y: 10}
+  - Dir: {x: 5, y: 2}
     duration: 1
-  - Dir: {x: 0, y: 20}
+  - Dir: {x: 0, y: 3}
     duration: 1
 --- !u!212 &21293900
 SpriteRenderer:
@@ -152,7 +153,7 @@ Prefab:
         type: 3}
     - target: {fileID: 0}
       propertyPath: movingPaterns.Array.data[0].Dir.y
-      value: -10
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movingPaterns.Array.data[0].duration
@@ -160,11 +161,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movingPaterns.Array.data[1].Dir.y
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movingPaterns.Array.data[2].Dir.y
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movingPaterns.Array.data[1].duration
