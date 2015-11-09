@@ -25,7 +25,7 @@ public class EnemyControler : MonoBehaviour
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
         StartCoroutine(gameLoop());
 
-        EnemyBase e;
+       /* EnemyBase e;
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 6; j++)
@@ -36,7 +36,7 @@ public class EnemyControler : MonoBehaviour
             }
         }
 
-        EnemyPool.RemoveAllImmediate();
+        EnemyPool.RemoveAllImmediate*/
     }
 
     private void StageControler_onBossBattleEnds()

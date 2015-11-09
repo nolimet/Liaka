@@ -7,10 +7,13 @@ public class PlayerAnimationControler1 : MonoBehaviour
     int CurrentMoveDir = 0;
     SpriteRenderer[] r;
 
+    public Animator ani;
+    Rigidbody2D ri;
+
     void Awake()
     {
         r = GetComponentsInChildren<SpriteRenderer>();
-
+        ri = GetComponent<Rigidbody2D>();
         PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
         PlayerControler.onPlayerDestoryed += PlayerControler_onPlayerDestoryed;
         Debug.Log("bleep");
@@ -36,6 +39,12 @@ public class PlayerAnimationControler1 : MonoBehaviour
         p.onJump += Player_OnJump;
         p.onCoinsLost += Player_OnHit;
         p.onHitGround += Player_Land;
+        p.onShoot += P_onShoot;
+    }
+
+    private void P_onShoot()
+    {
+        ani.SetTrigger("Shooting");
     }
 
     public void Player_OnHit(int i)
@@ -82,7 +91,7 @@ public class PlayerAnimationControler1 : MonoBehaviour
 
     public void Player_OnJump()
     {
-
+        ani.SetTrigger("Jump");
     }
 
     public void Player_Land()
@@ -114,5 +123,15 @@ public class PlayerAnimationControler1 : MonoBehaviour
     public void Player_OnPause(bool b)
     {
 
+    }
+
+    float f;
+
+    void Update()
+    {
+        f = ri.velocity.y;
+        if (f < 0)
+            f = -f;
+        ani.SetFloat("FallSpeed",f);
     }
 }

@@ -48,6 +48,7 @@ public class FlyingEnemy: EnemyBase
             if (!paused)
             {
                 p = transform.position;
+                Debug.Log(System.DateTime.Now);
 
                 if (t1 <= 0 && t2 <= 0)
                 {

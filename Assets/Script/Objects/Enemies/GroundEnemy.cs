@@ -45,7 +45,7 @@ public class GroundEnemy : EnemyBase
             if (!GameManager.playerControler)
                 yield break;
 
-            if (!paused)
+            if (!GameManager.gamePaused)
             {
                 d = transform.position.x - GameManager.playerControler.transform.position.x;
                 if (d < 0)

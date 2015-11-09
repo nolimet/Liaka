@@ -77,7 +77,14 @@ public class GameManager : MonoBehaviour
 
     public bool GodMode = false;
 
-    bool GamePaused;
+    private static bool _gamePaused;
+    public static bool gamePaused
+    {
+        get
+        {
+            return _gamePaused;
+        }
+    }
     #endregion
 
     #region UnityFunctions
@@ -91,7 +98,7 @@ public class GameManager : MonoBehaviour
         SaveLoad(false);
 
         PauseMenu.SetActive(false);
-        GamePaused = false;
+        _gamePaused = false;
 
         if (!Application.isEditor)
             GodMode = false;
@@ -200,7 +207,7 @@ public class GameManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        GamePaused = false;
+        _gamePaused = false;
         if(onPauseGame!=null)
         onPauseGame(false);
         PauseMenu.SetActive(false);
@@ -274,10 +281,10 @@ public class GameManager : MonoBehaviour
         if (Application.loadedLevel == 1)
             return;
 
-        GamePaused = !GamePaused;
-        onPauseGame(GamePaused);
-        PauseMenu.SetActive(GamePaused);
-        Debug.Log(GamePaused ? "OPENED PAUSE MENU" : "CLOSED PAUSE MENU");
+        _gamePaused = !_gamePaused;
+        onPauseGame(_gamePaused);
+        PauseMenu.SetActive(_gamePaused);
+        Debug.Log(_gamePaused ? "OPENED PAUSE MENU" : "CLOSED PAUSE MENU");
     }
     #endregion
 }
