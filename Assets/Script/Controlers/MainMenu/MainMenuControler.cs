@@ -14,6 +14,8 @@ public class MainMenuControler : MonoBehaviour {
 
     public Text CoinsDisplay;
 
+    public RectTransform MainMenu;
+
     int updateDelay;
 
     void Start()
@@ -24,6 +26,9 @@ public class MainMenuControler : MonoBehaviour {
         OptionMenu.interfaceVol.value = GameManager.instance.saveDat.options.interfaceVolume;
 
         CoinsDisplay.text = "Current Gold:" + "\n " + GameManager.instance.saveDat.game.CoinsCurrent.ToString();
+
+        MainMenu.anchoredPosition = MainMenu.anchoredPosition - new Vector2(MainMenu.rect.width, 0);
+        StartCoroutine(moveMain(1, 20));
     }
 
     public void Update()
@@ -40,8 +45,11 @@ public class MainMenuControler : MonoBehaviour {
     public void OpenOptions(bool b)
     {
         OptionMenu.menu.SetActive(b);
+        if(b)
+            StartCoroutine(moveMain(-1, 10));
+        else
+            StartCoroutine(moveMain(1, 20));
     }
-
 
     public void onFXVolumeChange(float f)
     {
@@ -61,5 +69,53 @@ public class MainMenuControler : MonoBehaviour {
     public void ClearSaveData()
     {
         GameManager.instance.ResetSave();
+    }
+
+    /// <summary>
+    /// Moves main menu
+    /// </summary>
+    /// <param name="dir">move direction right = 1 left = -1</param>
+    /// <param name="duration">the distance it will cover each second</param>
+    /// <returns></returns>
+    IEnumerator moveMain(int dir, float duration)
+    {
+        float l = MainMenu.rect.width * MainMenu.localScale.x;
+
+        float endPoint = 0;
+        if (dir > 0)
+            endPoint = 0;
+        else if (dir < 0)
+            endPoint = -l;
+
+        Vector2 start, end;
+        start = MainMenu.anchoredPosition;
+        end = new Vector2(endPoint, start.y);
+
+        float t = 0;
+        Debug.Log(dir);
+        if (dir > 0)
+        {
+            while (MainMenu.anchoredPosition.x - endPoint < -0.05)
+            {
+                Debug.Log(t);
+                t += Time.deltaTime / duration;
+                start = MainMenu.anchoredPosition;
+                MainMenu.anchoredPosition = Vector2.Lerp(start, end, t);
+
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        else if (dir < 0)
+        {
+            while (MainMenu.anchoredPosition.x - endPoint > 0.05)
+            {
+                Debug.Log(t);
+                t += Time.deltaTime / duration;
+                start = MainMenu.anchoredPosition;
+                MainMenu.anchoredPosition = Vector2.Lerp(start, end, t);
+
+                yield return new WaitForEndOfFrame();
+            }
+        }
     }
 }
