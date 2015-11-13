@@ -66,8 +66,21 @@ public class GameManager : MonoBehaviour
     public static DropTableControler dropTable;
     public DropTableControler _DropTable;
 
-    public static StageControler stageControler;
-    public StageControler _stageControler;
+     static StageControler _stageControler;
+    public static StageControler stageControler
+    {
+        get
+        {
+            if (!_stageControler)
+                _stageControler = FindObjectOfType<StageControler>();
+
+            if (!_stageControler)
+                return null;
+
+                return _stageControler;
+        }
+    }
+    public StageControler __stageControler;
 
 
     //publics
@@ -113,7 +126,7 @@ public class GameManager : MonoBehaviour
         playerControler = null;
         inputManager = null;
         _instance = null;
-        stageControler = null;
+        _stageControler = null;
         _Destroyed = true;
     }
 
@@ -156,8 +169,8 @@ public class GameManager : MonoBehaviour
         if (_DropTable && !dropTable)
             dropTable = _DropTable;
 
-        if (_stageControler && !stageControler)
-            stageControler = _stageControler;
+        if (__stageControler && !_stageControler)
+            _stageControler = __stageControler;
     }
 
     void SaveLoad(bool save)
@@ -199,19 +212,36 @@ public class GameManager : MonoBehaviour
 
     void GameEnd()
     {
-        if (_stageControler)
+        if (__stageControler)
         {
-            saveDat.game.addCoins(_stageControler.coinsCollected);
+            saveDat.game.addCoins(__stageControler.coinsCollected);
         }
     }
 
     public void ContinueGame()
     {
+        Debug.Log("CONTINUED1");
+
         _gamePaused = false;
-        if(onPauseGame!=null)
-        onPauseGame(false);
+        if (onPauseGame != null)
+            onPauseGame(false);
         PauseMenu.SetActive(false);
         uiControler.gameObject.SetActive(true);
+
+        Debug.Log("CONTINUED2");
+    }
+
+    public void PauseGame()
+    {
+        Debug.Log("PAUSED1");
+
+        _gamePaused = true;
+        if (onPauseGame != null)
+            onPauseGame(true);
+        PauseMenu.SetActive(true);
+        uiControler.gameObject.SetActive(false);
+
+        Debug.Log("PAUSED2");
     }
 
     void Update()
@@ -253,17 +283,17 @@ public class GameManager : MonoBehaviour
 
     void onStageControlerLoaded(StageControler s)
     {
-        if (_stageControler == null)
-            _stageControler = s;
+        if (__stageControler == null)
+            __stageControler = s;
     }
 
     void onStageControlerDestroyed(StageControler s)
     {
-        if (_stageControler != s)
+        if (__stageControler != s)
             return;
 
-        stageControler = null;
         _stageControler = null;
+        __stageControler = null;
     }
 
     void onStageEnded()

@@ -7,29 +7,49 @@ using System.Collections.Generic;
 public class AudioControler : MonoBehaviour
 {
     //Player
-    public AudioClip playerJump, PlayerHitGround, PlayerShoots;
+    [Header("Player")]
+    public AudioClip playerJump;
+    public AudioClip PlayerHitGround, PlayerShoots;
     //BaseObject
-    public AudioClip enemyGetsHit, CoinGetsPicked, EnergyGetsPicked;
+    [Header("pickups")]
+    public AudioClip enemyGetsHit;
+    public AudioClip CoinGetsPicked, EnergyGetsPicked, coinHitGround;
     //Boss
-    public AudioClip bossGetsHitByBullet, bossGetsHitByEnemy;
+    [Header("boss")]
+    public AudioClip bossGetsHitByBullet;
+    public AudioClip bossGetsHitByEnemy;
     //Music
+    [Header("music")]
     public AudioClip[] Music;
     //UI
-    public AudioClip MouseOver, MouseClick;
+    [Header("UI")]
+    public AudioClip MouseOver;
+    public AudioClip MouseClick;
+
 
     [System.Serializable]
     public struct sources
     {
-        //player
-        public AudioSource playerJump, PlayerHitGround, PlayerShoots;
+        //Player
+        [Header("Player")]
+        public AudioSource playerJump;
+        public AudioSource PlayerHitGround, PlayerShoots;
         //BaseObject
-        public AudioSource enemyGetsHit, CoinGetsPicked, EnergyGetsPicked;
+        [Header("pickups")]
+        public AudioSource enemyGetsHit;
+        public AudioSource CoinGetsPicked, EnergyGetsPicked, coinHitGround;
         //Boss
-        public AudioSource bossGetsHitByBullet, bossGetsHitByEnemy;
+        [Header("boss")]
+        public AudioSource bossGetsHitByBullet;
+        public AudioSource bossGetsHitByEnemy;
         //Music
+        [Header("music")]
         public AudioSource Music;
         //UI
-        public AudioSource MouseOver, MouseClick;
+        [Header("UI")]
+        public AudioSource MouseOver;
+        public AudioSource MouseClick;
+
     }
 
     public sources AudioSources;
@@ -46,25 +66,11 @@ public class AudioControler : MonoBehaviour
         BaseObject.onHitBose += BaseObject_onHitBose;
         BaseObject.onImpact += BaseObject_onImpact;
         PickupBase.onPickup += PickupBase_onPickup;
-
+        PickupBase.onGroundHit += PickupBase_onGroundHit;
         SetClicks();
     }
 
-    private void PickupBase_onPickup(PickupBase.PickupType p)
-    {
-        switch (p)
-        {
-            case PickupBase.PickupType.Coin:
-                AudioSources.CoinGetsPicked.PlayOneShot(CoinGetsPicked, SFXVol);
-                //AudioSource.PlayClipAtPoint(CoinGetsPicked, soundPos, SFXVol);
-                break;
-
-            case PickupBase.PickupType.Energy:
-                AudioSources.EnergyGetsPicked.PlayOneShot(EnergyGetsPicked, SFXVol);
-                //AudioSource.PlayClipAtPoint(EnergyGetsPicked, soundPos, SFXVol);
-                break;
-        }
-    }
+    
 
     void OnDestroy()
     {
@@ -72,6 +78,8 @@ public class AudioControler : MonoBehaviour
         PlayerControler.onPlayerDestoryed -= PlayerDestoryed;
         BaseObject.onHitBose -= BaseObject_onHitBose;
         BaseObject.onImpact -= BaseObject_onImpact;
+        PickupBase.onPickup -= PickupBase_onPickup;
+        PickupBase.onGroundHit -= PickupBase_onGroundHit;
     }
 
     public void OnLevelWasLoaded(int level)
@@ -214,6 +222,32 @@ public class AudioControler : MonoBehaviour
             case BaseObject.objectType.Enemy:
                 AudioSources.bossGetsHitByEnemy.PlayOneShot(bossGetsHitByEnemy, SFXVol);
                 //AudioSource.PlayClipAtPoint(bossGetsHitByEnemy, soundPos, SFXVol);
+                break;
+        }
+    }
+
+    private void PickupBase_onGroundHit(PickupBase.PickupType p)
+    {
+        switch (p)
+        {
+            case PickupBase.PickupType.Coin:
+                AudioSources.coinHitGround.PlayOneShot(coinHitGround, SFXVol);
+                break;
+        }
+    }
+
+    private void PickupBase_onPickup(PickupBase.PickupType p)
+    {
+        switch (p)
+        {
+            case PickupBase.PickupType.Coin:
+                AudioSources.CoinGetsPicked.PlayOneShot(CoinGetsPicked, SFXVol);
+                //AudioSource.PlayClipAtPoint(CoinGetsPicked, soundPos, SFXVol);
+                break;
+
+            case PickupBase.PickupType.Energy:
+                AudioSources.EnergyGetsPicked.PlayOneShot(EnergyGetsPicked, SFXVol);
+                //AudioSource.PlayClipAtPoint(EnergyGetsPicked, soundPos, SFXVol);
                 break;
         }
     }

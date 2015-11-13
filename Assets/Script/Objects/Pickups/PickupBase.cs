@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D),typeof(CircleCollider2D))]
 public class PickupBase :BaseObject {
     public delegate void PickupObjectEvent(PickupType p);
-    public static event PickupObjectEvent onPickup;
+    public static event PickupObjectEvent onPickup,onGroundHit;
 
     public enum PickupType
     {
@@ -128,6 +128,12 @@ public class PickupBase :BaseObject {
                 collision.transform.gameObject.SendMessage("hitPickup", gameObject, SendMessageOptions.DontRequireReceiver);
                 if (onPickup != null)
                     onPickup(pType);
+                break;
+
+            case TagManager.Ground:
+
+                if (onGroundHit != null)
+                    onGroundHit(pType);
                 break;
         }
     }

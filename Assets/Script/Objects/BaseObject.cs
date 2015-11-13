@@ -58,18 +58,21 @@ public class BaseObject : MonoBehaviour
     protected Rigidbody2D ri;
     protected Animator a;
     protected CircleCollider2D cp;
-    protected SpriteRenderer r;
+    protected SpriteRenderer sr;
+    protected SkeletonAnimation SA;
 
     protected virtual void Awake()
     {
-        if (!r)
-            r = GetComponent<SpriteRenderer>();
+        if (!sr)
+            sr = GetComponent<SpriteRenderer>();
         if (!cp)
             cp = GetComponent<CircleCollider2D>();
         if (!a)
             a = GetComponent<Animator>();
         if (!ri)
             ri = GetComponent<Rigidbody2D>();
+        if (!SA)
+            SA = GetComponentInChildren<SkeletonAnimation>();
     }
 
     /// <summary>
@@ -86,8 +89,8 @@ public class BaseObject : MonoBehaviour
     /// </summary>
     public virtual void startBehaviours()
     {
-        if (r)
-            r.color = new Color(r.color.r, r.color.g, r.color.b, 1);
+        ChangeColour(Color.white);
+
         if (cp)
             cp.enabled = true;
         if (a)
@@ -205,15 +208,11 @@ public class BaseObject : MonoBehaviour
             fading = true;
             
             float z = f;
-            
-            SpriteRenderer r = GetComponent<SpriteRenderer>();
-
-            
 
             if (GetComponent<Animator>())
                 GetComponent<Animator>().enabled = true;
 
-            Color c = r.color;
+            Color c = getColour();
 
             if (DisableCollsionAtStart)
                 GetComponent<CircleCollider2D>().enabled = false;
@@ -226,8 +225,9 @@ public class BaseObject : MonoBehaviour
             while (z > 0)
             {
                 c.a = z / f;
-                r.color = c;
+                ChangeColour(c);
                 z -= Time.deltaTime;
+
                 yield return new WaitForEndOfFrame();
             }
 
@@ -235,7 +235,7 @@ public class BaseObject : MonoBehaviour
             RemoveFromView();
         }
     }
-
+   
     public virtual void Instance_onPauseGame(bool b)
     {
         // Rigidbody2D r = GetComponent<Rigidbody2D>();
@@ -323,5 +323,33 @@ public class BaseObject : MonoBehaviour
     {
         if (transform.position.x > 100)
             RemoveFromView();
+    }
+
+    protected void ChangeColour(Color c)
+    {
+        if(sr)
+        {
+            sr.color = c;
+        }
+
+        if (SA)
+        {
+            SA.skeleton.SetColor(c);
+        }
+    }
+
+    protected Color getColour()
+    {
+        if (sr)
+        {
+            return sr.color;
+        }
+
+        if (SA)
+        {
+            return new Color(SA.skeleton.R, SA.skeleton.G, SA.skeleton.B, SA.skeleton.A);
+        }
+
+        return Color.white;
     }
 }

@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
     private void Instance_onPauseGame(bool b)
     {
         if (Application.loadedLevel != 1 && Application.loadedLevel != 0)
-            setReconizers(!b);
+            StartCoroutine(LateRecon(!b));
     }
 
     public void OnLevelWasLoaded(int level)
@@ -113,5 +113,11 @@ public class InputManager : MonoBehaviour
             if (onSwipeUp != null)
                 onSwipeUp();
         }
+    }
+
+    IEnumerator LateRecon(bool state)
+    {
+        yield return new WaitForEndOfFrame();
+        setReconizers(state);
     }
 }

@@ -1,0 +1,27 @@
+
+M1_w_skeleton.png
+size: 128,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm
+  rotate: false
+  xy: 97, 23
+  size: 16, 34
+  orig: 16, 34
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 2, 2
+  size: 68, 55
+  orig: 68, 55
+  offset: 0, 0
+  index: -1
+leg
+  rotate: false
+  xy: 72, 19
+  size: 23, 38
+  orig: 23, 38
+  offset: 0, 0
+  index: -1

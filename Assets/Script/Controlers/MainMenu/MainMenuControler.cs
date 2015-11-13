@@ -79,6 +79,11 @@ public class MainMenuControler : MonoBehaviour {
     /// <returns></returns>
     IEnumerator moveMain(int dir, float duration)
     {
+        stopMenuMove = true;
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        stopMenuMove = false;
+
         float l = MainMenu.rect.width * MainMenu.localScale.x;
 
         float endPoint = 0;
@@ -92,15 +97,17 @@ public class MainMenuControler : MonoBehaviour {
         end = new Vector2(endPoint, start.y);
 
         float t = 0;
-        Debug.Log(dir);
+        
         if (dir > 0)
         {
             while (MainMenu.anchoredPosition.x - endPoint < -0.05)
             {
-                Debug.Log(t);
                 t += Time.deltaTime / duration;
                 start = MainMenu.anchoredPosition;
                 MainMenu.anchoredPosition = Vector2.Lerp(start, end, t);
+
+                if (stopMenuMove)
+                    yield break;
 
                 yield return new WaitForEndOfFrame();
             }
@@ -109,13 +116,16 @@ public class MainMenuControler : MonoBehaviour {
         {
             while (MainMenu.anchoredPosition.x - endPoint > 0.05)
             {
-                Debug.Log(t);
                 t += Time.deltaTime / duration;
                 start = MainMenu.anchoredPosition;
                 MainMenu.anchoredPosition = Vector2.Lerp(start, end, t);
+
+                if (stopMenuMove)
+                    yield break;
 
                 yield return new WaitForEndOfFrame();
             }
         }
     }
+    bool stopMenuMove;
 }

@@ -54,7 +54,6 @@ public class FlyingEnemy: EnemyBase
             if (!GameManager.gamePaused)
             {
                 p = transform.position;
-                Debug.Log(System.DateTime.Now);
 
                 if (t1 <= 0 && t2 <= 0)
                 {
@@ -75,7 +74,7 @@ public class FlyingEnemy: EnemyBase
 
                 transform.position = p;
                 deb = p;
-                Debug.Log("running " + name + " t1 = " + t1.ToString() + " t2 = " + t2.ToString() + " tm = " + tM.ToString() + " pos: " + transform.position, this.gameObject);
+                //Debug.Log("running " + name + " t1 = " + t1.ToString() + " t2 = " + t2.ToString() + " tm = " + tM.ToString() + " pos: " + transform.position, this.gameObject);
             }
             yield return new WaitForEndOfFrame();
         }

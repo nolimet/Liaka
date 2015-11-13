@@ -3,6 +3,9 @@ using System.Collections;
 
 public class MoveBoxScaler : MonoBehaviour {
 
+    public bool useRectransMode = false;
+
+    [Header("Default Scaling mode")]
     [SerializeField]
     new Camera camera;
 
@@ -16,9 +19,19 @@ public class MoveBoxScaler : MonoBehaviour {
     [SerializeField, Tooltip("Should object Scale in this direction?")]
     bool Vertical = false, Horizontal = false;
 
+    
+
     void Awake()
     {
-        if (camera == null)
+        if (useRectransMode)
+            rectTransMode();
+        else
+            defaultMode();
+    }
+
+    void defaultMode()
+    {
+if (camera == null)
             camera = Camera.main;
 
         StartSize /= 100;
@@ -37,5 +50,19 @@ public class MoveBoxScaler : MonoBehaviour {
         p1.Scale(ExstraSizeMult);
         transform.localScale = new Vector3(p1.x, p1.y, 1); //* 2f;
         screenSize = new Vector3(p1.x, p1.y, 1); //* 2f;
+    }
+
+    void rectTransMode()
+    {
+        RectTransform r = (RectTransform)transform;
+        Vector2 n;
+        Vector2 Aspect = new Vector2(Screen.width, Screen.height);
+
+        if (r.sizeDelta.x > r.sizeDelta.y)
+            n = new Vector2(r.sizeDelta.x, r.sizeDelta.x);
+        else
+            n = new Vector2(r.sizeDelta.y, r.sizeDelta.y);
+
+        //r.sizeDelta = n;
     }
 }
