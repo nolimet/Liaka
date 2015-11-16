@@ -50,6 +50,10 @@ public class GameManager : MonoBehaviour
     public static InputManager inputManager;
     public InputManager _inputManager;
 
+    //OptionsMenu
+    public static OptionsMenuControler optionsMenu;
+    public OptionsMenuControler _optionsMenu;
+
     //Player Controler
     public static PlayerControler playerControler;
     public PlayerControler _playerControler;
@@ -132,19 +136,17 @@ public class GameManager : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        if (level != 1 && level != 2)
-        {
-            ContinueGame();
-        }
-
-        if (level == 1 || level ==2)
+        if (level == 1 || level == 2 || level == 2)
         {
             PauseMenu.SetActive(false);
             onPauseGame(true);
             uiControler.gameObject.SetActive(false);
         }
-
+        else
+        { 
+            ContinueGame();
         
+        }
     }
 
     #endregion
@@ -171,6 +173,9 @@ public class GameManager : MonoBehaviour
 
         if (__stageControler && !_stageControler)
             _stageControler = __stageControler;
+
+        if (_optionsMenu && !optionsMenu)
+            optionsMenu = _optionsMenu;
     }
 
     void SaveLoad(bool save)

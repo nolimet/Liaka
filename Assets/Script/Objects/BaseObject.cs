@@ -258,6 +258,9 @@ public class BaseObject : MonoBehaviour
 
                 if (a)
                     a.enabled = false;
+
+                if (SA)
+                    SA.timeScale = 0;
             }
             else
             {
@@ -266,6 +269,9 @@ public class BaseObject : MonoBehaviour
 
                 if (a)
                     a.enabled = true;
+
+                if (SA)
+                    SA.timeScale = 1;
             }
         }
         catch (System.Exception)

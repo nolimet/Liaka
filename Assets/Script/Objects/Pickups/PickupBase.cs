@@ -57,6 +57,9 @@ public class PickupBase :BaseObject {
         {
             case TagManager.Ground:
                 stopedMoving = true;
+
+                if (onGroundHit != null)
+                    onGroundHit(pType);
                 break;
 
             case TagManager.Trap:
@@ -130,13 +133,11 @@ public class PickupBase :BaseObject {
                     onPickup(pType);
                 break;
 
-            case TagManager.Ground:
-
-                if (onGroundHit != null)
-                    onGroundHit(pType);
-                break;
+           
         }
     }
+
+   
 
     /// <summary>
     /// fades the object out

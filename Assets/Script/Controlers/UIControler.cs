@@ -15,6 +15,15 @@ public class UIControler : MonoBehaviour
 
     bool StageControlerAlive = false;
 
+    new public GameObject gameObject
+    {
+        get
+        {
+            Debug.Log("acc");
+            return base.gameObject;
+        }
+    }
+
     public void Start()
     {
         GameManager.instance.onPauseGame += onGamePause;

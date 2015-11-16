@@ -29,6 +29,8 @@ public class MainMenuControler : MonoBehaviour {
 
         MainMenu.anchoredPosition = MainMenu.anchoredPosition - new Vector2(MainMenu.rect.width, 0);
         StartCoroutine(moveMain(1, 20));
+
+        
     }
 
     public void Update()
@@ -44,31 +46,31 @@ public class MainMenuControler : MonoBehaviour {
 
     public void OpenOptions(bool b)
     {
-        OptionMenu.menu.SetActive(b);
-        if(b)
+
+        if (b)
+        {
+            if (GameManager.optionsMenu)
+            {
+                GameManager.optionsMenu.OpenMenu();
+                GameManager.optionsMenu.onClose += OptionsMenu_onClose;
+            }
+
+            
+
             StartCoroutine(moveMain(-1, 10));
+        }
         else
+        {
+            if (GameManager.optionsMenu)
+                GameManager.optionsMenu.CloseMenu();
             StartCoroutine(moveMain(1, 20));
+        }
     }
 
-    public void onFXVolumeChange(float f)
+    private void OptionsMenu_onClose()
     {
-        GameManager.instance.saveDat.options.soundVolume = f;
-    }
-
-    public void onMusicVolumeChange(float f)
-    {
-        GameManager.instance.saveDat.options.musicVolume = f;
-    }
-
-    public void onInterfaceVolumeChange(float f)
-    {
-        GameManager.instance.saveDat.options.interfaceVolume = f;
-    }
-
-    public void ClearSaveData()
-    {
-        GameManager.instance.ResetSave();
+        GameManager.optionsMenu.onClose -= OptionsMenu_onClose;
+        OpenOptions(false);
     }
 
     /// <summary>
