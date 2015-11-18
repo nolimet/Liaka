@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        if (level == 1 || level == 2 || level == 2)
+        if (level == 1 || level == 2 || level == 3)
         {
             PauseMenu.SendMessage("SetState", true , SendMessageOptions.DontRequireReceiver);
             onPauseGame(true);

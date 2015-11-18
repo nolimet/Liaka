@@ -95,7 +95,7 @@ public class OptionsMenuControler : MonoBehaviour {
 
         if (dir > 0)
         {
-            while (RectTrans.anchoredPosition.y + endPoint < -0.5)
+            while (RectTrans.anchoredPosition.y + endPoint < -10)
             {
                 Debug.Log(" POS : " + (RectTrans.anchoredPosition.y - endPoint) + " DIR : " + dir);
 
