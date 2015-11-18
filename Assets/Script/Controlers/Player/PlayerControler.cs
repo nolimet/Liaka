@@ -407,7 +407,7 @@ public class PlayerControler : MonoBehaviour
             if (onShoot != null)
                 onShoot();
 
-            gun.Shoot(p);
+            gun.Shoot(Vector2.right);
 
             return;
         }
@@ -421,6 +421,6 @@ public class PlayerControler : MonoBehaviour
         Debug.DrawRay(new Vector3(newXpos, -10, 0), Vector3.up, Color.cyan, 100f);
         transform.position = new Vector3(newXpos, transform.position.y);
 
-        playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
+       // playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
     }
 }

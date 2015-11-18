@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveBoxScaler : MonoBehaviour {
+public class MoveBoxScaler : MonoBehaviour
+{
 
     public bool useRectransMode = false;
 
@@ -19,10 +20,12 @@ public class MoveBoxScaler : MonoBehaviour {
     [SerializeField, Tooltip("Should object Scale in this direction?")]
     bool Vertical = false, Horizontal = false;
 
-    
+
 
     void Awake()
     {
+        if (!GameManager.instance)
+            Debug.Log("error");
         if (useRectransMode)
             rectTransMode();
         else
@@ -31,7 +34,7 @@ public class MoveBoxScaler : MonoBehaviour {
 
     void defaultMode()
     {
-if (camera == null)
+        if (camera == null)
             camera = Camera.main;
 
         StartSize /= 100;

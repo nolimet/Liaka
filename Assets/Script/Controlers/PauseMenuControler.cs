@@ -1,65 +1,56 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
-public class OptionsMenuControler : MonoBehaviour {
-
-    public delegate void voidDelegate();
-    public event voidDelegate onClose;
+public class PauseMenuControler : MonoBehaviour
+{
 
     [SerializeField]
     RectTransform RectTrans;
 
     [SerializeField]
-    private Slider SFX_Slider, Music_Slider, Interface_Slider;
+    GameObject continueButton;
 
-    void Start()
+    public void SetState(bool b)
     {
-        SaveData d = GameManager.instance.saveDat;
-
-        SFX_Slider.value = d.options.soundVolume;
-        Music_Slider.value = d.options.musicVolume;
-        Interface_Slider.value = d.options.interfaceVolume;
-
-        gameObject.SetActive(false);
+        Debug.Log("PauseMenuState : " + b);
+        if (b)
+        {
+            gameObject.SetActive(true);
+            continueButton.SetActive(true);
+            StartCoroutine(moveMain(1, 10, true, false));
+        }
+        else
+        {
+            continueButton.SetActive(false);
+            StartCoroutine(moveMain(-1, 1, changeStateToDisabledAtEnd: true));
+        }
     }
 
-    public void update_SFXVolume(float f)
+    public void OpenOptions()
     {
-        GameManager.instance.saveDat.options.soundVolume = f;
+        if (GameManager.optionsMenu)
+            GameManager.optionsMenu.onClose += OptionsMenu_onClose;
+        GameManager.optionsMenu.OpenMenu();
+
+        StartCoroutine(moveMain(-1, 10));
+        //gameObject.SetActive(false);
     }
 
-    public void update_MusicVolume(float f)
+    private void OptionsMenu_onClose()
     {
-        GameManager.instance.saveDat.options.musicVolume = f;
+        openPause();
+        GameManager.optionsMenu.onClose -= OptionsMenu_onClose;
     }
 
-    public void update_InterfaceVolume(float f)
+    void openPause()
     {
-        GameManager.instance.saveDat.options.interfaceVolume = f;
+        //gameObject.SetActive(true);
+        StartCoroutine(moveMain(1, 20));
     }
 
-    public void ClearSaveData()
+    public void OnDestroy()
     {
-        GameManager.instance.ResetSave();
-    }
 
-    public void CloseMenu()
-    {
-        if (onClose != null)
-            onClose();
-
-        Debug.Log("Close-options");
-        if (gameObject.activeSelf)
-            StartCoroutine(moveMain(-1, 4, changeStateToDisabledAtEnd: true));
-    }
-
-    public void OpenMenu()
-    {
-        Debug.Log("Open-options");
-       gameObject.SetActive(true);
-
-        StartCoroutine(moveMain(1, 10,true));
     }
 
     /// <summary>
@@ -68,18 +59,21 @@ public class OptionsMenuControler : MonoBehaviour {
     /// <param name="dir">move direction right = 1 left = -1</param>
     /// <param name="duration">the distance it will cover each second</param>
     /// <returns></returns>
-    IEnumerator moveMain(int dir, float duration, bool startAtEnd = false, bool changeStateToDisabledAtEnd = false)
+    IEnumerator moveMain(int dir, float duration, bool startAtEnd = false , bool changeStateToDisabledAtEnd = false)
     {
+        Debug.Log("bleeeeshes");
+        
+
         float l = RectTrans.rect.height * RectTrans.localScale.y;
 
         float endPoint = 0;
         if (dir > 0)
             endPoint = 0;
         else if (dir < 0)
-            endPoint = -l;
+            endPoint = l;
 
         if (startAtEnd && dir > 0)
-            RectTrans.anchoredPosition = new Vector2(RectTrans.anchoredPosition.x, -l);
+            RectTrans.anchoredPosition = new Vector2(RectTrans.anchoredPosition.x, l);
         else if (startAtEnd && dir < 0)
             RectTrans.anchoredPosition = new Vector2(RectTrans.anchoredPosition.x, 0);
         Vector2 start, end;
@@ -95,42 +89,40 @@ public class OptionsMenuControler : MonoBehaviour {
 
         if (dir > 0)
         {
-            while (RectTrans.anchoredPosition.y + endPoint < -0.5)
+            while (RectTrans.anchoredPosition.y - endPoint > 0.05)
             {
                 Debug.Log(" POS : " + (RectTrans.anchoredPosition.y - endPoint) + " DIR : " + dir);
-
                 t += Time.deltaTime / duration;
                 start = RectTrans.anchoredPosition;
                 RectTrans.anchoredPosition = Vector2.Lerp(start, end, t);
 
                 if (stopMenuMove)
-                    break;
+                     break;
 
                 yield return new WaitForEndOfFrame();
             }
         }
         else if (dir < 0)
         {
-            while (RectTrans.anchoredPosition.y - endPoint > 0.5)
+            while (RectTrans.anchoredPosition.y - endPoint < -10)
             {
 
                 Debug.Log(" POS : " + (RectTrans.anchoredPosition.y - endPoint) + " DIR : " + dir);
-
                 t += Time.deltaTime / duration;
                 start = RectTrans.anchoredPosition;
                 RectTrans.anchoredPosition = Vector2.Lerp(start, end, t);
 
                 if (stopMenuMove)
-                    break;
+                     break;
 
                 yield return new WaitForEndOfFrame();
             }
         }
 
-        if (changeStateToDisabledAtEnd)
+        if (changeStateToDisabledAtEnd && dir < 0)
             gameObject.SetActive(false);
 
-        Debug.Log("end option menu move");
+        Debug.Log("end pause menu move");
     }
     bool stopMenuMove;
 }

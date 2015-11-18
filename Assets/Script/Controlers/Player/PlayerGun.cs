@@ -10,8 +10,10 @@ public class PlayerGun : MonoBehaviour {
         if (!GameManager.stageControler.bossFighting && !GameManager.gamePaused)
         {
             Debug.Log("Shoot");
+
             Vector3 wp = Camera.main.ScreenToWorldPoint(new Vector3(v2.x, v2.y, 0));
             Vector3 d = wp - transform.position;
+            d = Vector3.right;
             Quaternion q = Quaternion.Euler(0, 0, util.MathHelper.VectorToAngle(d));
             transform.rotation = q;
 

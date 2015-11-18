@@ -20,17 +20,14 @@ public class MainMenuControler : MonoBehaviour {
 
     void Start()
     {
-        OpenOptions(false);
-        OptionMenu.sounds.value = GameManager.instance.saveDat.options.soundVolume;
-        OptionMenu.music.value = GameManager.instance.saveDat.options.musicVolume;
-        OptionMenu.interfaceVol.value = GameManager.instance.saveDat.options.interfaceVolume;
-
         CoinsDisplay.text = "Current Gold:" + "\n " + GameManager.instance.saveDat.game.CoinsCurrent.ToString();
 
         MainMenu.anchoredPosition = MainMenu.anchoredPosition - new Vector2(MainMenu.rect.width, 0);
         StartCoroutine(moveMain(1, 20));
 
-        
+        if (GameManager.optionsMenu)
+            GameManager.optionsMenu.CloseMenu();
+
     }
 
     public void Update()
@@ -44,33 +41,21 @@ public class MainMenuControler : MonoBehaviour {
         }
     }
 
-    public void OpenOptions(bool b)
+    public void OpenOptions()
     {
-
-        if (b)
+        if (GameManager.optionsMenu)
         {
-            if (GameManager.optionsMenu)
-            {
-                GameManager.optionsMenu.OpenMenu();
-                GameManager.optionsMenu.onClose += OptionsMenu_onClose;
-            }
-
-            
-
-            StartCoroutine(moveMain(-1, 10));
+            GameManager.optionsMenu.OpenMenu();
+            GameManager.optionsMenu.onClose += OptionsMenu_onClose;
         }
-        else
-        {
-            if (GameManager.optionsMenu)
-                GameManager.optionsMenu.CloseMenu();
-            StartCoroutine(moveMain(1, 20));
-        }
+
+        StartCoroutine(moveMain(-1, 10));
     }
 
     private void OptionsMenu_onClose()
     {
         GameManager.optionsMenu.onClose -= OptionsMenu_onClose;
-        OpenOptions(false);
+        StartCoroutine(moveMain(1, 4));
     }
 
     /// <summary>

@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
                 _instance = FindObjectOfType<GameManager>();
 
                 if (!_instance && !_Destroyed)
-                {   
+                {
                     GameObject g = Instantiate(Resources.Load("GameManager")) as GameObject;
                     g.name = "Game Manager";
                     Debug.Log("created new object");
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     //UI contrler
     public static UIControler uiControler;
     public UIControler _UIControler;
-    
+
     //AudioControler
     public static AudioControler audioControler;
     public AudioControler _AudioControler;
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     public static DropTableControler dropTable;
     public DropTableControler _DropTable;
 
-     static StageControler _stageControler;
+    static StageControler _stageControler;
     public static StageControler stageControler
     {
         get
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             if (!_stageControler)
                 return null;
 
-                return _stageControler;
+            return _stageControler;
         }
     }
     public StageControler __stageControler;
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
     #region UnityFunctions
     void Awake()
     {
-        
+
         if (_instance)
             Destroy(gameObject);
         SetStatics();
@@ -138,14 +138,14 @@ public class GameManager : MonoBehaviour
     {
         if (level == 1 || level == 2 || level == 2)
         {
-            PauseMenu.SetActive(false);
+            PauseMenu.SendMessage("SetState", true , SendMessageOptions.DontRequireReceiver);
             onPauseGame(true);
             uiControler.gameObject.SetActive(false);
         }
         else
-        { 
+        {
             ContinueGame();
-        
+
         }
     }
 
@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
 
                 Debug.Log(saveDat);
             }
-            
+
         }
         else
         {
@@ -230,7 +230,9 @@ public class GameManager : MonoBehaviour
         _gamePaused = false;
         if (onPauseGame != null)
             onPauseGame(false);
-        PauseMenu.SetActive(false);
+
+        PauseMenu.SendMessage("SetState", false , SendMessageOptions.DontRequireReceiver);
+
         uiControler.gameObject.SetActive(true);
 
         Debug.Log("CONTINUED2");
@@ -243,7 +245,10 @@ public class GameManager : MonoBehaviour
         _gamePaused = true;
         if (onPauseGame != null)
             onPauseGame(true);
+
         PauseMenu.SetActive(true);
+        PauseMenu.SendMessage("SetState", true , SendMessageOptions.DontRequireReceiver);
+
         uiControler.gameObject.SetActive(false);
 
         Debug.Log("PAUSED2");
@@ -252,7 +257,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SetStatics();
-    } 
+    }
 
     #region EventListeners
     void EventInit()
@@ -260,7 +265,7 @@ public class GameManager : MonoBehaviour
         _inputManager.onEscapePressed += EscapePressed;
         PlayerControler.onPlayerDestoryed += onPlayerDestoryed;
         PlayerControler.onPlayerCreated += onPlayerCreated;
-        
+
         StageControler.onStageCreated += onStageControlerLoaded;
         StageControler.onStageDestroyed += onStageControlerDestroyed;
         StageControler.onStageTimerEnded += onStageEnded;
@@ -303,12 +308,12 @@ public class GameManager : MonoBehaviour
 
     void onStageEnded()
     {
-        
+
     }
 
     void onPlayerHitTrap()
     {
-        
+
     }
 
     void EscapePressed()
@@ -317,8 +322,12 @@ public class GameManager : MonoBehaviour
             return;
 
         _gamePaused = !_gamePaused;
-        onPauseGame(_gamePaused);
-        PauseMenu.SetActive(_gamePaused);
+        //onPauseGame(_gamePaused);
+        if (_gamePaused)
+            PauseGame();
+        else
+            ContinueGame();
+
         Debug.Log(_gamePaused ? "OPENED PAUSE MENU" : "CLOSED PAUSE MENU");
     }
     #endregion

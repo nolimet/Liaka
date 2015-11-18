@@ -37,7 +37,7 @@ public class StageControler : MonoBehaviour
     public string NextStageName = "";
 
     float TimeLeft;
-    bool _bossFighting,_bossDefeated;
+    bool _bossFighting, _bossDefeated;
 
     int _coinsCollected;
 
@@ -54,11 +54,18 @@ public class StageControler : MonoBehaviour
 
         TimeLeft = StageLength;
 
+       
+
         if (onStageCreated != null)
             onStageCreated(this);
 
         if (onBossBattleEnds != null)
             onBossBattleEnds();
+
+        Debug.LogWarning("BOSS BATTLE DISABLED IN STAGE CONTROLER STARTUP!!! DO NOT FORGET YOU FOOL!");
+        BossBattleLength = 0.1f;
+
+        _bossDefeated = true;
     }
 
     public void OnDestroy()
