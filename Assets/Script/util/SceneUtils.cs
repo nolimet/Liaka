@@ -15,5 +15,10 @@ namespace util
         {
             Application.Quit();
         }
+
+        public void ReloadScene()
+        {
+            Application.LoadLevel(Application.loadedLevelName);
+        }
     }
 }

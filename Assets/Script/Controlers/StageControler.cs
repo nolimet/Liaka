@@ -44,17 +44,18 @@ public class StageControler : MonoBehaviour
     BossControler bossControler; 
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
         BossControler.onDefeated += BossControler_Defeated;
 
         onBossBattleBegins += StageControler_onBossBattleBegins;
         onBossBattleEnds += StageControler_onBossBattleEnds;
+    }
 
+    void Start()
+    {
         TimeLeft = StageLength;
-
-       
 
         if (onStageCreated != null)
             onStageCreated(this);
@@ -72,8 +73,6 @@ public class StageControler : MonoBehaviour
     {
         if (onStageDestroyed != null)
             onStageDestroyed(this);
-
-        
 
         PlayerControler.onPlayerCreated -= PlayerControler_onPlayerCreated;
         BossControler.onDefeated -= BossControler_Defeated;
