@@ -407,7 +407,7 @@ public class PlayerControler : MonoBehaviour
             if (onShoot != null)
                 onShoot();
 
-            gun.Shoot(Vector2.right);
+            gun.Shoot(p);
 
             return;
         }
