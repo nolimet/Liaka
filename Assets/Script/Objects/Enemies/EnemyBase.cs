@@ -40,6 +40,9 @@ public class EnemyBase : BaseObject{
         base.startBehaviours();
         setVelocity(new Vector3(-5, 0));
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
+        if (SA)
+            SA.timeScale = OriginalTimeScale;
     }
 
     public override void RemoveFromView()

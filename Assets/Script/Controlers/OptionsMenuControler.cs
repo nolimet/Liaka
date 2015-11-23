@@ -49,14 +49,12 @@ public class OptionsMenuControler : MonoBehaviour {
         if (onClose != null)
             onClose();
 
-        Debug.Log("Close-options");
         if (gameObject.activeSelf)
             StartCoroutine(moveMain(-1, 4, changeStateToDisabledAtEnd: true));
     }
 
     public void OpenMenu()
     {
-        Debug.Log("Open-options");
        gameObject.SetActive(true);
 
         StartCoroutine(moveMain(1, 10,true));

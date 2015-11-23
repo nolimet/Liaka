@@ -119,6 +119,10 @@ public class GameManager : MonoBehaviour
 
         if (!Application.isEditor)
             GodMode = false;
+        else
+        {
+            Application.targetFrameRate = 60;
+        }
     }
 
     public void OnDestroy()
@@ -225,8 +229,6 @@ public class GameManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        Debug.Log("CONTINUED1");
-
         _gamePaused = false;
         if (onPauseGame != null)
             onPauseGame(false);
@@ -234,14 +236,10 @@ public class GameManager : MonoBehaviour
         PauseMenu.SendMessage("SetState", false , SendMessageOptions.DontRequireReceiver);
 
         uiControler.gameObject.SetActive(true);
-
-        Debug.Log("CONTINUED2");
     }
 
     public void PauseGame()
     {
-        Debug.Log("PAUSED1");
-
         _gamePaused = true;
         if (onPauseGame != null)
             onPauseGame(true);
@@ -250,8 +248,6 @@ public class GameManager : MonoBehaviour
         PauseMenu.SendMessage("SetState", true , SendMessageOptions.DontRequireReceiver);
 
         uiControler.gameObject.SetActive(false);
-
-        Debug.Log("PAUSED2");
     }
 
     void Update()

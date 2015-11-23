@@ -1,5 +1,5 @@
 
-skeleton.png
+skeleton_M2.png
 size: 512,256
 format: RGBA8888
 filter: Linear,Linear

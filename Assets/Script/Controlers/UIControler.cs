@@ -15,16 +15,7 @@ public class UIControler : MonoBehaviour
 
     bool StageControlerAlive = false;
 
-    new public GameObject gameObject
-    {
-        get
-        {
-            Debug.Log("acc");
-            return base.gameObject;
-        }
-    }
-
-    public void Start()
+    public void Awake()
     {
         GameManager.instance.onPauseGame += onGamePause;
         PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
@@ -71,6 +62,8 @@ public class UIControler : MonoBehaviour
     void onGamePause(bool b)
     {
         GamePaused = b;
+
+        Debug.Log("paused " + GamePaused);
     }
 
     #region Update

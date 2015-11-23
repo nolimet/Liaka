@@ -18,14 +18,18 @@ public class EnemyControler : MonoBehaviour
     public int diff = 1;
     bool gamePaused, bossBattle, GameLoopStarted;
 
-    void Start()
+    void Awake()
     {
         GameManager.instance.onPauseGame += GamePaused;
         StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
-        StartCoroutine(gameLoop());
+    }
 
-       /* EnemyBase e;
+    void Start()
+    {
+        //StartCoroutine(gameLoop());
+
+        EnemyBase e;
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 6; j++)
@@ -36,8 +40,10 @@ public class EnemyControler : MonoBehaviour
             }
         }
 
-        EnemyPool.RemoveAllImmediate*/
+        EnemyPool.RemoveAllImmediate();
     }
+
+
 
     private void StageControler_onBossBattleEnds()
     {
@@ -62,6 +68,16 @@ public class EnemyControler : MonoBehaviour
         GameManager.instance.onPauseGame -= GamePaused;
         StageControler.onBossBattleBegins -= StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds -= StageControler_onBossBattleEnds;
+    }
+
+    public void OnEnable()
+    {
+        StartCoroutine(gameLoop());
+    }
+
+    public void OnDisable()
+    {
+        GameLoopStarted = false;
     }
 
     void GamePaused(bool b)
@@ -108,7 +124,7 @@ public class EnemyControler : MonoBehaviour
 
         GameLoopStarted = true;
         float d = 2f;
-        while (!gamePaused && !bossBattle)
+        while (GameLoopStarted && !gamePaused && !bossBattle && isActiveAndEnabled)
         {
             if (d <= 0)
             {

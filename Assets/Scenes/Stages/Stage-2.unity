@@ -415,6 +415,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &54574122 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 106306, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+  m_PrefabInternal: {fileID: 54574121}
 --- !u!1 &72165981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4939,6 +4943,52 @@ MonoBehaviour:
   Sprites:
   - {fileID: 21300000, guid: 93ff310bb0041954aade8cfb7f3af697, type: 3}
   - {fileID: 21300000, guid: 6460016f75dd60a4289553263d5e6450, type: 3}
+--- !u!1001 &863271173
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440920, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: StageManager
+      value: 
+      objectReference: {fileID: 54574122}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &868533920
 GameObject:
   m_ObjectHideFlags: 0
@@ -12616,7 +12666,7 @@ Transform:
   - {fileID: 1201699071}
   - {fileID: 973480333}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &2077297314
 MonoBehaviour:
   m_ObjectHideFlags: 0

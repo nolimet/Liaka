@@ -1,5 +1,5 @@
 
-M2_F_skeleton.png
+skeleton_M3.png
 size: 512,128
 format: RGBA8888
 filter: Linear,Linear
@@ -11,7 +11,7 @@ body
   orig: 116, 99
   offset: 0, 0
   index: -1
-body2
+body3
   rotate: false
   xy: 120, 26
   size: 116, 99
@@ -25,11 +25,18 @@ claw
   orig: 18, 22
   offset: 0, 0
   index: -1
-face
+face2
   rotate: false
   xy: 238, 77
   size: 89, 48
   orig: 89, 48
+  offset: 0, 0
+  index: -1
+fire
+  rotate: false
+  xy: 281, 53
+  size: 9, 22
+  orig: 9, 22
   offset: 0, 0
   index: -1
 wingback

@@ -23,7 +23,6 @@ public class PauseMenuControler : MonoBehaviour
 
     public void SetState(bool b)
     {
-        Debug.Log("PauseMenuState : " + b);
         if (b)
         {
             RectTrans.gameObject.SetActive(true);

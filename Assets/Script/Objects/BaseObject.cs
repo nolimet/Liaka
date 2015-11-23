@@ -55,6 +55,8 @@ public class BaseObject : MonoBehaviour
     protected bool paused = false;
     public bool fadeWhenGroundhit = true;
 
+    protected float OriginalTimeScale = 0f; // timescale of SkeletonAnimation
+
     protected Rigidbody2D ri;
     protected Animator a;
     protected CircleCollider2D cp;
@@ -73,6 +75,10 @@ public class BaseObject : MonoBehaviour
             ri = GetComponent<Rigidbody2D>();
         if (!SA)
             SA = GetComponentInChildren<SkeletonAnimation>();
+
+
+        if (SA)
+            OriginalTimeScale = SA.timeScale;
     }
 
     /// <summary>
@@ -271,7 +277,7 @@ public class BaseObject : MonoBehaviour
                     a.enabled = true;
 
                 if (SA)
-                    SA.timeScale = 1;
+                    SA.timeScale = OriginalTimeScale;
             }
         }
         catch (System.Exception)

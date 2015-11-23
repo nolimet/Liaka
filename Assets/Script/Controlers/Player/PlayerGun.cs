@@ -16,12 +16,10 @@ public class PlayerGun : MonoBehaviour {
     {
         if (!GameManager.stageControler.bossFighting && !GameManager.gamePaused)
         {
-            Debug.Log(v2);
             Vector3 wp = Camera.main.ScreenToWorldPoint(new Vector3(v2.x, v2.y, 0));
             Vector3 d = wp - transform.position;
 
             float a = util.MathHelper.VectorToAngle(d);
-            Debug.Log(a);
 
             if (a > maxAngle)
                 a = maxAngle;

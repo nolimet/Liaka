@@ -16,25 +16,36 @@ public class PickupControler : MonoBehaviour
     bool bossCharging = false;
     bool bossAttacking = false;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         GameManager.instance.onPauseGame += Instance_onPauseGame;
-        FindObjectOfType<BossControler>().bossMove.onMoveChangeEarly += setlocalMoveDirBoss;
-
         StageControler.onBossBattleBegins += StageControler_onBossBattleBegins;
         StageControler.onBossBattleEnds += StageControler_onBossBattleEnds;
+    }
 
-        StartCoroutine(gameLoop());
+    void Start()
+    {
+        FindObjectOfType<BossControler>().bossMove.onMoveChangeEarly += setlocalMoveDirBoss;
 
-        foreach(PickupBase.PickupType p in spawnable)
+        foreach (PickupBase.PickupType p in spawnable)
         {
             for (int i = 0; i < 10; i++)
             {
                 PickupPool.GetObject(p);
-            }    
+            }
         }
 
         PickupPool.RemoveAllImmediate();
+    }
+
+    public void OnEnable()
+    {
+        StartCoroutine(gameLoop());
+    }
+
+    public void OnDisable()
+    {
+        gameloopRunning = false;
     }
 
     private void StageControler_onBossBattleEnds()
@@ -47,6 +58,8 @@ public class PickupControler : MonoBehaviour
         bossAttacking = true;
         PickupPool.RemoveAll();
     }
+
+
 
     public void OnDestroy()
     {
@@ -80,7 +93,7 @@ public class PickupControler : MonoBehaviour
 
         gameloopRunning = true;
 
-        while (gameloopRunning)
+        while (gameloopRunning && isActiveAndEnabled)
         {
             yield return new WaitForSeconds(Random.Range(1f, 5f));
             while (gamePaused || bossAttacking)

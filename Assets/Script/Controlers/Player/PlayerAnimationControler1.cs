@@ -16,7 +16,6 @@ public class PlayerAnimationControler1 : MonoBehaviour
         ri = GetComponent<Rigidbody2D>();
         PlayerControler.onPlayerCreated += PlayerControler_onPlayerCreated;
         PlayerControler.onPlayerDestoryed += PlayerControler_onPlayerDestoryed;
-        Debug.Log("bleep");
     }
 
     public void OnDestroy()
@@ -30,8 +29,6 @@ public class PlayerAnimationControler1 : MonoBehaviour
         p.onJump -= Player_OnJump;
         p.onCoinsLost -= Player_OnHit;
         p.onHitGround -= Player_Land;
-        Debug.Log("pling");
-        
     }
 
     private void PlayerControler_onPlayerCreated(PlayerControler p)

@@ -29,13 +29,16 @@ public class LayerControler : MonoBehaviour {
 
 	public virtual void moveLayer(Vector3 v)
     {
+        foreach (Transform t in SubObjects)
+        {
+            if (t.gameObject.activeSelf)
+                InView(t);
+        }
         foreach(Transform t in SubObjects)
         {
             if (t.gameObject.activeSelf)
             {
-                if(InView(t))
                 t.Translate(v * Time.deltaTime);
-                
             }
         }
     }
