@@ -124,19 +124,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 22403538, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22448388, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 22476564, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22499854, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22403538, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22448388, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

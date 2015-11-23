@@ -119,10 +119,6 @@ public class GameManager : MonoBehaviour
 
         if (!Application.isEditor)
             GodMode = false;
-        else
-        {
-            Application.targetFrameRate = 60;
-        }
     }
 
     public void OnDestroy()
@@ -253,6 +249,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SetStatics();
+        int t = (int)Time.time;
+        Debug.Log("" + (t / 1000 % 10) + " : " + (t / 100 % 10) + " : " + (t / 10 % 10) + " : " + t % 10);
     }
 
     #region EventListeners
