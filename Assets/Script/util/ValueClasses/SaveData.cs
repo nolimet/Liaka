@@ -30,7 +30,11 @@ public class SaveData
         /// </summary>
         public int HighestAmountOfCoinsHeld { get { return _HighestAmountOfCoinsHeld; } }
         int _HighestAmountOfCoinsHeld = 0;
-
+        /// <summary>
+        /// return the highest ammount gained in a single run
+        /// </summary>
+        public int HighestAmountGainedInSingleRun {  get { return _HighestAmountGainedInSingleRun; } }
+        int _HighestAmountGainedInSingleRun;
         /// <summary>
         /// add x number of coins to the collected coins pool
         /// </summary>
@@ -39,17 +43,19 @@ public class SaveData
         {
             CoinsCurrent += numb;
             _CoinsTotal += numb;
+            if (numb > HighestAmountGainedInSingleRun)
+                _HighestAmountGainedInSingleRun = numb;
+
             if (CoinsCurrent > _HighestAmountOfCoinsHeld)
                 _HighestAmountOfCoinsHeld = CoinsCurrent;
         }
-        private int Test = 0;
     }
 
     public optionsData options = new optionsData();
     public gameData game = new gameData();
 
     string GameVersionLastStartup = "";
-    const string CurrentGameVersion = "0.1f";
+    const string CurrentGameVersion = "0.6f";
 
     bool versionTest()
     {
