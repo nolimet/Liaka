@@ -126,7 +126,7 @@ public class PickupPool : MonoBehaviour
             if (e)
             {
                 e.transform.position = new Vector3(0, 500, -50);
-                e.Instance_onPauseGame(true);
+                e.RemoveFromView(false);
                 if (disableEvents)
                     e.unregisterDelegates();
             }

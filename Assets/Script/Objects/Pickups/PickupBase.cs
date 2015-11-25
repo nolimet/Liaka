@@ -45,10 +45,22 @@ public class PickupBase :BaseObject {
         stopedMoving = false;
     }
 
-    public override void RemoveFromView()
+    public override void RemoveFromView(bool callRemoveOjbect = true)
     {
         unregisterDelegates();
-        PickupPool.RemoveObject(this);
+        alive = false;
+
+        ri.velocity = Vector2.zero;
+        ri.isKinematic = true;
+
+        if (a)
+            a.enabled = false;
+
+        if (SA)
+            SA.timeScale = 0;
+
+        if (callRemoveOjbect)
+            PickupPool.RemoveObject(this);
     }
 
     public override void OnCollisionEnter2D(Collision2D collision)

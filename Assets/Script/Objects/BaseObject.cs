@@ -131,11 +131,22 @@ public class BaseObject : MonoBehaviour
     /// <summary>
     /// Throw object out of the active object pool
     /// </summary>
-    public virtual void RemoveFromView()
+    public virtual void RemoveFromView(bool callRemoveOjbect = true)
     {
         unregisterDelegates();
         alive = false;
-        BasePool.RemoveObject(this);
+
+        ri.velocity = Vector2.zero;
+        ri.isKinematic = true;
+
+        if (a)
+            a.enabled = false;
+
+        if (SA)
+            SA.timeScale = 0;
+
+        if (callRemoveOjbect)
+            BasePool.RemoveObject(this);
     }
 
     public virtual void unregisterDelegates()

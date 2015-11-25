@@ -3119,6 +3119,10 @@ Prefab:
       propertyPath: m_Name
       value: PlayerContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 114482, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
   m_IsPrefabParent: 0
@@ -3570,6 +3574,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 2ac94af18f54e4840b8ef39b1d9e0f17,
         type: 3}
+    - target: {fileID: 138912, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
   m_IsPrefabParent: 0
@@ -7029,14 +7037,6 @@ Prefab:
     - target: {fileID: 472150, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11443500, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: NextStageName
-      value: Stage-2
-      objectReference: {fileID: 0}
-    - target: {fileID: 494684, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 10.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}

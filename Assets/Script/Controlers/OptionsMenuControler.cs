@@ -113,7 +113,7 @@ public class OptionsMenuControler : MonoBehaviour {
         {
             while (RectTrans.anchoredPosition.y + endPoint < -10)
             {
-                Debug.Log(" POS : " + (RectTrans.anchoredPosition.y - endPoint) + " DIR : " + dir);
+              //  Debug.Log(" POS : " + (RectTrans.anchoredPosition.y - endPoint) + " DIR : " + dir);
 
                 t += Time.deltaTime / duration;
                 start = RectTrans.anchoredPosition;
@@ -130,7 +130,7 @@ public class OptionsMenuControler : MonoBehaviour {
             while (RectTrans.anchoredPosition.y - endPoint > 0.5)
             {
 
-                Debug.Log(" POS : " + (RectTrans.anchoredPosition.y - endPoint) + " DIR : " + dir);
+               // Debug.Log(" POS : " + (RectTrans.anchoredPosition.y - endPoint) + " DIR : " + dir);
 
                 t += Time.deltaTime / duration;
                 start = RectTrans.anchoredPosition;
@@ -146,7 +146,7 @@ public class OptionsMenuControler : MonoBehaviour {
         if (changeStateToDisabledAtEnd)
             gameObject.SetActive(false);
 
-        Debug.Log("end option menu move");
+       // Debug.Log("end option menu move");
     }
     bool stopMenuMove;
 }
