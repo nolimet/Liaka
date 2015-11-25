@@ -11,6 +11,11 @@ namespace util
             Application.LoadLevel(name);
         }
 
+        public void OpenScene(int level)
+        {
+            Application.LoadLevel(level);
+        }
+
         public void CloseGame()
         {
             Application.Quit();
@@ -19,6 +24,17 @@ namespace util
         public void ReloadScene()
         {
             Application.LoadLevel(Application.loadedLevelName);
+        }
+
+        int LastScene;
+        public void ReloadLastScene()
+        {
+            Application.LoadLevel(LastScene);
+        }
+
+        public void OnLevelWasLoaded(int level)
+        {
+            LastScene = level;
         }
     }
 }
