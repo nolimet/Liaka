@@ -92,8 +92,8 @@ public class EnemyControler : MonoBehaviour
 
     void Spawn()
     {
-        //EnemyBase b = EnemyPool.GetObject((EnemyBase.Enemytype)Random.Range(0,3));
-        EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.walking);
+        EnemyBase b = EnemyPool.GetObject((EnemyBase.Enemytype)Random.Range(0,3));
+        //EnemyBase b = EnemyPool.GetObject(EnemyBase.Enemytype.walking);
         Vector3 p = Vector3.zero;
         switch (b.etype)
         {
