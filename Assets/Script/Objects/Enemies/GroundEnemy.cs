@@ -43,8 +43,6 @@ public class GroundEnemy : EnemyBase
         if (running)
             yield break;
 
-        Debug.Log("JUMP!");
-
 
         running = true;
         float d;
@@ -73,7 +71,7 @@ public class GroundEnemy : EnemyBase
                 if (jumpCooldown > 0)
                     jumpCooldown -= (float)(System.DateTime.Now - t1).TotalMilliseconds / 1000;
         }
-        Debug.Log("stoped rnning " + name);
+
         running = false;
     }
 
@@ -102,11 +100,7 @@ public class GroundEnemy : EnemyBase
             return;
 
        // Debug.DrawLine(transform.position + rayCastOffSet, transform.position + rayCastOffSet + (Vector3.down * 1f), Color.green, 1f);
-        hitcast = Physics2D.Raycast(transform.position + rayCastOffSet, Vector2.down, 0.75f, RayMask);
-        
-
-        if (hitcast)
-            Debug.Log("HIT: " + hitcast.transform.name);
+        hitcast = Physics2D.Raycast(transform.position + rayCastOffSet, Vector2.down, 0.75f, RayMask);       
 
         if (!hitcast.transform)
         {

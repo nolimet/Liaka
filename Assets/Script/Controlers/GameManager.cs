@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public event BoolDelegate onPauseGame;
     #endregion
 
-    #region varibles
+    #region Variables-Static
     //Keept spawing new Instances when quiting the game. This fixed that.
     private static bool _Destroyed = false;
 
@@ -71,21 +71,20 @@ public class GameManager : MonoBehaviour
     public static DropTableControler dropTable;
     public DropTableControler _DropTable;
 
-    static StageControler _stageControler;
+   public StageControler _stageControler;
     public static StageControler stageControler
     {
         get
         {
-            if (!_stageControler)
-                _stageControler = FindObjectOfType<StageControler>();
+            if (!instance._stageControler)
+                instance._stageControler = FindObjectOfType<StageControler>();
 
-            if (!_stageControler)
+            if (!instance._stageControler)
                 return null;
 
-            return _stageControler;
+            return instance._stageControler;
         }
     }
-    public StageControler __stageControler;
 
 
     //publics
@@ -104,6 +103,24 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+
+    int _coinsCollectedRun = 0;
+    public int coinsCollectedRun
+    {
+        get
+        {
+            return _coinsCollectedRun;
+        }
+    }
+
+    int _lastScene, _lastScene_1;
+    public int LastScene
+    {
+        get
+        {
+            return _lastScene;
+        }
+    }
 
     #region UnityFunctions
     void Awake()
@@ -134,12 +151,15 @@ public class GameManager : MonoBehaviour
         _stageControler = null;
         _Destroyed = true;
     }
-
     public void OnLevelWasLoaded(int level)
     {
+
+        _lastScene = _lastScene_1;
+        _lastScene_1 = level;
+
         if (level == 1 || level == 2 || level == 3)
         {
-            PauseMenu.SendMessage("SetState", true , SendMessageOptions.DontRequireReceiver);
+            PauseMenu.SendMessage("SetState", true, SendMessageOptions.DontRequireReceiver);
             onPauseGame(true);
             uiControler.gameObject.SetActive(false);
         }
@@ -147,6 +167,13 @@ public class GameManager : MonoBehaviour
         {
             ContinueGame();
 
+        }
+
+        if (level > 3 && _lastScene <= 3)
+        {
+            Debug.Log("resSet");
+            saveDat.game.addCoins(_coinsCollectedRun);
+            _coinsCollectedRun = 0;
         }
     }
 
@@ -171,9 +198,6 @@ public class GameManager : MonoBehaviour
 
         if (_DropTable && !dropTable)
             dropTable = _DropTable;
-
-        if (__stageControler && !_stageControler)
-            _stageControler = __stageControler;
 
         if (_optionsMenu && !optionsMenu)
             optionsMenu = _optionsMenu;
@@ -216,12 +240,9 @@ public class GameManager : MonoBehaviour
         SaveLoad(true);
     }
 
-    void GameEnd()
+    public void GameEnd(int coins)
     {
-        if (__stageControler)
-        {
-            saveDat.game.addCoins(__stageControler.coinsCollected);
-        }
+        _coinsCollectedRun += coins;
     }
 
     public void ContinueGame()
@@ -288,17 +309,16 @@ public class GameManager : MonoBehaviour
 
     void onStageControlerLoaded(StageControler s)
     {
-        if (__stageControler == null)
-            __stageControler = s;
+        if (_stageControler == null)
+            _stageControler = s;
     }
 
     void onStageControlerDestroyed(StageControler s)
     {
-        if (__stageControler != s)
+        if (_stageControler != s)
             return;
 
         _stageControler = null;
-        __stageControler = null;
     }
 
     void onStageEnded()

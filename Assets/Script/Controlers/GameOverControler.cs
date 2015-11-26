@@ -130,8 +130,9 @@ public class GameOverControler : MonoBehaviour {
 
     IEnumerator NumberIntro()
     {
-        int score = 123;
-        int scoreBest = 453;
+        int score = GameManager.instance.coinsCollectedRun;
+        Debug.Log(GameManager.instance.coinsCollectedRun);
+        int scoreBest = GameManager.instance.saveDat.game.HighestAmountGainedInSingleRun;
 
         int x = 0;
 

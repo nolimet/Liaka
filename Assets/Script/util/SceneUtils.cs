@@ -26,15 +26,9 @@ namespace util
             Application.LoadLevel(Application.loadedLevelName);
         }
 
-        int LastScene;
         public void ReloadLastScene()
         {
-            Application.LoadLevel(LastScene);
-        }
-
-        public void OnLevelWasLoaded(int level)
-        {
-            LastScene = level;
+            Application.LoadLevel(GameManager.instance.LastScene);
         }
     }
 }

@@ -41,6 +41,7 @@ public class SaveData
         /// <param name="numb">Now many will be added</param>
         public void addCoins(int numb)
         {
+            Debug.Log(numb);
             CoinsCurrent += numb;
             _CoinsTotal += numb;
             if (numb > HighestAmountGainedInSingleRun)

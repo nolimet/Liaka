@@ -81,7 +81,7 @@ public class StageControler : MonoBehaviour
         onBossBattleEnds -= StageControler_onBossBattleEnds;
 
         if (GameManager.instance)
-            GameManager.instance.saveDat.game.addCoins(_coinsCollected);
+            GameManager.instance.GameEnd(_coinsCollected);
     }
 
     #region Events
@@ -115,12 +115,12 @@ public class StageControler : MonoBehaviour
 
     private void Player_onEnergyZero()
     {
-        Application.LoadLevel("GAME-OVER");
+        playerDefeated();
     }
 
     private void Player_onDeath()
     {
-        Application.LoadLevel("GAME-OVER");
+        playerDefeated();
     }
 
     private void StageControler_onBossBattleEnds()
@@ -129,10 +129,7 @@ public class StageControler : MonoBehaviour
 
         if (_bossDefeated)
         {
-            if (NextStageName == "")
-                Application.LoadLevel("STAGE_COMPLETE");
-            else
-                Application.LoadLevel(NextStageName);
+            playerWon();
         }
 
     }
@@ -198,6 +195,9 @@ public class StageControler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
             dropCoins(10);
+
+        if (Input.GetKeyDown(KeyCode.C))
+            _coinsCollected += 4;
     }
 
     public float NormalizedTimeLeft()
@@ -222,5 +222,18 @@ public class StageControler : MonoBehaviour
 
             p.FadeOutStart(0.4f, 2f);
         }
+    }
+
+    void playerDefeated()
+    {
+        Application.LoadLevel("Game-End-Lose");
+    }
+
+    void playerWon()
+    {
+        if (NextStageName == "")
+            Application.LoadLevel("Game-End-Win");
+        else
+            Application.LoadLevel(NextStageName);
     }
 }
