@@ -52,7 +52,10 @@ public class GameOverControler : MonoBehaviour {
 
         Color c = Color.white;
         c.a = 0;
-        foreach(Image i in flickerImages)
+
+        StartCoroutine(NumberIntro());
+
+        foreach (Image i in flickerImages)
         {
             c = i.color;
             c.a = 0;
@@ -74,8 +77,6 @@ public class GameOverControler : MonoBehaviour {
             duration2[i] = Random.Range(1.4f, 1.6f);
             flicker[i] = Random.Range(7, 9);
         }
-
-        StartCoroutine(NumberIntro());
 
         #region flickering
         while (flicker.Any(a => a > 0))
@@ -135,6 +136,8 @@ public class GameOverControler : MonoBehaviour {
         //int scoreBest = GameManager.instance.saveDat.game.HighestAmountGainedInSingleRun;
         int scoreBest = GameManager.instance.saveDat.game.HighestAmountGainedInSingleRun;
 
+
+        //yield return new WaitForSeconds(0.5f);
 
         int x = 0;
 
