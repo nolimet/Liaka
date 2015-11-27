@@ -271,8 +271,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SetStatics();
-        int t = (int)(Time.time * 10);
-        //Debug.Log(t.getNumbAt(4) + " : " + t.getNumbAt(3) + " : " + t.getNumbAt(2) + " : " + t.getNumbAt(1) + " : " + t.getNumbAt(0));
     }
 
     #region EventListeners

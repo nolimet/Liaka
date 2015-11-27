@@ -7,8 +7,6 @@ public class FlyingEnemy: EnemyBase
 
     Vector3 startingPoint;
 
-    [SerializeField]
-    Vector3 deb = Vector3.zero;
 
     [System.Serializable]
     struct movePatern
@@ -73,7 +71,6 @@ public class FlyingEnemy: EnemyBase
                 }
 
                 transform.position = p;
-                deb = p;
                 //Debug.Log("running " + name + " t1 = " + t1.ToString() + " t2 = " + t2.ToString() + " tm = " + tM.ToString() + " pos: " + transform.position, this.gameObject);
             }
             yield return new WaitForEndOfFrame();

@@ -9,14 +9,14 @@ public class AttackSlider : MonoBehaviour
     public event FloatDelegate onAttack;
 
     [SerializeField]
-    RectTransform cicleMov;
+    RectTransform cicleMov = new RectTransform();
     [SerializeField]
-    slidePart Good, Bad1, Bad2, Perfect;
+    slidePart Good = new slidePart(), Bad1 = new slidePart(), Bad2 = new slidePart(), Perfect = new slidePart();
     [Header("MovementRange")]
-    public float MoveMin;
-    public float MoveMax;
-    public float moveRange;
-    bool paused;
+    public float MoveMin = 0;
+    public float MoveMax = 0;
+    public float moveRange = 0;
+    bool paused = false;
 
     public enum state
     {

@@ -54,8 +54,6 @@ public class AudioControler : MonoBehaviour
 
     public sources AudioSources;
 
-    Vector3 soundPos = new Vector3(0, 0, -10);
-
     float MusicVol, SFXVol, UIVol;
 
     void Start()

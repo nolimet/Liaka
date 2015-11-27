@@ -149,13 +149,13 @@ public class GameOverControler : MonoBehaviour {
             CurrentScore.numb0.text = Random.Range(0, 9).ToString();
             if (x > 1)
                 BestScore.numb0.text = Random.Range(0, 9).ToString();
-            if (x > 5) 
+            if (x > 2) 
                 CurrentScore.numb1.text = Random.Range(0, 9).ToString();
-            if(x>6)
+            if(x>3)
                 BestScore.numb1.text = Random.Range(0, 9).ToString();
-            if(x>10)
+            if(x>4)
                 CurrentScore.numb2.text = Random.Range(0, 9).ToString();
-            if(x>16)
+            if(x>5)
                 BestScore.numb2.text = Random.Range(0, 9).ToString();
 
             yield return new WaitForSeconds(0.05f);

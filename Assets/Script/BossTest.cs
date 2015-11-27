@@ -4,14 +4,13 @@ using System.Collections;
 public class BossTest : MonoBehaviour
 {
     [SerializeField]
-    Vector3 posDist,PlayerStart,SelfStart;
+    Vector3 posDist,SelfStart;
     float tx;
 
     void Start()
     {
         BaseObject.onHitBose += hit;
         GameManager.uiControler.attackSlider.onAttack += AttackSlider_onAttack;
-        PlayerControler.onPlayerCreated += PlayerControler_Created;
         
         SelfStart = transform.position;
     }
@@ -20,13 +19,6 @@ public class BossTest : MonoBehaviour
     {
         GameManager.uiControler.attackSlider.onAttack -= AttackSlider_onAttack;
         BaseObject.onHitBose -= hit;
-        PlayerControler.onPlayerCreated -= PlayerControler_Created;
-    }
-
-    private void PlayerControler_Created(PlayerControler player)
-    {
-        Debug.Log("cake");
-        PlayerStart = player.transform.position;
     }
 
     private void AttackSlider_onAttack(float f, AttackSlider.state preformance)

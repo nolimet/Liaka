@@ -4,13 +4,7 @@ using System.Collections;
 
 public class MainMenuControler : MonoBehaviour {
 
-    [System.Serializable]
-    public struct opMenu
-    {
-        public Slider sounds, music,interfaceVol;
-        public GameObject menu;
-    }
-    public opMenu OptionMenu;
+    public CreditsScreen CreditScreen;
 
     public Text CoinsDisplay;
 
@@ -57,6 +51,24 @@ public class MainMenuControler : MonoBehaviour {
         GameManager.optionsMenu.onClose -= OptionsMenu_onClose;
         StartCoroutine(moveMain(1, 4));
     }
+
+    public void OpenCredits() {
+        if (CreditScreen)
+        {
+            CreditScreen.OpenMenu();
+            CreditScreen.onClose += CreditScreen_onClose;
+        }
+
+        StartCoroutine(moveMain(-1, 10));
+    }
+
+    private void CreditScreen_onClose()
+    {
+        CreditScreen.onClose -= CreditScreen_onClose;
+        StartCoroutine(moveMain(1, 4));
+    }
+
+    
 
     /// <summary>
     /// Moves main menu

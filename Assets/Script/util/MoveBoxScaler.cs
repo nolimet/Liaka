@@ -59,13 +59,12 @@ public class MoveBoxScaler : MonoBehaviour
     {
         RectTransform r = (RectTransform)transform;
         Vector2 n;
-        Vector2 Aspect = new Vector2(Screen.width, Screen.height);
 
         if (r.sizeDelta.x > r.sizeDelta.y)
             n = new Vector2(r.sizeDelta.x, r.sizeDelta.x);
         else
             n = new Vector2(r.sizeDelta.y, r.sizeDelta.y);
 
-        //r.sizeDelta = n;
+        r.sizeDelta = n;
     }
 }

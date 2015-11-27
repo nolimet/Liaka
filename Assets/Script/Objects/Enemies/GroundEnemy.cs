@@ -6,7 +6,6 @@ public class GroundEnemy : EnemyBase
 
     bool running;
     bool g;
-    string groundTag = "";
 
     float jumpCooldown = 0f;
 
