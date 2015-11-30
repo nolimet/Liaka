@@ -21,6 +21,7 @@ public class VariationLayerControler : LayerControler
         {
             tx = transform.GetChild(i);
                 SubObjects.Add(tx);
+            tx.localPosition = SubObjects[0].localPosition;
             tx.position = new Vector3(l, tx.position.y, tx.position.z);
                 l += tx.getChildBounds().size.x;
                 if (i >= 3)
