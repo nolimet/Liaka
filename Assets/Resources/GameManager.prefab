@@ -4026,7 +4026,7 @@ MonoBehaviour:
   _UIControler: {fileID: 11482284}
   _AudioControler: {fileID: 11407024}
   _DropTable: {fileID: 11473038}
-  __stageControler: {fileID: 0}
+  _stageControler: {fileID: 0}
   PauseMenu: {fileID: 115436}
   saveDat:
     options:
@@ -4686,18 +4686,23 @@ MonoBehaviour:
   - type: 0
     movement: 1
     chance: 50
+    maxConcecutiveDrops: 5
   - type: 0
     movement: 0
     chance: 45
+    maxConcecutiveDrops: 6
   - type: 1
     movement: 1
     chance: 15
+    maxConcecutiveDrops: 1
   - type: 1
     movement: 0
     chance: 30
+    maxConcecutiveDrops: 2
   - type: 2
     movement: 1
     chance: 7
+    maxConcecutiveDrops: 1
   Table: 
 --- !u!114 &11473052
 MonoBehaviour:

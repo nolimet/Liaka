@@ -49,7 +49,9 @@ public class InputManager : MonoBehaviour
 
     void setReconizers(bool b)
     {
-        Debug.Log(b ? "Adding Reconziers" : "Removing Reconziers");
+        if (DebugTouches)
+            Debug.Log(b ? "Adding Reconziers" : "Removing Reconziers");
+
         if (!b && !eventActive)
         {
             eventActive = false;

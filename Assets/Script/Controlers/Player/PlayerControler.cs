@@ -384,7 +384,7 @@ public class PlayerControler : MonoBehaviour
         if (hitTrap || gamePaused)
             return;
 
-        rigi2d.AddForce(new Vector3(0, 9 * rigi2d.mass, 0), ForceMode2D.Impulse);
+        rigi2d.AddForce(new Vector3(0, 9 * rigi2d.mass * rigi2d.gravityScale, 0), ForceMode2D.Impulse);
         if (onJump != null)
             onJump();
     }

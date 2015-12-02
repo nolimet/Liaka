@@ -171,7 +171,6 @@ public class GameManager : MonoBehaviour
 
         if (level > 3 && _lastScene <= 3)
         {
-            Debug.Log("resSet");
             saveDat.game.addCoins(_coinsCollectedRun);
             _coinsCollectedRun = 0;
         }
