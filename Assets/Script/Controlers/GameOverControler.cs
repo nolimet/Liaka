@@ -10,12 +10,42 @@ public class GameOverControler : MonoBehaviour {
     public struct Scoreboard
     {
         public Text numb0, numb1, numb2;
+        public Text[] numbs;
+
+        int l;
 
         public void setValue(int i)
         {
-            numb0.text = i.getNumbAt(0).ToString();
-            numb1.text = i.getNumbAt(1).ToString();
-            numb2.text = i.getNumbAt(2).ToString();
+            l = numbs.Length;
+            for (int j = 0; j < l; j++)
+            {
+                numbs[j].text = i.getNumbAt(j).ToString();
+            }
+           // numb.text = i.getNumbAt(0).ToString();
+           // numb1.text = i.getNumbAt(1).ToString();
+           // numb2.text = i.getNumbAt(2).ToString();
+        }
+
+        /// <summary>
+        /// Set Values of TextObjects;
+        /// </summary>
+        /// <param name="s"></param>
+        public void setValue(string s)
+        {
+            l = numbs.Length;
+            for (int i = 0; i < l && i < s.Length; i++) 
+            {
+                numbs[i].text = s[i].ToString();
+            }
+        }
+
+        public void SetRandomNumber(int AffectedNumb)
+        {
+            l = numbs.Length;
+            for (int i = 0; i < l && i < AffectedNumb; i++)
+            {
+                numbs[i].text = Random.Range(0, 10).ToString();
+            }
         }
     }
 
@@ -140,62 +170,86 @@ public class GameOverControler : MonoBehaviour {
         //yield return new WaitForSeconds(0.5f);
 
         int x = 0;
-
+        string n = "";
         for (int i = 0; i < 30; i++)
         {
             if (i % 3 == 0)
                 x++;
 
-            CurrentScore.numb0.text = Random.Range(0, 9).ToString();
-            if (x > 1)
-                BestScore.numb0.text = Random.Range(0, 9).ToString();
-            if (x > 2) 
-                CurrentScore.numb1.text = Random.Range(0, 9).ToString();
-            if(x>3)
-                BestScore.numb1.text = Random.Range(0, 9).ToString();
-            if(x>4)
-                CurrentScore.numb2.text = Random.Range(0, 9).ToString();
-            if(x>5)
-                BestScore.numb2.text = Random.Range(0, 9).ToString();
+            if(x > 10)
+            {
+                CurrentScore.SetRandomNumber(3);
+                BestScore.SetRandomNumber(3);
+            }
+            else if (x > 5)
+            {
+                CurrentScore.SetRandomNumber(2);
+                BestScore.SetRandomNumber(2);
+            }
+
+            else if(x>1)
+            {
+                CurrentScore.SetRandomNumber(1);
+                BestScore.SetRandomNumber(1);
+            }
+            //CurrentScore.numb[0].text = Random.Range(0, 9).ToString();
+            //if (x > 1)
+            //    BestScore.numb[0].text = Random.Range(0, 9).ToString();
+            //if (x > 2) 
+            //    CurrentScore.numb1.text = Random.Range(0, 9).ToString();
+            //if(x>3)
+            //    BestScore.numb1.text = Random.Range(0, 9).ToString();
+            //if(x>4)
+            //    CurrentScore.numb2.text = Random.Range(0, 9).ToString();
+            //if(x>5)
+            //    BestScore.numb2.text = Random.Range(0, 9).ToString();
 
             yield return new WaitForSeconds(0.05f);
         }
 
         x = 20;
+        string CScore = "000";
+        string BScore = "000";
         for (int i = 0; i < 60; i++)
         {
             if (i % 3 == 0)
                 x--;
+            CScore = "";
+            BScore = "";
+
 
             if (x > 15)
-                CurrentScore.numb0.text = Random.Range(0, 9).ToString();
+                CScore += Random.Range(0, 9).ToString();
             else
-                CurrentScore.numb0.text = score.getNumbAt(0).ToString();
+                CScore += score.getNumbAt(0).ToString();
 
             if (x > 14)
-                BestScore.numb0.text = Random.Range(0, 9).ToString();
+                BScore += Random.Range(0, 9).ToString();
             else
-                BestScore.numb0.text = scoreBest.getNumbAt(0).ToString();
+                BScore += scoreBest.getNumbAt(0).ToString();
 
             if (x > 10)
-                CurrentScore.numb1.text = Random.Range(0, 9).ToString();
+                CScore += Random.Range(0, 9).ToString();
             else
-                CurrentScore.numb1.text = score.getNumbAt(1).ToString();
+                CScore += score.getNumbAt(1).ToString();
 
             if (x > 9)
-                BestScore.numb1.text = Random.Range(0, 9).ToString();
+                BScore += Random.Range(0, 9).ToString();
             else
-                BestScore.numb1.text = scoreBest.getNumbAt(1).ToString();
+                BScore += scoreBest.getNumbAt(1).ToString();
 
             if (x > 5)
-                CurrentScore.numb2.text = Random.Range(0, 9).ToString();
+                CScore += Random.Range(0, 9).ToString();
             else
-                CurrentScore.numb2.text = score.getNumbAt(2).ToString();
+                CScore += score.getNumbAt(2).ToString();
 
             if (x > 4)
-                BestScore.numb2.text = Random.Range(0, 9).ToString();
+                BScore += Random.Range(0, 9).ToString();
             else
-                BestScore.numb2.text = scoreBest.getNumbAt(2).ToString();
+                BScore += scoreBest.getNumbAt(2).ToString();
+
+            BestScore.setValue(BScore);
+            CurrentScore.setValue(CScore);
 
             yield return new WaitForSeconds(0.05f);
         }
