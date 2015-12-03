@@ -23,11 +23,11 @@ public class AsyncLoader : MonoBehaviour {
         {
             yield return async.isDone;
             LoadingBar.setValue(async.progress);
-            Debug.Log("Loading at " + async.progress);
+            //Debug.Log("Loading at " + async.progress);
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log("Completed Loading of :: " + levelName);
+        //Debug.Log("Completed Loading of :: " + levelName);
 
         gameObject.SetActive(false);
     }

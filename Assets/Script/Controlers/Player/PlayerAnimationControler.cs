@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerAnimationControler : MonoBehaviour
 {
 
-    int CurrentMoveDir = 0;
+    //int CurrentMoveDir = 0;
 
     [SerializeField]
     SkeletonAnimation anim;
@@ -95,7 +95,7 @@ public class PlayerAnimationControler : MonoBehaviour
                 break;
         }
 
-        CurrentMoveDir = Dir;
+        //CurrentMoveDir = Dir;
     }
 
 

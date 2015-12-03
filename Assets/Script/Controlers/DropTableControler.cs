@@ -88,18 +88,18 @@ public class DropTableControler : MonoBehaviour
         t.Abort();
         yield return new WaitForEndOfFrame();
 
-#if UNITY_EDITOR
-        t = new Thread(TestTable);
-        t.Start();
-        while (t.IsAlive)
-        {
-            Debug.Log("Thread Running-1");
-            yield return new WaitForEndOfFrame();
-        }
+//#if UNITY_EDITOR
+//        t = new Thread(TestTable);
+//        t.Start();
+//        while (t.IsAlive)
+//        {
+//            Debug.Log("Thread Running-1");
+//            yield return new WaitForEndOfFrame();
+//        }
 
-        t.Abort();
+//        t.Abort();
 
-#endif
+//#endif
         t = null;
     }
 
@@ -145,6 +145,7 @@ public class DropTableControler : MonoBehaviour
             j = getRandomIntItem();
             raw += j ;
             numbs[j]++;
+            Thread.Sleep(1);
         }
 
         string output = "Output: ";
@@ -171,7 +172,6 @@ public class DropTableControler : MonoBehaviour
 
         int tableSize = Table.Count;
         int i = 0;
-        int j;
         int itter = 0;
         bool check = true;
         bool anyMatch = false;
@@ -247,7 +247,7 @@ public class DropTableControler : MonoBehaviour
 //        bool anyMatch = false;
 //        while (check)
  //       {
-            //i = Table.ElementAtOrDefault(new System.Random().Next() % Table.Count());
+            //i = Table.ElementAtOrDefault(new System.Random().Next() % Table.Count);
             i = getRandomIntItem();
 /*
             for (j = 0; j < lastItem.Length-1; j++)

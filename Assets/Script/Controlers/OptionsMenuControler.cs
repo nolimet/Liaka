@@ -8,13 +8,13 @@ public class OptionsMenuControler : MonoBehaviour {
     public event voidDelegate onClose;
 
     [SerializeField]
-    RectTransform RectTrans;
+    RectTransform RectTrans = null;
 
     [SerializeField]
-    private Slider SFX_Slider, Music_Slider, Interface_Slider;
+    private Slider SFX_Slider = null, Music_Slider = null, Interface_Slider = null;
 
     [SerializeField]
-    private Toggle godModeToggle;
+    private Toggle godModeToggle = null;
 
     void Start()
     {

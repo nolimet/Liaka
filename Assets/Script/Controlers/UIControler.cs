@@ -7,13 +7,12 @@ public class UIControler : MonoBehaviour
 
 
     [SerializeField]
-    MaskBar heatLevel,EnergyLevel;
-    [SerializeField]
-    UnityEngine.UI.Slider TimerBar;
-    bool GamePaused;
-    bool PlayerExists;
+    MaskBar heatLevel = null, EnergyLevel = null;
+    UnityEngine.UI.Slider TimerBar = null;
+    bool GamePaused = false;
+    bool PlayerExists = false;
 
-    bool StageControlerAlive = false;
+    //bool StageControlerAlive = false;
 
     public void Awake()
     {
@@ -82,7 +81,7 @@ public class UIControler : MonoBehaviour
     {
         if (!PlayerExists)
             return;
-       
+
         heatLevel.setValue(GameManager.playerControler.weaponHeat / GameManager.playerControler.MaxHeat);
 
     }

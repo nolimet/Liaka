@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerAnimationControler1 : MonoBehaviour
 {
 
-    int CurrentMoveDir = 0;
     SpriteRenderer[] r;
 
     public Animator ani;
@@ -112,8 +111,6 @@ public class PlayerAnimationControler1 : MonoBehaviour
                 
                 break;
         }
-
-        CurrentMoveDir = Dir;
     }
 
 

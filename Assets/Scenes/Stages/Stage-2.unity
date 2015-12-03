@@ -228,6 +228,10 @@ Prefab:
       propertyPath: NextStageName
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 106306, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
   m_IsPrefabParent: 0
@@ -6596,6 +6600,10 @@ Prefab:
       propertyPath: StageManager
       value: 
       objectReference: {fileID: 54574122}
+    - target: {fileID: 142030, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
   m_IsPrefabParent: 0
@@ -8920,6 +8928,10 @@ Prefab:
     - target: {fileID: 21257326, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
       propertyPath: m_SortingOrder
       value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 138912, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
@@ -16085,6 +16097,7 @@ MonoBehaviour:
     speed: {x: -7, y: 0, z: 0}
   - Layer: {fileID: 973480334}
     speed: {x: -5, y: 0, z: 0}
+  SpeedMult: 1
 --- !u!1 &2088285522
 GameObject:
   m_ObjectHideFlags: 0

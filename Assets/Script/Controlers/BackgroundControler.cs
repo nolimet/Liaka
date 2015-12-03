@@ -14,6 +14,7 @@ public class BackgroundControler : MonoBehaviour
 
     [SerializeField]
     layer[] Layers = new layer[0];
+    public float SpeedMult = 1f;
     bool GamePaused = false;
     bool playerHitTrap = false;
     void Start()
@@ -44,7 +45,7 @@ public class BackgroundControler : MonoBehaviour
             return;
         foreach (layer l in Layers)
         {
-            l.Layer.moveLayer(l.speed);
+            l.Layer.moveLayer(l.speed * SpeedMult);
         }
     }
 

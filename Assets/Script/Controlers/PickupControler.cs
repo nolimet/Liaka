@@ -4,14 +4,14 @@ using System.Collections;
 public class PickupControler : MonoBehaviour
 {
     [Tooltip("Pickups spawn between low spawn and high spawn"), SerializeField]
-    Transform HighSpawn, LowSpawn;
+    Transform HighSpawn = null, LowSpawn = null;
     [SerializeField]
-    PickupBase.PickupType[] spawnable;
+    PickupBase.PickupType[] spawnable = null;
     [SerializeField]
-    float MinVelocity, MaxVelocity;
+    float MinVelocity=0, MaxVelocity=0;
 
-    bool gameloopRunning;
-    bool gamePaused;
+    bool gameloopRunning = false;
+    bool gamePaused = false;
     [SerializeField]
     bool bossCharging = false;
     bool bossAttacking = false;
