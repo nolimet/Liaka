@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
         _lastScene = _lastScene_1;
         _lastScene_1 = level;
 
-        if (level == 1 || level == 2 || level == 3)
+        if (level == 1 || level == 2 || level == 3 || level == 4)
         {
             PauseMenu.SendMessage("SetState", true, SendMessageOptions.DontRequireReceiver);
             onPauseGame(true);
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (level > 3 && _lastScene <= 3)
+        if (level > 3 && _lastScene <= 4)
         {
             saveDat.game.addCoins(_coinsCollectedRun);
             _coinsCollectedRun = 0;

@@ -92,6 +92,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 405260, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -172,6 +176,50 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11482284, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: TimerBar
+      value: 
+      objectReference: {fileID: 941121973}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[3].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[3].chance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[3].maxConcecutiveDrops
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[4].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[4].movement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[4].chance
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[4].maxConcecutiveDrops
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[2].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[2].chance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473038, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: dropChance.Array.data[0].maxConcecutiveDrops
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
   m_IsPrefabParent: 0
@@ -249,3 +297,9 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
   m_StereoMirrorMode: 0
+--- !u!114 &941121973 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11411362, guid: ca53d6696f6e4294ba0ba99327a4ded0,
+    type: 2}
+  m_PrefabInternal: {fileID: 376768425}
+  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}

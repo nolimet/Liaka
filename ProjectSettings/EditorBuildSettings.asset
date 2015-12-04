@@ -13,6 +13,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Game-End-Lose.unity
   - enabled: 1
     path: Assets/Scenes/Levels/Game-End-Win.unity
+  - enabled: 1
+    path: Assets/Scenes/Levels/Game-Load.unity
   - enabled: 0
     path: Assets/Scenes/Levels/STAGE_COMPLETE.unity
   - enabled: 0

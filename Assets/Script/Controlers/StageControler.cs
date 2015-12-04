@@ -198,6 +198,9 @@ public class StageControler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
             _coinsCollected += 4;
+
+        if (Input.GetKeyDown(KeyCode.V))
+            TimeLeft = 1f;
     }
 
     public float NormalizedTimeLeft()
@@ -226,14 +229,17 @@ public class StageControler : MonoBehaviour
 
     void playerDefeated()
     {
-        Application.LoadLevel("Game-End-Lose");
+        LoadObject.LoadLevelAsync("Game-End-Lose", 1.5f);
+        //Application.LoadLevel("Game-End-Lose");
     }
 
     void playerWon()
     {
         if (NextStageName == "")
-            Application.LoadLevel("Game-End-Win");
+            LoadObject.LoadLevelAsync("Game-End-Win", 1.5f);
+        //Application.LoadLevel("Game-End-Win");
         else
-            Application.LoadLevel(NextStageName);
+            LoadObject.LoadLevelAsync(NextStageName, 1.5f);
+        //Application.LoadLevel(NextStageName);
     }
 }

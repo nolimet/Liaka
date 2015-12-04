@@ -3768,6 +3768,7 @@ MonoBehaviour:
     speed: {x: -.699999988, y: 0, z: 0}
   - Layer: {fileID: 1109644214}
     speed: {x: -.300000012, y: 0, z: 0}
+  SpeedMult: 1
 --- !u!1 &984797654
 GameObject:
   m_ObjectHideFlags: 0
@@ -7010,6 +7011,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11460744, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: spawnable.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 472150, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7040,6 +7045,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472150, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460744, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: spawnable.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460744, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: spawnable.Array.data[1]
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []

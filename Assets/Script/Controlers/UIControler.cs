@@ -8,6 +8,7 @@ public class UIControler : MonoBehaviour
 
     [SerializeField]
     MaskBar heatLevel = null, EnergyLevel = null;
+    [SerializeField]
     UnityEngine.UI.Slider TimerBar = null;
     bool GamePaused = false;
     bool PlayerExists = false;
