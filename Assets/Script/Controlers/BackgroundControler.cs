@@ -17,10 +17,13 @@ public class BackgroundControler : MonoBehaviour
     public float SpeedMult = 1f;
     bool GamePaused = false;
     bool playerHitTrap = false;
+    
+
     void Start()
     {
         if (GameManager.instance)
             GameManager.instance.onPauseGame += onGamePaused;
+
     }
 
     void OnDestory()
@@ -58,4 +61,10 @@ public class BackgroundControler : MonoBehaviour
     //        l.Layer.FixedLayerMove(l.speed);
     //    }
     //}
+
+    void LateUpdate()
+    {
+            foreach (layer l in Layers)
+                l.Layer.LateUpdateLoop();
+    }
 }

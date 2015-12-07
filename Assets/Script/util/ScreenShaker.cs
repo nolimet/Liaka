@@ -8,11 +8,17 @@ public class ScreenShaker : MonoBehaviour
     /// Object instance
     /// </summary>
     public static ScreenShaker instance;
-    bool shaking = false;
+
+    public static bool Shaking { get { return instance.shaking; } }
+    public static Vector2 currenOffSet { get { return instance._currentOffSet; } }
+
+    protected Vector2 _currentOffSet = Vector2.zero;
+    protected bool shaking = false;
     bool paused = false;
 
     void Start()
     {
+        shaking = false;
         GameManager.instance.onPauseGame += Instance_onPauseGame;
     }
 
@@ -35,6 +41,8 @@ public class ScreenShaker : MonoBehaviour
             ShakeScreen(2f, 0.4f, 0.05f);
         if (Input.GetKeyDown(KeyCode.Alpha4))
             ShakeScreen(2f, 0.7f, 0.05f);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            ShakeScreen(2f, 1f, 0.04f);
 #endif
     }
 
@@ -78,6 +86,9 @@ public class ScreenShaker : MonoBehaviour
         Vector2 screenShakeTarget = new Vector2(intensity * Random.Range(-1f, 1f), intensity * Random.Range(-1f, 1f)), LastScreenShakeTarget = Vector2.zero;
         //camera main transform;
         Transform camTrans = Camera.main.transform;
+        //Time Delta Calculator
+        System.DateTime timeLast = System.DateTime.Now;
+        float timeDelta = 0;
         //shakes the screen
         while (t > 0)
         {
@@ -85,11 +96,12 @@ public class ScreenShaker : MonoBehaviour
             if (!paused)
             {
                 //moves the camera around with a liniar interpolation
-                camTrans.localPosition = Vector2.Lerp(LastScreenShakeTarget, screenShakeTarget, shakeLerp / timePerShake);
+                _currentOffSet = Vector2.Lerp(LastScreenShakeTarget, screenShakeTarget, shakeLerp / timePerShake);
+                camTrans.localPosition = _currentOffSet;
                 //does a count down
-                t -= Time.deltaTime;
+                t -= timeDelta;
                 
-                shakeLerp += Time.deltaTime;
+                shakeLerp += timeDelta;
                 if (shakeLerp >= timePerShake)
                 {
                     shakeLerp = 0;
@@ -98,20 +110,30 @@ public class ScreenShaker : MonoBehaviour
                     screenShakeTarget = new Vector2(intensity * Random.Range(-1f, 1f), intensity * Random.Range(-1f, 1f));
                 }
             }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.014f);
+            
+            timeDelta = (float)(System.DateTime.Now - timeLast).TotalSeconds;
+            timeLast = System.DateTime.Now;
+            Debug.Log(timeDelta);
         }
-
+        
+        
         t = 0;
         //make sure the screen is back to where it started
         while (t < timePerShake)
         {
-            camTrans.localPosition = Vector2.Lerp(screenShakeTarget, Vector2.zero, t / timePerShake);
-            t += Time.deltaTime;
+            _currentOffSet = Vector2.Lerp(screenShakeTarget, Vector2.zero, t / timePerShake);
+            camTrans.localPosition = _currentOffSet;
+            t += timeDelta;
+            
+            yield return new WaitForSeconds(0.014f);
 
-            yield return new WaitForEndOfFrame();
+            timeDelta = (float)(System.DateTime.Now - timeLast).TotalSeconds;
+            timeLast = System.DateTime.Now;
         }
-
-        camTrans.localPosition = Vector2.zero;
         shaking = false;
+        _currentOffSet = Vector2.zero;
+        camTrans.localPosition = Vector2.zero;
+       
     }
 }

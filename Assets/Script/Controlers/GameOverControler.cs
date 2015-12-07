@@ -170,7 +170,6 @@ public class GameOverControler : MonoBehaviour {
         //yield return new WaitForSeconds(0.5f);
 
         int x = 0;
-        string n = "";
         for (int i = 0; i < 30; i++)
         {
             if (i % 3 == 0)
