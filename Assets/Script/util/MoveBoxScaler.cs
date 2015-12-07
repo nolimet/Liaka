@@ -25,7 +25,7 @@ public class MoveBoxScaler : MonoBehaviour
     void Awake()
     {
         if (!GameManager.instance)
-            Debug.Log("error");
+            Debug.LogError("No Game Manager Could Be found 0.0");
         if (useRectransMode)
             rectTransMode();
         else
