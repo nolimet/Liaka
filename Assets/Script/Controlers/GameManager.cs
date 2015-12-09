@@ -220,8 +220,7 @@ public class GameManager : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                AnalyticsGameManager.ThrowSystemError(e);
-
+                Debug.LogException(e);
                 Debug.Log(saveDat);
             }
 
@@ -332,6 +331,7 @@ public class GameManager : MonoBehaviour
     void EscapePressed()
     {
         if (Application.loadedLevel == 1)
+            
             return;
 
         _gamePaused = !_gamePaused;

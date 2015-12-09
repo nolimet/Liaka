@@ -75,11 +75,6 @@ public class EnemyControler : MonoBehaviour
         StartCoroutine(gameLoop());
     }
 
-    public void OnDisable()
-    {
-        GameLoopStarted = false;
-    }
-
     void GamePaused(bool b)
     {
         if (!this)
@@ -119,16 +114,11 @@ public class EnemyControler : MonoBehaviour
 
     IEnumerator gameLoop()
     {
-        if (GameLoopStarted)
-            yield break;
-
-        GameLoopStarted = true;
         float d = 2f;
         while (GameLoopStarted && !gamePaused && !bossBattle && isActiveAndEnabled)
         {
             if (d <= 0)
             {
-                if(EnemyPool.instance.activeObjects==0)
                 Spawn();
                 d = Random.Range(0.3f, 5 / Mathf.Pow(1.2f,diff));
             }
@@ -136,6 +126,5 @@ public class EnemyControler : MonoBehaviour
             d -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        GameLoopStarted = false;
     }
 }
