@@ -3234,7 +3234,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 495202, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .689999998
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 495202, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3264,13 +3264,17 @@ Prefab:
       propertyPath: m_Name
       value: PlayerContainer
       objectReference: {fileID: 0}
-    - target: {fileID: 114482, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 11495150, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: l
+      value: 1.83
       objectReference: {fileID: 0}
-    - target: {fileID: 5077958, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
-      propertyPath: m_GravityScale
-      value: 1.5
+    - target: {fileID: 11495150, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: distOff.y
+      value: -1.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 11495150, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: distOff.x
+      value: -0.24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
