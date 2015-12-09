@@ -178,14 +178,14 @@ public class DropTableControler : MonoBehaviour
         // string superRaw = "SuperRaw: ";
         System.DateTime t = System.DateTime.Now;
         int SEED = t.Millisecond * t.Second * t.Minute;
-        System.Random r;
+        System.Random r = new System.Random(SEED); ;
         while (check)
         {
-            r = new System.Random(SEED);
+            //r = new System.Random(SEED);
             //new System.Random().Next(Table.Count()
             i = Table.ElementAtOrDefault(r.Next() % tableSize);
 
-            if (itter > 1000)
+            if (itter > 100)
                 check = false;
 
             //superRaw += i.ToString();

@@ -6,7 +6,11 @@ public class LoadObject : MonoBehaviour
 
     public static string LevelToLoad = "";
     public float waitTime;
+    public float waitTimeMax;
     public bool lvlLoadingDone;
+
+    SegmentedBar b;
+
     public static void LoadLevelAsync(string level, float waitTime)
     {
         GameObject G = Instantiate(Resources.Load("Object/LoadObject"), Vector3.zero,Quaternion.identity) as GameObject;
@@ -24,7 +28,9 @@ public class LoadObject : MonoBehaviour
     {
         if(lvlLoadingDone)
         {
+
             waitTime -= Time.deltaTime;
+            b.Value = ((waitTimeMax-waitTime) / waitTimeMax) * 0.6f;
             if(waitTime<0 && waitTime > -1)
             {
                 waitTime = -10;
@@ -36,6 +42,7 @@ public class LoadObject : MonoBehaviour
     public void BeginLoading(string lvl, float waitTime)
     {
         this.waitTime = waitTime;
+        waitTimeMax = waitTime;
         LevelToLoad = lvl;
         StartCoroutine(Loader("Game-Load"));
     }
@@ -45,6 +52,8 @@ public class LoadObject : MonoBehaviour
         AsyncOperation async = Application.LoadLevelAsync(levelName);
         while (!async.isDone)
         {
+            if (lvlLoadingDone)
+                b.Value = 0.6f + (async.progress) * 0.4f;
             yield return async.isDone;
             //LoadingBar.setValue(async.progress);
             //Debug.Log("Loading at " + async.progress);
@@ -55,6 +64,9 @@ public class LoadObject : MonoBehaviour
         if (lvlLoadingDone)
             Destroy(gameObject);
         else
+        {
             lvlLoadingDone = true;
+            b = FindObjectOfType<SegmentedBar>();
+        }
     }
 }

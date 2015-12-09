@@ -163,6 +163,7 @@ public class PlayerControler : MonoBehaviour
         Update_GroundCheck();
         Update_HeatLevel();
         Update_Boost();
+        Update_JumpSpeed();
     }
     #endregion
 
@@ -252,6 +253,11 @@ public class PlayerControler : MonoBehaviour
     #endregion
 
     #region UpdateFunctions
+    void Update_JumpSpeed()
+    {
+        if (rigi2d.velocity.y > 0 && rigi2d.velocity.y < 0.3f)
+            rigi2d.AddForce(new Vector2(0, -10f*rigi2d.mass), ForceMode2D.Force);
+    }
     void Update_Energy()
     {
         if (Energy > 0)
@@ -281,6 +287,7 @@ public class PlayerControler : MonoBehaviour
         else
             g = false;
     }
+
     void Update_HeatLevel()
     {
         if (weaponHeat > 0)
