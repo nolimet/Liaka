@@ -72,7 +72,7 @@ public class PickObject : BaseObject
 
         Vector2 v;
         Vector2 d = GameManager.playerControler.transform.position - transform.position;
-        v = util.MathHelper.AngleToVector(util.MathHelper.VectorToAngle(d));
+        v = util.Common.AngleToVector(util.Common.VectorToAngle(d));
 
         rigi.AddForce(v * 50f);
     }

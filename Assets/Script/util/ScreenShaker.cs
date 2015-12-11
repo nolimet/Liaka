@@ -114,7 +114,6 @@ public class ScreenShaker : MonoBehaviour
             
             timeDelta = (float)(System.DateTime.Now - timeLast).TotalSeconds;
             timeLast = System.DateTime.Now;
-            Debug.Log(timeDelta);
         }
         
         

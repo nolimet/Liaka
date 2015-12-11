@@ -210,19 +210,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 442316, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.53999996
+      value: -1.54
       objectReference: {fileID: 0}
     - target: {fileID: 442316, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 21.8700008
+      value: 21.87
       objectReference: {fileID: 0}
     - target: {fileID: 456852, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 21.6599998
+      value: 21.83
       objectReference: {fileID: 0}
     - target: {fileID: 456852, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.9000001
+      value: 2.69
       objectReference: {fileID: 0}
     - target: {fileID: 11443500, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: NextStageName
@@ -231,6 +231,22 @@ Prefab:
     - target: {fileID: 106306, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 494684, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 21.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 494684, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 9.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 456852, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 494684, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
@@ -2517,7 +2533,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 358651132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.93, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 590319719}
@@ -15304,8 +15320,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1920044515}
-  - 114: {fileID: 1920044516}
   - 114: {fileID: 1920044517}
+  - 114: {fileID: 1920044518}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -15331,22 +15347,6 @@ Transform:
   - {fileID: 72770215}
   m_Father: {fileID: 2077297313}
   m_RootOrder: 2
---- !u!114 &1920044516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1920044514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d353b3d6f3ed414793b30fd0e851f71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SubObjects: []
-  subObjectWorldSize: {x: 0, y: 0, z: 0}
-  IgnorShake: 1
-  DoUpdate: 1
-  offSetX: -18
 --- !u!114 &1920044517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15364,6 +15364,23 @@ MonoBehaviour:
   Vertical: 1
   Horizontal: 0
   UsePivot: 0
+--- !u!114 &1920044518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1920044514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c819516d52c364192f8d13d9c8a9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SubObjects: []
+  subObjectWorldSize: {x: 0, y: 0, z: 0}
+  IgnorShake: 0
+  DoUpdate: 1
+  offSetX: -18
+  disableTraps: 4
 --- !u!1 &1929513894
 GameObject:
   m_ObjectHideFlags: 0
@@ -16969,10 +16986,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Layers:
-  - Layer: {fileID: 1920044516}
-    speed: {x: -15, y: 0, z: 0}
+  - Layer: {fileID: 1920044518}
+    speed: {x: -17, y: 0, z: 0}
   - Layer: {fileID: 910188059}
-    speed: {x: -12, y: 0, z: 0}
+    speed: {x: -14, y: 0, z: 0}
   - Layer: {fileID: 1818881038}
     speed: {x: -12, y: 0, z: 0}
   - Layer: {fileID: 1201699072}

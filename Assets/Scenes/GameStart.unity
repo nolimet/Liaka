@@ -176,6 +176,10 @@ Prefab:
       propertyPath: GodMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2063796, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ca53d6696f6e4294ba0ba99327a4ded0, type: 2}
   m_IsPrefabParent: 0

@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SegmentedBar : MonoBehaviour {
+public class SegmentedBar : MonoBehaviour
+{
 
-    public float maxValue=1;
+    public float maxValue = 1;
 
-    public float Value { get { return _Value; }
+    public float Value
+    {
+        get { return _Value; }
         set
         {
             if (value != _Value)
@@ -25,7 +28,8 @@ public class SegmentedBar : MonoBehaviour {
 
     public GameObject[] Segments;
 
-	void Start () {
+    void Awake()
+    {
 
         if (Segments == null || Segments.Length == 0)
         {
@@ -37,28 +41,29 @@ public class SegmentedBar : MonoBehaviour {
             {
                 g = Instantiate(SegmentPrefab);
                 r = (RectTransform)g.transform;
-
+                g.name = "Segment - " + i;
                 Segments[i] = g;
 
                 g.transform.SetParent(Container, false);
-                r.anchoredPosition = new Vector2(w*i, 0);
+                r.anchoredPosition = new Vector2(w * i, 0);
                 g.SetActive(false);
-                
+
             }
         }
-	}
+    }
 
     void Update_Value()
     {
         int z = Mathf.CeilToInt((_Value / maxValue) * MaxSegments);
-
         for (int i = 0; i < MaxSegments; i++)
         {
-            if (i <= z)
-                Segments[i].SetActive(true);
-            else if (i > z)
-                Segments[i].SetActive(false);
+            if (Segments[i])
+            {
+                if (i <= z)
+                    Segments[i].SetActive(true);
+                else if (i > z)
+                    Segments[i].SetActive(false);
+            }
         }
-            Debug.Log((_Value / maxValue) * MaxSegments);
     }
 }

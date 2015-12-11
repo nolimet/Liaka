@@ -28,8 +28,9 @@ public class VariationLayerControler : LayerControler
                     tx.gameObject.SetActive(false);
         }
     }
-    List<Transform> randomSelection = null;
-    List<Transform> negativeSelectoin = null;
+    [SerializeField]
+    protected List<Transform> randomSelection = null;
+    protected List<Transform> negativeSelectoin = null;
     public override bool InView(Transform t)
     {
         

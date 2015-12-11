@@ -163,7 +163,7 @@ public class PlayerControler : MonoBehaviour
         Update_GroundCheck();
         Update_HeatLevel();
         Update_Boost();
-        Update_JumpSpeed();
+        //Update_JumpSpeed();
     }
     #endregion
 

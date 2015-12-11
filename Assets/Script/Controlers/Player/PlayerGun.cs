@@ -19,7 +19,7 @@ public class PlayerGun : MonoBehaviour {
             Vector3 wp = Camera.main.ScreenToWorldPoint(new Vector3(v2.x, v2.y, 0));
             Vector3 d = wp - transform.position;
 
-            float a = util.MathHelper.VectorToAngle(d);
+            float a = util.Common.VectorToAngle(d);
 
             if (a > maxAngle)
                 a = maxAngle;
@@ -34,7 +34,7 @@ public class PlayerGun : MonoBehaviour {
             b.transform.rotation = q;
             b.transform.position = fireLocation.position;
 
-            b.setVelocity(util.MathHelper.AngleToVector(a) * 20f);
+            b.setVelocity(util.Common.AngleToVector(a) * 20f);
         }
     }
 }

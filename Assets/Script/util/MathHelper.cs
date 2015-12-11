@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace util
 {
-    public static class MathHelper
+    public static class Common
     {
 
         public static Vector2 AngleToVector(float angle)
@@ -36,7 +36,6 @@ namespace util
         {
             // First find a center for your bounds.
             Vector3 center = Vector3.zero;
-
             foreach (Transform child in t.transform)
             {
                 center += child.gameObject.GetComponent<SpriteRenderer>().bounds.center;

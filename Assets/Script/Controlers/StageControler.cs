@@ -221,7 +221,7 @@ public class StageControler : MonoBehaviour
             p.ignorPlayer();
             p.transform.position = GameManager.playerControler.transform.position;
             p.SetMovementType(PickupBase.Movement.Dynamic);
-            p.setVelocity(Random.Range(6f, 9f) * util.MathHelper.AngleToVector(Random.Range(45f, 45 + 90f)));
+            p.setVelocity(Random.Range(6f, 9f) * util.Common.AngleToVector(Random.Range(45f, 45 + 90f)));
 
             p.FadeOutStart(0.4f, 2f);
         }
