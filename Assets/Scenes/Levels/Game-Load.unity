@@ -94,9 +94,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 436887289}
   - 20: {fileID: 436887285}
-  - 92: {fileID: 436887288}
-  - 124: {fileID: 436887287}
-  - 81: {fileID: 436887286}
   m_Layer: 0
   m_Name: Loadingcam
   m_TagString: Untagged
@@ -138,27 +135,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
   m_StereoMirrorMode: 0
---- !u!81 &436887286
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 436887284}
-  m_Enabled: 1
---- !u!124 &436887287
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 436887284}
-  m_Enabled: 1
---- !u!92 &436887288
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 436887284}
-  m_Enabled: 1
 --- !u!4 &436887289
 Transform:
   m_ObjectHideFlags: 0

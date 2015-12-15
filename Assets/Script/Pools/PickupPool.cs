@@ -60,7 +60,7 @@ public class PickupPool : MonoBehaviour
 
     public void OnLevelWasLoaded(int level)
     {
-        DestroyAll();
+        //DestroyAll();
     }
 
     /// <summary>
@@ -110,6 +110,7 @@ public class PickupPool : MonoBehaviour
         }
 
         instance.InActivePool = new List<PickupBase>();
+        instance.ActivePool = new List<PickupBase>();
         System.GC.Collect();
     }
 
