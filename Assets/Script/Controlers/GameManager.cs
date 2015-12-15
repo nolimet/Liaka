@@ -86,7 +86,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    public Camera _UICamera;
+    public static Camera UICamera;
     //publics
     public GameObject PauseMenu;
 
@@ -201,6 +202,9 @@ public class GameManager : MonoBehaviour
 
         if (_optionsMenu && !optionsMenu)
             optionsMenu = _optionsMenu;
+
+        if (_UICamera && !UICamera)
+            UICamera = _UICamera;
     }
 
     void SaveLoad(bool save)

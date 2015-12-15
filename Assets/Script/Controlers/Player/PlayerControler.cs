@@ -85,8 +85,8 @@ public class PlayerControler : MonoBehaviour
 
     [HideInInspector]
     public float weaponHeat, MaxHeat = 100f;
-    [HideInInspector]
-    public float Energy, MaxEnergy = 100f;
+
+    public float Energy, MaxEnergy = 50f;
     [HideInInspector]
     public bool weaponForcedCooldown;
     [HideInInspector]
@@ -261,7 +261,7 @@ public class PlayerControler : MonoBehaviour
     void Update_Energy()
     {
         if (Energy > 0)
-            Energy -= 2f * Time.deltaTime;
+            Energy -= Time.deltaTime;
 
         if (Energy <= 0)
         {
@@ -269,6 +269,8 @@ public class PlayerControler : MonoBehaviour
                 if (onEnergyZero != null)
                     onEnergyZero();
         }
+
+        util.ValueDebugger.ValueLog("EnergyLevel", "current : " + Energy + " Max: " + MaxEnergy);
     }
     void Update_GroundCheck()
     {
@@ -276,6 +278,7 @@ public class PlayerControler : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
         Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l), Color.red);
+
         if (hit && hit.transform.tag == TagManager.Ground)
         {
             if (!g && onHitGround != null)
@@ -286,6 +289,8 @@ public class PlayerControler : MonoBehaviour
         }
         else
             g = false;
+
+        util.ValueDebugger.ValueLog("GroundStatus", "G : " + g + " DoubleJump : " + doubleJump);
     }
     void Update_HeatLevel()
     {
@@ -297,6 +302,8 @@ public class PlayerControler : MonoBehaviour
             weaponHeat = 0;
             weaponForcedCooldown = false;
         }
+
+        util.ValueDebugger.ValueLog("HeatLevel", "current : " + weaponHeat + " max: " + MaxHeat);
     }
     /// <summary>
     /// calls the Functions for the MoveBoost
