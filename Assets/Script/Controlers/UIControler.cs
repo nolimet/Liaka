@@ -99,7 +99,7 @@ public class UIControler : MonoBehaviour
     {
         if (!PlayerExists || !GameManager.stageControler)
             return;
-
+        if(TimerBar)
         TimerBar.value = GameManager.stageControler.NormalizedTimeLeft();
     }
 

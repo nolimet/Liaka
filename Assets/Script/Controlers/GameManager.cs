@@ -123,6 +123,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool _AllowDebug;
+    public static bool AllowDebug { get { return instance._AllowDebug; } }
+
     #region UnityFunctions
     void Awake()
     {

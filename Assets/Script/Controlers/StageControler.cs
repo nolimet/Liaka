@@ -105,7 +105,7 @@ public class StageControler : MonoBehaviour
         }
 
         if (o > 0)
-            dropCoins(o); 
+            dropCoins(o * 3); 
     }
 
     private void P_onCoinPickup()
@@ -145,9 +145,6 @@ public class StageControler : MonoBehaviour
         
     }
     #endregion
-
-
-    // Update is called once per frame
     void Update()
     {
         if(TimeLeft>0)
@@ -201,6 +198,9 @@ public class StageControler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.V))
             TimeLeft = 1f;
+
+
+        util.Debugger.Log("coins" , " current: " + coinsCollected);
     }
 
     public float NormalizedTimeLeft()

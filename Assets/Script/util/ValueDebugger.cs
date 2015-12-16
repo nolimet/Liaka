@@ -9,15 +9,13 @@ namespace util
 {
     public class ValueDebugger : MonoBehaviour
     {
-        private static ValueDebugger instance;
+        static ValueDebugger instance;
 
         protected Dictionary<string, object> Values;
         protected Text t;
 
         public static void ValueLog(string name, object value)
         {
-            return;
-
             if (instance == null)
             {
                 GameObject g = new GameObject();
@@ -33,7 +31,7 @@ namespace util
                 //txt
                 GameObject g2 = new GameObject();
                 g2.transform.SetParent(g.transform, false);
-                
+
                 RectTransform rt = g2.AddComponent<RectTransform>();
                 rt.anchorMax = new Vector2(1f, 1f);
                 rt.anchorMin = new Vector2(0.5f, 0);
@@ -48,8 +46,8 @@ namespace util
 
                 //img
                 GameObject g3 = new GameObject();
-                g3.transform.SetParent(g.transform,false);
-                g3.transform.SetAsFirstSibling(); 
+                g3.transform.SetParent(g.transform, false);
+                g3.transform.SetAsFirstSibling();
 
                 rt = g3.AddComponent<RectTransform>();
                 rt.anchorMax = new Vector2(1f, 1f);
@@ -102,6 +100,16 @@ namespace util
             }
 
             t.text = ts;
+        }
+    }
+
+    public static class Debugger
+    {
+        public static void Log(string name, object value)
+        {
+            if (GameManager.AllowDebug)
+
+                ValueDebugger.ValueLog(name, value);
         }
     }
 }

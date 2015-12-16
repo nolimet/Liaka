@@ -164,6 +164,8 @@ public class PlayerControler : MonoBehaviour
         Update_HeatLevel();
         Update_Boost();
         //Update_JumpSpeed();
+
+        Update_Debug();
     }
     #endregion
 
@@ -175,7 +177,7 @@ public class PlayerControler : MonoBehaviour
         {
             case BaseObject.objectType.Enemy:
                 if (onCoinsLost != null)
-                    onCoinsLost(Random.Range(5, 8));
+                    onCoinsLost(Random.Range(2, 6));
 
                 break;
         }
@@ -270,7 +272,7 @@ public class PlayerControler : MonoBehaviour
                     onEnergyZero();
         }
 
-        util.ValueDebugger.ValueLog("EnergyLevel", "current : " + Energy + " Max: " + MaxEnergy);
+        
     }
     void Update_GroundCheck()
     {
@@ -290,7 +292,7 @@ public class PlayerControler : MonoBehaviour
         else
             g = false;
 
-        util.ValueDebugger.ValueLog("GroundStatus", "G : " + g + " DoubleJump : " + doubleJump);
+
     }
     void Update_HeatLevel()
     {
@@ -303,7 +305,7 @@ public class PlayerControler : MonoBehaviour
             weaponForcedCooldown = false;
         }
 
-        util.ValueDebugger.ValueLog("HeatLevel", "current : " + weaponHeat + " max: " + MaxHeat);
+        
     }
     /// <summary>
     /// calls the Functions for the MoveBoost
@@ -386,6 +388,14 @@ public class PlayerControler : MonoBehaviour
             if (boostTimeLeft > 0)
                 boostTimeLeft -= Time.deltaTime * boostDegrationSpeed;
         }
+    }
+
+    void Update_Debug()
+    {
+        util.Debugger.Log("GroundStatus", "G : " + g + " DoubleJump : " + doubleJump);
+        util.Debugger.Log("HeatLevel", "current : " + weaponHeat + " max: " + MaxHeat);
+        util.Debugger.Log("EnergyLevel", "current : " + Energy + " max: " + MaxEnergy);
+        util.Debugger.Log("BoostLevel", "current : " + boostTimeLeft + " max: " + maxBoost);
     }
     #endregion
 

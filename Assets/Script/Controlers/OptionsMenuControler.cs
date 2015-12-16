@@ -14,7 +14,7 @@ public class OptionsMenuControler : MonoBehaviour {
     private Slider SFX_Slider = null, Music_Slider = null, Interface_Slider = null;
 
     [SerializeField]
-    private Toggle godModeToggle = null;
+    private Toggle godModeToggle = null, DebugToggle = null;
 
     void Start()
     {
@@ -24,8 +24,11 @@ public class OptionsMenuControler : MonoBehaviour {
         Music_Slider.value = d.options.musicVolume;
         Interface_Slider.value = d.options.interfaceVolume;
 
-        godModeToggle.isOn = GameManager.instance.GodMode;
+        if (godModeToggle)
+            godModeToggle.isOn = GameManager.instance.GodMode;
 
+        if (DebugToggle)
+            DebugToggle.isOn = GameManager.AllowDebug;
 
         GameManager.instance.onPauseGame += Instance_onPauseGame;
         gameObject.SetActive(false);
@@ -69,6 +72,11 @@ public class OptionsMenuControler : MonoBehaviour {
     public void ToggleGodMode(bool b)
     {
         GameManager.instance.GodMode = b;
+    }
+
+    public void ToggleDebug(bool b)
+    {
+        GameManager.instance._AllowDebug = b;
     }
 
     public void OpenMenu()
