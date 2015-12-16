@@ -337,8 +337,7 @@ public class GameManager : MonoBehaviour
 
     void EscapePressed()
     {
-        if (Application.loadedLevel == 1)
-            
+        if (Application.loadedLevel == 1)          
             return;
 
         _gamePaused = !_gamePaused;

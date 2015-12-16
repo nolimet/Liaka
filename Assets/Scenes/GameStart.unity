@@ -2477,7 +2477,7 @@ MonoBehaviour:
   Music_Slider: {fileID: 1093454833}
   Interface_Slider: {fileID: 520893951}
   godModeToggle: {fileID: 257464732}
-  DebugToggle: {fileID: 0}
+  DebugToggle: {fileID: 1352754373}
 --- !u!114 &629412009
 MonoBehaviour:
   m_ObjectHideFlags: 0

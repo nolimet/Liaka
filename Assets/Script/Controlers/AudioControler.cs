@@ -104,7 +104,11 @@ public class AudioControler : MonoBehaviour
 
     void Update()
     {
-        MusicVol = GameManager.instance.saveDat.options.musicVolume;
+        if (MusicVol != GameManager.instance.saveDat.options.musicVolume)
+        {
+            AudioSources.Music.volume = GameManager.instance.saveDat.options.musicVolume;
+            MusicVol = GameManager.instance.saveDat.options.musicVolume;
+        }
         SFXVol = GameManager.instance.saveDat.options.soundVolume;
         UIVol = GameManager.instance.saveDat.options.interfaceVolume;
     }
