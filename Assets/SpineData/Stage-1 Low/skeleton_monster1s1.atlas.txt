@@ -1,0 +1,41 @@
+
+skeleton_monster1s1.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm
+  rotate: true
+  xy: 152, 71
+  size: 35, 82
+  orig: 35, 82
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 152, 108
+  size: 148, 118
+  orig: 148, 118
+  offset: 0, 0
+  index: -1
+longfeet
+  rotate: true
+  xy: 2, 2
+  size: 37, 114
+  orig: 37, 114
+  offset: 0, 0
+  index: -1
+preview
+  rotate: false
+  xy: 2, 41
+  size: 148, 185
+  orig: 148, 185
+  offset: 0, 0
+  index: -1
+pupil
+  rotate: false
+  xy: 302, 182
+  size: 17, 44
+  orig: 17, 44
+  offset: 0, 0
+  index: -1

@@ -53,7 +53,7 @@ public class GroundLayerControler : VariationLayerControler
                         {
                             t.gameObject.SetActive(true);
                             activeBits++;
-                            t.position = f.position + new Vector3(f.getChildBounds().size.x, 0, 0);
+                            t.position =  new Vector3(f.getChildBounds("tree").max.x, f.position.y, 0);
                             f = t;
                         }
                 }
@@ -70,7 +70,7 @@ public class GroundLayerControler : VariationLayerControler
     public override bool InView(Transform t)
     {
         //bool b = base.OutOfView(t);
-        if (t.position.x + (t.getChildBounds().size.x) < WorldScreenSize.x)
+        if (t.position.x + (t.getChildBounds("tree").size.x) < WorldScreenSize.x)
         {
             if (disableTraps > 0)
                 randomSelection = SubObjects.Where(i => i.gameObject.activeSelf == false && !i.name.ToLower().Contains("trap")).ToList();
@@ -90,7 +90,7 @@ public class GroundLayerControler : VariationLayerControler
                 t.gameObject.SetActive(false);
                 freeObject.gameObject.SetActive(true);
 
-                freeObject.position = f.position + new Vector3(f.getChildBounds().size.x, 0, 0);
+                freeObject.position =  new Vector3(f.getChildBounds("tree").max.x, f.position.y, 0);
             }
 
 

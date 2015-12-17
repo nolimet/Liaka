@@ -1,0 +1,41 @@
+
+skeleton_monster2s1.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm
+  rotate: true
+  xy: 2, 42
+  size: 195, 330
+  orig: 195, 330
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 334, 32
+  size: 208, 205
+  orig: 208, 205
+  offset: 0, 0
+  index: -1
+eyes
+  rotate: true
+  xy: 2, 2
+  size: 38, 78
+  orig: 38, 78
+  offset: 0, 0
+  index: -1
+scarf
+  rotate: false
+  xy: 544, 172
+  size: 170, 65
+  orig: 170, 65
+  offset: 0, 0
+  index: -1
+wing
+  rotate: false
+  xy: 544, 87
+  size: 80, 83
+  orig: 80, 83
+  offset: 0, 0
+  index: -1

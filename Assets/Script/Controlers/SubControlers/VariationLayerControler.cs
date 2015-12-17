@@ -23,12 +23,12 @@ public class VariationLayerControler : LayerControler
                 SubObjects.Add(tx);
             tx.localPosition = SubObjects[0].localPosition;
             tx.position = new Vector3(l, tx.position.y, tx.position.z);
-                l += tx.getChildBounds().size.x;
+                l += tx.getChildBounds("tree").size.x;
                 if (i >= 3)
                     tx.gameObject.SetActive(false);
         }
     }
-    [SerializeField]
+
     protected List<Transform> randomSelection = null;
     protected List<Transform> negativeSelectoin = null;
     public override bool InView(Transform t)
@@ -51,7 +51,7 @@ public class VariationLayerControler : LayerControler
                 t.gameObject.SetActive(false);
                 freeObject.gameObject.SetActive(true);
 
-                freeObject.position = f.position + new Vector3(f.getChildBounds().size.x, 0, 0);
+                freeObject.position = new Vector3(f.getChildBounds("tree").max.x, f.position.y, 0);
             }
 
 
@@ -61,5 +61,31 @@ public class VariationLayerControler : LayerControler
 
         }
         return true;
+    }
+
+    public override void LateUpdateLoop()
+    {
+        base.LateUpdateLoop();
+       // drawOutLine();
+    }
+    Bounds b;
+    public virtual void drawOutLine()
+    {
+        
+        foreach(Transform t in SubObjects)
+        {
+            b = t.getChildBounds("tree");
+            Debug.DrawLine(b.max, new Vector3(b.max.x, b.min.y));
+            Debug.DrawLine(new Vector3(b.max.x, b.min.y), b.min);
+            Debug.DrawLine(b.min, new Vector3(b.min.x, b.max.y));
+            Debug.DrawLine(new Vector3(b.min.x, b.max.y), b.max);
+
+
+            //b = t.getChildBounds();
+            //Debug.DrawLine(b.max, new Vector3(b.max.x, b.min.y), Color.red);
+            //Debug.DrawLine(new Vector3(b.max.x, b.min.y), b.min, Color.red);
+            //Debug.DrawLine(b.min, new Vector3(b.min.x, b.max.y), Color.red);
+            //Debug.DrawLine(new Vector3(b.min.x, b.max.y), b.max, Color.red);
+        }
     }
 }

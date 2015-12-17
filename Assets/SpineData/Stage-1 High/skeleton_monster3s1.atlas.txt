@@ -1,0 +1,27 @@
+
+skeleton_monster3s1.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 2
+  size: 280, 186
+  orig: 280, 186
+  offset: 0, 0
+  index: -1
+wingback
+  rotate: false
+  xy: 284, 100
+  size: 77, 88
+  orig: 77, 88
+  offset: 0, 0
+  index: -1
+wingfront
+  rotate: true
+  xy: 284, 7
+  size: 91, 68
+  orig: 91, 68
+  offset: 0, 0
+  index: -1
