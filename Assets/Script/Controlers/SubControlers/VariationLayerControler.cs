@@ -56,7 +56,6 @@ public class VariationLayerControler : LayerControler
                 freeObject.gameObject.SetActive(true);
 
                 freeObject.position = new Vector3(f.getChildBounds(IgnorNameTags).max.x, f.position.y, 0);
-
             }
 
             randomSelection = null;
