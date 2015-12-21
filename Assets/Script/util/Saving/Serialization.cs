@@ -5,21 +5,22 @@ using System.IO;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
-
-public static class Serialization
+namespace util
 {
-    #region fileSaveSettings
-    public enum fileTypes
+    public static class Serialization
     {
-        save,
-        settings,
-        indexFile,
-        binary
-    }
-    
-    public static string saveFolderName = "GameData";
+        #region fileSaveSettings
+        public enum fileTypes
+        {
+            save,
+            settings,
+            indexFile,
+            binary
+        }
 
-    readonly public static Dictionary<fileTypes, string> fileExstentions = new Dictionary<fileTypes, string>
+        public static string saveFolderName = "GameData";
+
+        readonly public static Dictionary<fileTypes, string> fileExstentions = new Dictionary<fileTypes, string>
         {
             { fileTypes.save,       ".sav"  },
             { fileTypes.settings,   ".set"  },
@@ -27,71 +28,72 @@ public static class Serialization
             { fileTypes.binary,     ".bin"  }
         },
 
-        FileLocations = new Dictionary<fileTypes, string>
-        {
+            FileLocations = new Dictionary<fileTypes, string>
+            {
             { fileTypes.save,       "Save"      },
             { fileTypes.settings,   "Settings"  },
             { fileTypes.binary,     "Data"      }
-        };
-    #endregion
+            };
+        #endregion
 
-    public static string SaveLocation(fileTypes fileType)
-    {
-
-        string saveLocation;
-        if(Application.isEditor)
-            saveLocation = Application.dataPath + "/" + saveFolderName + "/" + FileLocations[fileType] + "/";
-        else
-            saveLocation = Application.persistentDataPath + "/" + saveFolderName + "/" + FileLocations[fileType] + "/";
-
-        if (!Directory.Exists(saveLocation))
+        public static string SaveLocation(fileTypes fileType)
         {
-            Directory.CreateDirectory(saveLocation);
+
+            string saveLocation;
+            if (Application.isEditor)
+                saveLocation = Application.dataPath + "/" + saveFolderName + "/" + FileLocations[fileType] + "/";
+            else
+                saveLocation = Application.persistentDataPath + "/" + saveFolderName + "/" + FileLocations[fileType] + "/";
+
+            if (!Directory.Exists(saveLocation))
+            {
+                Directory.CreateDirectory(saveLocation);
+            }
+            return saveLocation;
         }
-        return saveLocation;
-    }
 
-    public static string GetFileType(string fileName, fileTypes fileType)
-    {
-        return fileName + fileExstentions[fileType];
-    }
-
-    public static void Save<T>(string fileName,fileTypes fileType, T token)
-    {
-        string saveFile = SaveLocation(fileType);
-        saveFile += GetFileType(fileName, fileType);
-
-        IFormatter formatter = new BinaryFormatter();
-        Stream stream = new FileStream(saveFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
-        formatter.Serialize(stream, token);
-        stream.Close();
-
-        Debug.Log("Saved file: " + saveFile + " At " + System.DateTime.Now);
-
-    }
-
-    public static bool Load<T>(string fileName, fileTypes fileType, ref T outputData)
-    {
-        string saveFile = SaveLocation(fileType);
-        saveFile += GetFileType(fileName, fileType);
-        bool returnval = false;
-
-
-        if (!File.Exists(saveFile))
+        public static string GetFileType(string fileName, fileTypes fileType)
         {
-            outputData = default(T);
-            returnval = false;
+            return fileName + fileExstentions[fileType];
         }
-        else
+
+        public static void Save<T>(string fileName, fileTypes fileType, T token)
         {
+            string saveFile = SaveLocation(fileType);
+            saveFile += GetFileType(fileName, fileType);
+
             IFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(saveFile, FileMode.Open);
-
-            T data = (T)formatter.Deserialize(stream);
-            outputData = data;
-            returnval = true;
+            Stream stream = new FileStream(saveFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+            formatter.Serialize(stream, token);
             stream.Close();
+
+            Debug.Log("Saved file: " + saveFile + " At " + System.DateTime.Now);
+
         }
-        return returnval;
+
+        public static bool Load<T>(string fileName, fileTypes fileType, ref T outputData)
+        {
+            string saveFile = SaveLocation(fileType);
+            saveFile += GetFileType(fileName, fileType);
+            bool returnval = false;
+
+
+            if (!File.Exists(saveFile))
+            {
+                outputData = default(T);
+                returnval = false;
+            }
+            else
+            {
+                IFormatter formatter = new BinaryFormatter();
+                FileStream stream = new FileStream(saveFile, FileMode.Open);
+
+                T data = (T)formatter.Deserialize(stream);
+                outputData = data;
+                returnval = true;
+                stream.Close();
+            }
+            return returnval;
+        }
     }
 }

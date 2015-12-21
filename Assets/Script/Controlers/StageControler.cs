@@ -229,17 +229,17 @@ public class StageControler : MonoBehaviour
 
     void playerDefeated()
     {
-        LoadObject.LoadLevelAsync("Game-End-Lose", 1.5f);
+        util.LoadObject.LoadLevelAsync("Game-End-Lose", 1.5f);
         //Application.LoadLevel("Game-End-Lose");
     }
 
     void playerWon()
     {
         if (NextStageName == "")
-            LoadObject.LoadLevelAsync("Game-End-Win", 1.5f);
+            util.LoadObject.LoadLevelAsync("Game-End-Win", 1.5f);
         //Application.LoadLevel("Game-End-Win");
         else
-            LoadObject.LoadLevelAsync(NextStageName, 1.5f);
+            util.LoadObject.LoadLevelAsync(NextStageName, 1.5f);
         //Application.LoadLevel(NextStageName);
     }
 }

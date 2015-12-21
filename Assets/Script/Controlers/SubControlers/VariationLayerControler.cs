@@ -8,12 +8,15 @@ public class VariationLayerControler : LayerControler
 {
 
     public float offSetX = 0;
+    public string[] IgnorNameTags;
     protected override void Start()
     {
-        
-        WorldScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2f, 0));
+        if (GameManager.instance)
+            WorldScreenSize = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2f, 0));
 
-        subObjectWorldSize = transform.GetChild(0).getChildBounds().size;
+        
+
+        //subObjectWorldSize = transform.GetChild(0).getChildBounds(IgnorNameTags).size;
         SubObjects = new List<Transform>();
         float l = offSetX;
         Transform tx;
@@ -23,7 +26,7 @@ public class VariationLayerControler : LayerControler
                 SubObjects.Add(tx);
             tx.localPosition = SubObjects[0].localPosition;
             tx.position = new Vector3(l, tx.position.y, tx.position.z);
-                l += tx.getChildBounds("tree").size.x;
+                l += tx.getChildBounds(IgnorNameTags).size.x;
                 if (i >= 3)
                     tx.gameObject.SetActive(false);
         }
@@ -35,25 +38,26 @@ public class VariationLayerControler : LayerControler
     {
         
         //bool b = base.OutOfView(t);
-        if (t.position.x +(t.getChildBounds().size.x) < WorldScreenSize.x)
+        if ((t.getChildBounds().max.x) < WorldScreenSize.x)
         {
+            t.gameObject.SetActive(false);
             randomSelection = SubObjects.Where(i => i.gameObject.activeSelf == false).ToList();
             negativeSelectoin = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
 
-            Transform f = transform;
+            Transform f =t;
             foreach (Transform x in negativeSelectoin)
                 if (x.transform.position.x > f.position.x)
                     f = x;
-            
+            Debug.Log(f == t);
+
             if (randomSelection.Count > 0)
             {
                 Transform freeObject = randomSelection.ElementAtOrDefault(new System.Random().Next() % randomSelection.Count());
-                t.gameObject.SetActive(false);
                 freeObject.gameObject.SetActive(true);
 
-                freeObject.position = new Vector3(f.getChildBounds("tree").max.x, f.position.y, 0);
-            }
+                freeObject.position = new Vector3(f.getChildBounds(IgnorNameTags).max.x, f.position.y, 0);
 
+            }
 
             randomSelection = null;
             negativeSelectoin = null;
@@ -66,7 +70,7 @@ public class VariationLayerControler : LayerControler
     public override void LateUpdateLoop()
     {
         base.LateUpdateLoop();
-       // drawOutLine();
+       drawOutLine();
     }
     Bounds b;
     public virtual void drawOutLine()
@@ -74,12 +78,8 @@ public class VariationLayerControler : LayerControler
         
         foreach(Transform t in SubObjects)
         {
-            b = t.getChildBounds("tree");
-            Debug.DrawLine(b.max, new Vector3(b.max.x, b.min.y));
-            Debug.DrawLine(new Vector3(b.max.x, b.min.y), b.min);
-            Debug.DrawLine(b.min, new Vector3(b.min.x, b.max.y));
-            Debug.DrawLine(new Vector3(b.min.x, b.max.y), b.max);
-
+            b = t.getChildBounds(IgnorNameTags);
+            util.Common.DrawBounds(b);
 
             //b = t.getChildBounds();
             //Debug.DrawLine(b.max, new Vector3(b.max.x, b.min.y), Color.red);

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace util
 {
@@ -32,7 +34,28 @@ namespace util
             return Mathf.Sqrt(Mathf.Pow(v2.x,2) + Mathf.Pow(v2.y,2));
         }
 
-        public static Bounds getChildBounds(this Transform t, string ignorNameTag="")
+        public static Bounds getChildBounds(this Transform t)
+        {
+            Bounds bounds;
+            // First find a center for your bounds.
+            Vector3 center = Vector3.zero;
+            foreach (Transform child in t.transform)
+            {
+                center += child.gameObject.GetComponent<SpriteRenderer>().bounds.center;
+            }
+            center /= t.transform.childCount; //center is average center of children
+
+            //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
+            bounds = new Bounds(center, Vector3.zero);
+
+            foreach (Transform child in t.transform)
+            {
+                bounds.Encapsulate(child.gameObject.GetComponent<SpriteRenderer>().bounds);
+            }
+            return bounds;
+        }
+
+        public static Bounds getChildBounds(this Transform t, string ignorNameTag)
         {
             Bounds bounds;
 
@@ -83,6 +106,55 @@ namespace util
                 }
             }
             return bounds;
+        }
+
+        public static Bounds getChildBounds(this Transform t, string[] IgnorNameTags)
+        {
+            if (IgnorNameTags.Length == 0)
+                return t.getChildBounds();
+
+            Bounds bounds;
+            List<Transform> ChildBuffer = new List<Transform>(); 
+            Vector3 center = Vector3.zero;
+            string n;
+
+
+            for (int j = 0; j < IgnorNameTags.Length; j++)
+            {
+               IgnorNameTags[j] = IgnorNameTags[j].ToLower();
+            }
+            //creating a buffer mask for all the children as doing the same bit of code over and over was kinda repetative
+            foreach (Transform child in t.transform)
+            {
+                n = child.gameObject.name.ToLower();
+                if (!IgnorNameTags.Any(str => n.Contains(str)) && child.GetComponent<SpriteRenderer>())
+                    ChildBuffer.Add(child);
+            }
+
+            // First find a center for your bounds
+            foreach (Transform child in ChildBuffer)
+                center += child.gameObject.GetComponent<SpriteRenderer>().bounds.center;
+
+            center /= ChildBuffer.Count; //center is average center of children
+
+            //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
+            bounds = new Bounds(center, Vector3.zero);
+
+            //Encapuslating all the children in the Object;
+            foreach (Transform child in ChildBuffer)
+                bounds.Encapsulate(child.gameObject.GetComponent<SpriteRenderer>().bounds);
+
+            ChildBuffer = null;
+
+            return bounds;
+        }
+
+        public static void DrawBounds(Bounds b)
+        {
+            Debug.DrawLine(b.max, new Vector3(b.max.x, b.min.y));
+            Debug.DrawLine(new Vector3(b.max.x, b.min.y), b.min);
+            Debug.DrawLine(b.min, new Vector3(b.min.x, b.max.y));
+            Debug.DrawLine(new Vector3(b.min.x, b.max.y), b.max);
         }
 
         public static float CalculateJumpVerticalSpeed(float targetJumpHeight)
