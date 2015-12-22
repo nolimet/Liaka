@@ -54,8 +54,10 @@ public class VariationLayerControler : LayerControler
             {
                 Transform freeObject = randomSelection.ElementAtOrDefault(new System.Random().Next() % randomSelection.Count());
                 freeObject.gameObject.SetActive(true);
-
-                freeObject.position = new Vector3(f.getChildBounds(IgnorNameTags).max.x, f.position.y, 0);
+                if (IgnorNameTags == null)
+                    freeObject.position = f.position + new Vector3(f.getChildBounds().extents.x, 0, 0);
+                else
+                    freeObject.position = f.position + new Vector3(f.getChildBounds(IgnorNameTags).extents.x, 0, 0);
             }
 
             randomSelection = null;

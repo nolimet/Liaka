@@ -181,7 +181,7 @@ public class BaseObject : MonoBehaviour
 
             case TagManager.Boss:
                 StartCoroutine(fadeOut(0.2f, 0));
-                
+                Debug.Log("HIT");
 
                 if (onHitBose != null)
                     onHitBose(type);

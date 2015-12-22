@@ -68,7 +68,20 @@ public class MainMenuControler : MonoBehaviour {
         StartCoroutine(moveMain(1, 4));
     }
 
-    
+    public void OpenTutorial()
+    {
+        if(GameManager.TutorialControler)
+        {
+            GameManager.TutorialControler.Open();
+            GameManager.TutorialControler.onClose += TutorialControler_onClose;
+        }
+    }
+
+    private void TutorialControler_onClose()
+    {
+        GameManager.TutorialControler.onClose -= TutorialControler_onClose;
+        StartCoroutine(moveMain(1, 4));
+    }
 
     /// <summary>
     /// Moves main menu

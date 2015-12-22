@@ -36,6 +36,17 @@ namespace util
 
         public static Bounds getChildBounds(this Transform t)
         {
+            //To handle exeption when a object has no children and no sprite Renderer
+            if (t.childCount == 0)
+            {
+                SpriteRenderer r = t.gameObject.GetComponent<SpriteRenderer>();
+
+                if (r)
+                    return r.bounds;
+                else
+                    return new Bounds();
+            }
+
             Bounds bounds;
             // First find a center for your bounds.
             Vector3 center = Vector3.zero;
@@ -61,57 +72,60 @@ namespace util
 
             //so i don't do useless checks
             if (ignorNameTag == "")
+                return t.getChildBounds();
+
+            //To handle exeption when a object has no children and no sprite Renderer
+            if (t.childCount == 0)
             {
-                // First find a center for your bounds.
-                Vector3 center = Vector3.zero;
-                foreach (Transform child in t.transform)
+                SpriteRenderer r = t.gameObject.GetComponent<SpriteRenderer>();
+
+                if (r)
+                    return r.bounds;
+                else
+                    return new Bounds();
+            }
+
+            ignorNameTag = ignorNameTag.ToLower();
+            // First find a center for your bounds.
+            Vector3 center = Vector3.zero;
+            int i = 0;
+            foreach (Transform child in t.transform)
+            {
+                if (!child.gameObject.name.ToLower().Contains(ignorNameTag))
                 {
+                    //Debug.Log(child.name);
                     center += child.gameObject.GetComponent<SpriteRenderer>().bounds.center;
-                }
-                center /= t.transform.childCount; //center is average center of children
-
-                //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
-                 bounds = new Bounds(center, Vector3.zero);
-
-                foreach (Transform child in t.transform)
-                {
-                    bounds.Encapsulate(child.gameObject.GetComponent<SpriteRenderer>().bounds);
+                    i++;
                 }
             }
-            //
-            else
+            center /= i; //center is average center of children
+
+            //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
+            bounds = new Bounds(center, Vector3.zero);
+
+            foreach (Transform child in t.transform)
             {
-                ignorNameTag = ignorNameTag.ToLower();
-                // First find a center for your bounds.
-                Vector3 center = Vector3.zero;
-                int i = 0;
-                foreach (Transform child in t.transform)
-                {
-                    if (!child.gameObject.name.ToLower().Contains(ignorNameTag))
-                    {
-                        //Debug.Log(child.name);
-                        center += child.gameObject.GetComponent<SpriteRenderer>().bounds.center;
-                        i++;
-                    }
-                }
-                center /= i; //center is average center of children
-
-                //Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
-                bounds = new Bounds(center, Vector3.zero);
-
-                foreach (Transform child in t.transform)
-                {
-                    if (!child.name.ToLower().Contains(ignorNameTag))
-                        bounds.Encapsulate(child.gameObject.GetComponent<SpriteRenderer>().bounds);
-                }
+                if (!child.name.ToLower().Contains(ignorNameTag))
+                    bounds.Encapsulate(child.gameObject.GetComponent<SpriteRenderer>().bounds);
             }
             return bounds;
         }
 
         public static Bounds getChildBounds(this Transform t, string[] IgnorNameTags)
         {
-            if (IgnorNameTags.Length == 0)
+            if (IgnorNameTags == null || IgnorNameTags.Length == 0)
                 return t.getChildBounds();
+
+            //To handle exeption when a object has no children and no sprite Renderer
+            if (t.childCount == 0)
+            {
+                SpriteRenderer r = t.gameObject.GetComponent<SpriteRenderer>();
+
+                if (r)
+                    return r.bounds;
+                else
+                    return new Bounds();
+            }
 
             Bounds bounds;
             List<Transform> ChildBuffer = new List<Transform>(); 
@@ -129,6 +143,15 @@ namespace util
                 n = child.gameObject.name.ToLower();
                 if (!IgnorNameTags.Any(str => n.Contains(str)) && child.GetComponent<SpriteRenderer>())
                     ChildBuffer.Add(child);
+            }
+            if (ChildBuffer.Count == 0)
+            {
+                SpriteRenderer r = t.gameObject.GetComponent<SpriteRenderer>();
+
+                if (r)
+                    return r.bounds;
+                else
+                    return new Bounds();
             }
 
             // First find a center for your bounds

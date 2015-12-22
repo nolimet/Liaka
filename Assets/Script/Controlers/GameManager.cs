@@ -60,8 +60,12 @@ public class GameManager : MonoBehaviour
     public PlayerControler _playerControler;
 
     //UI contrler
-    public static UIControler uiControler;
-    public UIControler _UIControler;
+    public static InGameUIControler uiControler;
+    public InGameUIControler _UIControler;
+
+    //TutorialScreen
+    public static Tutorial TutorialControler;
+    public Tutorial _TutorialControler;
 
     //AudioControler
     public static AudioControler audioControler;
@@ -208,6 +212,9 @@ public class GameManager : MonoBehaviour
 
         if (_UICamera && !UICamera)
             UICamera = _UICamera;
+
+        if (_TutorialControler && !TutorialControler)
+            TutorialControler = _TutorialControler;
     }
 
     void SaveLoad(bool save)

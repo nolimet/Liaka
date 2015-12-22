@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UIControler : MonoBehaviour
+public class InGameUIControler : MonoBehaviour
 {
     public AttackSlider attackSlider;
 
