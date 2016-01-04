@@ -22,6 +22,9 @@ public class MainMenuControler : MonoBehaviour {
         if (GameManager.optionsMenu)
             GameManager.optionsMenu.CloseMenu();
 
+        if (GameManager.instance.saveDat.game.firstStartup)
+            Invoke("OpenTutorial", 0.4f);
+
     }
 
     public void Update()
@@ -72,6 +75,7 @@ public class MainMenuControler : MonoBehaviour {
     {
         if(GameManager.TutorialControler)
         {
+            GameManager.instance.saveDat.game.firstStartup = false;
             GameManager.TutorialControler.Open();
             GameManager.TutorialControler.onClose += TutorialControler_onClose;
         }
