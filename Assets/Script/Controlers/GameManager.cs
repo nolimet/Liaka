@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool _AllowDebug;
+    public bool _AllowDebug =true;
     public static bool AllowDebug { get { return instance._AllowDebug; } }
 
     #region UnityFunctions

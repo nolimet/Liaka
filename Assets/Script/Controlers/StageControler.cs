@@ -41,7 +41,7 @@ public class StageControler : MonoBehaviour
 
     int _coinsCollected;
 
-    BossControler bossControler; 
+    BossControler bossControler;
 
     // Use this for initialization
     void Awake()

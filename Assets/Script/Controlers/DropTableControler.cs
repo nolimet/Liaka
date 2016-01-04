@@ -80,13 +80,13 @@ public class DropTableControler : MonoBehaviour
         Thread t = new Thread(ReCalcTable);
 
         t.Start();
-        Debug.Log("Thread-0 Started");
+        //Debug.Log("Thread-0 Started");
         while (t.IsAlive)
         {
-            Debug.Log("Thread-0 Running");
+            //Debug.Log("Thread-0 Running");
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("Thread-0 Done");
+        //Debug.Log("Thread-0 Done");
         t.Abort();
         yield return new WaitForEndOfFrame();
 

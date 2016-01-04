@@ -48,16 +48,18 @@ public class VariationLayerControler : LayerControler
             foreach (Transform x in negativeSelectoin)
                 if (x.transform.position.x > f.position.x)
                     f = x;
-            Debug.Log(f == t);
-
+           
             if (randomSelection.Count > 0)
             {
                 Transform freeObject = randomSelection.ElementAtOrDefault(new System.Random().Next() % randomSelection.Count());
                 freeObject.gameObject.SetActive(true);
                 if (IgnorNameTags == null)
-                    freeObject.position = f.position + new Vector3(f.getChildBounds().extents.x, 0, 0);
+                    freeObject.position = f.position + new Vector3(f.getChildBounds().size.x, 0, 0);
                 else
-                    freeObject.position = f.position + new Vector3(f.getChildBounds(IgnorNameTags).extents.x, 0, 0);
+                    freeObject.position = f.position + new Vector3(f.getChildBounds(IgnorNameTags).size.x, 0, 0);
+
+                util.Debugger.Log("bound orignal " + f.name, f.getChildBounds(IgnorNameTags));
+                util.Debugger.Log("bound newObject " + freeObject.name, freeObject.getChildBounds(IgnorNameTags));
             }
 
             randomSelection = null;
@@ -80,6 +82,7 @@ public class VariationLayerControler : LayerControler
         foreach(Transform t in SubObjects)
         {
             b = t.getChildBounds(IgnorNameTags);
+            
             util.Common.DrawBounds(b);
 
             //b = t.getChildBounds();

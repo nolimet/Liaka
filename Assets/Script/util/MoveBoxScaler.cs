@@ -10,7 +10,7 @@ public class MoveBoxScaler : MonoBehaviour
     [SerializeField]
     new Camera camera;
 
-    public Vector3 screenSize = Vector3.zero;
+    public static Vector3 screenSize = Vector3.zero;
 
     [Tooltip("Sprite's Size in pixel used to make sure it's scaled correctly")]
     public Vector2 StartSize = Vector2.one;
