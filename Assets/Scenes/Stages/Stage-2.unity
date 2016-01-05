@@ -216,6 +216,23 @@ Prefab:
       propertyPath: NextStageName
       value: Stage-3
       objectReference: {fileID: 0}
+    - target: {fileID: 21228818, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 825ddc2ead8c14e44afc8f569356571d,
+        type: 3}
+    - target: {fileID: 446560, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 446560, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.1379896
+      objectReference: {fileID: 0}
+    - target: {fileID: 446560, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 17.89
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
   m_IsPrefabParent: 0
