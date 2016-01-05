@@ -15,6 +15,9 @@ public class PickupControler : MonoBehaviour
     [SerializeField]
     bool bossCharging = false;
     bool bossAttacking = false;
+
+    public bool keepDisabled;
+
     // Use this for initialization
     void Awake()
     {
@@ -40,7 +43,10 @@ public class PickupControler : MonoBehaviour
 
     public void OnEnable()
     {
-        StartCoroutine(gameLoop());
+        if (keepDisabled)
+            enabled = false;
+        else
+            StartCoroutine(gameLoop());
     }
 
     public void OnDisable()

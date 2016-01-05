@@ -8,18 +8,20 @@ public class PlayerAnimationControler : MonoBehaviour
 
     [SerializeField]
     SkeletonAnimation anim;
-
+    float shootAniHold = 0f;
+    bool eventPlaced = false;
+    #region Animations
     [SpineAnimation]
     public string hit;
 
     [SpineAnimation]
     public string idle;
 
-    [SpineAnimation]
-    public string MoveLeft;
+    //[SpineAnimation]
+    //public string MoveLeft;
 
-    [SpineAnimation]
-    public string MoveRight;
+    //[SpineAnimation]
+    //public string MoveRight;
 
     [SpineAnimation]
     public string jump;
@@ -36,18 +38,29 @@ public class PlayerAnimationControler : MonoBehaviour
     [SpineAnimation]
     public string groundHit;
 
+    [SpineAnimation]
+    public string overHeated;
+
+    [SpineAnimation]
+    public string coolDown;
+    #endregion
+
     void Start()
     {
-        anim = GetComponent<SkeletonAnimation>();
-
         if (!anim)
         {
             Destroy(this);
             return;
         }
+
+        if (!GameManager.playerControler)
+            return;
+
+        eventPlaced = true;
         GameManager.playerControler.onJump += Player_OnJump;
         GameManager.playerControler.onCoinsLost += Player_OnHit;
         GameManager.playerControler.onHitGround += Player_Land;
+        GameManager.playerControler.onShoot += Player_Shoot;
     }
 
     public void OnDestroy()
@@ -58,6 +71,14 @@ public class PlayerAnimationControler : MonoBehaviour
         GameManager.playerControler.onJump -= Player_OnJump;
         GameManager.playerControler.onCoinsLost -= Player_OnHit;
         GameManager.playerControler.onHitGround -= Player_Land;
+        GameManager.playerControler.onShoot -= Player_Shoot;
+    }
+
+    void Update()
+    {
+        Update_shootAniHold();
+        if (!eventPlaced)
+            Start();
     }
 
     public void Player_OnHit(int i)
@@ -78,12 +99,32 @@ public class PlayerAnimationControler : MonoBehaviour
         anim.state.AddAnimation(0, idle, true, 0);
     }
 
+    public void Player_Shoot()
+    {
+        if (shootAniHold <= 0)
+            anim.state.SetAnimation(1, shoot, false);
+        shootAniHold = 1f;
+    }
+
+    public void Update_shootAniHold()
+    {
+        if (shootAniHold <= 0 && shootAniHold > -1)
+        {
+            anim.state.SetAnimation(1, idle, false);
+            shootAniHold = -20;
+        }
+        else if (shootAniHold > 0)
+        {
+            shootAniHold -= Time.deltaTime;
+        }
+    }
+
     public void Player_MoveChange(int Dir)
     {
         switch (Dir)
         {
             case -1:
-                anim.AnimationName = MoveLeft;
+                anim.AnimationName = idle;
                 break;
 
             case 0:
@@ -91,7 +132,7 @@ public class PlayerAnimationControler : MonoBehaviour
                 break;
 
             case 1:
-                anim.AnimationName = MoveRight;
+                anim.AnimationName = idle;
                 break;
         }
 

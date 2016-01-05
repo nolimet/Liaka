@@ -41,7 +41,10 @@ public class StageControler : MonoBehaviour
 
     int _coinsCollected;
 
-    BossControler bossControler;
+    public PortalControler p;
+    public EnemyControler eControl;
+    public PickupControler pControl;
+    public BossControler bossControler;
 
     // Use this for initialization
     void Awake()
@@ -233,13 +236,39 @@ public class StageControler : MonoBehaviour
         //Application.LoadLevel("Game-End-Lose");
     }
 
-    void playerWon()
+    void playerWon(bool animPlayed = false)
     {
-        if (NextStageName == "")
-            util.LoadObject.LoadLevelAsync("Game-End-Win", 1.5f);
-        //Application.LoadLevel("Game-End-Win");
+        if (animPlayed)
+        {
+            if (NextStageName == "")
+                util.LoadObject.LoadLevelAsync("Game-End-Win", 1.5f);
+            //Application.LoadLevel("Game-End-Win");
+            else
+                util.LoadObject.LoadLevelAsync(NextStageName, 1.5f);
+            //Application.LoadLevel(NextStageName);
+
+        }
         else
-            util.LoadObject.LoadLevelAsync(NextStageName, 1.5f);
-        //Application.LoadLevel(NextStageName);
+        {
+
+            eControl.keepDisabled = true;
+            pControl.keepDisabled = true;
+           
+
+            eControl.gameObject.SetActive(false);
+            pControl.gameObject.SetActive(false);
+            bossControler.enabled = false;
+
+            p.StartMove();
+            p.onMoveDone += PortalAniDone;
+            portalWorking = true;
+        }
+    }
+
+    bool portalWorking = false;
+    void PortalAniDone()
+    {
+        p.onMoveDone -= PortalAniDone;
+        playerWon(true);
     }
 }

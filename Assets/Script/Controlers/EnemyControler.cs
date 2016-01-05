@@ -18,6 +18,8 @@ public class EnemyControler : MonoBehaviour
     public int diff = 1;
     bool gamePaused, bossBattle, GameLoopStarted;
 
+    public bool keepDisabled;
+
     void Awake()
     {
         GameManager.instance.onPauseGame += GamePaused;
@@ -72,7 +74,10 @@ public class EnemyControler : MonoBehaviour
 
     public void OnEnable()
     {
-        StartCoroutine(gameLoop());
+        if (keepDisabled)
+            enabled = false;
+        else
+            StartCoroutine(gameLoop());
     }
 
     void GamePaused(bool b)

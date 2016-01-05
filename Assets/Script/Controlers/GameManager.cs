@@ -284,6 +284,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SetStatics();
+
+        if (Input.GetKeyDown(KeyCode.P))
+            _AllowDebug = true;
     }
 
     #region EventListeners

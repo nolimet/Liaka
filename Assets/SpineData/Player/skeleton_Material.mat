@@ -26,5 +26,5 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: 0.1
+        second: 0
     m_Colors: {}

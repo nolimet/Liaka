@@ -83,10 +83,13 @@ public class PlayerControler : MonoBehaviour
     bool atNewBoostPos;
     float BoostStayTimeLeft;
 
-    [HideInInspector]
-    public float weaponHeat, MaxHeat = 100f;
+    [Header("Weapon heat Settings")]
+    public float weaponHeat;
+    public float MaxHeat = 100f;
 
-    public float Energy, MaxEnergy = 50f;
+    [Header("Energy Setting")]
+    public float Energy;
+    public float MaxEnergy = 50f;
     [HideInInspector]
     public bool weaponForcedCooldown;
     [HideInInspector]
@@ -178,7 +181,6 @@ public class PlayerControler : MonoBehaviour
             case BaseObject.objectType.Enemy:
                 if (onCoinsLost != null)
                     onCoinsLost(Random.Range(2, 6));
-
                 break;
         }
     }
@@ -441,6 +443,6 @@ public class PlayerControler : MonoBehaviour
         Debug.DrawRay(new Vector3(newXpos, -10, 0), Vector3.up, Color.cyan, 100f);
         transform.position = new Vector3(newXpos, transform.position.y);
 
-       // playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
+       //playerScreenX = Camera.main.WorldToScreenPoint(transform.position).x;
     }
 }

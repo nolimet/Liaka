@@ -206,47 +206,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472150, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 442316, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -1.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 442316, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 21.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 456852, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 21.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 456852, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.69
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11443500, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: NextStageName
+      propertyPath: bossControler
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 106306, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 494684, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 21.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 494684, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 9.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 456852, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 494684, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
+      objectReference: {fileID: 1091928236}
+    - target: {fileID: 11443500, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
+      propertyPath: NextStageName
+      value: Stage-3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e16251842a7e4e4e95d446e3f3e3c39, type: 2}
@@ -1060,6 +1028,14 @@ Prefab:
     - target: {fileID: 5077958, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
       propertyPath: m_GravityScale
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397028, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320172, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
@@ -7651,6 +7627,7 @@ MonoBehaviour:
   IgnorShake: 1
   DoUpdate: 1
   offSetX: -18
+  IgnorNameTags: []
 --- !u!1 &912202375
 GameObject:
   m_ObjectHideFlags: 0
@@ -8128,6 +8105,7 @@ MonoBehaviour:
   IgnorShake: 1
   DoUpdate: 1
   offSetX: -18
+  IgnorNameTags: []
 --- !u!1 &974694955
 GameObject:
   m_ObjectHideFlags: 0
@@ -9432,6 +9410,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1091928236 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11495816, guid: 2d7b766d82c74b64490f947f38620897,
+    type: 2}
+  m_PrefabInternal: {fileID: 1091928235}
+  m_Script: {fileID: 11500000, guid: 6dc132ca5fb008c4582c554a91d31fb9, type: 3}
 --- !u!1 &1112879435
 GameObject:
   m_ObjectHideFlags: 0
@@ -10118,6 +10102,7 @@ MonoBehaviour:
   IgnorShake: 1
   DoUpdate: 1
   offSetX: -18
+  IgnorNameTags: []
 --- !u!1 &1212953804
 GameObject:
   m_ObjectHideFlags: 0
@@ -12485,7 +12470,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useRectransMode: 0
   camera: {fileID: 0}
-  screenSize: {x: 100, y: 100, z: 0}
   StartSize: {x: 1920, y: 1080}
   ExstraSizeMult: {x: 1.05, y: 1.05}
   Vertical: 1
@@ -14521,6 +14505,7 @@ MonoBehaviour:
   IgnorShake: 1
   DoUpdate: 1
   offSetX: -18
+  IgnorNameTags: []
 --- !u!1 &1834299454
 GameObject:
   m_ObjectHideFlags: 0
@@ -15380,6 +15365,7 @@ MonoBehaviour:
   IgnorShake: 0
   DoUpdate: 1
   offSetX: -18
+  IgnorNameTags: []
   disableTraps: 4
 --- !u!1 &1929513894
 GameObject:
