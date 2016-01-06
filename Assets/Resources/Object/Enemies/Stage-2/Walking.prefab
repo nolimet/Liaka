@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.13000011, y: 14.6400003, z: 0}
-  m_LocalScale: {x: 1.05816305, y: 1.05816305, z: 1.05816305}
+  m_LocalPosition: {x: 13.36, y: -9.17, z: 0}
+  m_LocalScale: {x: 1.058163, y: 1.058163, z: 1.058163}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -38,15 +38,16 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103708}
+  m_UseAutoMass: 0
   m_Mass: 2000
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!58 &5897586
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -54,12 +55,13 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103708}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 0d45a9108da506e47aab6bce59fb8bc9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .573333323
+  m_Radius: 1.04
 --- !u!114 &11409076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,7 +70,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 103708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821b2602ced37b14e8c5c1292778beed, type: 3}
+  m_Script: {fileID: 11500000, guid: 40903bffe521c6649b908052225a1af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   useBounds:
@@ -77,6 +79,8 @@ MonoBehaviour:
     left: 1
     right: 0
   type: 2
+  fadeWhenGroundhit: 1
+  removeObject: 0
   Health: 0
   maxHealth: 0
   etype: 0
@@ -98,14 +102,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8f4a8aab1365cd941bb8a8997aa057d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ff4b033104de3448a7ff9dbf7bb04d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -134,6 +142,18 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 8f4a8aab1365cd941bb8a8997aa057d3,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 0d45a9108da506e47aab6bce59fb8bc9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 103708}

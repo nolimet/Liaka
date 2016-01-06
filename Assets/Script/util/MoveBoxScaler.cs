@@ -8,7 +8,7 @@ public class MoveBoxScaler : MonoBehaviour
 
     [Header("Default Scaling mode")]
     [SerializeField]
-    new Camera camera;
+    new public Camera camera;
 
     public static Vector3 screenSize = Vector3.zero;
 
@@ -24,15 +24,18 @@ public class MoveBoxScaler : MonoBehaviour
 
     void Awake()
     {
-        if (!GameManager.instance)
-            Debug.LogError("No Game Manager Could Be found 0.0");
+        if (!camera)
+            camera = FindObjectOfType<Camera>();
+        if (!camera)
+            if (!GameManager.instance)
+                Debug.LogError("No Game Manager Could Be found 0.0");
         if (useRectransMode)
             rectTransMode();
         else
             defaultMode();
     }
 
-    void defaultMode()
+    public void defaultMode()
     {
         if (camera == null)
             camera = Camera.main;
@@ -55,7 +58,7 @@ public class MoveBoxScaler : MonoBehaviour
         screenSize = new Vector3(p1.x, p1.y, 1); //* 2f;
     }
 
-    void rectTransMode()
+    public void rectTransMode()
     {
         RectTransform r = (RectTransform)transform;
         Vector2 n;
