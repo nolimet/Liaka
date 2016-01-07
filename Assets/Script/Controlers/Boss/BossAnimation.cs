@@ -3,7 +3,10 @@ using System.Collections;
 
 public class BossAnimation : MonoBehaviour
 {
-    SkeletonAnimation ani;
+    public SkeletonAnimation ani;
+
+    [SpineAnimation]
+    public string walkNormal;
     void Start()
     {
         if (!ani)
@@ -14,33 +17,31 @@ public class BossAnimation : MonoBehaviour
             enabled = false;
             return;
         }
-
-
     }
 
     public virtual void Fight_onPerfectHit()
     {
-        Debug.Log("NOT BAD! A PERFECT HIT");
+       // Debug.Log("NOT BAD! A PERFECT HIT");
     }
 
     public virtual void Fight_onGoodHit()
     {
-        Debug.Log("PLAYER DID A NOT SO BAD HIT");
+       // Debug.Log("PLAYER DID A NOT SO BAD HIT");
     }
 
     public virtual void Fight_onBadHit()
     {
-        Debug.Log("PLAYER CAN'T AIM!");
+        //Debug.Log("PLAYER CAN'T AIM!");
     }
 
     public virtual void OnPlayerHit()
     {
-        Debug.Log("PLAYER HIT ME");
+        //Debug.Log("PLAYER HIT ME");
     }
 
     public virtual void OnEnemyHit()
     {
-        Debug.Log("Enemie HIT ANIMATION PLAY Event");
+        //Debug.Log("Enemie HIT ANIMATION PLAY Event");
     }
 
     public virtual void MoveChange(int interger)

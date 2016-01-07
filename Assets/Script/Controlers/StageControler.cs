@@ -38,10 +38,12 @@ public class StageControler : MonoBehaviour
 
     float TimeLeft;
     bool _bossFighting, _bossDefeated;
+    
 
     int _coinsCollected;
 
-    public PortalControler p;
+    public PortalControler portalControler;
+    public PlayerDeath PlayerDeathAnimationControler;
     public EnemyControler eControl;
     public PickupControler pControl;
     public BossControler bossControler;
@@ -230,9 +232,27 @@ public class StageControler : MonoBehaviour
         }
     }
 
-    void playerDefeated()
+    void playerDefeated(bool animPlayed = false)
     {
-        util.LoadObject.LoadLevelAsync("Game-End-Lose", 1.5f);
+        if (animPlayed)
+            util.LoadObject.LoadLevelAddative("Game-End-Lose");
+        else
+        {
+            if (deathAnimePlaying)
+                return;
+
+            eControl.keepDisabled = true;
+            pControl.keepDisabled = true;
+
+
+            eControl.gameObject.SetActive(false);
+            pControl.gameObject.SetActive(false);
+            bossControler.enabled = false;
+
+            PlayerDeathAnimationControler.onAnimationDone += PlayerDeathAnimationDone;
+            PlayerDeathAnimationControler.StartAni();
+            deathAnimePlaying = true;
+        }
         //Application.LoadLevel("Game-End-Lose");
     }
 
@@ -241,7 +261,8 @@ public class StageControler : MonoBehaviour
         if (animPlayed)
         {
             if (NextStageName == "")
-                util.LoadObject.LoadLevelAsync("Game-End-Win", 1.5f);
+                //util.LoadObject.LoadLevelAsync("Game-End-Win", 1.5f);
+                util.LoadObject.LoadLevelAddative("Game-End-Win");
             //Application.LoadLevel("Game-End-Win");
             else
                 util.LoadObject.LoadLevelAsync(NextStageName, 1.5f);
@@ -250,7 +271,8 @@ public class StageControler : MonoBehaviour
         }
         else
         {
-
+            if (!portalWorking)
+                return;
             eControl.keepDisabled = true;
             pControl.keepDisabled = true;
            
@@ -259,8 +281,8 @@ public class StageControler : MonoBehaviour
             pControl.gameObject.SetActive(false);
             bossControler.enabled = false;
 
-            p.StartMove();
-            p.onMoveDone += PortalAniDone;
+            portalControler.StartMove();
+            portalControler.onMoveDone += PortalAniDone;
             portalWorking = true;
         }
     }
@@ -268,7 +290,14 @@ public class StageControler : MonoBehaviour
     bool portalWorking = false;
     void PortalAniDone()
     {
-        p.onMoveDone -= PortalAniDone;
+        portalControler.onMoveDone -= PortalAniDone;
         playerWon(true);
+    }
+
+    bool deathAnimePlaying = false;
+    void PlayerDeathAnimationDone()
+    {
+        PlayerDeathAnimationControler.onAnimationDone -= PlayerDeathAnimationDone;
+        playerDefeated(true);
     }
 }

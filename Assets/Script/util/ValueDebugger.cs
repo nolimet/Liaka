@@ -62,6 +62,9 @@ namespace util
                 g.name = "util.DebugVisual";
             }
 
+            if (instance && !instance.transform.parent.gameObject.activeSelf) 
+                instance.transform.parent.gameObject.SetActive(true);
+
             if (instance.Values.Keys.Contains(name))
             {
                 instance.Values[name] = value;
@@ -81,6 +84,9 @@ namespace util
 
         void Update()
         {
+            if (!GameManager.AllowDebug)
+                transform.parent.gameObject.SetActive(false);
+
             Process();
         }
 

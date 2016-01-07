@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 namespace util
 {
@@ -17,6 +18,11 @@ namespace util
             GameObject G = Instantiate(Resources.Load("Object/LoadObject"), Vector3.zero, Quaternion.identity) as GameObject;
 
             G.GetComponent<LoadObject>().BeginLoading(level, waitTime);
+        }
+
+        public static void LoadLevelAddative(string level)
+        {
+            SceneManager.LoadScene(level, LoadSceneMode.Additive);
         }
 
         void Start()

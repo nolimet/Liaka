@@ -150,7 +150,8 @@ public class PlayerControler : MonoBehaviour
         { 
             hitTrap = true;
 
-            rigi2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+            if (onDeath != null)
+                onDeath();
         }
     }
 

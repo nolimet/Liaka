@@ -1,0 +1,279 @@
+
+skeleton.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eekhoorntjesbrood
+  rotate: false
+  xy: 2, 402
+  size: 827, 232
+  orig: 827, 232
+  offset: 0, 0
+  index: -1
+hat
+  rotate: true
+  xy: 1876, 1461
+  size: 290, 146
+  orig: 290, 146
+  offset: 0, 0
+  index: -1
+mos
+  rotate: false
+  xy: 1276, 1455
+  size: 598, 296
+  orig: 598, 296
+  offset: 0, 0
+  index: -1
+mouthpiece
+  rotate: false
+  xy: 1022, 457
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+mushroom_big_cap
+  rotate: true
+  xy: 1071, 960
+  size: 278, 179
+  orig: 278, 179
+  offset: 0, 0
+  index: -1
+mushroom_big_stem
+  rotate: true
+  xy: 1584, 1086
+  size: 128, 137
+  orig: 128, 137
+  offset: 0, 0
+  index: -1
+mushroom_caps01
+  rotate: true
+  xy: 1340, 892
+  size: 51, 60
+  orig: 51, 60
+  offset: 0, 0
+  index: -1
+mushroom_caps02
+  rotate: false
+  xy: 1088, 762
+  size: 72, 89
+  orig: 72, 89
+  offset: 0, 0
+  index: -1
+mushroom_caps04
+  rotate: false
+  xy: 1723, 1107
+  size: 138, 107
+  orig: 138, 107
+  offset: 0, 0
+  index: -1
+mushroom_caps05
+  rotate: false
+  xy: 1423, 1081
+  size: 159, 133
+  orig: 159, 133
+  offset: 0, 0
+  index: -1
+mushroom_stems01
+  rotate: false
+  xy: 1166, 893
+  size: 81, 65
+  orig: 81, 65
+  offset: 0, 0
+  index: -1
+mushroom_stems02
+  rotate: false
+  xy: 1088, 853
+  size: 76, 105
+  orig: 76, 105
+  offset: 0, 0
+  index: -1
+mushroom_stems04
+  rotate: false
+  xy: 531, 44
+  size: 90, 114
+  orig: 90, 114
+  offset: 0, 0
+  index: -1
+mushroom_stems05
+  rotate: true
+  xy: 1252, 945
+  size: 86, 145
+  orig: 86, 145
+  offset: 0, 0
+  index: -1
+mushrooms_back
+  rotate: false
+  xy: 529, 160
+  size: 292, 240
+  orig: 292, 240
+  offset: 0, 0
+  index: -1
+mushrooms_double
+  rotate: false
+  xy: 245, 14
+  size: 208, 143
+  orig: 208, 143
+  offset: 0, 0
+  index: -1
+preview
+  rotate: false
+  xy: 2, 1240
+  size: 1272, 794
+  orig: 1272, 794
+  offset: 0, 0
+  index: -1
+rope
+  rotate: true
+  xy: 1864, 1281
+  size: 172, 182
+  orig: 172, 182
+  offset: 0, 0
+  index: -1
+shell_belly
+  rotate: false
+  xy: 2, 159
+  size: 525, 241
+  orig: 525, 241
+  offset: 0, 0
+  index: -1
+shell_upper
+  rotate: false
+  xy: 2, 636
+  size: 779, 602
+  orig: 779, 602
+  offset: 0, 0
+  index: -1
+shroom_arm_L_lower-
+  rotate: true
+  xy: 1022, 507
+  size: 138, 50
+  orig: 138, 50
+  offset: 0, 0
+  index: -1
+shroom_arm_L_upper
+  rotate: true
+  xy: 1423, 1042
+  size: 37, 109
+  orig: 37, 109
+  offset: 0, 0
+  index: -1
+shroom_arm_r_lower
+  rotate: false
+  xy: 1864, 1229
+  size: 138, 50
+  orig: 138, 50
+  offset: 0, 0
+  index: -1
+shroom_arm_r_upper
+  rotate: true
+  xy: 623, 45
+  size: 37, 109
+  orig: 37, 109
+  offset: 0, 0
+  index: -1
+shroom_body
+  rotate: false
+  xy: 831, 453
+  size: 189, 192
+  orig: 189, 192
+  offset: 0, 0
+  index: -1
+shroom_leg_L_lower
+  rotate: false
+  xy: 455, 27
+  size: 74, 130
+  orig: 74, 130
+  offset: 0, 0
+  index: -1
+shroom_leg_L_upper
+  rotate: false
+  xy: 1249, 889
+  size: 89, 54
+  orig: 89, 54
+  offset: 0, 0
+  index: -1
+shroom_leg_R_lower
+  rotate: true
+  xy: 623, 84
+  size: 74, 130
+  orig: 74, 130
+  offset: 0, 0
+  index: -1
+shroom_leg_R_upper
+  rotate: true
+  xy: 755, 69
+  size: 89, 54
+  orig: 89, 54
+  offset: 0, 0
+  index: -1
+turtle_eye
+  rotate: false
+  xy: 1723, 1065
+  size: 98, 40
+  orig: 98, 40
+  offset: 0, 0
+  index: -1
+turtle_eyebrow
+  rotate: false
+  xy: 831, 405
+  size: 133, 46
+  orig: 133, 46
+  offset: 0, 0
+  index: -1
+turtle_flower
+  rotate: false
+  xy: 1088, 670
+  size: 56, 90
+  orig: 56, 90
+  offset: 0, 0
+  index: -1
+turtle_head
+  rotate: false
+  xy: 1276, 1753
+  size: 759, 281
+  orig: 759, 281
+  offset: 0, 0
+  index: -1
+turtle_jaw_lower
+  rotate: false
+  xy: 1252, 1033
+  size: 169, 181
+  orig: 169, 181
+  offset: 0, 0
+  index: -1
+turtle_leg_L_behind
+  rotate: true
+  xy: 1276, 1216
+  size: 237, 292
+  orig: 237, 292
+  offset: 0, 0
+  index: -1
+turtle_leg_L_front-
+  rotate: false
+  xy: 783, 935
+  size: 286, 303
+  orig: 286, 303
+  offset: 0, 0
+  index: -1
+turtle_leg_R_behind
+  rotate: true
+  xy: 1570, 1216
+  size: 237, 292
+  orig: 237, 292
+  offset: 0, 0
+  index: -1
+turtle_leg_R_front
+  rotate: true
+  xy: 783, 647
+  size: 286, 303
+  orig: 286, 303
+  offset: 0, 0
+  index: -1
+turtle_tail
+  rotate: false
+  xy: 2, 2
+  size: 241, 155
+  orig: 241, 155
+  offset: 0, 0
+  index: -1

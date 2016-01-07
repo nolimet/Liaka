@@ -73,7 +73,7 @@ public class VariationLayerControler : LayerControler
     public override void LateUpdateLoop()
     {
         base.LateUpdateLoop();
-       drawOutLine();
+       //drawOutLine();
     }
     Bounds b;
     public virtual void drawOutLine()

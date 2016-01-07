@@ -99,6 +99,11 @@ public class PlayerAnimationControler : MonoBehaviour
         anim.state.AddAnimation(0, idle, true, 0);
     }
 
+    public void Player_Death()
+    {
+        anim.state.SetAnimation(0, death, false);
+    }
+
     public void Player_Shoot()
     {
         if (shootAniHold <= 0)

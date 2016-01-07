@@ -91,5 +91,13 @@ public class BossControler : MonoBehaviour
                 onPlayerHit();
             bossAnimator.OnPlayerHit();
         }
+
+        if(collision.transform.tag == TagManager.Ground)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Boss");
+            Rigidbody2D ri = GetComponent<Rigidbody2D>();
+            ri.constraints = RigidbodyConstraints2D.FreezeAll;
+            ri.gravityScale = 0;
+        }
     }
 }

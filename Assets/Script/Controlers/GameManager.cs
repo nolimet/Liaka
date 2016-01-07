@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
                 if (!_instance && !_Destroyed)
                 {
                     GameObject g = Instantiate(Resources.Load("GameManager")) as GameObject;
+                    _instance = g.GetComponent<GameManager>();
                     g.name = "Game Manager";
                     Debug.Log("created new object");
                     return g.GetComponent<GameManager>();
@@ -286,7 +287,10 @@ public class GameManager : MonoBehaviour
         SetStatics();
 
         if (Input.GetKeyDown(KeyCode.P))
-            _AllowDebug = true;
+            _AllowDebug = !AllowDebug;
+
+        if (Input.GetKeyDown(KeyCode.O))
+            GodMode = !GodMode;
     }
 
     #region EventListeners
@@ -300,10 +304,10 @@ public class GameManager : MonoBehaviour
         StageControler.onStageDestroyed += onStageControlerDestroyed;
         StageControler.onStageTimerEnded += onStageEnded;
 
-        DontDestroyOnLoad(inputManager);
-        DontDestroyOnLoad(uiControler);
-        DontDestroyOnLoad(audioControler);
-        DontDestroyOnLoad(_instance);
+        DontDestroyOnLoad(inputManager.gameObject);
+        DontDestroyOnLoad(uiControler.gameObject);
+        DontDestroyOnLoad(audioControler.gameObject);
+        DontDestroyOnLoad(_instance.gameObject);
     }
 
     void onPlayerDestoryed(PlayerControler p)
