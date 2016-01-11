@@ -9409,11 +9409,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471076, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.04999995
+      value: -2.05
       objectReference: {fileID: 0}
     - target: {fileID: 471076, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -5.38000011
+      value: -5.04
       objectReference: {fileID: 0}
     - target: {fileID: 467390, guid: 2d7b766d82c74b64490f947f38620897, type: 2}
       propertyPath: m_LocalPosition.x
@@ -15590,7 +15590,7 @@ MonoBehaviour:
   DoUpdate: 1
   offSetX: -18
   IgnorNameTags: []
-  disableTraps: 4
+  disableTraps: 128
 --- !u!1 &1929513894
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,90 @@
+
+skeleton.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hand-back
+  rotate: false
+  xy: 277, 29
+  size: 58, 21
+  orig: 58, 21
+  offset: 0, 0
+  index: -1
+hand-front
+  rotate: false
+  xy: 74, 4
+  size: 56, 31
+  orig: 56, 31
+  offset: 0, 0
+  index: -1
+rings
+  rotate: false
+  xy: 132, 17
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+rope-back
+  rotate: true
+  xy: 2, 2
+  size: 33, 70
+  orig: 33, 70
+  offset: 0, 0
+  index: -1
+rope-front
+  rotate: true
+  xy: 364, 73
+  size: 51, 75
+  orig: 51, 75
+  offset: 0, 0
+  index: -1
+rope-piece-front
+  rotate: false
+  xy: 494, 112
+  size: 7, 12
+  orig: 7, 12
+  offset: 0, 0
+  index: -1
+rope-ring
+  rotate: false
+  xy: 503, 113
+  size: 7, 11
+  orig: 7, 11
+  offset: 0, 0
+  index: -1
+scarf
+  rotate: false
+  xy: 277, 52
+  size: 85, 72
+  orig: 85, 72
+  offset: 0, 0
+  index: -1
+shroom-cap
+  rotate: false
+  xy: 152, 24
+  size: 123, 100
+  orig: 123, 100
+  offset: 0, 0
+  index: -1
+stalk
+  rotate: false
+  xy: 441, 49
+  size: 51, 75
+  orig: 51, 75
+  offset: 0, 0
+  index: -1
+worm-body
+  rotate: false
+  xy: 2, 37
+  size: 148, 87
+  orig: 148, 87
+  offset: 0, 0
+  index: -1
+worm-head
+  rotate: true
+  xy: 364, 25
+  size: 46, 49
+  orig: 46, 49
+  offset: 0, 0
+  index: -1

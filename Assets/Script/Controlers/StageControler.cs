@@ -72,6 +72,12 @@ public class StageControler : MonoBehaviour
         BossBattleLength = 0.1f;
 
         _bossDefeated = true;
+
+        if (portalControler == null)
+            portalControler = FindObjectOfType<PortalControler>();
+
+        if (PlayerDeathAnimationControler == null)
+            PlayerDeathAnimationControler = FindObjectOfType<PlayerDeath>();
     }
 
     public void OnDestroy()
@@ -271,8 +277,9 @@ public class StageControler : MonoBehaviour
         }
         else
         {
-            if (!portalWorking)
+            if (portalWorking)
                 return;
+
             eControl.keepDisabled = true;
             pControl.keepDisabled = true;
            

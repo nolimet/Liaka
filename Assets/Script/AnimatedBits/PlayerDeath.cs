@@ -40,6 +40,8 @@ public class PlayerDeath : MonoBehaviour
         ri.AddForce(new Vector3(0, 9 * ri.mass * ri.gravityScale, 0), ForceMode2D.Impulse);
 
         playerAni.GetComponent<PlayerControler>().enabled = false;
+        playerAni.enabled = false;
+
 
         playerAni.Player_Death();
 
@@ -55,15 +57,20 @@ public class PlayerDeath : MonoBehaviour
     {
         rc2D = Physics2D.Raycast(ri.transform.position, Vector2.down, Mathf.Infinity, rayMask);
 
+        util.Debugger.Log("Player ground dist ", rc2D.distance);
         if (rc2D.distance > maxHeight)
             maxHeight = rc2D.distance;
 
         if (rc2D.distance < maxHeight)
             if (rc2D.distance < 0.1f)
             {
+                if (eventSend)
+                    return;
+
                 eventSend = true;
                 if (onAnimationDone != null)
                     onAnimationDone();
+                Debug.Log("send event");
             }
 
         rc2D = new RaycastHit2D();

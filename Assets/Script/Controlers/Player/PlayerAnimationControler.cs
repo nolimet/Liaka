@@ -57,6 +57,7 @@ public class PlayerAnimationControler : MonoBehaviour
             return;
 
         eventPlaced = true;
+
         GameManager.playerControler.onJump += Player_OnJump;
         GameManager.playerControler.onCoinsLost += Player_OnHit;
         GameManager.playerControler.onHitGround += Player_Land;
@@ -65,8 +66,23 @@ public class PlayerAnimationControler : MonoBehaviour
 
     public void OnDestroy()
     {
-        if (!GameManager.playerControler)
+        if (!GameManager.playerControler || !eventPlaced)
             return;
+
+        eventPlaced = false;
+
+        GameManager.playerControler.onJump -= Player_OnJump;
+        GameManager.playerControler.onCoinsLost -= Player_OnHit;
+        GameManager.playerControler.onHitGround -= Player_Land;
+        GameManager.playerControler.onShoot -= Player_Shoot;
+    }
+
+    public void OnDisable()
+    {
+        if (!eventPlaced || !GameManager.playerControler)
+            return;
+
+        eventPlaced = false;
 
         GameManager.playerControler.onJump -= Player_OnJump;
         GameManager.playerControler.onCoinsLost -= Player_OnHit;
