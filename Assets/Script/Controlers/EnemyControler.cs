@@ -50,7 +50,7 @@ public class EnemyControler : MonoBehaviour
     private void StageControler_onBossBattleEnds()
     {
         bossBattle = false;
-        if (this)
+        if (this && enabled)
             StartCoroutine(gameLoop());
         else
         {

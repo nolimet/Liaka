@@ -13,14 +13,18 @@ public class specialSpriteSwapper : MonoBehaviour
         GameObject g = new GameObject("Render1");
         MoveBoxScaler m;
         m = g.AddComponent<MoveBoxScaler>();
-        m.StartSize = new Vector2(2048, 1625);
+        m.StartSize = new Vector2(1024, 812.5f);
+        m.Horizontal = true;
+        m.Vertical = true;
         m.defaultMode();
 
         r1 = g.AddComponent<SpriteRenderer>();
 
         g = new GameObject("Render2");
         m = g.AddComponent<MoveBoxScaler>();
-        m.StartSize = new Vector2(2048, 1625);
+        m.StartSize = new Vector2(1024, 812.5f);
+        m.Horizontal = true;
+        m.Vertical = true;
         m.defaultMode();
 
         r2 = g.AddComponent<SpriteRenderer>();

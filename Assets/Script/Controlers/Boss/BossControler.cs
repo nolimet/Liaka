@@ -11,7 +11,7 @@ public class BossControler : MonoBehaviour
     public BossMove bossMove;
     [SerializeField]
     BossAnimation bossAnimator;
-    
+
     //number of enemies that hit the boss;
     int noEnemiesThatHitBoss;
 
@@ -23,7 +23,7 @@ public class BossControler : MonoBehaviour
         if (!bossAnimator)
             bossAnimator = GetComponent<BossAnimation>();
         if (!bossFight)
-            bossFight = GetComponent<BossFight>();            
+            bossFight = GetComponent<BossFight>();
     }
     void Start()
     {
@@ -41,6 +41,21 @@ public class BossControler : MonoBehaviour
         bossFight.onPerfectHit += () => bossAnimator.Fight_onPerfectHit();
     }
 
+    public void OnEnable()
+    {
+        bossFight.gameObject.SetActive(true);
+        bossMove.gameObject.SetActive(true);
+        bossAnimator.gameObject.SetActive(true);
+    }
+
+    public void OnDisable()
+    {
+        bossFight.gameObject.SetActive(false);
+        bossMove.gameObject.SetActive(false);
+        bossAnimator.gameObject.SetActive(false);
+
+    }
+
     public void OnDestroy()
     {
         BaseObject.onHitBose -= BaseObject_onHitBose;
@@ -53,7 +68,7 @@ public class BossControler : MonoBehaviour
     {
         bossAnimator.MoveChange((int)moveDir);
     }
-    
+
     private void BaseObject_onHitBose(BaseObject.objectType o)
     {
         if (o == BaseObject.objectType.Enemy)
@@ -92,11 +107,11 @@ public class BossControler : MonoBehaviour
             bossAnimator.OnPlayerHit();
         }
 
-        if(collision.transform.tag == TagManager.Ground)
+        if (collision.transform.tag == TagManager.Ground)
         {
             gameObject.layer = LayerMask.NameToLayer("Boss");
             Rigidbody2D ri = GetComponent<Rigidbody2D>();
-            ri.constraints = RigidbodyConstraints2D.FreezeAll;
+            ri.isKinematic = true;
             ri.gravityScale = 0;
         }
     }

@@ -17,8 +17,8 @@ public class MoveBoxScaler : MonoBehaviour
     [Tooltip("exstra size that will be added after properscaling")]
     public Vector2 ExstraSizeMult = Vector2.one;
 
-    [SerializeField, Tooltip("Should object Scale in this direction?")]
-    bool Vertical = false, Horizontal = false;
+    [Tooltip("Should object Scale in this direction?")]
+    public bool Vertical = false, Horizontal = false;
 
 
 

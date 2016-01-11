@@ -18,7 +18,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -61,6 +61,13 @@ TextureImporter:
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 152, y: 212}
+        - {x: 0, y: 212}
+        - {x: 0, y: 0}
+        - {x: 154, y: 0}
+        - {x: 154, y: 210}
+    outline: []
   spritePackingTag: Background_Stage-1
   userData: 
   assetBundleName: 
