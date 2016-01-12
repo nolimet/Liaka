@@ -125,7 +125,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -156,7 +156,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 687929265}
   - 114: {fileID: 687929262}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SwapAbleImages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - 4: {fileID: 844185090}
   - 212: {fileID: 844185089}
   - 114: {fileID: 844185088}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InspiringTexts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -954,7 +954,7 @@ GameObject:
   - 4: {fileID: 1970184529}
   - 212: {fileID: 1970184528}
   - 114: {fileID: 1970184527}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

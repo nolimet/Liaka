@@ -4,6 +4,7 @@ using System.Collections;
 public class BossAnimation : MonoBehaviour
 {
     public SkeletonAnimation ani;
+    float startingTimeScale = 0f;
 
     [SpineAnimation]
     public string walkNormal;
@@ -12,21 +13,37 @@ public class BossAnimation : MonoBehaviour
         if (!ani)
             ani = GetComponent<SkeletonAnimation>();
 
-        if(!ani)
+        if (!ani)
         {
             enabled = false;
             return;
         }
+
+        startingTimeScale = ani.timeScale;
+        GameManager.instance.onPauseGame += Instance_onPauseGame;
+    }
+
+    public void OnDestroy()
+    {
+        GameManager.instance.onPauseGame -= Instance_onPauseGame;
+    }
+
+    private void Instance_onPauseGame(bool b)
+    {
+        if (b)
+            ani.timeScale = 0f;
+        else
+            ani.timeScale = startingTimeScale;
     }
 
     public virtual void Fight_onPerfectHit()
     {
-       // Debug.Log("NOT BAD! A PERFECT HIT");
+        // Debug.Log("NOT BAD! A PERFECT HIT");
     }
 
     public virtual void Fight_onGoodHit()
     {
-       // Debug.Log("PLAYER DID A NOT SO BAD HIT");
+        // Debug.Log("PLAYER DID A NOT SO BAD HIT");
     }
 
     public virtual void Fight_onBadHit()

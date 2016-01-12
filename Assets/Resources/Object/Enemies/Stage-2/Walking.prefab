@@ -147,8 +147,8 @@ MonoBehaviour:
   logErrors: 0
   submeshSeparators: []
   timeScale: 1
-  loop: 0
-  _animationName: 
+  loop: 1
+  _animationName: crawl
 --- !u!114 &11409076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,6 +211,10 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 0d45a9108da506e47aab6bce59fb8bc9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 103708}

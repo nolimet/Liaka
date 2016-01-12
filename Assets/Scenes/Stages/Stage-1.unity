@@ -416,21 +416,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3320172, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 114482, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
       propertyPath: m_Name
       value: PlayerContainer
       objectReference: {fileID: 0}
-    - target: {fileID: 400046, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 13.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 400046, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -6.97
+    - target: {fileID: 3320172, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
@@ -4942,7 +4934,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4968,8 +4960,12 @@ Prefab:
       propertyPath: StageManager
       value: 
       objectReference: {fileID: 2046007765}
-    - target: {fileID: 142030, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
-      propertyPath: m_IsActive
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 475898, guid: 75f5846df81ebb84eb28394cc0096c8d, type: 2}
+      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

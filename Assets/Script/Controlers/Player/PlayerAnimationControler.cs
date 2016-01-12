@@ -9,6 +9,7 @@ public class PlayerAnimationControler : MonoBehaviour
     [SerializeField]
     SkeletonAnimation anim;
     float shootAniHold = 0f;
+    float startingTimeScale = 0f;
     bool eventPlaced = false;
     #region Animations
     [SpineAnimation]
@@ -56,12 +57,23 @@ public class PlayerAnimationControler : MonoBehaviour
         if (!GameManager.playerControler)
             return;
 
+        startingTimeScale = anim.timeScale;
+
         eventPlaced = true;
 
         GameManager.playerControler.onJump += Player_OnJump;
         GameManager.playerControler.onCoinsLost += Player_OnHit;
         GameManager.playerControler.onHitGround += Player_Land;
         GameManager.playerControler.onShoot += Player_Shoot;
+        GameManager.instance.onPauseGame += Instance_onPauseGame;
+    }
+
+    private void Instance_onPauseGame(bool b)
+    {
+        if (b)
+            anim.timeScale = 0f;
+        else
+            anim.timeScale = startingTimeScale;
     }
 
     public void OnDestroy()
@@ -75,6 +87,7 @@ public class PlayerAnimationControler : MonoBehaviour
         GameManager.playerControler.onCoinsLost -= Player_OnHit;
         GameManager.playerControler.onHitGround -= Player_Land;
         GameManager.playerControler.onShoot -= Player_Shoot;
+        GameManager.instance.onPauseGame -= Instance_onPauseGame;
     }
 
     public void OnDisable()
