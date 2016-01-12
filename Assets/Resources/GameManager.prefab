@@ -3943,8 +3943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useRectransMode: 0
-  camera: {fileID: 0}
-  screenSize: {x: 0, y: 0, z: 0}
+  camera: {fileID: 2063796}
   StartSize: {x: 100, y: 100}
   ExstraSizeMult: {x: 1, y: 1}
   Vertical: 1
@@ -6202,7 +6201,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: baaac40f63d8e2e42b908cdc76329405, type: 3}
   - {fileID: 21300000, guid: 4a9f038c10b955c4386506f1a40999b9, type: 3}
   - {fileID: 21300000, guid: 832bf9b7d9bb5d44ca4948df41bd12bd, type: 3}
-  - {fileID: 21300000, guid: adaca6907e62fc14eb195f7dd08d5377, type: 3}
   DisplayObject: {fileID: 11464726}
   Container: {fileID: 22401462}
 --- !u!114 &11499544

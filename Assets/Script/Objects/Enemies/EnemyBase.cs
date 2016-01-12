@@ -42,7 +42,9 @@ public class EnemyBase : BaseObject{
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
         if (SA)
-            SA.timeScale = OriginalTimeScale;
+            SA.enabled = true;
+
+        alive = true;
     }
 
     public override void RemoveFromView(bool callRemoveOjbect = true)
@@ -57,7 +59,7 @@ public class EnemyBase : BaseObject{
             a.enabled = false;
 
         if (SA)
-            SA.timeScale = 0;
+            SA.enabled = false;
 
         if (callRemoveOjbect)
             EnemyPool.RemoveObject(this);

@@ -158,6 +158,9 @@ public class StageControler : MonoBehaviour
     #endregion
     void Update()
     {
+        if (GameManager.gamePaused)
+            return;
+
         if(TimeLeft>0)
             TimeLeft -= Time.deltaTime;
 
