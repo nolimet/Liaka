@@ -14,18 +14,23 @@ public class BossAnimation : MonoBehaviour
             ani = GetComponent<SkeletonAnimation>();
 
         if (!ani)
+            ani = GetComponentInChildren<SkeletonAnimation>();
+
+        if (!ani)
         {
             enabled = false;
             return;
         }
 
         startingTimeScale = ani.timeScale;
+
         GameManager.instance.onPauseGame += Instance_onPauseGame;
     }
 
     public void OnDestroy()
     {
-        GameManager.instance.onPauseGame -= Instance_onPauseGame;
+        if (ani)
+            GameManager.instance.onPauseGame -= Instance_onPauseGame;
     }
 
     private void Instance_onPauseGame(bool b)
