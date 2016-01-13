@@ -1,0 +1,76 @@
+
+skeleton_fly_st3.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+copt1
+  rotate: true
+  xy: 201, 2
+  size: 361, 85
+  orig: 361, 85
+  offset: 0, 0
+  index: -1
+copt2
+  rotate: true
+  xy: 2, 2
+  size: 361, 98
+  orig: 361, 98
+  offset: 0, 0
+  index: -1
+copt3
+  rotate: true
+  xy: 102, 2
+  size: 361, 97
+  orig: 361, 97
+  offset: 0, 0
+  index: -1
+fly_head
+  rotate: false
+  xy: 312, 322
+  size: 200, 219
+  orig: 200, 219
+  offset: 0, 0
+  index: -1
+fly_leaves
+  rotate: false
+  xy: 288, 112
+  size: 169, 208
+  orig: 169, 208
+  offset: 0, 0
+  index: -1
+fly_mouth
+  rotate: true
+  xy: 862, 809
+  size: 169, 133
+  orig: 169, 133
+  offset: 0, 0
+  index: -1
+tear1
+  rotate: false
+  xy: 2, 543
+  size: 432, 220
+  orig: 432, 220
+  offset: 0, 0
+  index: -1
+tear2
+  rotate: false
+  xy: 2, 765
+  size: 471, 213
+  orig: 471, 213
+  offset: 0, 0
+  index: -1
+tear3
+  rotate: false
+  xy: 475, 805
+  size: 385, 173
+  orig: 385, 173
+  offset: 0, 0
+  index: -1
+tearside
+  rotate: false
+  xy: 2, 365
+  size: 308, 176
+  orig: 308, 176
+  offset: 0, 0
+  index: -1

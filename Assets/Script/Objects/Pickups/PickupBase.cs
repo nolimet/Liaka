@@ -149,7 +149,21 @@ public class PickupBase :BaseObject {
         }
     }
 
-   
+    RaycastHit2D hitcast;
+    protected override void Update()
+    {
+        base.Update();
+
+        //if(alive)
+        //{
+        //    if (SA)
+        //     //   hitcast = Physics2D.Raycast(transform.position + SA.b);
+        //    else if (a)
+        //    {
+
+        //    }
+        //}
+    }
 
     /// <summary>
     /// fades the object out

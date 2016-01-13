@@ -1,0 +1,83 @@
+
+skeleton_crawl_st3.png
+size: 512,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+crawl_head2_base01
+  rotate: false
+  xy: 344, 159
+  size: 146, 141
+  orig: 146, 141
+  offset: 0, 0
+  index: -1
+crawl_head_base02
+  rotate: true
+  xy: 344, 302
+  size: 154, 146
+  orig: 154, 146
+  offset: 0, 0
+  index: -1
+crawl_head_base03
+  rotate: false
+  xy: 2, 2
+  size: 172, 159
+  orig: 172, 159
+  offset: 0, 0
+  index: -1
+crawl_leaves2_base01
+  rotate: false
+  xy: 270, 458
+  size: 217, 235
+  orig: 217, 235
+  offset: 0, 0
+  index: -1
+crawl_leaves_base02
+  rotate: false
+  xy: 267, 695
+  size: 220, 320
+  orig: 220, 320
+  offset: 0, 0
+  index: -1
+crawl_leaves_base03
+  rotate: false
+  xy: 2, 625
+  size: 263, 390
+  orig: 263, 390
+  offset: 0, 0
+  index: -1
+crawl_mouth_base02
+  rotate: false
+  xy: 344, 76
+  size: 114, 81
+  orig: 114, 81
+  offset: 0, 0
+  index: -1
+crawl_mouth_base03
+  rotate: true
+  xy: 176, 23
+  size: 138, 86
+  orig: 138, 86
+  offset: 0, 0
+  index: -1
+crawl_roots
+  rotate: true
+  xy: 270, 91
+  size: 365, 72
+  orig: 365, 72
+  offset: 0, 0
+  index: -1
+crawl_tears01
+  rotate: true
+  xy: 2, 163
+  size: 460, 132
+  orig: 460, 132
+  offset: 0, 0
+  index: -1
+crawl_tears02
+  rotate: true
+  xy: 136, 163
+  size: 460, 132
+  orig: 460, 132
+  offset: 0, 0
+  index: -1

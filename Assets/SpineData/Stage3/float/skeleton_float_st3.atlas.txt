@@ -1,0 +1,90 @@
+
+skeleton_float_st3.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+float_head
+  rotate: false
+  xy: 2, 187
+  size: 320, 315
+  orig: 320, 315
+  offset: 0, 0
+  index: -1
+float_inside_mouth
+  rotate: false
+  xy: 693, 143
+  size: 96, 147
+  orig: 96, 147
+  offset: 0, 0
+  index: -1
+float_tentacles_01
+  rotate: true
+  xy: 850, 194
+  size: 96, 65
+  orig: 96, 65
+  offset: 0, 0
+  index: -1
+float_tentacles_02
+  rotate: true
+  xy: 596, 129
+  size: 159, 95
+  orig: 159, 95
+  offset: 0, 0
+  index: -1
+float_tentacles_03
+  rotate: false
+  xy: 270, 44
+  size: 31, 141
+  orig: 31, 141
+  offset: 0, 0
+  index: -1
+float_tentacles_04
+  rotate: true
+  xy: 913, 298
+  size: 204, 103
+  orig: 204, 103
+  offset: 0, 0
+  index: -1
+float_tentacles_base
+  rotate: true
+  xy: 791, 153
+  size: 137, 57
+  orig: 137, 57
+  offset: 0, 0
+  index: -1
+float_tongue
+  rotate: false
+  xy: 596, 83
+  size: 73, 44
+  orig: 73, 44
+  offset: 0, 0
+  index: -1
+tear1
+  rotate: false
+  xy: 324, 290
+  size: 298, 212
+  orig: 298, 212
+  offset: 0, 0
+  index: -1
+tear2
+  rotate: false
+  xy: 624, 292
+  size: 287, 210
+  orig: 287, 210
+  offset: 0, 0
+  index: -1
+tear3
+  rotate: false
+  xy: 324, 86
+  size: 270, 202
+  orig: 270, 202
+  offset: 0, 0
+  index: -1
+tear4
+  rotate: false
+  xy: 2, 2
+  size: 266, 183
+  orig: 266, 183
+  offset: 0, 0
+  index: -1

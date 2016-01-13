@@ -1,0 +1,201 @@
+
+skeleton_boss_3.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Tear1
+  rotate: false
+  xy: 2, 344
+  size: 458, 671
+  orig: 458, 671
+  offset: 0, 0
+  index: -1
+Tear2
+  rotate: false
+  xy: 462, 344
+  size: 458, 671
+  orig: 458, 671
+  offset: 0, 0
+  index: -1
+bodyfull
+  rotate: true
+  xy: 439, 7
+  size: 335, 394
+  orig: 335, 394
+  offset: 0, 0
+  index: -1
+brake2
+  rotate: true
+  xy: 922, 417
+  size: 266, 84
+  orig: 266, 84
+  offset: 0, 0
+  index: -1
+brake7
+  rotate: false
+  xy: 928, 9
+  size: 93, 62
+  orig: 93, 62
+  offset: 0, 0
+  index: -1
+brake8
+  rotate: false
+  xy: 2, 4
+  size: 27, 16
+  orig: 27, 16
+  offset: 0, 0
+  index: -1
+curl
+  rotate: true
+  xy: 922, 360
+  size: 55, 75
+  orig: 55, 75
+  offset: 0, 0
+  index: -1
+dow_down_arm
+  rotate: false
+  xy: 835, 73
+  size: 177, 269
+  orig: 177, 269
+  offset: 0, 0
+  index: -1
+dust1
+  rotate: true
+  xy: 922, 685
+  size: 330, 97
+  orig: 330, 97
+  offset: 0, 0
+  index: -1
+fullarm
+  rotate: true
+  xy: 2, 22
+  size: 320, 435
+  orig: 320, 435
+  offset: 0, 0
+  index: -1
+sl_Tear3
+  rotate: true
+  xy: 835, 2
+  size: 69, 91
+  orig: 69, 91
+  offset: 0, 0
+  index: -1
+
+skeleton2_boss_3.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Tear3
+  rotate: false
+  xy: 2, 344
+  size: 458, 671
+  orig: 458, 671
+  offset: 0, 0
+  index: -1
+brake1
+  rotate: true
+  xy: 930, 821
+  size: 194, 92
+  orig: 194, 92
+  offset: 0, 0
+  index: -1
+brake3
+  rotate: true
+  xy: 471, 86
+  size: 268, 111
+  orig: 268, 111
+  offset: 0, 0
+  index: -1
+brake4
+  rotate: true
+  xy: 335, 84
+  size: 258, 134
+  orig: 258, 134
+  offset: 0, 0
+  index: -1
+brake5_2
+  rotate: true
+  xy: 715, 366
+  size: 201, 130
+  orig: 201, 130
+  offset: 0, 0
+  index: -1
+brake6
+  rotate: true
+  xy: 762, 164
+  size: 200, 111
+  orig: 200, 111
+  offset: 0, 0
+  index: -1
+dow_upper_arm
+  rotate: false
+  xy: 584, 109
+  size: 118, 245
+  orig: 118, 245
+  offset: 0, 0
+  index: -1
+dust2
+  rotate: false
+  xy: 462, 706
+  size: 438, 125
+  orig: 438, 125
+  offset: 0, 0
+  index: -1
+dust3
+  rotate: false
+  xy: 462, 833
+  size: 466, 182
+  orig: 466, 182
+  offset: 0, 0
+  index: -1
+dust4
+  rotate: false
+  xy: 462, 569
+  size: 405, 135
+  orig: 405, 135
+  offset: 0, 0
+  index: -1
+dust5
+  rotate: true
+  xy: 704, 5
+  size: 349, 56
+  orig: 349, 56
+  offset: 0, 0
+  index: -1
+fullleg
+  rotate: true
+  xy: 462, 356
+  size: 211, 251
+  orig: 211, 251
+  offset: 0, 0
+  index: -1
+head2
+  rotate: false
+  xy: 2, 14
+  size: 331, 328
+  orig: 331, 328
+  offset: 0, 0
+  index: -1
+mouth
+  rotate: true
+  xy: 762, 37
+  size: 125, 184
+  orig: 125, 184
+  offset: 0, 0
+  index: -1
+sl_Tear1
+  rotate: true
+  xy: 427, 31
+  size: 51, 34
+  orig: 51, 34
+  offset: 0, 0
+  index: -1
+sl_Tear2
+  rotate: false
+  xy: 335, 2
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
