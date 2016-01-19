@@ -52,7 +52,7 @@ public class PlayerControler : MonoBehaviour
     bool g, doubleJump;
 
     [SerializeField, Tooltip("Distance the ground check ray travels")]
-    float l = 1f;
+    float l = 0.05f;
 
     [SerializeField, Tooltip("STarting point of ground checkRay")]
     Vector3 distOff = Vector3.zero;
@@ -61,7 +61,8 @@ public class PlayerControler : MonoBehaviour
     [SerializeField]
     PlayerAnimationControler AnimationControler;
 
-    Rigidbody2D rigi2d;
+    Rigidbody2D _rigi2d;
+    public Rigidbody2D rigi2d { get { return _rigi2d; } }
     Vector2 speed = Vector2.zero, startPos;
 
     float coolDownDelay;
@@ -101,7 +102,7 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         Energy = MaxEnergy;
-        rigi2d = GetComponent<Rigidbody2D>();
+        _rigi2d = GetComponent<Rigidbody2D>();
 
         GameManager.inputManager.onSwipeUp += InputManager_onSwipeUp;
         GameManager.inputManager.onTap += InputManager_onTap;
@@ -191,14 +192,14 @@ public class PlayerControler : MonoBehaviour
         gamePaused = b;
         if (b)
         {
-            speed = rigi2d.velocity;
-            rigi2d.velocity = Vector2.zero;
-            rigi2d.isKinematic = true;
+            speed = _rigi2d.velocity;
+            _rigi2d.velocity = Vector2.zero;
+            _rigi2d.isKinematic = true;
         }
         else
         {
-            rigi2d.isKinematic = false;
-            rigi2d.velocity = speed;
+            _rigi2d.isKinematic = false;
+            _rigi2d.velocity = speed;
         }
     }
 
@@ -260,8 +261,8 @@ public class PlayerControler : MonoBehaviour
     #region UpdateFunctions
     void Update_JumpSpeed()
     {
-        if (rigi2d.velocity.y > 0 && rigi2d.velocity.y < 0.3f)
-            rigi2d.AddForce(new Vector2(0, -10f*rigi2d.mass), ForceMode2D.Impulse);
+        if (_rigi2d.velocity.y > 0 && _rigi2d.velocity.y < 0.3f)
+            _rigi2d.AddForce(new Vector2(0, -10f*_rigi2d.mass), ForceMode2D.Impulse);
     }
     void Update_Energy()
     {
@@ -407,7 +408,7 @@ public class PlayerControler : MonoBehaviour
         if (hitTrap || gamePaused)
             return;
 
-        rigi2d.AddForce(new Vector3(0, 9 * rigi2d.mass * rigi2d.gravityScale, 0), ForceMode2D.Impulse);
+        _rigi2d.AddForce(new Vector3(0, 9 * _rigi2d.mass * _rigi2d.gravityScale, 0), ForceMode2D.Impulse);
         if (onJump != null)
             onJump();
     }

@@ -11,6 +11,7 @@ public class PlayerAnimationControler : MonoBehaviour
     float shootAniHold = 0f;
     float startingTimeScale = 0f;
     bool eventPlaced = false;
+    bool InAir;
     #region Animations
     [SpineAnimation]
     public string hit;
@@ -28,16 +29,16 @@ public class PlayerAnimationControler : MonoBehaviour
     public string jump;
 
     [SpineAnimation]
-    public string Idle_Air;
+    public string Idle_Air_Up, Idle_Air_Down;
+
+    [SpineAnimation]
+    public string groundHit;
 
     [SpineAnimation]
     public string shoot;
 
     [SpineAnimation]
     public string death;
-
-    [SpineAnimation]
-    public string groundHit;
 
     [SpineAnimation]
     public string overHeated;
@@ -106,6 +107,7 @@ public class PlayerAnimationControler : MonoBehaviour
     void Update()
     {
         Update_shootAniHold();
+        Update_Jump();
         if (!eventPlaced)
             Start();
     }
@@ -118,12 +120,16 @@ public class PlayerAnimationControler : MonoBehaviour
 
     public void Player_OnJump()
     {
+
+        InAir = true;
         anim.state.SetAnimation(0, jump, false);
-        anim.state.AddAnimation(0, Idle_Air, true, 0);
+        anim.state.AddAnimation(0, Idle_Air_Up, true, 0);
     }
 
     public void Player_Land()
     {
+
+        InAir = false;
         anim.state.SetAnimation(0, groundHit, false);
         anim.state.AddAnimation(0, idle, true, 0);
     }
@@ -150,6 +156,17 @@ public class PlayerAnimationControler : MonoBehaviour
         else if (shootAniHold > 0)
         {
             shootAniHold -= Time.deltaTime;
+        }
+    }
+
+    public void Update_Jump()
+    {
+        if (InAir)
+        {
+            if(GameManager.playerControler.rigi2d.velocity.y<5)
+            {
+                anim.state.SetAnimation(0, Idle_Air_Down, true);
+            }
         }
     }
 

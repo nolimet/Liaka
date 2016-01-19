@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using util;
 
 [RequireComponent(typeof(Rigidbody2D),typeof(CircleCollider2D))]
 public class PickupBase :BaseObject {
@@ -30,11 +31,16 @@ public class PickupBase :BaseObject {
     public Movement _moveType;
     Rigidbody2D rigi;
     bool stopedMoving;
+    bool g;
+    int RayCastMask;
+
     protected override void Awake()
     {
         base.Awake();
         gameObject.layer = LayerMask.NameToLayer("Pickup");
         type = objectType.Pickup;
+        RayCastMask = 0;
+        RayCastMask = 1 << LayerMask.NameToLayer(TagManager.Ground);
     }
 
     public override void startBehaviours()
@@ -70,8 +76,7 @@ public class PickupBase :BaseObject {
             case TagManager.Ground:
                 stopedMoving = true;
 
-                if (onGroundHit != null)
-                    onGroundHit(pType);
+                
                 break;
 
             case TagManager.Trap:
@@ -154,15 +159,33 @@ public class PickupBase :BaseObject {
     {
         base.Update();
 
-        //if(alive)
-        //{
-        //    if (SA)
-        //     //   hitcast = Physics2D.Raycast(transform.position + SA.b);
-        //    else if (a)
-        //    {
+        if (alive)
+        {
+            hitcast = new RaycastHit2D();
 
-        //    }
-        //}
+            if (SA)
+            {
+                hitcast = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, SA.GetComponent<Renderer>().bounds.size.y / 2f), Vector2.down, 0.01f, RayCastMask);
+            }
+            else if (a)
+            {
+                Physics2D.Raycast((Vector2)transform.position + new Vector2(0, transform.getChildBounds().size.y / 2f), Vector2.down, 0.01f, RayCastMask);
+            }
+
+            if (hitcast.transform)
+            {
+                if (!g)
+                {
+                    if (onGroundHit != null)
+                        onGroundHit(pType);
+                    g = true;
+                }
+            }
+            else
+            {
+                g = false;
+            }
+        }
     }
 
     /// <summary>
