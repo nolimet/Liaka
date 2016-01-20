@@ -75,8 +75,6 @@ public class PickupBase :BaseObject {
         {
             case TagManager.Ground:
                 stopedMoving = true;
-
-                
                 break;
 
             case TagManager.Trap:
@@ -162,16 +160,17 @@ public class PickupBase :BaseObject {
         if (alive)
         {
             hitcast = new RaycastHit2D();
-
+           
             if (SA)
             {
-                hitcast = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, SA.GetComponent<Renderer>().bounds.size.y / 2f), Vector2.down, 0.01f, RayCastMask);
+                //Debug.DrawRay((Vector2)transform.position + new Vector2(0, -SA.GetComponent<Renderer>().bounds.size.y / 2f), Vector2.down, Color.red, 3);
+                hitcast = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, -SA.GetComponent<Renderer>().bounds.size.y / 2f), Vector2.down, 0.01f, RayCastMask);
             }
-            else if (a)
+            else if (a || sr)
             {
-                Physics2D.Raycast((Vector2)transform.position + new Vector2(0, transform.getChildBounds().size.y / 2f), Vector2.down, 0.01f, RayCastMask);
+                //Debug.DrawRay((Vector2)transform.position + new Vector2(0, -transform.getChildBounds().size.y / 2f), Vector2.down, Color.red, 3);
+                hitcast = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, -transform.getChildBounds().size.y / 2f), Vector2.down, 0.05f, RayCastMask);
             }
-
             if (hitcast.transform)
             {
                 if (!g)
