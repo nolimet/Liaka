@@ -11,6 +11,9 @@ public class PlayerDeath : MonoBehaviour
 
     public PlayerAnimationControler playerAni;
     public BackgroundControler back;
+    public PlayerControler playerControler;
+    public GameObject Skeleton;
+    public Vector3 OffsetSkeletonCauseDeathMove;
     Rigidbody2D ri;
 
     int rayMask = 0;
@@ -24,6 +27,8 @@ public class PlayerDeath : MonoBehaviour
 
         if (!back)
             back = FindObjectOfType<BackgroundControler>();
+        if (!playerControler)
+            playerControler = FindObjectOfType<PlayerControler>();
         enabled = false;
 
     }
@@ -48,6 +53,8 @@ public class PlayerDeath : MonoBehaviour
         eventSend = false;
         back.SpeedMult = 0;
 
+        Skeleton.transform.localPosition = OffsetSkeletonCauseDeathMove;
+
         Debug.Log("Started ANI");
     }
 
@@ -55,8 +62,8 @@ public class PlayerDeath : MonoBehaviour
 
     void Update()
     {
-        rc2D = Physics2D.Raycast(ri.transform.position, Vector2.down, Mathf.Infinity, rayMask);
-
+        rc2D = Physics2D.Raycast(ri.transform.position + playerControler.distOff, Vector2.down, Mathf.Infinity, rayMask);
+        Debug.Log(rc2D.distance);
         util.Debugger.Log("Player ground dist ", rc2D.distance);
         if (rc2D.distance > maxHeight)
             maxHeight = rc2D.distance;

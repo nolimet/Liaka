@@ -53,9 +53,11 @@ public class PlayerControler : MonoBehaviour
 
     [SerializeField, Tooltip("Distance the ground check ray travels")]
     float l = 0.05f;
+    int jumpCooldown = 0;
 
     [SerializeField, Tooltip("STarting point of ground checkRay")]
-    Vector3 distOff = Vector3.zero;
+    Vector3 _distOff = Vector3.zero;
+    public Vector3 distOff { get { return _distOff; } }
     [SerializeField]
     Transform SpeedUpEndPosition;
     [SerializeField]
@@ -117,8 +119,6 @@ public class PlayerControler : MonoBehaviour
         startPos = transform.position;
     }
 
-    
-
     public void OnDestroy()
     {
         if (GameManager.inputManager)
@@ -165,12 +165,17 @@ public class PlayerControler : MonoBehaviour
             return;
 
         Update_Energy();
-        Update_GroundCheck();
+        
         Update_HeatLevel();
         Update_Boost();
         //Update_JumpSpeed();
 
         Update_Debug();
+    }
+
+    void FixedUpdate()
+    {
+        Update_GroundCheck();
     }
     #endregion
 
@@ -280,10 +285,15 @@ public class PlayerControler : MonoBehaviour
     }
     void Update_GroundCheck()
     {
+        if(jumpCooldown>0)
+        {
+            jumpCooldown--;
+            return;
+        }
         int mask = 1 << LayerMask.NameToLayer("Ground");
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + distOff, new Vector2(0, -1), l, mask);
-        Debug.DrawLine(transform.position + distOff, transform.position + distOff + new Vector3(0, -l), Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + _distOff, new Vector2(0, -1), l, mask);
+        Debug.DrawLine(transform.position + _distOff, transform.position + _distOff + new Vector3(0, -l), Color.red);
 
         if (hit && hit.transform.tag == TagManager.Ground)
         {
@@ -411,6 +421,8 @@ public class PlayerControler : MonoBehaviour
         _rigi2d.AddForce(new Vector3(0, 9 * _rigi2d.mass * _rigi2d.gravityScale, 0), ForceMode2D.Impulse);
         if (onJump != null)
             onJump();
+
+        jumpCooldown = 3;
     }
 
     void shoot(Vector2 p)

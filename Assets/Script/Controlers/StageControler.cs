@@ -309,5 +309,6 @@ public class StageControler : MonoBehaviour
     {
         PlayerDeathAnimationControler.onAnimationDone -= PlayerDeathAnimationDone;
         playerDefeated(true);
+        enabled = false;
     }
 }

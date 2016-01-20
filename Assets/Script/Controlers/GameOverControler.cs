@@ -146,9 +146,7 @@ public class GameOverControler : MonoBehaviour {
 
             yield return new WaitForEndOfFrame();   
         }
-        #endregion
-
-        
+        #endregion        
 
         foreach (Image i in flickerImages)
         {

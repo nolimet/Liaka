@@ -12,6 +12,7 @@ public class PlayerAnimationControler : MonoBehaviour
     float startingTimeScale = 0f;
     bool eventPlaced = false;
     bool InAir;
+    bool Falling;
     #region Animations
     [SpineAnimation]
     public string hit;
@@ -120,7 +121,7 @@ public class PlayerAnimationControler : MonoBehaviour
 
     public void Player_OnJump()
     {
-
+        Debug.Log("JUMP");
         InAir = true;
         anim.state.SetAnimation(0, jump, false);
         anim.state.AddAnimation(0, Idle_Air_Up, true, 0);
@@ -128,9 +129,10 @@ public class PlayerAnimationControler : MonoBehaviour
 
     public void Player_Land()
     {
-
+        Debug.Log("LAND");
         InAir = false;
-        anim.state.SetAnimation(0, groundHit, false);
+       // anim.state.SetAnimation(0, Idle_Air_Down, false);
+        anim.state.AddAnimation(0, groundHit, false,0);
         anim.state.AddAnimation(0, idle, true, 0);
     }
 
@@ -142,7 +144,7 @@ public class PlayerAnimationControler : MonoBehaviour
     public void Player_Shoot()
     {
         if (shootAniHold <= 0)
-            anim.state.SetAnimation(1, shoot, false);
+            anim.state.SetAnimation(0, shoot, false);
         shootAniHold = 1f;
     }
 
@@ -150,7 +152,7 @@ public class PlayerAnimationControler : MonoBehaviour
     {
         if (shootAniHold <= 0 && shootAniHold > -1)
         {
-            anim.state.SetAnimation(1, idle, false);
+            anim.state.SetAnimation(0, idle, true);
             shootAniHold = -20;
         }
         else if (shootAniHold > 0)
@@ -163,9 +165,10 @@ public class PlayerAnimationControler : MonoBehaviour
     {
         if (InAir)
         {
-            if(GameManager.playerControler.rigi2d.velocity.y<5)
+            if (anim.state.GetCurrent(0).Animation.Name != Idle_Air_Down && GameManager.playerControler.rigi2d.velocity.y<5)
             {
                 anim.state.SetAnimation(0, Idle_Air_Down, true);
+                Debug.Log(anim.state.GetCurrent(0).Animation.Name);
             }
         }
     }
@@ -189,8 +192,6 @@ public class PlayerAnimationControler : MonoBehaviour
 
         //CurrentMoveDir = Dir;
     }
-
-
     public void Player_OnPause(bool b)
     {
         if (b)

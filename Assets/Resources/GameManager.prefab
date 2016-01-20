@@ -4570,7 +4570,7 @@ MonoBehaviour:
     game:
       firstStartup: 1
       CoinsCurrent: 0
-  GodMode: 1
+  GodMode: 0
   _AllowDebug: 0
 --- !u!114 &11446662
 MonoBehaviour:
@@ -5412,17 +5412,13 @@ MonoBehaviour:
     movement: 1
     chance: 50
     maxConcecutiveDrops: 16
-  - type: 3
+  - type: 0
     movement: 0
-    chance: 5
-    maxConcecutiveDrops: 1
-  - type: 1
-    movement: 0
-    chance: 5
-    maxConcecutiveDrops: 1
-  - type: 1
+    chance: 45
+    maxConcecutiveDrops: 6
+  - type: 2
     movement: 1
-    chance: 22
+    chance: 1
     maxConcecutiveDrops: 1
   Table: 
 --- !u!114 &11473052
@@ -7015,7 +7011,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 663.9, y: -345.2}
+  m_AnchoredPosition: {x: 670, y: -347.4}
   m_SizeDelta: {x: 207, y: 121}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22414328
@@ -7246,9 +7242,9 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -670.2, y: -347.4}
+  m_AnchoredPosition: {x: -698, y: -347.4}
   m_SizeDelta: {x: 207, y: 121}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.38840994, y: 0.5}
 --- !u!224 &22426680
 RectTransform:
   m_ObjectHideFlags: 1
@@ -7449,7 +7445,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 682.8, y: 353.3}
+  m_AnchoredPosition: {x: 693, y: 366}
   m_SizeDelta: {x: 200, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22437494

@@ -1802,6 +1802,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAni: {fileID: 11463384}
   back: {fileID: 0}
+  playerControler: {fileID: 11495150}
+  Skeleton: {fileID: 145740}
+  OffsetSkeletonCauseDeathMove: {x: -3.33, y: -2.6, z: 0}
 --- !u!114 &11415966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1843,11 +1846,12 @@ MonoBehaviour:
   anim: {fileID: 11470484}
   hit: run
   idle: run
-  jump: jump
-  Idle_Air: run
+  jump: jump - start
+  Idle_Air_Up: jump - up
+  Idle_Air_Down: jump - fall
+  groundHit: run
   shoot: shoot
   death: death
-  groundHit: run
   overHeated: overheat
   coolDown: cooldown
 --- !u!114 &11470484
@@ -1888,8 +1892,8 @@ MonoBehaviour:
   gun: {fileID: 11416340}
   g: 0
   doubleJump: 0
-  l: 1.83
-  distOff: {x: -0.24, y: -1.54, z: 0}
+  l: 0.025
+  _distOff: {x: -0.2, y: -1.451, z: 0}
   SpeedUpEndPosition: {fileID: 400046}
   AnimationControler: {fileID: 11463384}
   boostMoveSpeed: 10
@@ -3531,7 +3535,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: l
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distOff.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distOff.y
+      value: -1.451
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114482}

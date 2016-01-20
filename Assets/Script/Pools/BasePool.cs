@@ -51,6 +51,12 @@ public class BasePool : MonoBehaviour
     public void OnLevelWasLoaded(int level)
     {
         RemoveAll();
+
+        for (int i = 0; i < InActivePool.Count; i++)
+        {
+            if (!InActivePool[i])
+                InActivePool.RemoveAt(i);
+        }
     }
 
     /// <summary>
@@ -112,6 +118,7 @@ public class BasePool : MonoBehaviour
     {
         if (instance)
         {
+            
             BaseObject e;
             if (instance.InActivePool.Any(i => i.type == Type))
             {

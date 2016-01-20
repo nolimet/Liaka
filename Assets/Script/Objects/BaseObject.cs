@@ -225,8 +225,8 @@ public class BaseObject : MonoBehaviour
         if (!fading)
         {
             alive = false;
-            //if (type == objectType.Enemy && g == TagManager.Bullet)
-            //    //dropLoot();  
+            if (type == objectType.Enemy && g == TagManager.Bullet)
+                dropLoot();
             fading = true;
             
             float z = f;
