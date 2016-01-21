@@ -5978,7 +5978,7 @@ MonoBehaviour:
     game:
       firstStartup: 1
       CoinsCurrent: 0
-  GodMode: 0
+  GodMode: 1
   _AllowDebug: 0
 --- !u!114 &1319886870
 MonoBehaviour:

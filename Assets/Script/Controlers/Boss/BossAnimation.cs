@@ -10,6 +10,8 @@ public class BossAnimation : MonoBehaviour
     public string walkNormal;
     void Start()
     {
+        GameManager.instance.onPauseGame += Instance_onPauseGame;
+
         if (!ani)
             ani = GetComponent<SkeletonAnimation>();
 
@@ -24,13 +26,12 @@ public class BossAnimation : MonoBehaviour
 
         startingTimeScale = ani.timeScale;
 
-        GameManager.instance.onPauseGame += Instance_onPauseGame;
+        
     }
 
     public void OnDestroy()
     {
-        if (ani && Application.isPlaying)
-            GameManager.instance.onPauseGame -= Instance_onPauseGame;
+        GameManager.instance.onPauseGame -= Instance_onPauseGame;
     }
 
     private void Instance_onPauseGame(bool b)

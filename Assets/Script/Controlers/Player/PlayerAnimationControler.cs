@@ -132,7 +132,7 @@ public class PlayerAnimationControler : MonoBehaviour
         Debug.Log("LAND");
         InAir = false;
        // anim.state.SetAnimation(0, Idle_Air_Down, false);
-        anim.state.AddAnimation(0, groundHit, false,0);
+        anim.state.SetAnimation(0, groundHit, false);
         anim.state.AddAnimation(0, idle, true, 0);
     }
 

@@ -150,7 +150,6 @@ public class PlayerControler : MonoBehaviour
         if (collision.transform.tag == TagManager.Trap && (GameManager.instance && !GameManager.instance.GodMode)) 
         { 
             hitTrap = true;
-
             if (onDeath != null)
                 onDeath();
         }
@@ -293,10 +292,11 @@ public class PlayerControler : MonoBehaviour
         int mask = 1 << LayerMask.NameToLayer("Ground");
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position + _distOff, new Vector2(0, -1), l, mask);
-        Debug.DrawLine(transform.position + _distOff, transform.position + _distOff + new Vector3(0, -l), Color.red);
+        Debug.DrawLine(transform.position + _distOff, transform.position + _distOff + new Vector3(0, -1), Color.red);
 
         if (hit && hit.transform.tag == TagManager.Ground)
         {
+            util.Debugger.Log("PlayerGround Hit " + hit.transform.tag, hit.transform.name);
             if (!g && onHitGround != null)
                 onHitGround();
 

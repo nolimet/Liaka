@@ -1724,9 +1724,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.35}
   serializedVersion: 2
-  m_Radius: 1.95
+  m_Radius: 1.78
 --- !u!61 &6119504
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1892,7 +1892,7 @@ MonoBehaviour:
   gun: {fileID: 11416340}
   g: 0
   doubleJump: 0
-  l: 0.025
+  l: 0.05
   _distOff: {x: -0.2, y: -1.451, z: 0}
   SpeedUpEndPosition: {fileID: 400046}
   AnimationControler: {fileID: 11463384}

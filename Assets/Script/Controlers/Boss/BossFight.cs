@@ -11,25 +11,17 @@ public class BossFight : MonoBehaviour
 
     public float HP = 5;
     public float MaxHP = 5;
-    public TextMesh textm;
 
    void Start()
     {
         if (GameManager.uiControler)
             GameManager.uiControler.attackSlider.onAttack += AttackSlider_onAttack;
-
-        textm.text = "BossHP: " + HP.ToString() + " / " + MaxHP.ToString();
     }
 
     void Destroy()
     {
         if (GameManager.uiControler)
             GameManager.uiControler.attackSlider.onAttack -= AttackSlider_onAttack;
-    }
-
-    void onEnable()
-    {
-
     }
 
     private void AttackSlider_onAttack(float f, AttackSlider.state preformance)
@@ -65,7 +57,5 @@ public class BossFight : MonoBehaviour
 
         if (onHPChange != null)
             onHPChange(HP / MaxHP);
-
-        textm.text = "BossHP: " + HP.ToString() + " / " + MaxHP.ToString();
     }
 }

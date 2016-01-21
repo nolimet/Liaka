@@ -58,8 +58,8 @@ public class VariationLayerControler : LayerControler
                 else
                     freeObject.position = f.position + new Vector3(f.getChildBounds(IgnorNameTags).size.x, 0, 0);
 
-                util.Debugger.Log("bound orignal " + f.name, f.getChildBounds(IgnorNameTags));
-                util.Debugger.Log("bound newObject " + freeObject.name, freeObject.getChildBounds(IgnorNameTags));
+                //util.Debugger.Log("bound orignal " + f.name, f.getChildBounds(IgnorNameTags));
+                //util.Debugger.Log("bound newObject " + freeObject.name, freeObject.getChildBounds(IgnorNameTags));
             }
 
             randomSelection = null;

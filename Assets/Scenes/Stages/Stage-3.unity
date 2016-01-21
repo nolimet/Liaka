@@ -15740,6 +15740,14 @@ Prefab:
       propertyPath: l
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 5807936, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: m_Offset.y
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5807936, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
+      propertyPath: m_Radius
+      value: 1.78
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4eb8dfc9fdbac2945abc924b40e8e6e0, type: 2}
   m_IsPrefabParent: 0

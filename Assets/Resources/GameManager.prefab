@@ -8712,6 +8712,10 @@ Prefab:
       propertyPath: dropChance.Array.data[2].chance
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: GodMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 177478}

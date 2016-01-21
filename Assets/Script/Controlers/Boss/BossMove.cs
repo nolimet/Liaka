@@ -54,6 +54,9 @@ public class BossMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
             forceMove = true;
+
+        endPos.position = new Vector3(endPos.position.x, transform.position.y, 0);
+        startPos = new Vector3(startPos.x, transform.position.y, 0);
     }
 
     IEnumerator bossMove()
@@ -105,6 +108,7 @@ public class BossMove : MonoBehaviour
                 //Move forward
                 while (dir == 1 && Vector3.Distance(transform.position, endPos.position) > 0.3f && alive)
                 {
+                    util.Debugger.Log("BOSS DISTANCE!", Vector3.Distance(transform.position, endPos.position));
                     if (!paused)
                     {
                         transform.Translate(Vector3.right * Random.Range(0.6f, 2f) * SpeedForward * Time.deltaTime);

@@ -38,7 +38,10 @@ public class StageControler : MonoBehaviour
 
     float TimeLeft;
     bool _bossFighting, _bossDefeated;
-    
+
+#if UNITY_EDITOR
+    public bool DisableTimer;
+#endif
 
     int _coinsCollected;
 
@@ -160,7 +163,9 @@ public class StageControler : MonoBehaviour
     {
         if (GameManager.gamePaused)
             return;
-
+#if UNITY_EDITOR
+        if(!DisableTimer)
+#endif
         if(TimeLeft>0)
             TimeLeft -= Time.deltaTime;
 
