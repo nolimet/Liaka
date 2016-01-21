@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     public static DropTableControler dropTable;
     public DropTableControler _DropTable;
 
-   public StageControler _stageControler;
+    public StageControler _stageControler;
     public static StageControler stageControler
     {
         get
@@ -128,13 +128,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool _AllowDebug =true;
+    public bool _AllowDebug = true;
     public static bool AllowDebug { get { return instance._AllowDebug; } }
 
     #region UnityFunctions
     void Awake()
     {
-
         if (_instance)
             Destroy(gameObject);
         SetStatics();
@@ -150,7 +149,7 @@ public class GameManager : MonoBehaviour
 
     public void OnDestroy()
     {
-        SaveLoad(true);
+        
         dropTable = null;
         audioControler = null;
         uiControler = null;
@@ -160,6 +159,7 @@ public class GameManager : MonoBehaviour
         _stageControler = null;
         _Destroyed = true;
     }
+
     public void OnLevelWasLoaded(int level)
     {
         if (level != 4)
@@ -218,6 +218,11 @@ public class GameManager : MonoBehaviour
             TutorialControler = _TutorialControler;
     }
 
+    public void OnApplicationQuit()
+    {
+        SaveLoad(true);
+    }
+
     void SaveLoad(bool save)
     {
         string dataName = "GameSave";
@@ -265,7 +270,7 @@ public class GameManager : MonoBehaviour
         if (onPauseGame != null)
             onPauseGame(false);
 
-        PauseMenu.SendMessage("SetState", false , SendMessageOptions.DontRequireReceiver);
+        PauseMenu.SendMessage("SetState", false, SendMessageOptions.DontRequireReceiver);
 
         uiControler.gameObject.SetActive(true);
     }
@@ -277,7 +282,7 @@ public class GameManager : MonoBehaviour
             onPauseGame(true);
 
         PauseMenu.SetActive(true);
-        PauseMenu.SendMessage("SetState", true , SendMessageOptions.DontRequireReceiver);
+        PauseMenu.SendMessage("SetState", true, SendMessageOptions.DontRequireReceiver);
 
         uiControler.gameObject.SetActive(false);
     }
@@ -351,7 +356,7 @@ public class GameManager : MonoBehaviour
 
     void EscapePressed()
     {
-        if (Application.loadedLevel == 1)          
+        if (Application.loadedLevel == 1)
             return;
 
         _gamePaused = !_gamePaused;

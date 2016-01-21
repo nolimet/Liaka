@@ -29,7 +29,7 @@ public class BossAnimation : MonoBehaviour
 
     public void OnDestroy()
     {
-        if (ani)
+        if (ani && Application.isPlaying)
             GameManager.instance.onPauseGame -= Instance_onPauseGame;
     }
 
