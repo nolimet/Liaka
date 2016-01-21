@@ -36,6 +36,9 @@ public class BossAnimation : MonoBehaviour
 
     private void Instance_onPauseGame(bool b)
     {
+        if (!ani)
+            return;
+
         if (b)
             ani.timeScale = 0f;
         else

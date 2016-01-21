@@ -87,16 +87,20 @@ public class PauseMenuControler : MonoBehaviour
             RectTrans.anchoredPosition = new Vector2(RectTrans.anchoredPosition.x, l);
         else if (startAtEnd && dir < 0)
             RectTrans.anchoredPosition = new Vector2(RectTrans.anchoredPosition.x, 0);
+
         Vector2 start, end;
         start = RectTrans.anchoredPosition;
         end = new Vector2(start.x, endPoint);
 
         float t = 0;
 
+
         stopMenuMove = true;
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
         stopMenuMove = false;
+
+        RectTrans.gameObject.SetActive(true);
 
         if (dir > 0)
         {
