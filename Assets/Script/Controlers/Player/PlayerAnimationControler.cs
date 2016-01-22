@@ -144,7 +144,7 @@ public class PlayerAnimationControler : MonoBehaviour
     public void Player_Shoot()
     {
         if (shootAniHold <= 0)
-            anim.state.SetAnimation(0, shoot, false);
+            anim.state.SetAnimation(1, shoot, false);
         shootAniHold = 1f;
     }
 
@@ -152,7 +152,7 @@ public class PlayerAnimationControler : MonoBehaviour
     {
         if (shootAniHold <= 0 && shootAniHold > -1)
         {
-            anim.state.SetAnimation(0, idle, true);
+            anim.state.SetAnimation(1, idle, true);
             shootAniHold = -20;
         }
         else if (shootAniHold > 0)
