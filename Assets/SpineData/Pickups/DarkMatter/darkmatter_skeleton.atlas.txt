@@ -1,0 +1,62 @@
+
+darkmatter_skeleton.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+anti-matter-final_01
+  rotate: false
+  xy: 2, 2
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+m1
+  rotate: false
+  xy: 654, 385
+  size: 133, 117
+  orig: 133, 117
+  offset: 0, 0
+  index: -1
+m2
+  rotate: false
+  xy: 504, 385
+  size: 148, 117
+  orig: 148, 117
+  offset: 0, 0
+  index: -1
+m3
+  rotate: false
+  xy: 504, 144
+  size: 136, 118
+  orig: 136, 118
+  offset: 0, 0
+  index: -1
+m4
+  rotate: false
+  xy: 504, 264
+  size: 136, 119
+  orig: 136, 119
+  offset: 0, 0
+  index: -1
+m5
+  rotate: false
+  xy: 789, 386
+  size: 133, 116
+  orig: 133, 116
+  offset: 0, 0
+  index: -1
+m6
+  rotate: false
+  xy: 504, 23
+  size: 134, 119
+  orig: 134, 119
+  offset: 0, 0
+  index: -1
+m7
+  rotate: false
+  xy: 642, 266
+  size: 133, 117
+  orig: 133, 117
+  offset: 0, 0
+  index: -1
