@@ -3,24 +3,24 @@ using System.Collections;
 
 public class PlayerDeath : MonoBehaviour
 {
-
     public delegate void VoidDelegate();
+
     public event VoidDelegate onAnimationDone;
 
-    bool eventSend = false;
+    private bool eventSend = false;
 
     public PlayerAnimationControler playerAni;
     public BackgroundControler back;
     public PlayerControler playerControler;
     public GameObject Skeleton;
     public Vector3 OffsetSkeletonCauseDeathMove;
-    Rigidbody2D ri;
+    private Rigidbody2D ri;
 
-    int rayMask = 0;
+    private int rayMask = 0;
 
-    float maxHeight = 0;
+    private float maxHeight = 0;
 
-    void Start()
+    private void Start()
     {
         ri = playerAni.GetComponent<Rigidbody2D>();
         rayMask = 1 << LayerMask.NameToLayer("Ground");
@@ -30,7 +30,6 @@ public class PlayerDeath : MonoBehaviour
         if (!playerControler)
             playerControler = FindObjectOfType<PlayerControler>();
         enabled = false;
-
     }
 
     public void StartAni()
@@ -47,7 +46,6 @@ public class PlayerDeath : MonoBehaviour
         playerAni.GetComponent<PlayerControler>().enabled = false;
         playerAni.enabled = false;
 
-
         playerAni.Player_Death();
 
         eventSend = false;
@@ -58,28 +56,23 @@ public class PlayerDeath : MonoBehaviour
         Debug.Log("Started ANI");
     }
 
-    RaycastHit2D rc2D;
-
-    void Update()
+    private void Update()
     {
-        rc2D = Physics2D.Raycast(ri.transform.position + playerControler.distOff, Vector2.down, Mathf.Infinity, rayMask);
-        Debug.Log(rc2D.distance);
-        util.Debugger.Log("Player ground dist ", rc2D.distance);
-        if (rc2D.distance > maxHeight)
-            maxHeight = rc2D.distance;
+        RaycastHit2D hit = Physics2D.Raycast(ri.transform.position + playerControler.distOff, Vector2.down, Mathf.Infinity, rayMask);
+        Debug.Log(hit.distance);
+        util.Debugger.Log("Player ground dist ", hit.distance);
+        if (hit.distance > maxHeight)
+            maxHeight = hit.distance;
 
-        if (rc2D.distance < maxHeight)
-            if (rc2D.distance < 0.1f)
-            {
-                if (eventSend)
-                    return;
+        if (hit.distance < maxHeight && hit.distance < 0.1f)
+        {
+            if (eventSend)
+                return;
 
-                eventSend = true;
-                if (onAnimationDone != null)
-                    onAnimationDone();
-                Debug.Log("send event");
-            }
-
-        rc2D = new RaycastHit2D();
+            eventSend = true;
+            if (onAnimationDone != null)
+                onAnimationDone();
+            Debug.Log("send event");
+        }
     }
 }

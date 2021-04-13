@@ -33,7 +33,7 @@ public class VariationLayerControler : LayerControler
     }
 
     protected List<Transform> randomSelection = null;
-    protected List<Transform> negativeSelectoin = null;
+    protected List<Transform> negativeSelection = null;
     public override bool InView(Transform t)
     {
         
@@ -42,10 +42,10 @@ public class VariationLayerControler : LayerControler
         {
             t.gameObject.SetActive(false);
             randomSelection = SubObjects.Where(i => i.gameObject.activeSelf == false).ToList();
-            negativeSelectoin = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
+            negativeSelection = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
 
             Transform f =t;
-            foreach (Transform x in negativeSelectoin)
+            foreach (Transform x in negativeSelection)
                 if (x.transform.position.x > f.position.x)
                     f = x;
            
@@ -63,7 +63,7 @@ public class VariationLayerControler : LayerControler
             }
 
             randomSelection = null;
-            negativeSelectoin = null;
+            negativeSelection = null;
             return false;
 
         }

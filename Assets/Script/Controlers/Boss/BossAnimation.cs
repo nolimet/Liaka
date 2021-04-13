@@ -4,11 +4,12 @@ using System.Collections;
 public class BossAnimation : MonoBehaviour
 {
     public SkeletonAnimation ani;
-    float startingTimeScale = 0f;
+    private float startingTimeScale = 0f;
 
     [SpineAnimation]
     public string walkNormal;
-    void Start()
+
+    private void Start()
     {
         GameManager.instance.onPauseGame += Instance_onPauseGame;
 
@@ -25,8 +26,6 @@ public class BossAnimation : MonoBehaviour
         }
 
         startingTimeScale = ani.timeScale;
-
-        
     }
 
     public void OnDestroy()

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody2D),typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class BaseObject : MonoBehaviour
 {
     public delegate void objectTypeDelegate(objectType o);
+
     public static event objectTypeDelegate onImpact, onHitBose, onHitPlayer;
 
     public enum objectType
@@ -47,7 +48,7 @@ public class BaseObject : MonoBehaviour
     protected bounds useBounds;
 
     public objectType type;
-    Vector2 Speed = Vector2.zero;
+    private Vector2 Speed = Vector2.zero;
 
     protected bool delegateSet = false;
     protected bool fading = false;
@@ -77,7 +78,6 @@ public class BaseObject : MonoBehaviour
             ri = GetComponent<Rigidbody2D>();
         if (!SA)
             SA = GetComponentInChildren<SkeletonAnimation>();
-
 
         if (SA)
             OriginalTimeScale = SA.timeScale;
@@ -161,14 +161,14 @@ public class BaseObject : MonoBehaviour
     }
 
     protected string s;
+
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-
         s = collision.transform.tag;
         switch (s)
         {
             case TagManager.Enemy:
-                collision.gameObject.SendMessage("hit",tag ,SendMessageOptions.DontRequireReceiver);
+                collision.gameObject.SendMessage("hit", tag, SendMessageOptions.DontRequireReceiver);
                 if (!noCoroutines)
                     StartCoroutine(fadeOut(0.1f, 0f));
 
@@ -228,7 +228,7 @@ public class BaseObject : MonoBehaviour
             if (type == objectType.Enemy && g == TagManager.Bullet)
                 dropLoot();
             fading = true;
-            
+
             float z = f;
 
             if (GetComponent<Animator>())
@@ -257,7 +257,7 @@ public class BaseObject : MonoBehaviour
             RemoveFromView();
         }
     }
-   
+
     public virtual void Instance_onPauseGame(bool b)
     {
         // Rigidbody2D r = GetComponent<Rigidbody2D>();
@@ -266,7 +266,7 @@ public class BaseObject : MonoBehaviour
 
         try
         {
-            if(this==null)
+            if (this == null)
             {
                 Debug.Log("null pointer in Pause_Game");
                 GameManager.instance.onPauseGame -= Instance_onPauseGame;
@@ -301,7 +301,6 @@ public class BaseObject : MonoBehaviour
             GameManager.instance.onPauseGame -= Instance_onPauseGame;
             throw;
         }
-        
     }
 
     protected virtual void dropLoot()
@@ -325,7 +324,6 @@ public class BaseObject : MonoBehaviour
                 p = BasePool.GetPickup(PickObject.pickupType.Dynamic_Coin);
                 p.setVelocity(new Vector2(Random.Range(-5f, 5f), 3f));
                 p.transform.position = transform.position;
-                
             }
             else if (r < 20f)
             {
@@ -355,7 +353,7 @@ public class BaseObject : MonoBehaviour
 
     protected void ChangeColour(Color c)
     {
-        if(sr)
+        if (sr)
         {
             sr.color = c;
         }

@@ -95,8 +95,8 @@ public class SkeletonAnimator : SkeletonRenderer, ISkeletonAnimation {
 			var clipInfo = animator.GetCurrentAnimatorClipInfo(i);
 			var nextClipInfo = animator.GetNextAnimatorClipInfo(i);
 #else
-			var clipInfo = animator.GetCurrentAnimationClipState(i);
-			var nextClipInfo = animator.GetNextAnimationClipState(i);
+			var clipInfo = animator.GetCurrentAnimatorClipInfo(i);
+			var nextClipInfo = animator.GetNextAnimatorClipInfo(i);
 #endif
 			MixMode mode = layerMixModes[i];
 

@@ -32,18 +32,18 @@ public class GroundLayerControler : VariationLayerControler
             else
                 randomSelection = SubObjects.Where(i => i.gameObject.activeSelf == false).ToList();
 
-            negativeSelectoin = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
+            negativeSelection = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
 
             Transform f = transform;
-            if (negativeSelectoin.Count > 1)
+            if (negativeSelection.Count > 1)
             {
-                foreach (Transform x in negativeSelectoin)
+                foreach (Transform x in negativeSelection)
                     if (x.transform.position.x > f.position.x)
                         f = x;
             }
             else
-                if (negativeSelectoin.Count > 0)
-                f = negativeSelectoin[0];
+                if (negativeSelection.Count > 0)
+                f = negativeSelection[0];
 
 
                 foreach (Transform t in SubObjects)
@@ -77,10 +77,10 @@ public class GroundLayerControler : VariationLayerControler
             else
                 randomSelection = SubObjects.Where(i => i.gameObject.activeSelf == false).ToList();
 
-            negativeSelectoin = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
+            negativeSelection = SubObjects.Where(i => i.gameObject.activeSelf == true).ToList();
 
             Transform f = transform;
-            foreach (Transform x in negativeSelectoin)
+            foreach (Transform x in negativeSelection)
                 if (x.transform.position.x > f.position.x)
                     f = x;
 
@@ -95,7 +95,7 @@ public class GroundLayerControler : VariationLayerControler
 
 
             randomSelection = null;
-            negativeSelectoin = null;
+            negativeSelection = null;
             return false;
 
         }

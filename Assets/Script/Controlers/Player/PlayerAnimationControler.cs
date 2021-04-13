@@ -3,17 +3,19 @@ using System.Collections;
 
 public class PlayerAnimationControler : MonoBehaviour
 {
-
     //int CurrentMoveDir = 0;
 
     [SerializeField]
-    SkeletonAnimation anim;
-    float shootAniHold = 0f;
-    float startingTimeScale = 0f;
-    bool eventPlaced = false;
-    bool InAir;
-    bool Falling;
+    private SkeletonAnimation anim;
+
+    private float shootAniHold = 0f;
+    private float startingTimeScale = 0f;
+    private bool eventPlaced = false;
+    private bool InAir;
+    private bool Falling;
+
     #region Animations
+
     [SpineAnimation]
     public string hit;
 
@@ -46,9 +48,10 @@ public class PlayerAnimationControler : MonoBehaviour
 
     [SpineAnimation]
     public string coolDown;
-    #endregion
 
-    void Start()
+    #endregion Animations
+
+    private void Start()
     {
         if (!anim)
         {
@@ -105,7 +108,7 @@ public class PlayerAnimationControler : MonoBehaviour
         GameManager.playerControler.onShoot -= Player_Shoot;
     }
 
-    void Update()
+    private void Update()
     {
         Update_shootAniHold();
         Update_Jump();
@@ -131,7 +134,7 @@ public class PlayerAnimationControler : MonoBehaviour
     {
         Debug.Log("LAND");
         InAir = false;
-       // anim.state.SetAnimation(0, Idle_Air_Down, false);
+        // anim.state.SetAnimation(0, Idle_Air_Down, false);
         anim.state.SetAnimation(0, groundHit, false);
         anim.state.AddAnimation(0, idle, true, 0);
     }
@@ -165,7 +168,7 @@ public class PlayerAnimationControler : MonoBehaviour
     {
         if (InAir)
         {
-            if (anim.state.GetCurrent(0).Animation.Name != Idle_Air_Down && GameManager.playerControler.rigi2d.velocity.y<5)
+            if (anim.state.GetCurrent(0).Animation.Name != Idle_Air_Down && GameManager.playerControler.rigi2d.velocity.y < 5)
             {
                 anim.state.SetAnimation(0, Idle_Air_Down, true);
                 Debug.Log(anim.state.GetCurrent(0).Animation.Name);
@@ -192,6 +195,7 @@ public class PlayerAnimationControler : MonoBehaviour
 
         //CurrentMoveDir = Dir;
     }
+
     public void Player_OnPause(bool b)
     {
         if (b)
